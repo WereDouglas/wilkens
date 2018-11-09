@@ -3,30 +3,35 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Client $client
  */
+
+
+$links_array = [
+    ['List Clients', ['action' => 'index']],
+    ['List Users', ['controller' => 'Users', 'action' => 'index']],
+    ['New User', ['controller' => 'Users', 'action' => 'add']]
+
+];
+$active = ['yes', 'no'];
+
+$input_array = [
+    ['user_id', ['options' => $users]],
+    ['commission', ['class' => 'form-control', 'placeholder' => '%']],
+    ['contract', ['class' => 'form-control', 'placeholder' => 'Contract period']],
+    ['start_date', ['class' => 'form-control', 'placeholder' => 'Starting']],
+    ['end_date', ['class' => 'form-control', 'placeholder' => 'Ending']],
+    ['active', ['options' => $active, 'empty' => false]],
+    ['payment_terms', ['class' => 'form-control']],
+    ['code', ['class' => 'form-control', 'placeholder' => 'Code']],
+    ['delivery_method', ['class' => 'form-control', 'placeholder' => 'Method of report delivery']],
+    ['created_at', ['class' => 'form-control', 'placeholder' => 'Created at']]
+];
+
+$this->extend('/Common/add');
+$this->assign('links', json_encode($links_array));
+$this->assign('inputs', json_encode($input_array));
+$this->assign('title', 'Client');
+$this->start('form_object');
+echo $this->Form->create($client);
+$this->end();
+
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Clients'), ['action' => 'index']) ?></li>
-         </ul>
-</nav>
-<div class="clients form large-9 medium-8 columns content">
-    <?= $this->Form->create($client) ?>
-    <fieldset>
-        <legend><?= __('Add Client') ?></legend>
-        <?php
-           echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('commission');
-            echo $this->Form->control('contract');
-            echo $this->Form->control('start_date');
-            echo $this->Form->control('end_date', ['empty' => true]);
-            echo $this->Form->control('active');
-            echo $this->Form->control('payment_terms');
-            echo $this->Form->control('code');
-            echo $this->Form->control('delivery_method');
-            echo $this->Form->control('created_at');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>

@@ -33,6 +33,7 @@ class Client extends Entity
      * @var array
      */
     protected $_accessible = [
+        'user_id' => true,
         'commission' => true,
         'contract' => true,
         'start_date' => true,
@@ -41,8 +42,7 @@ class Client extends Entity
         'payment_terms' => true,
         'code' => true,
         'delivery_method' => true,
-        'created_at' => true,
-        'user_id' => true,
+
         'user' => true
     ];
 }

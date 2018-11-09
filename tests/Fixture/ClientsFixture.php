@@ -33,9 +33,10 @@ class ClientsFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'clients_users_id_fk' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -50,17 +51,17 @@ class ClientsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '7bdb4438-c2b9-4d31-ad53-067e2434e850',
+                'id' => '0d2f89c7-26f7-4975-9e04-e0b52b2a3670',
                 'commission' => 1,
                 'contract' => 1,
-                'start_date' => '2018-10-29',
-                'end_date' => '2018-10-29',
+                'start_date' => '2018-11-08',
+                'end_date' => '2018-11-08',
                 'active' => 'Lorem ipsum dolor sit amet',
                 'payment_terms' => 'Lorem ipsum dolor sit amet',
                 'code' => 'Lorem ip',
                 'delivery_method' => 'Lorem ip',
-                'created_at' => 1540853855,
-                'user_id' => 'bf435ae9-9859-4531-8ddc-80a0647e0717'
+                'created_at' => 1541686077,
+                'user_id' => 'c66a3a23-3695-4a60-b4cb-b1900131b68f'
             ],
         ];
         parent::init();

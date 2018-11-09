@@ -23,7 +23,10 @@ class BranchesController extends AppController
         $this->paginate = [
             'contain' => ['Companies']
         ];
-        $branches = $this->paginate($this->Branches);
+        $query = $this->Branches->find()
+            ->select(['id','name','company_name'=>'Companies.name'])
+            ->contain(['Companies']);
+        $branches = $this->paginate($query);
 
         $this->set(compact('branches'));
     }
@@ -56,7 +59,6 @@ class BranchesController extends AppController
             $branch = $this->Branches->patchEntity($branch, $this->request->getData());
             if ($this->Branches->save($branch)) {
                 $this->Flash->success(__('The branch has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The branch could not be saved. Please, try again.'));

@@ -3,23 +3,23 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Company $company
  */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Companies'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="companies form large-9 medium-8 columns content">
-    <?= $this->Form->create($company, ['type' =>'file']) ?>
-    <fieldset>
-        <legend><?= __('Add Company') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('address');
-            echo $this->Form->control('photo', ['type' => 'file']);   
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+
+
+$links_array = [
+    ['List Companies', ['action' => 'index']]
+];
+
+$input_array = [
+    ['name', ['class' => 'form-control']],
+    ['address', ['class' => 'form-control']],
+    ['photo', ['type' => 'file']]
+];
+$this->extend('/Common/add');
+$this->assign('links', json_encode($links_array));
+$this->assign('inputs', json_encode($input_array));
+$this->assign('title', 'Company');
+$this->start('form_object');
+echo $this->Form->create($company, ['type' =>'file']);
+$this->end();
+
+

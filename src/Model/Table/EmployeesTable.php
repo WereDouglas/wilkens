@@ -71,20 +71,17 @@ class EmployeesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('start_date')
-            ->maxLength('start_date', 10)
+            ->date('start_date')
             ->requirePresence('start_date', 'create')
             ->notEmpty('start_date');
 
         $validator
-            ->scalar('end_date')
-            ->maxLength('end_date', 10)
-            ->requirePresence('end_date', 'create')
-            ->notEmpty('end_date');
+            ->date('end_date')
+            ->allowEmpty('end_date');
 
         $validator
             ->scalar('active')
-            ->allowEmpty('active');
+            ->allowEmpty('active','create');
 
         $validator
             ->scalar('address')
@@ -96,9 +93,7 @@ class EmployeesTable extends Table
             ->maxLength('no', 30)
             ->allowEmpty('no');
 
-        $validator
-            ->dateTime('created_at')
-            ->allowEmpty('created_at');
+
 
         return $validator;
     }

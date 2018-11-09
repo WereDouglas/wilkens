@@ -20,11 +20,11 @@ class DepartmentsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Companies']
-        ];
-        $departments = $this->paginate($this->Departments);
+        $query = $this->Departments->find()
+            ->select(['id','name', 'company_name' => 'Companies.name'])
+            ->contain(['Companies']);
 
+        $departments = $this->paginate($query);
         $this->set(compact('departments'));
     }
 

@@ -5,5 +5,12 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 ?>
 
 <div class="alert alert-success" onclick="this.classList.add('hidden')">
-    <strong>Done</strong> <a href="javascript:void(0);" class="alert-link"><?= $message ?></a>.
+        <a href="javascript:void(0);" class="alert-link">
+            <div class="icon">
+                <i class="material-icons col-white">cancel</i>
+                <?= $message ?>
+            </div>
+
+        </a>
+
 </div>

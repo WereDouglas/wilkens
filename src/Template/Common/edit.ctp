@@ -7,13 +7,14 @@
 
 $links = json_decode($this->fetch('links'), true);
 $inputs = json_decode($this->fetch('inputs'), true);
+$id = $this->fetch('id');;
 ?>
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2> Add <?= $this->fetch('title')?> </h2>
+                <h2> EDIT </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -26,8 +27,8 @@ $inputs = json_decode($this->fetch('inputs'), true);
                             foreach ($links as [$title, $options]) { // This will search in the 2 jsons
                                 echo '<li>' . $this->Html->link(__($title), $options) . '</li>';
                             }
-
                             ?>
+                            <li><?= $this->Form->postLink( __('Delete'), ['action' => 'delete', $id],['confirm' => __('Are you sure you want to delete # {0}?', $id)])?></li>
                         </ul>
                     </li>
                 </ul>
@@ -52,10 +53,7 @@ $inputs = json_decode($this->fetch('inputs'), true);
 
                             </div>
                         </div>
-
                         <?= $this->Form->end() ?>
-
-
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ $input_array = [
 $this->extend('/Common/add');
 $this->assign('links', json_encode($links_array));
 $this->assign('inputs', json_encode($input_array));
-
+$this->assign('title', 'User');
 $this->start('form_object');
-echo $this->Form->create($user);
+echo $this->Form->create($user, ['type' =>'file']);
 $this->end();

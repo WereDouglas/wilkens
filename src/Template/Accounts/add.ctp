@@ -3,25 +3,28 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Account $account
  */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Accounts'), ['action' => 'index']) ?></li>
-               </ul>
-</nav>
-<div class="accounts form large-9 medium-8 columns content">
-    <?= $this->Form->create($account) ?>
-    <fieldset>
-        <legend><?= __('Add Account') ?></legend>
-        <?php
-            echo $this->Form->control('no');
-            echo $this->Form->control('type');
-            echo $this->Form->control('account_name');
-            echo $this->Form->control('bank_name');
-            echo $this->Form->control('user_id', ['options' => $users]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+$links_array = [
+    ['List Accounts', ['action' => 'index']],
+
+];
+
+$input_array = [
+    ['no', ['class' => 'form-control', 'placeholder' => 'Account No.']],
+    ['type', ['class' => 'form-control', 'placeholder' => 'Account type']],
+    ['account_name', ['class' => 'form-control', 'placeholder' => 'Account name']],
+    ['bank_name', ['class' => 'form-control', 'placeholder' => 'Bank Name']],
+    ['user_id', ['options' => $users]]
+];
+
+
+$this->extend('/Common/add');
+$this->assign('links', json_encode($links_array));
+$this->assign('inputs', json_encode($input_array));
+$this->assign('title', 'Account');
+$this->start('form_object');
+echo $this->Form->create($account);
+$this->end();
+
+
+
+

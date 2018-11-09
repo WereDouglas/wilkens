@@ -6,13 +6,14 @@
     "license": "MIT",
     "require": {
         "php": ">=5.6",
+        "ext-json": "*",
         "cakephp/cakephp": "3.6.*",
         "cakephp/migrations": "^2.0.0",
         "cakephp/plugin-installer": "^1.0",
         "josegonzalez/cakephp-upload": "^4.0",
         "josegonzalez/dotenv": "3.*",
         "mobiledetect/mobiledetectlib": "2.*",
-        "ext-json": "*"
+        "multidots/cakephp-rest-api": "^1.1"
     },
     "require-dev": {
         "cakephp/bake": "~1.0",

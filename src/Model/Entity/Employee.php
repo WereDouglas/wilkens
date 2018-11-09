@@ -11,8 +11,8 @@ use Cake\ORM\Entity;
  * @property string $company_id
  * @property string $branch_id
  * @property string $department_id
- * @property string $start_date
- * @property string $end_date
+ * @property \Cake\I18n\FrozenDate $start_date
+ * @property \Cake\I18n\FrozenDate $end_date
  * @property string $active
  * @property string $address
  * @property string $no
@@ -45,7 +45,6 @@ class Employee extends Entity
         'active' => true,
         'address' => true,
         'no' => true,
-        'created_at' => true,
         'user' => true,
         'company' => true,
         'branch' => true,

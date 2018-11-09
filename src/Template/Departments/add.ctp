@@ -3,21 +3,20 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Department $department
  */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Departments'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="departments form large-9 medium-8 columns content">
-    <?= $this->Form->create($department) ?>
-    <fieldset>
-        <legend><?= __('Add Department') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+
+
+$links_array = [
+    ['List Departments', ['action' => 'index']]
+];
+
+$input_array = [
+    ['name', ['class' => 'form-control']],
+    ['company_id', ['options' => $companies,'empty' => false]]
+];
+$this->extend('/Common/add');
+$this->assign('links', json_encode($links_array));
+$this->assign('inputs', json_encode($input_array));
+$this->assign('title', 'Department');
+$this->start('form_object');
+echo $this->Form->create($department, ['type' =>'file']);
+$this->end();

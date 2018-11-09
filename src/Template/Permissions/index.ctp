@@ -8,14 +8,11 @@ $links_array = [
     ['List Roles',['controller' => 'Roles', 'action' => 'index']],
     ['New Role',['controller' => 'Roles', 'action' => 'add']]
     ];
-$headers = new \Cake\Collection\Collection(['id', 'description']);
+$headers = ['id', 'description'];
 
 $objects = $permissions->map(function ($permission) use ($headers) {
-    return $headers->map(function ($header) use ($permission) {
-        return $permission->get($header);
-    });
+    return $permission->extract($headers);
 });
-
 $this->extend('/Common/table');
 $this->assign('links', json_encode($links_array));
 $this->assign('page_header', "Permissions");

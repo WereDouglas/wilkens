@@ -62,7 +62,6 @@ class ClientsController extends AppController
             $this->Flash->error(__('The client could not be saved. Please, try again.'));
         }
         $users = $this->Clients->Users->find('list', ['limit' => 200]);
-     
         $this->set(compact('client', 'users'));
     }
 

@@ -3,35 +3,32 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Client $client
  */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $client->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $client->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Clients'), ['action' => 'index']) ?></li>
-          </ul>
-</nav>
-<div class="clients form large-9 medium-8 columns content">
-    <?= $this->Form->create($client) ?>
-    <fieldset>
-        <legend><?= __('Edit Client') ?></legend>
-        <?php
-            echo $this->Form->control('commission');
-            echo $this->Form->control('contract');
-            echo $this->Form->control('start_date');
-            echo $this->Form->control('end_date', ['empty' => true]);
-            echo $this->Form->control('active');
-            echo $this->Form->control('payment_terms');
-            echo $this->Form->control('code');
-            echo $this->Form->control('delivery_method');
-            echo $this->Form->control('created_at');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+
+$links_array = [
+    ['List Clients', ['action' => 'index']]
+];
+$active = ['yes','no'];
+
+
+$input_array = [
+    ['user_id', ['options' => $users]],
+    ['commission', ['class' => 'form-control', 'placeholder' => '%']],
+    ['contract', ['class' => 'form-control', 'placeholder' => 'Contract period']],
+    ['start_date', ['class' => 'form-control', 'placeholder' => 'Starting']],
+    ['end_date', ['class' => 'form-control', 'placeholder' => 'Ending','empty' => true]],
+    ['active', ['options' => $active, 'empty' => false]],
+    ['payment_terms', ['class' => 'form-control']],
+    ['code', ['class' => 'form-control', 'placeholder' => 'Code']],
+    ['delivery_method', ['class' => 'form-control', 'placeholder' => 'Method of report delivery']],
+    ['created_at', ['class' => 'form-control', 'placeholder' => 'Created at']],
+];
+
+
+$this->extend('/Common/edit');
+$this->assign('links', json_encode($links_array));
+$this->assign('inputs', json_encode($input_array));
+$this->assign('id',$ids);
+
+$this->start('form_object');
+echo $this->Form->create($client);
+$this->end();

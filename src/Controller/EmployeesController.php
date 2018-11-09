@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -20,11 +21,12 @@ class EmployeesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Companies', 'Branches', 'Departments']
-        ];
-        $employees = $this->paginate($this->Employees);
 
+        $query = $this->Employees->find()
+            ->select(['user_name' => 'Users.first_name', 'id', 'company_name' => 'Companies.name', 'branch' => 'Branches.name', 'department' => 'Departments.name', 'start_date', 'end_date', 'active', 'address', 'no', 'created_at','photo'=>'Users.photo','photo_dir'=>'Users.photo_dir',])
+            ->contain(['Users', 'Companies', 'Branches', 'Departments']);
+
+        $employees = $this->paginate($query);
         $this->set(compact('employees'));
     }
 

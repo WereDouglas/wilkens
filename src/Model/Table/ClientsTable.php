@@ -35,13 +35,12 @@ class ClientsTable extends Table
 
         $this->setTable('clients');
         $this->setDisplayField('id');
-        $this->setPrimaryKey(['id', 'user_id']);
+        $this->setPrimaryKey(['id']);
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-       
     }
 
     /**
@@ -112,7 +111,7 @@ class ClientsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-      
+
         return $rules;
     }
 }

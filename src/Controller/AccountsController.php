@@ -74,6 +74,7 @@ class AccountsController extends AppController
      */
     public function edit($id = null)
     {
+        $ids = $id;
         $account = $this->Accounts->get($id, [
             'contain' => []
         ]);
@@ -87,7 +88,7 @@ class AccountsController extends AppController
             $this->Flash->error(__('The account could not be saved. Please, try again.'));
         }
         $users = $this->Accounts->Users->find('list', ['limit' => 200]);
-        $this->set(compact('account', 'users'));
+        $this->set(compact('account', 'users','$ids'));
     }
 
     /**

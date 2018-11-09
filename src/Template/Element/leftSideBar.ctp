@@ -27,6 +27,7 @@
         <ul class="list">
             <li class="header">MAIN NAVIGATION</li>
 
+
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
@@ -34,17 +35,59 @@
                     </div>
                     <span>Users</span>
                 </a>
-
                 <ul class="ml-menu">
+                    <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
                     <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <span>Accounts</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
 
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <span>Contacts</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li><?= $this->Html->link(__('List Contacts'), ['controller' => 'Contacts', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Contact'), ['controller' => 'Contacts', 'action' => 'add']) ?></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <span>Emergency Contacts(Kins)</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li><?= $this->Html->link(__('List Kins'), ['controller' => 'Kins', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Kin'), ['controller' => 'Kins', 'action' => 'add']) ?></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <div class="icon">
+                                <i class="material-icons col-orange">fingerprint</i>
+                            </div>
+                            <span>Passwords</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li><?= $this->Html->link(__('List Passwords'), ['controller' => 'Passwords', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Password'), ['controller' => 'Passwords', 'action' => 'add']) ?></li>
+
+                        </ul>
+                    </li>
                 </ul>
             </li>
+
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
-                        <i class="material-icons col-purple">work_outline</i>
+                        <i class="material-icons col-orange">work_outline</i>
                     </div>
                     <span>Companies</span>
                 </a>
@@ -79,7 +122,7 @@
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
-                        <i class="material-icons col-purple">work_outline</i>
+                        <i class="material-icons radio-col-orange">group</i>
                     </div>
                     <span>Employees</span>
                 </a>
@@ -91,7 +134,7 @@
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
-                        <i class="material-icons col-purple">store</i>
+                        <i class="material-icons col-green">store</i>
                     </div>
                     <span>Branches</span>
                 </a>
@@ -103,7 +146,7 @@
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
-                        <i class="material-icons col-purple">work_outline</i>
+                        <i class="material-icons col-blue">airline_seat_recline_normal</i>
                     </div>
                     <span>Departments</span>
                 </a>
@@ -116,7 +159,7 @@
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
-                        <i class="material-icons col-purple">nature_people</i>
+                        <i class="material-icons col-red">verified_user</i>
                     </div>
                     <span>Roles</span>
                 </a>
@@ -127,7 +170,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">swap_calls</i>
+                    <i class="material-icons">lock_open</i>
                     <span>Permissions</span>
                 </a>
                 <ul class="ml-menu">
@@ -136,58 +179,7 @@
 
                 </ul>
             </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <div class="icon">
-                        <i class="material-icons col-indigo">face</i>
-                    </div>
-                    <span>Users</span>
-                </a>
-                <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Accounts</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Contacts</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Contacts'), ['controller' => 'Contacts', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Contact'), ['controller' => 'Contacts', 'action' => 'add']) ?></li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Emergency Contacts(Kins)</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Kins'), ['controller' => 'Kins', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Kin'), ['controller' => 'Kins', 'action' => 'add']) ?></li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Passwords</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Passwords'), ['controller' => 'Passwords', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Password'), ['controller' => 'Passwords', 'action' => 'add']) ?></li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>
+             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
                         <i class="material-icons col-orange">how_to_reg</i>
@@ -201,7 +193,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">swap_calls</i>
+                    <i class="material-icons">business</i>
                     <span>Properties</span>
                 </a>
                 <ul class="ml-menu">
@@ -225,7 +217,7 @@
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
-                        <i class="material-icons col-green">payment</i>
+                        <i class="material-icons col-green">style</i>
                     </div>
                     <span>Rent Payments</span>
                 </a>
@@ -293,7 +285,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">swap_calls</i>
+                    <i class="material-icons">payment</i>
                     <span>Expenses & Requisitions</span>
                 </a>
                 <ul class="ml-menu">
@@ -402,9 +394,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <div class="icon">
-                        <i class="material-icons col-purple">transfer_with</i>
-                    </div>
+                    <i class="material-icons col-purple">transfer_with</i>
                     <span>Evictions</span>
                 </a>
                 <ul class="ml-menu">

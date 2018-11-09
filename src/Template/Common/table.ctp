@@ -9,6 +9,7 @@ use Cake\Routing\Router;
 $links = json_decode($this->fetch('links'), true);
 $fields = json_decode($this->fetch('fields'), true);
 $page_header = $this->fetch('page_header');
+
 ?>
 <?= $this->element('tableCss') ?>
 <!-- #END# Basic Examples -->
@@ -46,7 +47,11 @@ $page_header = $this->fetch('page_header');
                         <tr>
                             <?php
                             foreach ($headers as $header) {
-                                echo '<th scope="col">' . $this->Paginator->sort($header) . '</th>';
+                                if ($header === "id") {
+                                    echo '<th scope="col" style="display:none">>' . $this->Paginator->sort($header) . '</th>';
+                                } else {
+                                    echo '<th scope="col">' . $this->Paginator->sort($header) . '</th>';
+                                }
                             }
                             ?>
                             <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -55,34 +60,54 @@ $page_header = $this->fetch('page_header');
                         <tbody>
 
 
-                            <?php
-                            foreach ($objects as $object) {
-                                echo '<tr>';
-                                foreach ($object as $field) {
-                                    echo '<td>' . h($field) . '</td>';
+                        <?php
+                        foreach ($objects as $object) {
+                            echo '<tr>';
+                            foreach ($object as $key => $value) {
+                                switch ($key) {
+                                    case "id";
+                                        $id = $value;
+                                        echo '<td style="display:none">' . h($value) . '</td>';
+                                        break;
+                                    case "commission";
+                                        echo '<td>' . $this->Number->format($value) . '</td>';
+                                    case "contract";
+                                        echo '<td>' . $this->Number->format($value) . '</td>';
+                                        break;
+                                    case "photo";
+                                        if ($value) {
+                                            echo '<td><img src="' . $object['photo_dir'] . '\\' . $object['photo'] . '" height="40"  width="40" alt="img"/></td>';
+                                        } else {
+                                            echo '<td><img src="webroot\img\user.png" height="40"  width="40" alt="photo"/></td>';
+                                        }
+                                        break;
+                                    case "contains_id";
+                                        break;
+                                    default:
+                                        echo '<td>' . h($value) . '</td>';
                                 }
-
-                                $id = $object->first();
-                                ?>
-                                <td class="actions">
-                                    <button
-                                        onclick="window.location.href='<?php echo Router::url(array('action' => 'view', $id)); ?>'"
-                                        type="button"
-                                        class="btn bg-green btn-circle waves-effect waves-circle waves-float">
-                                        <i class="material-icons">more_horiz</i>
-                                    </button>
-                                    <button
-                                        onclick="window.location.href='<?php echo Router::url(array('action' => 'edit', $id)); ?>'"
-                                        type="button"
-                                        class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float">
-                                        <i class="material-icons">mode_edit</i>
-                                    </button>
-
-                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $id], ['confirm' => __('Are you sure you want to delete # {0}?', $id)]) ?></td>
-                                <?php
-                                echo '</tr>';
                             }
                             ?>
+                            <td class="actions">
+                                <button
+                                    onclick="window.location.href='<?php echo Router::url(array('action' => 'view', $id)); ?>'"
+                                    type="button"
+                                    class="btn bg-green btn-circle waves-effect waves-circle waves-float">
+                                    <i class="material-icons">more_horiz</i>
+                                </button>
+                                <button
+                                    onclick="window.location.href='<?php echo Router::url(array('action' => 'edit', $id)); ?>'"
+                                    type="button"
+                                    class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float">
+                                    <i class="material-icons">mode_edit</i>
+                                </button>
+
+                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $id], ['confirm' => __('Are you sure you want to delete # {0}?', $id)]) ?>
+                            </td>
+                            <?php
+                            echo '</tr>';
+                        }
+                        ?>
                         </tbody>
                     </table>
 

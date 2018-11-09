@@ -35,11 +35,10 @@ class DepartmentsTable extends Table
 
         $this->setTable('departments');
         $this->setDisplayField('name');
-        $this->setPrimaryKey(['id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Companies', [
             'foreignKey' => 'company_id',
-            'joinType' => 'INNER'
         ]);
     }
 

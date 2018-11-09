@@ -47,7 +47,8 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Companies', [
-            'foreignKey' => 'company_id'
+            'foreignKey' => 'company_id',
+
         ]);
         $this->hasMany('Accounts', [
             'foreignKey' => 'user_id'
@@ -79,6 +80,18 @@ class UsersTable extends Table
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'role_id',
             'joinTable' => 'roles_users'
+        ]);
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+
+            'photo'=> [
+                'fields' => [
+                    // if these fields or their defaults exist
+                    // the values will be set.
+                    'dir' => 'photo_dir', // defaults to `dir`
+                    'size' => 'photo_size', // defaults to `size`
+                    'type' => 'photo_type', // defaults to `type`
+                ],
+            ],
         ]);
     }
 
@@ -116,11 +129,6 @@ class UsersTable extends Table
             ->allowEmpty('email');
 
         $validator
-            ->scalar('photo')
-            ->maxLength('photo', 65)
-            ->allowEmpty('photo');
-
-        $validator
             ->scalar('address')
             ->maxLength('address', 50)
             ->allowEmpty('address');
@@ -134,23 +142,6 @@ class UsersTable extends Table
             ->scalar('active')
             ->allowEmpty('active');
 
-        $validator
-            ->dateTime('created_at')
-            ->allowEmpty('created_at');
-
-        $validator
-            ->scalar('photo_dir')
-            ->maxLength('photo_dir', 60)
-            ->allowEmpty('photo_dir');
-
-        $validator
-            ->numeric('photo_size')
-            ->allowEmpty('photo_size');
-
-        $validator
-            ->scalar('photo_type')
-            ->maxLength('photo_type', 30)
-            ->allowEmpty('photo_type');
 
         return $validator;
     }
