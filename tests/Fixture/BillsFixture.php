@@ -36,7 +36,7 @@ class BillsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -51,9 +51,9 @@ class BillsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'dd9e76a8-130b-45b4-b8cf-68dd79afb955',
-                'created_on' => '2018-10-29',
-                'due_date' => '2018-10-29',
+                'id' => '5f8697ac-f593-42e6-98c3-751c68ec12a1',
+                'created_on' => '2018-11-10',
+                'due_date' => '2018-11-10',
                 'previous_reading' => 'Lorem ipsum dolor sit amet',
                 'current_reading' => 'Lorem ipsum dolor sit amet',
                 'units_used' => 'Lorem ipsum dolor sit amet',
@@ -61,8 +61,8 @@ class BillsFixture extends TestFixture
                 'total_cost' => 1,
                 'created_by' => 'Lorem ipsum dolor sit amet',
                 'paid' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829383,
-                'utility_id' => 'aeeda94f-13a8-41c6-a253-2962a09fa099'
+                'created_at' => 1541811593,
+                'utility_id' => '99e41029-87dd-47bb-bbe3-24cad7bc50b9'
             ],
         ];
         parent::init();

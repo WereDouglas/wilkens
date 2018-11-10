@@ -30,7 +30,7 @@ class KinsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'user_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -45,12 +45,12 @@ class KinsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '2bc13b03-05a7-4c20-8d4a-e1318e2e7cbc',
+                'id' => '6909e152-5ee7-466f-89b9-6d20c919dbfa',
                 'name' => 'Lorem ipsum dolor sit amet',
                 'contact' => 'Lorem ipsum d',
                 'email' => 'Lorem ipsum dolor sit amet',
                 'photo' => 'Lorem ipsum dolor sit amet',
-                'user_id' => 'e236ccbf-6abd-4970-aebc-4da47837d5e1'
+                'user_id' => 'd6dbfcad-0267-48f0-a136-a9cf89bb34cc'
             ],
         ];
         parent::init();

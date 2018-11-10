@@ -19,6 +19,10 @@ use Cake\ORM\Entity;
  * @property string $user_id
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Deposit[] $deposits
+ * @property \App\Model\Entity\Property[] $properties
+ * @property \App\Model\Entity\Requisition[] $requisitions
+ * @property \App\Model\Entity\Tenant[] $tenants
  */
 class Client extends Entity
 {
@@ -33,7 +37,6 @@ class Client extends Entity
      * @var array
      */
     protected $_accessible = [
-        'user_id' => true,
         'commission' => true,
         'contract' => true,
         'start_date' => true,
@@ -42,7 +45,12 @@ class Client extends Entity
         'payment_terms' => true,
         'code' => true,
         'delivery_method' => true,
-
-        'user' => true
+        'created_at' => true,
+        'user_id' => true,
+        'user' => true,
+        'deposits' => true,
+        'properties' => true,
+        'requisitions' => true,
+        'tenants' => true
     ];
 }

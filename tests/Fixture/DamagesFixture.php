@@ -34,7 +34,7 @@ class DamagesFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -49,16 +49,16 @@ class DamagesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'f5196bf2-f749-4ead-bc80-90c8137c34f0',
+                'id' => '6f9e113a-1a3f-43d6-9f1f-8c87f86c6c7b',
                 'details' => 'Lorem ipsum dolor sit amet',
                 'amount' => 1,
-                'date' => '2018-10-29',
+                'date' => '2018-11-10',
                 'prepared_by' => 'Lorem ipsum dolor sit amet',
                 'paid' => 'Lorem ipsum dolor sit amet',
                 'repaired' => 'Lorem ipsum dolor sit amet',
-                'date_repaired' => '2018-10-29',
-                'created_at' => 1540829422,
-                'tenant_id' => '0c76cab5-d6df-4cc4-ae1e-8e6f641d110f'
+                'date_repaired' => '2018-11-10',
+                'created_at' => 1541811594,
+                'tenant_id' => 'c87c4ef2-241e-40dd-ad8f-b7e26c11e6b5'
             ],
         ];
         parent::init();

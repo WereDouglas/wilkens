@@ -10,11 +10,16 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $address
  * @property string $photo
+ * @property string $photo_dir
+ * @property string $photo_size
+ * @property string $photo_type
  *
  * @property \App\Model\Entity\Branch[] $branches
  * @property \App\Model\Entity\Department[] $departments
+ * @property \App\Model\Entity\Employee[] $employees
  * @property \App\Model\Entity\Message[] $messages
  * @property \App\Model\Entity\Requisition[] $requisitions
+ * @property \App\Model\Entity\User[] $users
  */
 class Company extends Entity
 {
@@ -32,9 +37,14 @@ class Company extends Entity
         'name' => true,
         'address' => true,
         'photo' => true,
+        'photo_dir' => true,
+        'photo_size' => true,
+        'photo_type' => true,
         'branches' => true,
         'departments' => true,
+        'employees' => true,
         'messages' => true,
-        'requisitions' => true
+        'requisitions' => true,
+        'users' => true
     ];
 }

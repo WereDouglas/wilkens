@@ -76,9 +76,9 @@ $page_header = $this->fetch('page_header');
                                         break;
                                     case "photo";
                                         if ($value) {
-                                            echo '<td><img src="' . $object['photo_dir'] . '\\' . $object['photo'] . '" height="40"  width="40" alt="img"/></td>';
+                                            echo '<td><img src="' . $object['photo_dir'] . '\\' . $object['photo'] . '" height="50" width="auto" alt="img"/></td>';
                                         } else {
-                                            echo '<td><img src="webroot\img\user.png" height="40"  width="40" alt="photo"/></td>';
+                                            echo '<td><img src="webroot\img\user.png" height="50"  width="auto" alt="photo"/></td>';
                                         }
                                         break;
                                     case "contains_id";

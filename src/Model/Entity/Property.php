@@ -19,11 +19,11 @@ use Cake\ORM\Entity;
  * @property float $lat
  * @property int $commission
  * @property \Cake\I18n\FrozenTime $created_at
- * @property string $client_id
+ * @property string $user_id
  *
- * @property \App\Model\Entity\Manager $manager
- * @property \App\Model\Entity\Legal $legal
- * @property \App\Model\Entity\Client $client
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Requisition[] $requisitions
+ * @property \App\Model\Entity\Unit[] $units
  */
 class Property extends Entity
 {
@@ -50,8 +50,9 @@ class Property extends Entity
         'lat' => true,
         'commission' => true,
         'created_at' => true,
-        'manager' => true,
-        'legal' => true,
-        'client' => true
+        'user_id' => true,
+        'user' => true,
+        'requisitions' => true,
+        'units' => true
     ];
 }

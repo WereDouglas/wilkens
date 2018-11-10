@@ -9,7 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Units Model
  *
- * @property \App\Model\Table\ProperiesTable|\Cake\ORM\Association\BelongsTo $Properies
+ * @property \App\Model\Table\PropertiesTable|\Cake\ORM\Association\BelongsTo $Properties
+ * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsToMany $Tenants
  *
  * @method \App\Model\Entity\Unit get($primaryKey, $options = [])
  * @method \App\Model\Entity\Unit newEntity($data = null, array $options = [])
@@ -35,11 +36,16 @@ class UnitsTable extends Table
 
         $this->setTable('units');
         $this->setDisplayField('name');
-        $this->setPrimaryKey(['id', 'propery_id']);
+        $this->setPrimaryKey('id');
 
-        $this->belongsTo('Properies', [
-            'foreignKey' => 'propery_id',
+        $this->belongsTo('Properties', [
+            'foreignKey' => 'property_id',
             'joinType' => 'INNER'
+        ]);
+        $this->belongsToMany('Tenants', [
+            'foreignKey' => 'unit_id',
+            'targetForeignKey' => 'tenant_id',
+            'joinTable' => 'tenants_units'
         ]);
     }
 
@@ -100,7 +106,7 @@ class UnitsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['propery_id'], 'Properies'));
+        $rules->add($rules->existsIn(['property_id'], 'Properties'));
 
         return $rules;
     }

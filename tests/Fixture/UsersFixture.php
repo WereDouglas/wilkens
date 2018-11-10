@@ -53,7 +53,7 @@ class UsersFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '3a4af7b4-fb6a-48ac-bc0e-482fab5ed542',
+                'id' => '0a079d28-7468-440e-97d6-1c515cdb9caa',
                 'first_name' => 'Lorem ipsum dolor sit amet',
                 'last_name' => 'Lorem ipsum dolor sit amet',
                 'contact' => 'Lorem ipsum dolor sit a',
@@ -62,8 +62,8 @@ class UsersFixture extends TestFixture
                 'address' => 'Lorem ipsum dolor sit amet',
                 'password' => 'Lorem ipsum dolor sit amet',
                 'active' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1541024549,
-                'company_id' => 'a27f3781-dc33-4d4a-aa52-95093ef110e5',
+                'created_at' => 1541816193,
+                'company_id' => '0e14ac28-f67a-419f-b538-22859c85551b',
                 'photo_dir' => 'Lorem ipsum dolor sit amet',
                 'photo_size' => 1,
                 'photo_type' => 'Lorem ipsum dolor sit amet'

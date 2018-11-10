@@ -9,7 +9,7 @@
 $links_array = [
     ['New Client', ['action' => 'add']]];
 
-$headers = ['id', 'no', 'type', 'contact', 'account_name', 'bank_name', 'user_id'];
+$headers = ['photo','user_name','id', 'no', 'type', 'contact', 'account_name', 'bank_name', 'user_id','photo_dir'];
 //$client->has('user') ? $this->Html->link($client->user->first_name, ['controller' => 'Users', 'action' => 'view', $client->user->id]) : ''
 
 $objects = $clients->map(function ($client) use ($headers) {

@@ -28,7 +28,7 @@ class ContactsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'user_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -43,10 +43,10 @@ class ContactsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'f55863f3-090a-41a0-bd42-9cc4a5c62651',
+                'id' => 'd541f7e3-41ab-47c5-8f06-e32e3a5644ac',
                 'type' => 'Lorem ip',
                 'contact' => 'Lorem ip',
-                'user_id' => '27b41ab2-7156-4fe9-b3df-f38bdbc50c97'
+                'user_id' => '53ac4f0f-55d6-4540-bd7b-d00c9e6618ac'
             ],
         ];
         parent::init();

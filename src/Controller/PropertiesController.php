@@ -20,11 +20,10 @@ class PropertiesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Managers', 'Legals', 'Clients']
-        ];
-        $properties = $this->paginate($this->Properties);
-
+        $query = $this->Properties->find()
+            ->select(['client' => 'Users.first_name','manager'=>'Managers.first_name','legal'=>'Legals.first_name','id', 'name','lat','lng','details','no_of_rooms','terms','location','category','commission', 'created_at','photo'=>'Users.photo','photo_dir'=>'Users.photo_dir'])
+            ->contain(['Users','Managers','Legals']);
+        $properties = $this->paginate($query);
         $this->set(compact('properties'));
     }
 
@@ -38,7 +37,7 @@ class PropertiesController extends AppController
     public function view($id = null)
     {
         $property = $this->Properties->get($id, [
-            'contain' => ['Managers', 'Legals', 'Clients']
+            'contain' => ['Users', 'Clients', 'Requisitions']
         ]);
 
         $this->set('property', $property);
@@ -61,10 +60,8 @@ class PropertiesController extends AppController
             }
             $this->Flash->error(__('The property could not be saved. Please, try again.'));
         }
-        $managers = $this->Properties->Managers->find('list', ['limit' => 200]);
-        $legals = $this->Properties->Legals->find('list', ['limit' => 200]);
-        $clients = $this->Properties->Clients->find('list', ['limit' => 200]);
-        $this->set(compact('property', 'managers', 'legals', 'clients'));
+        $users = $this->Properties->Users->find('list', ['limit' => 200]);
+        $this->set(compact('property', 'users'));
     }
 
     /**
@@ -88,10 +85,9 @@ class PropertiesController extends AppController
             }
             $this->Flash->error(__('The property could not be saved. Please, try again.'));
         }
-        $managers = $this->Properties->Managers->find('list', ['limit' => 200]);
-        $legals = $this->Properties->Legals->find('list', ['limit' => 200]);
+        $users = $this->Properties->Users->find('list', ['limit' => 200]);
         $clients = $this->Properties->Clients->find('list', ['limit' => 200]);
-        $this->set(compact('property', 'managers', 'legals', 'clients'));
+        $this->set(compact('property', 'users', 'clients'));
     }
 
     /**

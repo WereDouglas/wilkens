@@ -15,6 +15,7 @@ $headers = ['photo','id','user_name','company_name','branch','department','start
 //$employee->has('branch') ? $this->Html->link($employee->branch->name, ['controller' => 'Branches', 'action' => 'view', $employee->branch->id]) : '' ;
  //$employee->has('department') ? $this->Html->link($employee->department->name, ['controller' => 'Departments', 'action' => 'view', $employee->department->id]) : '' ;
 
+
 $objects = $employees->map(function ($employee) use ($headers) {
     return $employee->extract($headers);
 });

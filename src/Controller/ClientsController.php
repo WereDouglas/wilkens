@@ -20,10 +20,10 @@ class ClientsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $clients = $this->paginate($this->Clients);
+        $query = $this->Clients->find()
+            ->select(['user_name' => 'Users.first_name', 'id','start_date', 'end_date', 'active', 'Users.address', 'created_at','photo'=>'Users.photo','photo_dir'=>'Users.photo_dir',])
+            ->contain(['Users']);
+        $clients = $this->paginate($query);
 
         $this->set(compact('clients'));
     }
@@ -51,6 +51,9 @@ class ClientsController extends AppController
      */
     public function add()
     {
+
+
+
         $client = $this->Clients->newEntity();
         if ($this->request->is('post')) {
             $client = $this->Clients->patchEntity($client, $this->request->getData());

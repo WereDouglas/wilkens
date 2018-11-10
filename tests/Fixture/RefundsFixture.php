@@ -36,7 +36,7 @@ class RefundsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -51,18 +51,18 @@ class RefundsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '96da4f27-e626-40ee-9b5a-8f33fcbd010e',
+                'id' => '3f55019d-476c-42ae-8efe-e92251f912ee',
                 'amount' => 1,
                 'bills' => 1,
                 'damages' => 1,
                 'rent_due' => 1,
                 'amount_refundable' => 1,
-                'date' => '2018-10-29',
+                'date' => '2018-11-10',
                 'paid' => 'Lorem ipsum dolor sit amet',
                 'approved' => 'Lorem ipsum dolor sit amet',
                 'approved_by' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829583,
-                'tenant_id' => '7b5155dc-e41a-4020-897f-26395ef43281'
+                'created_at' => 1541811596,
+                'tenant_id' => 'e1c905eb-e91d-4e89-9f89-a96d20009589'
             ],
         ];
         parent::init();

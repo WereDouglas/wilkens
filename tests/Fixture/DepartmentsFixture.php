@@ -19,15 +19,16 @@ class DepartmentsFixture extends TestFixture
     public $fields = [
         'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'name' => ['type' => 'string', 'length' => 25, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'company_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'company_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_departments_companies1_idx' => ['type' => 'index', 'columns' => ['company_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id', 'company_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'departments_companies_id_FK' => ['type' => 'foreign', 'columns' => ['company_id'], 'references' => ['companies', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -42,9 +43,9 @@ class DepartmentsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'd334b6d3-1456-4d20-a2ef-260309bedb5f',
+                'id' => 'a86d6ced-dcfc-4201-a007-28e93c888822',
                 'name' => 'Lorem ipsum dolor sit a',
-                'company_id' => 'a38a959e-c1b6-4a8b-b86d-aaf1995274cb'
+                'company_id' => '2037e149-3f5d-49d7-94c7-44386bd384ed'
             ],
         ];
         parent::init();

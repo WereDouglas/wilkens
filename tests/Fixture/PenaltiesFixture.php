@@ -29,7 +29,7 @@ class PenaltiesFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'tenant_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -44,11 +44,11 @@ class PenaltiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '3912c593-c3ff-4638-9ed2-68b877ea2a76',
+                'id' => 'dbbf100c-0ee4-458e-8c48-71ec3fbf33df',
                 'total' => 1,
                 'paid_by' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829563,
-                'tenant_id' => 'bc6f83f9-79df-4fec-b21d-f88fbf998b40'
+                'created_at' => 1541811595,
+                'tenant_id' => 'd4c93bd0-715e-4f1a-bb7d-5ee50d89fdbe'
             ],
         ];
         parent::init();

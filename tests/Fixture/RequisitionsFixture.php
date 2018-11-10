@@ -45,7 +45,7 @@ class RequisitionsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -60,9 +60,9 @@ class RequisitionsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'eadce1df-e2a0-434f-b9cd-e8121bedb024',
+                'id' => 'a229c23b-8043-410d-8dc1-fd9cd7a0bd0b',
                 'type' => 'Lorem ipsum dolor sit amet',
-                'date' => '2018-10-29',
+                'date' => '2018-11-10',
                 'details' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'no' => 'Lorem ipsum dolor ',
                 'remarks' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
@@ -75,10 +75,10 @@ class RequisitionsFixture extends TestFixture
                 'requested_by_id' => 'Lorem ipsum dolor sit amet',
                 'manager_id' => 'Lorem ipsum dolor sit amet',
                 'category' => 'Lorem ip',
-                'created_at' => 1540829484,
-                'client_id' => '5a1aeabc-c3b7-4403-86ee-6f9f581c345d',
-                'company_id' => '848f20af-9136-4015-bf3f-88a3c4fd8442',
-                'property_id' => 'eccc558d-a928-4671-bfe8-f70212a823f8'
+                'created_at' => 1541811596,
+                'client_id' => 'f6cf87e7-f255-4974-943a-bf7693d3c353',
+                'company_id' => '127a51e1-f9c2-4733-a841-1c4282f1c60c',
+                'property_id' => '94aa3cfc-a93a-4e6d-8168-98be5d75e760'
             ],
         ];
         parent::init();

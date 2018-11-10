@@ -30,7 +30,7 @@ class UtilitiesFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'tenant_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -45,12 +45,12 @@ class UtilitiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '6d139f96-789b-4fae-8a21-55987979f11a',
+                'id' => '2b2ed72b-f802-4264-9ae0-85d10dc6e0fa',
                 'name' => 'Lorem ipsum dolor sit amet',
                 'starting_reading' => 'Lorem ipsum dolor sit amet',
                 'unit_cost' => 1,
                 'account_no' => 'Lorem ipsum dolor sit amet',
-                'tenant_id' => 'f075e969-1317-4a92-a523-f45d3429ca23'
+                'tenant_id' => '849c3c76-9b95-4cd6-9712-a29469afc8aa'
             ],
         ];
         parent::init();

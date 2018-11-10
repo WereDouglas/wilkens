@@ -38,7 +38,7 @@ class EvictionsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'tenant_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -53,20 +53,20 @@ class EvictionsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '9ca995f0-c1ad-4fe2-a9d8-ae49b33ba3d5',
+                'id' => 'ac5e57c4-0322-4a07-ae5a-92c1668b8023',
                 'balance' => 1,
-                'date' => '2018-10-29',
+                'date' => '2018-11-10',
                 'costs_incurred' => 1,
                 'repair_costs' => 1,
                 'bill_costs' => 1,
                 'disposal_costs' => 1,
                 'evicted' => 'Lorem ipsum dolor sit amet',
                 'details' => 'Lorem ipsum dolor sit amet',
-                'evicted_on' => '2018-10-29',
+                'evicted_on' => '2018-11-10',
                 'evicted_by' => 'Lorem ipsum dolor sit amet',
                 'reason' => 'Lorem ipsum dolor sit amet',
                 'remarks' => 'Lorem ipsum dolor sit amet',
-                'tenant_id' => '7ef51cae-a425-4562-a41c-092d81f86d4f'
+                'tenant_id' => '6d2515bf-647a-42a3-96e7-3463ecd438e0'
             ],
         ];
         parent::init();

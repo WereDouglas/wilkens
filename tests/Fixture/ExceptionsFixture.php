@@ -25,7 +25,7 @@ class ExceptionsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -43,7 +43,7 @@ class ExceptionsFixture extends TestFixture
                 'id' => 1,
                 'message' => 'Lorem ipsum dolor sit amet',
                 'process' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829459
+                'created_at' => 1541811594
             ],
         ];
         parent::init();

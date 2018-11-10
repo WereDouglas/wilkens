@@ -10,6 +10,8 @@ use Cake\Validation\Validator;
  * Branches Model
  *
  * @property \App\Model\Table\CompaniesTable|\Cake\ORM\Association\BelongsTo $Companies
+ * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\HasMany $Employees
+ * @property \App\Model\Table\RentsTable|\Cake\ORM\Association\HasMany $Rents
  *
  * @method \App\Model\Entity\Branch get($primaryKey, $options = [])
  * @method \App\Model\Entity\Branch newEntity($data = null, array $options = [])
@@ -35,11 +37,17 @@ class BranchesTable extends Table
 
         $this->setTable('branches');
         $this->setDisplayField('name');
-        $this->setPrimaryKey(['id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Companies', [
             'foreignKey' => 'company_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Employees', [
+            'foreignKey' => 'branch_id'
+        ]);
+        $this->hasMany('Rents', [
+            'foreignKey' => 'branch_id'
         ]);
     }
 
@@ -58,8 +66,7 @@ class BranchesTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 25)
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->allowEmpty('name');
 
         return $validator;
     }

@@ -10,6 +10,10 @@ use Cake\Validation\Validator;
  * Clients Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\DepositsTable|\Cake\ORM\Association\HasMany $Deposits
+ * @property \App\Model\Table\PropertiesTable|\Cake\ORM\Association\HasMany $Properties
+ * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
+ * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\HasMany $Tenants
  *
  * @method \App\Model\Entity\Client get($primaryKey, $options = [])
  * @method \App\Model\Entity\Client newEntity($data = null, array $options = [])
@@ -35,11 +39,23 @@ class ClientsTable extends Table
 
         $this->setTable('clients');
         $this->setDisplayField('id');
-        $this->setPrimaryKey(['id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Deposits', [
+            'foreignKey' => 'client_id'
+        ]);
+        $this->hasMany('Properties', [
+            'foreignKey' => 'client_id'
+        ]);
+        $this->hasMany('Requisitions', [
+            'foreignKey' => 'client_id'
+        ]);
+        $this->hasMany('Tenants', [
+            'foreignKey' => 'client_id'
         ]);
     }
 

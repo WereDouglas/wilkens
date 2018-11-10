@@ -179,7 +179,7 @@
 
                 </ul>
             </li>
-             <li>
+            <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
                         <i class="material-icons col-orange">how_to_reg</i>
@@ -197,19 +197,21 @@
                     <span>Properties</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('New Property'), ['action' => 'add']) ?></li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <div class="icon">
-                                <i class="material-icons col-purple">grid_on</i>
-                            </div>
-                            <span>Units/Rooms</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Properties'), ['controller' => 'Properties', 'action' => 'index']) ?></li>
 
-                        </ul>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <div class="icon">
+                            <i class="material-icons col-purple">grid_on</i>
+                        </div>
+                        <span>Units/Rooms</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
+
+                    </ul>
                     </li>
                 </ul>
             </li>

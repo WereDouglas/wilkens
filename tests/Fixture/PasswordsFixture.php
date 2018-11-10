@@ -28,7 +28,7 @@ class PasswordsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -43,10 +43,10 @@ class PasswordsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'f2b2b60e-d4aa-408f-a91b-e0e049eed464',
+                'id' => '3b0dba75-7861-4792-a65c-05107f6dccc5',
                 'password' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829544,
-                'user_id' => 'b3b84eec-fd7b-4aa3-9577-16b54732f8aa'
+                'created_at' => 1541811595,
+                'user_id' => 'c9f81bfc-d183-4f1d-b69d-e4fd24ea50db'
             ],
         ];
         parent::init();

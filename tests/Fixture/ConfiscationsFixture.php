@@ -35,7 +35,7 @@ class ConfiscationsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'tenant_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -50,17 +50,17 @@ class ConfiscationsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'a1b862c4-8719-44bc-bc90-1000b906d587',
-                'date' => '2018-10-29',
+                'id' => '7df308bb-f3fd-4cec-b215-a6db4ed67256',
+                'date' => '2018-11-10',
                 'details' => 'Lorem ipsum dolor sit amet',
                 'cost' => 1,
                 'sold' => 'Lorem ipsum dolor sit amet',
-                'sold_on' => '2018-10-29',
+                'sold_on' => '2018-11-10',
                 'sold_by' => 'Lorem ipsum dolor ',
                 'storage_fees' => 1,
-                'deadline' => '2018-10-29',
-                'created_at' => 1540829403,
-                'tenant_id' => 'a4a90035-8cc2-402b-9f21-be81c332f18d'
+                'deadline' => '2018-11-10',
+                'created_at' => 1541811593,
+                'tenant_id' => '904540f1-9bbe-4459-8e12-42fcb5e3ab06'
             ],
         ];
         parent::init();

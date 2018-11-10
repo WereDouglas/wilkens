@@ -51,17 +51,17 @@ class ClientsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '0d2f89c7-26f7-4975-9e04-e0b52b2a3670',
+                'id' => 'b09862b1-fc64-47a5-ac95-88f667c32111',
                 'commission' => 1,
                 'contract' => 1,
-                'start_date' => '2018-11-08',
-                'end_date' => '2018-11-08',
+                'start_date' => '2018-11-10',
+                'end_date' => '2018-11-10',
                 'active' => 'Lorem ipsum dolor sit amet',
                 'payment_terms' => 'Lorem ipsum dolor sit amet',
                 'code' => 'Lorem ip',
                 'delivery_method' => 'Lorem ip',
-                'created_at' => 1541686077,
-                'user_id' => 'c66a3a23-3695-4a60-b4cb-b1900131b68f'
+                'created_at' => 1541816346,
+                'user_id' => 'c1097415-302c-4dc8-9040-6c62ccc977d5'
             ],
         ];
         parent::init();

@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property string $company_id
  *
  * @property \App\Model\Entity\Company $company
+ * @property \App\Model\Entity\Employee[] $employees
+ * @property \App\Model\Entity\Rent[] $rents
  */
 class Branch extends Entity
 {
@@ -26,7 +28,8 @@ class Branch extends Entity
      */
     protected $_accessible = [
         'name' => true,
-        'company_id' => true,
-        'company' => true
+        'company' => true,
+        'employees' => true,
+        'rents' => true
     ];
 }

@@ -25,15 +25,16 @@ class UnitsFixture extends TestFixture
         'cost' => ['type' => 'float', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
         'description' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'rooms' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'propery_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'property_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'fk_units_properties1_idx' => ['type' => 'index', 'columns' => ['propery_id'], 'length' => []],
+            'fk_units_properties1_idx' => ['type' => 'index', 'columns' => ['property_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id', 'propery_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'units_properties_id_FK' => ['type' => 'foreign', 'columns' => ['property_id'], 'references' => ['properties', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -48,7 +49,7 @@ class UnitsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'b7a6e7e3-5d55-4f12-b144-b88fbfae1f8b',
+                'id' => '237ad55b-d0a0-45c1-8f6f-41c31e4176a4',
                 'type' => 'Lorem ip',
                 'name' => 'Lorem ipsum dolor sit amet',
                 'state' => 'Lorem ipsum dolor sit amet',
@@ -56,7 +57,7 @@ class UnitsFixture extends TestFixture
                 'cost' => 1,
                 'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'rooms' => 1,
-                'propery_id' => 'eeb7e7d7-a029-4398-9dc2-75c782dc0b23'
+                'property_id' => '7d50705d-af28-4efa-9a0c-fbb41799b833'
             ],
         ];
         parent::init();

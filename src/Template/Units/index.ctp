@@ -8,6 +8,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Unit'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Properties'), ['controller' => 'Properties', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Property'), ['controller' => 'Properties', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="units index large-9 medium-8 columns content">
@@ -22,7 +26,7 @@
                 <th scope="col"><?= $this->Paginator->sort('occupied') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('cost') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('rooms') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('propery_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('property_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -36,7 +40,7 @@
                 <td><?= h($unit->occupied) ?></td>
                 <td><?= $this->Number->format($unit->cost) ?></td>
                 <td><?= $this->Number->format($unit->rooms) ?></td>
-                <td><?= h($unit->propery_id) ?></td>
+                <td><?= $unit->has('property') ? $this->Html->link($unit->property->name, ['controller' => 'Properties', 'action' => 'view', $unit->property->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $unit->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $unit->id]) ?>

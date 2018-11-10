@@ -17,7 +17,9 @@ class UnitsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.units',
-        'app.properies'
+        'app.properties',
+        'app.tenants',
+        'app.tenants_units'
     ];
 
     /**

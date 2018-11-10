@@ -36,7 +36,7 @@ class MessagesFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'company_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -61,8 +61,8 @@ class MessagesFixture extends TestFixture
                 'type' => 'Lorem ipsum dolor ',
                 'by' => 'Lorem ipsum dolor ',
                 'sent' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829511,
-                'company_id' => '8a9a2a95-e68c-48bd-ac70-cd43c3feda6b'
+                'created_at' => 1541811595,
+                'company_id' => '647fa3b1-b14a-4ca1-ae92-e43c57891a17'
             ],
         ];
         parent::init();

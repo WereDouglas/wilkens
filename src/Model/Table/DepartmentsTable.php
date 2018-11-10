@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Departments Model
  *
  * @property \App\Model\Table\CompaniesTable|\Cake\ORM\Association\BelongsTo $Companies
+ * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\HasMany $Employees
  *
  * @method \App\Model\Entity\Department get($primaryKey, $options = [])
  * @method \App\Model\Entity\Department newEntity($data = null, array $options = [])
@@ -38,7 +39,10 @@ class DepartmentsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Companies', [
-            'foreignKey' => 'company_id',
+            'foreignKey' => 'company_id'
+        ]);
+        $this->hasMany('Employees', [
+            'foreignKey' => 'department_id'
         ]);
     }
 

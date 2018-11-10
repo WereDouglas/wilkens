@@ -18,7 +18,7 @@ $objects = $tenants->map(function ($tenant) use ($headers) {
 
 $this->extend('/Common/table');
 $this->assign('links', json_encode($links_array));
-$this->assign('page_header', "Accounts");
+$this->assign('page_header', "Tenants");
 $this->set(compact('headers', 'objects'));
 
 

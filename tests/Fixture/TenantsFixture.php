@@ -36,9 +36,11 @@ class TenantsFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'tenants_clients_id_FK' => ['type' => 'foreign', 'columns' => ['client_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'tenants_users_id_FK' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -53,7 +55,7 @@ class TenantsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '3f964bdf-9ec9-4845-ad38-a6811d011bc5',
+                'id' => 'd51bfc92-51b1-4981-9b3f-94836485ba6b',
                 'start_date' => 'Lorem ip',
                 'end_date' => 'Lorem ip',
                 'rent_start_due_day' => 'Lorem ip',
@@ -63,9 +65,9 @@ class TenantsFixture extends TestFixture
                 'work_address' => 'Lorem ipsum dolor sit amet',
                 'nin' => 'Lorem ipsum dolor sit amet',
                 'passport' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540831268,
-                'user_id' => '96ea4aba-606c-42f0-9103-c27c74f11b16',
-                'client_id' => '09c22c55-6586-4606-952b-33794bad82e9'
+                'created_at' => 1541811597,
+                'user_id' => '9d41bea7-498a-4c87-89cc-9c992d9d4337',
+                'client_id' => 'bb6ec350-2e85-4be4-b2c6-c9744529ca1c'
             ],
         ];
         parent::init();

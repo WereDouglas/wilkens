@@ -30,7 +30,7 @@ class AccountsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -45,12 +45,12 @@ class AccountsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'aaf6642d-4ca0-4147-a80a-e4996bb45a49',
+                'id' => 'f6d53e2f-717b-457f-9f91-a3ceb146e3aa',
                 'no' => 'Lorem ipsum dolor ',
                 'type' => 'Lorem ipsum dolor sit amet',
                 'account_name' => 'Lorem ipsum dolor ',
                 'bank_name' => 'Lorem ipsum dolor ',
-                'user_id' => '82131bde-4530-4c69-a25b-32d4254885a4'
+                'user_id' => 'c857a622-9794-43c7-bc9d-a08d4d180255'
             ],
         ];
         parent::init();

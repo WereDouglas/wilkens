@@ -45,6 +45,7 @@ class Employee extends Entity
         'active' => true,
         'address' => true,
         'no' => true,
+        'created_at' => true,
         'user' => true,
         'company' => true,
         'branch' => true,

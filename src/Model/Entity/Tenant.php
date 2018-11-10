@@ -21,6 +21,7 @@ use Cake\ORM\Entity;
  * @property string $client_id
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Client $client
  * @property \App\Model\Entity\Confiscation[] $confiscations
  * @property \App\Model\Entity\Damage[] $damages
  * @property \App\Model\Entity\Eviction[] $evictions
@@ -57,6 +58,7 @@ class Tenant extends Entity
         'user_id' => true,
         'client_id' => true,
         'user' => true,
+        'client' => true,
         'confiscations' => true,
         'damages' => true,
         'evictions' => true,

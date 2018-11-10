@@ -31,7 +31,7 @@ class ExpensesFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'requisition_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -46,13 +46,13 @@ class ExpensesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'f93b5fde-9739-4839-b66b-fdb3171e6939',
+                'id' => 'c1e6c206-c004-456a-86db-5ab6d506ba44',
                 'item' => 'Lorem ipsum dolor sit amet',
                 'qty' => 1,
                 'cost' => 1,
                 'total' => 1,
-                'created_at' => 1540829493,
-                'requisition_id' => '2c73d1a4-904f-4187-aac4-a3c3f5a13e64'
+                'created_at' => 1541811595,
+                'requisition_id' => '0fa99945-2acf-48f0-a82e-6b393a6e94bd'
             ],
         ];
         parent::init();

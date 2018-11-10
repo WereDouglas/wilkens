@@ -21,7 +21,7 @@ class UnitsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Properies']
+            'contain' => ['Properties']
         ];
         $units = $this->paginate($this->Units);
 
@@ -38,7 +38,7 @@ class UnitsController extends AppController
     public function view($id = null)
     {
         $unit = $this->Units->get($id, [
-            'contain' => ['Properies']
+            'contain' => ['Properties', 'Tenants']
         ]);
 
         $this->set('unit', $unit);
@@ -61,8 +61,9 @@ class UnitsController extends AppController
             }
             $this->Flash->error(__('The unit could not be saved. Please, try again.'));
         }
-        $properies = $this->Units->Properies->find('list', ['limit' => 200]);
-        $this->set(compact('unit', 'properies'));
+        $properties = $this->Units->Properties->find('list', ['limit' => 200]);
+        $tenants = $this->Units->Tenants->find('list', ['limit' => 200]);
+        $this->set(compact('unit', 'properties', 'tenants'));
     }
 
     /**
@@ -75,7 +76,7 @@ class UnitsController extends AppController
     public function edit($id = null)
     {
         $unit = $this->Units->get($id, [
-            'contain' => []
+            'contain' => ['Tenants']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $unit = $this->Units->patchEntity($unit, $this->request->getData());
@@ -86,8 +87,9 @@ class UnitsController extends AppController
             }
             $this->Flash->error(__('The unit could not be saved. Please, try again.'));
         }
-        $properies = $this->Units->Properies->find('list', ['limit' => 200]);
-        $this->set(compact('unit', 'properies'));
+        $properties = $this->Units->Properties->find('list', ['limit' => 200]);
+        $tenants = $this->Units->Tenants->find('list', ['limit' => 200]);
+        $this->set(compact('unit', 'properties', 'tenants'));
     }
 
     /**

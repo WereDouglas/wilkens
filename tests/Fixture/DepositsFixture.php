@@ -38,7 +38,7 @@ class DepositsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'client_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -53,19 +53,19 @@ class DepositsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '51f77204-c61e-4331-bf9e-cd3ac31bd1ff',
+                'id' => 'f4a06351-e8b6-4da1-9f8e-a7c374da0c1a',
                 'rent_amount' => 1,
                 'expense_amount' => 1,
                 'method' => 'Lorem ip',
-                'date' => '2018-10-29',
+                'date' => '2018-11-10',
                 'prepared_by' => 'Lorem ipsum dolor sit amet',
                 'approved_by' => 'Lorem ipsum dolor sit amet',
                 'deposited_by' => 'Lorem ipsum dolor sit amet',
                 'remarks' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'complete' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829431,
-                'client_id' => '7b0b1468-9544-4b4e-b59f-44bc08cef0cc',
-                'account_id' => 'e1b5b889-6bb5-41d6-87cf-c1fdaa38961a'
+                'created_at' => 1541811594,
+                'client_id' => 'cc0d3ba9-a6f1-4fa1-9b04-e0821959a300',
+                'account_id' => 'bcd077fc-00a4-4ba4-98cd-aed9de449fbf'
             ],
         ];
         parent::init();

@@ -35,7 +35,7 @@ class SecuritiesFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -50,8 +50,8 @@ class SecuritiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'b00b2d4c-9b2b-4170-945e-f77a87de46e2',
-                'date' => '2018-10-29',
+                'id' => '11d4f199-e891-4f75-82da-25e65daa85a7',
+                'date' => '2018-11-10',
                 'amount' => 1,
                 'method' => 'Lorem ip',
                 'paid_back' => 'Lorem ipsum dolor sit amet',
@@ -60,7 +60,7 @@ class SecuritiesFixture extends TestFixture
                 'approved_by' => 'Lorem ipsum dolor sit amet',
                 'refunded' => 'Lorem ipsum dolor sit amet',
                 'no' => 1,
-                'tenant_id' => 'a7261589-8b5b-4971-88af-3cd9854a901b'
+                'tenant_id' => '87a99a23-ce3f-4ac8-9032-fed9c74c2231'
             ],
         ];
         parent::init();

@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Tenants Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property |\Cake\ORM\Association\BelongsTo $Clients
+ * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\BelongsTo $Clients
  * @property \App\Model\Table\ConfiscationsTable|\Cake\ORM\Association\HasMany $Confiscations
  * @property \App\Model\Table\DamagesTable|\Cake\ORM\Association\HasMany $Damages
  * @property \App\Model\Table\EvictionsTable|\Cake\ORM\Association\HasMany $Evictions

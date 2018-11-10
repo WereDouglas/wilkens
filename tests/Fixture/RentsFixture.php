@@ -48,7 +48,7 @@ class RentsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -63,8 +63,8 @@ class RentsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'd592a9db-56b0-434e-af45-57d5b9e99ec1',
-                'date' => '2018-10-29',
+                'id' => '9c969d60-e39e-4b97-9aa1-8fb2a2b341a2',
+                'date' => '2018-11-10',
                 'method' => 'Lorem ip',
                 'no' => 'Lorem ipsum dolor sit amet',
                 'total_cost' => 1,
@@ -75,8 +75,8 @@ class RentsFixture extends TestFixture
                 'paid_by' => 'Lorem ipsum dolor sit amet',
                 'paid_to_client' => 'Lorem ipsum dolor sit amet',
                 'banking_deposit_id' => 'Lorem ipsum dolor sit amet',
-                'start_date' => '2018-10-29',
-                'end_date' => '2018-10-29',
+                'start_date' => '2018-11-10',
+                'end_date' => '2018-11-10',
                 'unpaid_months' => 1,
                 'paid_months' => 1,
                 'vat' => 1,
@@ -85,8 +85,8 @@ class RentsFixture extends TestFixture
                 'cheque_no' => 'Lorem ipsum dolor sit amet',
                 'recieved_by' => 'Lorem ipsum dolor sit amet',
                 'editable' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829518,
-                'tenant_id' => '6c8daff8-052f-4dc1-8b3d-07fff652cb8f'
+                'created_at' => 1541811596,
+                'tenant_id' => '2faa4137-d50e-4105-9a43-ab515408e312'
             ],
         ];
         parent::init();

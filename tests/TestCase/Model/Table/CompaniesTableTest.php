@@ -27,8 +27,10 @@ class CompaniesTableTest extends TestCase
         'app.companies',
         'app.branches',
         'app.departments',
+        'app.employees',
         'app.messages',
-        'app.requisitions'
+        'app.requisitions',
+        'app.users'
     ];
 
     /**

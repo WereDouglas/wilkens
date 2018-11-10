@@ -9,9 +9,11 @@ use Cake\Validation\Validator;
 /**
  * Properties Model
  *
- * @property \App\Model\Table\ManagersTable|\Cake\ORM\Association\BelongsTo $Managers
- * @property \App\Model\Table\LegalsTable|\Cake\ORM\Association\BelongsTo $Legals
- * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\BelongsTo $Clients
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Legals
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Managers
+ * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
+ * @property \App\Model\Table\UnitsTable|\Cake\ORM\Association\HasMany $Units
  *
  * @method \App\Model\Entity\Property get($primaryKey, $options = [])
  * @method \App\Model\Entity\Property newEntity($data = null, array $options = [])
@@ -37,17 +39,25 @@ class PropertiesTable extends Table
 
         $this->setTable('properties');
         $this->setDisplayField('name');
-        $this->setPrimaryKey(['id', 'client_id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Managers', [
+            'className'=>'Users',
             'foreignKey' => 'manager_id'
         ]);
         $this->belongsTo('Legals', [
+            'className'=>'Users',
             'foreignKey' => 'legal_id'
         ]);
-        $this->belongsTo('Clients', [
-            'foreignKey' => 'client_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Requisitions', [
+            'foreignKey' => 'property_id'
+        ]);
+        $this->hasMany('Units', [
+            'foreignKey' => 'property_id'
         ]);
     }
 
@@ -121,9 +131,10 @@ class PropertiesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+
         $rules->add($rules->existsIn(['manager_id'], 'Managers'));
         $rules->add($rules->existsIn(['legal_id'], 'Legals'));
-        $rules->add($rules->existsIn(['client_id'], 'Clients'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

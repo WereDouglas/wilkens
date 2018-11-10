@@ -2,7 +2,12 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Property $property
+ * @var \App\Model\Entity\Client[]|\Cake\Collection\CollectionInterface $clients
+ * @var \App\Model\Entity\Employee[]|\Cake\Collection\CollectionInterface $managers
+ * @var \App\Model\Entity\Employee[]|\Cake\Collection\CollectionInterface $legals
  */
+
+
 
 $links_array = [
     ['List Properties', ['action' => 'index']],
@@ -12,14 +17,16 @@ $links_array = [
 $active =['yes','no'];
 $active =['Flat','Bangalow','Apartments','Office Space'];
 
+
 $input_array = [
+    ['user_id', ['options' => $users]],
     ['name', ['class' => 'form-control', 'placeholder' => 'Name']],
     ['details', ['class' => 'form-control', 'placeholder' => 'Details']],
     ['no_of_rooms', ['class' => 'form-control', 'placeholder' => 'No of rooms']],
-    ['manager_id', ['class' => 'form-control', 'placeholder' => 'Manager']],
-    ['legal_id', ['class' => 'form-control', 'placeholder' => 'Estate Legal']],
+    ['manager_id', ['options' => $users]],
+    ['legal_id', ['options' => $users]],
     ['terms', ['class' => 'form-control', 'placeholder' => 'Terms']],
-    ['location', ['options' => $active, 'empty' => false]],
+    ['location', ['class' => 'form-control']],
     ['category', ['options' => $category]],
     ['lng', ['class' => 'form-control', 'placeholder' => 'Longitude']],
     ['lat', ['class' => 'form-control', 'placeholder' => 'Latitude']],

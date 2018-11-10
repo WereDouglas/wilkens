@@ -13,17 +13,15 @@ $links_array = [
     ['New Client', ['controller' => 'Clients', 'action' => 'add']]
 ];
 
-$headers = new \Cake\Collection\Collection( [ 'id', 'name','no_of_rooms','manager_id', 'legal_id','terms','location','category','lng','lat', 'commission','created_at','client_id']);
+$headers = ['client', 'id', 'name','no_of_rooms','manager', 'legal','location','category','lng','lat', 'commission','created_at'];
 //$property->has('client') ? $this->Html->link($property->client->id, ['controller' => 'Clients', 'action' => 'view', $property->client->id]) : ''
-$objects = $accounts->map(function ($account) use ($headers) {
-    return $headers->map(function ($header) use ($account) {
-        return $account->get($header);
-    });
+$objects = $properties->map(function ($property) use ($headers) {
+    return $property->extract($headers);
 });
 
 $this->extend('/Common/table');
 $this->assign('links', json_encode($links_array));
-$this->assign('page_header', "Accounts");
+$this->assign('page_header', "Properties");
 $this->set(compact('headers', 'objects'));
 
 

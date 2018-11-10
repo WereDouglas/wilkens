@@ -29,7 +29,7 @@ class PaymentsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'bill_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -44,11 +44,11 @@ class PaymentsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'b45f40a2-fe7e-4050-94ed-f2bb263da485',
+                'id' => '4f5504a4-eabe-4cf0-8096-af9a6b4a0306',
                 'amount_paid' => 1,
                 'paid_by' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1540829553,
-                'bill_id' => 'd534e2ca-4e2c-432d-b169-4ff1002bc0af'
+                'created_at' => 1541811595,
+                'bill_id' => '2d0d7a20-941c-4c57-938b-94ebb8968e70'
             ],
         ];
         parent::init();

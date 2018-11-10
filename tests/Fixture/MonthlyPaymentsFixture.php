@@ -33,7 +33,7 @@ class MonthlyPaymentsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id', 'rent_id'], 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'latin1_swedish_ci'
         ],
     ];
@@ -48,15 +48,15 @@ class MonthlyPaymentsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'b41a0255-8d51-4885-ad49-faeb5253298a',
+                'id' => 'd80efa0e-cfb1-4279-b0f2-ba401d8c9750',
                 'total_amount' => 1,
                 'to_client' => 1,
                 'for_commission' => 1,
                 'month' => 'Lorem ip',
                 'year' => 'Lorem ip',
-                'date' => '2018-10-29',
-                'created_at' => 1540829536,
-                'rent_id' => '7f8f1470-0481-4f14-805e-b8bde0661e5f'
+                'date' => '2018-11-10',
+                'created_at' => 1541811595,
+                'rent_id' => '525e6673-807b-4caa-8464-aa6a34de4504'
             ],
         ];
         parent::init();

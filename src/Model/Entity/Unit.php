@@ -14,9 +14,10 @@ use Cake\ORM\Entity;
  * @property float $cost
  * @property string $description
  * @property int $rooms
- * @property string $propery_id
+ * @property string $property_id
  *
- * @property \App\Model\Entity\Propery $propery
+ * @property \App\Model\Entity\Property $property
+ * @property \App\Model\Entity\Tenant[] $tenants
  */
 class Unit extends Entity
 {
@@ -38,6 +39,8 @@ class Unit extends Entity
         'cost' => true,
         'description' => true,
         'rooms' => true,
-        'propery' => true
+        'property_id' => true,
+        'property' => true,
+        'tenants' => true
     ];
 }

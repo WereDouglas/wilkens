@@ -8,7 +8,7 @@ $links_array = [
     ['New User', ['action' => 'add']]];
 
 //$headers = new \Cake\Collection\Collection(['id', 'first_name', 'last_name', 'contact', 'email', 'photo', 'address', 'active', 'created_at', 'photo_dir']);
-$headers = ['id', 'first_name', 'last_name', 'contact', 'email', 'photo', 'address', 'active', 'created_at', 'photo_dir','company_id','full_name'];
+$headers = ['id', 'first_name', 'last_name', 'contact', 'email', 'photo', 'address', 'active', 'created_at', 'photo_dir', 'company_id', 'full_name'];
 
 $objects = $users->map(function ($user) use ($headers) {
     return $user->extract($headers);

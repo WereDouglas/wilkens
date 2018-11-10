@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property string $company_id
  *
  * @property \App\Model\Entity\Company $company
+ * @property \App\Model\Entity\Employee[] $employees
  */
 class Department extends Entity
 {
@@ -25,9 +26,9 @@ class Department extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
         'name' => true,
-        'company_id' => true
-
+        'company_id' => true,
+        'company' => true,
+        'employees' => true
     ];
 }
