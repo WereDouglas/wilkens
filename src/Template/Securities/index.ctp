@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Security'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
     </ul>
@@ -23,11 +25,11 @@
                 <th scope="col"><?= $this->Paginator->sort('method') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('paid_back') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('approved') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('requested_by') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('approved_by') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('requested_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('approved_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('refunded') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('no') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('tenant_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -40,11 +42,11 @@
                 <td><?= h($security->method) ?></td>
                 <td><?= h($security->paid_back) ?></td>
                 <td><?= h($security->approved) ?></td>
-                <td><?= h($security->requested_by) ?></td>
-                <td><?= h($security->approved_by) ?></td>
-                <td><?= h($security->refunded) ?></td>
+                <td><?= h($security->requested_id) ?></td>
+                <td><?= $security->has('user') ? $this->Html->link($security->user->id, ['controller' => 'Users', 'action' => 'view', $security->user->id]) : '' ?></td>
+                <td><?= $this->Number->format($security->refunded) ?></td>
                 <td><?= $this->Number->format($security->no) ?></td>
-                <td><?= $security->has('tenant') ? $this->Html->link($security->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $security->tenant->id]) : '' ?></td>
+                <td><?= h($security->user_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $security->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $security->id]) ?>

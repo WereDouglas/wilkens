@@ -11,7 +11,9 @@
         <li><?= $this->Form->postLink(__('Delete Expense'), ['action' => 'delete', $expense->id], ['confirm' => __('Are you sure you want to delete # {0}?', $expense->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Expenses'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Expense'), ['action' => 'add']) ?> </li>
-       </ul>
+        <li><?= $this->Html->link(__('List Requisitions'), ['controller' => 'Requisitions', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Requisition'), ['controller' => 'Requisitions', 'action' => 'add']) ?> </li>
+    </ul>
 </nav>
 <div class="expenses view large-9 medium-8 columns content">
     <h3><?= h($expense->id) ?></h3>
@@ -27,6 +29,14 @@
         <tr>
             <th scope="row"><?= __('Requisition') ?></th>
             <td><?= $expense->has('requisition') ? $this->Html->link($expense->requisition->id, ['controller' => 'Requisitions', 'action' => 'view', $expense->requisition->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Editable') ?></th>
+            <td><?= h($expense->editable) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('No') ?></th>
+            <td><?= h($expense->no) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Qty') ?></th>

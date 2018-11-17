@@ -19,9 +19,10 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('total') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('paid_by') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('rent_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('tenant_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('paid') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -30,9 +31,10 @@
             <tr>
                 <td><?= h($penalty->id) ?></td>
                 <td><?= $this->Number->format($penalty->total) ?></td>
-                <td><?= h($penalty->paid_by) ?></td>
+                <td><?= h($penalty->user_id) ?></td>
+                <td><?= h($penalty->rent_id) ?></td>
                 <td><?= h($penalty->created_at) ?></td>
-                <td><?= $penalty->has('tenant') ? $this->Html->link($penalty->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $penalty->tenant->id]) : '' ?></td>
+                <td><?= h($penalty->paid) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $penalty->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $penalty->id]) ?>

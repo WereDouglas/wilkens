@@ -25,7 +25,7 @@ class UtilitiesTableTest extends TestCase
      */
     public $fixtures = [
         'app.utilities',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

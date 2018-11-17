@@ -20,10 +20,10 @@ class ClientsController extends AppController
      */
     public function index()
     {
-        $query = $this->Clients->find()
-            ->select(['user_name' => 'Users.first_name', 'id','start_date', 'end_date', 'active', 'Users.address', 'created_at','photo'=>'Users.photo','photo_dir'=>'Users.photo_dir',])
-            ->contain(['Users']);
-        $clients = $this->paginate($query);
+        $this->paginate = [
+            'contain' => ['Users']
+        ];
+        $clients = $this->paginate($this->Clients);
 
         $this->set(compact('clients'));
     }
@@ -51,16 +51,25 @@ class ClientsController extends AppController
      */
     public function add()
     {
-
-
-
         $client = $this->Clients->newEntity();
         if ($this->request->is('post')) {
             $client = $this->Clients->patchEntity($client, $this->request->getData());
             if ($this->Clients->save($client)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $client->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The client has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The client could not be saved. Please, try again.'));
         }

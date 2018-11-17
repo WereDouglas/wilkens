@@ -17,7 +17,7 @@ class SecuritiesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.securities',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

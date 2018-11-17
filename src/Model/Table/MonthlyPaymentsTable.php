@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * MonthlyPayments Model
  *
  * @property \App\Model\Table\RentsTable|\Cake\ORM\Association\BelongsTo $Rents
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\MonthlyPayment get($primaryKey, $options = [])
  * @method \App\Model\Entity\MonthlyPayment newEntity($data = null, array $options = [])
@@ -39,6 +40,10 @@ class MonthlyPaymentsTable extends Table
 
         $this->belongsTo('Rents', [
             'foreignKey' => 'rent_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -102,6 +107,7 @@ class MonthlyPaymentsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['rent_id'], 'Rents'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

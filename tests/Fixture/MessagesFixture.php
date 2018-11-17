@@ -61,8 +61,8 @@ class MessagesFixture extends TestFixture
                 'type' => 'Lorem ipsum dolor ',
                 'by' => 'Lorem ipsum dolor ',
                 'sent' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1541811595,
-                'company_id' => '647fa3b1-b14a-4ca1-ae92-e43c57891a17'
+                'created_at' => 1542316524,
+                'company_id' => 'f06b7431-2fca-4b51-80d8-73e6306779b4'
             ],
         ];
         parent::init();

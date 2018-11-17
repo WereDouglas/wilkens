@@ -25,16 +25,16 @@
             <td><?= h($unit->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Type') ?></th>
-            <td><?= h($unit->type) ?></td>
+            <th scope="row"><?= __('Types') ?></th>
+            <td><?= h($unit->types) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($unit->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('State') ?></th>
-            <td><?= h($unit->state) ?></td>
+            <th scope="row"><?= __('States') ?></th>
+            <td><?= h($unit->states) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Occupied') ?></th>
@@ -43,6 +43,10 @@
         <tr>
             <th scope="row"><?= __('Property') ?></th>
             <td><?= $unit->has('property') ? $this->Html->link($unit->property->name, ['controller' => 'Properties', 'action' => 'view', $unit->property->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('User Id') ?></th>
+            <td><?= h($unit->user_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Cost') ?></th>
@@ -74,7 +78,8 @@
                 <th scope="col"><?= __('Passport') ?></th>
                 <th scope="col"><?= __('Created At') ?></th>
                 <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col"><?= __('Client Id') ?></th>
+                <th scope="col"><?= __('Unit Id') ?></th>
+                <th scope="col"><?= __('Property Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($unit->tenants as $tenants): ?>
@@ -91,7 +96,8 @@
                 <td><?= h($tenants->passport) ?></td>
                 <td><?= h($tenants->created_at) ?></td>
                 <td><?= h($tenants->user_id) ?></td>
-                <td><?= h($tenants->client_id) ?></td>
+                <td><?= h($tenants->unit_id) ?></td>
+                <td><?= h($tenants->property_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Tenants', 'action' => 'view', $tenants->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Tenants', 'action' => 'edit', $tenants->id]) ?>

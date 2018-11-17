@@ -58,7 +58,8 @@ class ExpensesTable extends Table
         $validator
             ->scalar('item')
             ->maxLength('item', 60)
-            ->allowEmpty('item');
+            ->requirePresence('item', 'create')
+            ->notEmpty('item');
 
         $validator
             ->numeric('qty')
@@ -78,6 +79,16 @@ class ExpensesTable extends Table
         $validator
             ->dateTime('created_at')
             ->allowEmpty('created_at');
+
+        $validator
+            ->scalar('editable')
+            ->allowEmpty('editable');
+
+        $validator
+            ->scalar('no')
+            ->maxLength('no', 20)
+            ->requirePresence('no', 'create')
+            ->notEmpty('no');
 
         return $validator;
     }

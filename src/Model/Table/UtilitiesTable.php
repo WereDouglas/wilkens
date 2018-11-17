@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Utilities Model
  *
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsTo $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Utility get($primaryKey, $options = [])
  * @method \App\Model\Entity\Utility newEntity($data = null, array $options = [])
@@ -37,8 +37,8 @@ class UtilitiesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey(['id', 'tenant_id']);
 
-        $this->belongsTo('Tenants', [
-            'foreignKey' => 'tenant_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -86,7 +86,7 @@ class UtilitiesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['tenant_id'], 'Tenants'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

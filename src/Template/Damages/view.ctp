@@ -11,6 +11,8 @@
         <li><?= $this->Form->postLink(__('Delete Damage'), ['action' => 'delete', $damage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $damage->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Damages'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Damage'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="damages view large-9 medium-8 columns content">
@@ -25,8 +27,8 @@
             <td><?= h($damage->details) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Prepared By') ?></th>
-            <td><?= h($damage->prepared_by) ?></td>
+            <th scope="row"><?= __('Prepared Id') ?></th>
+            <td><?= h($damage->prepared_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Paid') ?></th>
@@ -37,8 +39,8 @@
             <td><?= h($damage->repaired) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Tenant') ?></th>
-            <td><?= $damage->has('tenant') ? $this->Html->link($damage->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $damage->tenant->id]) : '' ?></td>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $damage->has('user') ? $this->Html->link($damage->user->id, ['controller' => 'Users', 'action' => 'view', $damage->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Amount') ?></th>

@@ -3,35 +3,46 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Tenant $tenant
  */
-
-
-$links_array = [
-    ['List Tenants', ['action' => 'index']],
-
-];
-$active = ['yes', 'no'];
-
-$input_array = [
-    ['user_id', ['options' => $users]],
-    ['units._ids', ['options' => $units]],
-    ['client_id', ['class' => 'form-control']],
-    ['start_date', ['class' => 'form-control', 'placeholder' => 'Start date']],
-    ['end_date', ['class' => 'form-control', 'placeholder' => 'Ending']],
-    ['rent_start_due_day', ['class' => 'form-control', 'placeholder' => 'Due day']],
-    ['active', ['options' => $active, 'empty' => false]],
-    ['notice', ['options' => $active]],
-    ['amount_to_pay', ['class' => 'form-control', 'placeholder' => 'Cost']],
-    ['work_address', ['class' => 'form-control']],
-    ['nin', ['class' => 'form-control']],
-    ['passport', ['class' => 'form-control']],
-    ['created_at', ['class' => 'form-control']]
-];
-
-$this->extend('/Common/add');
-$this->assign('links', json_encode($links_array));
-$this->assign('inputs', json_encode($input_array));
-$this->assign('title', 'Tenant');
-$this->start('form_object');
-echo $this->Form->create($tenant, ['type' =>'file']);
-$this->end();
-
+?>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('List Tenants'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Clients'), ['controller' => 'Clients', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Client'), ['controller' => 'Clients', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Penalties'), ['controller' => 'Penalties', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Penalty'), ['controller' => 'Penalties', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Securities'), ['controller' => 'Securities', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Security'), ['controller' => 'Securities', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
+    </ul>
+</nav>
+<div class="tenants form large-9 medium-8 columns content">
+    <?= $this->Form->create($tenant) ?>
+    <fieldset>
+        <legend><?= __('Add Tenant') ?></legend>
+        <?php
+            echo $this->Form->control('start_date');
+            echo $this->Form->control('end_date');
+            echo $this->Form->control('rent_start_due_day');
+            echo $this->Form->control('active');
+            echo $this->Form->control('notice');
+            echo $this->Form->control('amount_to_pay');
+            echo $this->Form->control('work_address');
+            echo $this->Form->control('nin');
+            echo $this->Form->control('passport');
+            echo $this->Form->control('created_at');
+            echo $this->Form->control('user_id', ['options' => $users]);
+            echo $this->Form->control('unit_id');
+            echo $this->Form->control('property_id');
+            echo $this->Form->control('units._ids', ['options' => $units]);
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
+</div>

@@ -55,9 +55,21 @@ class ExpensesController extends AppController
         if ($this->request->is('post')) {
             $expense = $this->Expenses->patchEntity($expense, $this->request->getData());
             if ($this->Expenses->save($expense)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $expense->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The expense has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The expense could not be saved. Please, try again.'));
         }

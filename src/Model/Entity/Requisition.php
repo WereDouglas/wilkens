@@ -13,24 +13,19 @@ use Cake\ORM\Entity;
  * @property string $no
  * @property string $remarks
  * @property string $approved
- * @property string $approved_by
+ * @property string $approved_id
  * @property string $paid
- * @property string $paid_by
+ * @property string $paid_id
  * @property string $method
  * @property string $repaired
- * @property string $requested_by_id
- * @property string $manager_id
+ * @property string $requested_id
  * @property string $category
  * @property \Cake\I18n\FrozenTime $created_at
- * @property string $client_id
- * @property string $company_id
+ * @property string $user_id
  * @property string $property_id
+ * @property string $unit_id
  *
- * @property \App\Model\Entity\RequestedBy $requested_by
- * @property \App\Model\Entity\Manager $manager
- * @property \App\Model\Entity\Client $client
- * @property \App\Model\Entity\Company $company
- * @property \App\Model\Entity\Property $property
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Expense[] $expenses
  */
 class Requisition extends Entity
@@ -46,29 +41,25 @@ class Requisition extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'type' => true,
         'date' => true,
         'details' => true,
         'no' => true,
         'remarks' => true,
         'approved' => true,
-        'approved_by' => true,
+        'approved_id' => true,
         'paid' => true,
-        'paid_by' => true,
+        'paid_id' => true,
         'method' => true,
         'repaired' => true,
-        'requested_by_id' => true,
-        'manager_id' => true,
+        'requested_id' => true,
         'category' => true,
         'created_at' => true,
-        'client_id' => true,
-        'company_id' => true,
+        'user_id' => true,
         'property_id' => true,
-        'requested_by' => true,
-        'manager' => true,
-        'client' => true,
-        'company' => true,
-        'property' => true,
+        'unit_id' => true,
+        'user' => true,
         'expenses' => true
     ];
 }

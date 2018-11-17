@@ -10,7 +10,6 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $contact
  * @property string $email
- * @property string $photo
  * @property string $user_id
  *
  * @property \App\Model\Entity\User $user
@@ -28,10 +27,11 @@ class Kin extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id'=>true,
         'name' => true,
         'contact' => true,
         'email' => true,
-        'photo' => true,
+        'user_id' => true,
         'user' => true
     ];
 }

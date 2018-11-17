@@ -39,7 +39,8 @@ class DepartmentsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Companies', [
-            'foreignKey' => 'company_id'
+            'foreignKey' => 'company_id',
+            'joinType' => 'INNER'
         ]);
         $this->hasMany('Employees', [
             'foreignKey' => 'department_id'

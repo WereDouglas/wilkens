@@ -23,9 +23,10 @@
     <fieldset>
         <legend><?= __('Edit Payment') ?></legend>
         <?php
-            echo $this->Form->control('amount_paid');
-            echo $this->Form->control('paid_by');
+            echo $this->Form->control('amount');
+            echo $this->Form->control('date', ['empty' => true]);
             echo $this->Form->control('created_at');
+            echo $this->Form->control('reciever_id');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Damage'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="damages index large-9 medium-8 columns content">
@@ -19,12 +21,12 @@
                 <th scope="col"><?= $this->Paginator->sort('details') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('amount') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('prepared_by') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('prepared_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('paid') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('repaired') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_repaired') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('tenant_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -35,12 +37,12 @@
                 <td><?= h($damage->details) ?></td>
                 <td><?= $this->Number->format($damage->amount) ?></td>
                 <td><?= h($damage->date) ?></td>
-                <td><?= h($damage->prepared_by) ?></td>
+                <td><?= h($damage->prepared_id) ?></td>
                 <td><?= h($damage->paid) ?></td>
                 <td><?= h($damage->repaired) ?></td>
                 <td><?= h($damage->date_repaired) ?></td>
                 <td><?= h($damage->created_at) ?></td>
-                <td><?= $damage->has('tenant') ? $this->Html->link($damage->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $damage->tenant->id]) : '' ?></td>
+                <td><?= $damage->has('user') ? $this->Html->link($damage->user->id, ['controller' => 'Users', 'action' => 'view', $damage->user->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $damage->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $damage->id]) ?>

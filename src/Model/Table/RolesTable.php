@@ -64,7 +64,7 @@ class RolesTable extends Table
 
         $validator
             ->scalar('name')
-            ->maxLength('name', 20)
+            ->maxLength('name', 80)
             ->allowEmpty('name');
 
         return $validator;

@@ -65,8 +65,9 @@ class BranchesTable extends Table
 
         $validator
             ->scalar('name')
-            ->maxLength('name', 25)
-            ->allowEmpty('name');
+            ->maxLength('name', 60)
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         return $validator;
     }

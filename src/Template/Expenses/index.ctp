@@ -8,7 +8,9 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Expense'), ['action' => 'add']) ?></li>
-        </ul>
+        <li><?= $this->Html->link(__('List Requisitions'), ['controller' => 'Requisitions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Requisition'), ['controller' => 'Requisitions', 'action' => 'add']) ?></li>
+    </ul>
 </nav>
 <div class="expenses index large-9 medium-8 columns content">
     <h3><?= __('Expenses') ?></h3>
@@ -22,6 +24,8 @@
                 <th scope="col"><?= $this->Paginator->sort('total') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('requisition_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('editable') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('no') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -35,6 +39,8 @@
                 <td><?= $this->Number->format($expense->total) ?></td>
                 <td><?= h($expense->created_at) ?></td>
                 <td><?= $expense->has('requisition') ? $this->Html->link($expense->requisition->id, ['controller' => 'Requisitions', 'action' => 'view', $expense->requisition->id]) : '' ?></td>
+                <td><?= h($expense->editable) ?></td>
+                <td><?= h($expense->no) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $expense->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $expense->id]) ?>

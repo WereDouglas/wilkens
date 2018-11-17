@@ -57,17 +57,17 @@ class EmployeesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '14c0512a-2a84-44be-b912-4de0f73a3d9b',
-                'user_id' => '11586846-c4d9-40ec-8ccc-d6e2fd0d01fd',
-                'company_id' => '46ac4818-0501-4592-bdd0-27be978aaf07',
-                'branch_id' => 'b350d84d-379c-413f-9d36-2ea7c5f9033d',
-                'department_id' => '30fa8d1f-c827-4f7a-bb41-0220ce8ff8dc',
-                'start_date' => '2018-11-10',
-                'end_date' => '2018-11-10',
+                'id' => '4e3ad2b0-1719-4f59-9cbf-d85944eecc8a',
+                'user_id' => 'bed9b285-5974-4c9d-8297-9996225421e5',
+                'company_id' => '910bb726-007e-43c4-b25d-679e593a61b0',
+                'branch_id' => '744fb289-9d2f-41b3-902d-cccc4146c722',
+                'department_id' => '57dc84fd-7628-4019-a3d5-ac6f8cebc8a8',
+                'start_date' => '2018-11-15',
+                'end_date' => '2018-11-15',
                 'active' => 'Lorem ipsum dolor sit amet',
                 'address' => 'Lorem ipsum dolor sit amet',
                 'no' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1541811594
+                'created_at' => 1542316523
             ],
         ];
         parent::init();

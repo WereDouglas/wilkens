@@ -20,13 +20,14 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('type') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('types') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('state') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('states') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('occupied') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('cost') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('rooms') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('property_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -34,13 +35,14 @@
             <?php foreach ($units as $unit): ?>
             <tr>
                 <td><?= h($unit->id) ?></td>
-                <td><?= h($unit->type) ?></td>
+                <td><?= h($unit->types) ?></td>
                 <td><?= h($unit->name) ?></td>
-                <td><?= h($unit->state) ?></td>
+                <td><?= h($unit->states) ?></td>
                 <td><?= h($unit->occupied) ?></td>
                 <td><?= $this->Number->format($unit->cost) ?></td>
                 <td><?= $this->Number->format($unit->rooms) ?></td>
                 <td><?= $unit->has('property') ? $this->Html->link($unit->property->name, ['controller' => 'Properties', 'action' => 'view', $unit->property->id]) : '' ?></td>
+                <td><?= h($unit->user_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $unit->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $unit->id]) ?>

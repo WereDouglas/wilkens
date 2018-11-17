@@ -10,6 +10,11 @@
         <li><?= $this->Html->link(__('Edit Deposit'), ['action' => 'edit', $deposit->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Deposit'), ['action' => 'delete', $deposit->id], ['confirm' => __('Are you sure you want to delete # {0}?', $deposit->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Deposits'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Deposit'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="deposits view large-9 medium-8 columns content">
@@ -24,28 +29,40 @@
             <td><?= h($deposit->method) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Prepared By') ?></th>
-            <td><?= h($deposit->prepared_by) ?></td>
+            <th scope="row"><?= __('Prepared Id') ?></th>
+            <td><?= h($deposit->prepared_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Approved By') ?></th>
-            <td><?= h($deposit->approved_by) ?></td>
+            <th scope="row"><?= __('Approved Id') ?></th>
+            <td><?= h($deposit->approved_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Deposited By') ?></th>
-            <td><?= h($deposit->deposited_by) ?></td>
+            <th scope="row"><?= __('Deposited Id') ?></th>
+            <td><?= h($deposit->deposited_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Complete') ?></th>
             <td><?= h($deposit->complete) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Client') ?></th>
-            <td><?= $deposit->has('client') ? $this->Html->link($deposit->client->id, ['controller' => 'Clients', 'action' => 'view', $deposit->client->id]) : '' ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Account') ?></th>
             <td><?= $deposit->has('account') ? $this->Html->link($deposit->account->id, ['controller' => 'Accounts', 'action' => 'view', $deposit->account->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $deposit->has('user') ? $this->Html->link($deposit->user->id, ['controller' => 'Users', 'action' => 'view', $deposit->user->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Account No') ?></th>
+            <td><?= h($deposit->account_no) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Account Name') ?></th>
+            <td><?= h($deposit->account_name) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Total Amount') ?></th>
+            <td><?= $this->Number->format($deposit->total_amount) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Rent Amount') ?></th>

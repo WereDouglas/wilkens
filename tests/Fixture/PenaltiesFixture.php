@@ -19,14 +19,18 @@ class PenaltiesFixture extends TestFixture
     public $fields = [
         'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'total' => ['type' => 'float', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
-        'paid_by' => ['type' => 'string', 'length' => 60, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'rent_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
-        'tenant_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'paid' => ['type' => 'string', 'length' => 10, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
-            'fk_penalties_tenants1_idx' => ['type' => 'index', 'columns' => ['tenant_id'], 'length' => []],
+            'fk_penalties_users1_idx' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
+            'penalty_rent_id_FK_idx' => ['type' => 'index', 'columns' => ['rent_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id', 'tenant_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'fk_penalties_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'penalty_rent_id_FK' => ['type' => 'foreign', 'columns' => ['rent_id'], 'references' => ['rents', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -44,11 +48,12 @@ class PenaltiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'dbbf100c-0ee4-458e-8c48-71ec3fbf33df',
+                'id' => '12a0c098-dcf8-41e1-9270-d8356b190f4d',
                 'total' => 1,
-                'paid_by' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1541811595,
-                'tenant_id' => 'd4c93bd0-715e-4f1a-bb7d-5ee50d89fdbe'
+                'user_id' => '6ca4784f-d8cf-4fcc-bd3f-1c8c5338847a',
+                'rent_id' => 'd59e381b-f035-4b54-9f57-3b84629fc6e1',
+                'created_at' => 1542316525,
+                'paid' => 'Lorem ip'
             ],
         ];
         parent::init();

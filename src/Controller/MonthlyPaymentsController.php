@@ -21,7 +21,7 @@ class MonthlyPaymentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Rents']
+            'contain' => ['Rents', 'Users']
         ];
         $monthlyPayments = $this->paginate($this->MonthlyPayments);
 
@@ -38,7 +38,7 @@ class MonthlyPaymentsController extends AppController
     public function view($id = null)
     {
         $monthlyPayment = $this->MonthlyPayments->get($id, [
-            'contain' => ['Rents']
+            'contain' => ['Rents', 'Users']
         ]);
 
         $this->set('monthlyPayment', $monthlyPayment);
@@ -62,7 +62,8 @@ class MonthlyPaymentsController extends AppController
             $this->Flash->error(__('The monthly payment could not be saved. Please, try again.'));
         }
         $rents = $this->MonthlyPayments->Rents->find('list', ['limit' => 200]);
-        $this->set(compact('monthlyPayment', 'rents'));
+        $users = $this->MonthlyPayments->Users->find('list', ['limit' => 200]);
+        $this->set(compact('monthlyPayment', 'rents', 'users'));
     }
 
     /**
@@ -87,7 +88,8 @@ class MonthlyPaymentsController extends AppController
             $this->Flash->error(__('The monthly payment could not be saved. Please, try again.'));
         }
         $rents = $this->MonthlyPayments->Rents->find('list', ['limit' => 200]);
-        $this->set(compact('monthlyPayment', 'rents'));
+        $users = $this->MonthlyPayments->Users->find('list', ['limit' => 200]);
+        $this->set(compact('monthlyPayment', 'rents', 'users'));
     }
 
     /**

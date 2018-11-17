@@ -12,13 +12,13 @@ use Cake\ORM\Entity;
  * @property float $cost
  * @property string $sold
  * @property \Cake\I18n\FrozenDate $sold_on
- * @property string $sold_by
+ * @property string $sold_id
  * @property float $storage_fees
  * @property \Cake\I18n\FrozenDate $deadline
  * @property \Cake\I18n\FrozenTime $created_at
- * @property string $tenant_id
+ * @property string $user_id
  *
- * @property \App\Model\Entity\Tenant $tenant
+ * @property \App\Model\Entity\User $user
  */
 class Confiscation extends Entity
 {
@@ -33,15 +33,17 @@ class Confiscation extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'date' => true,
         'details' => true,
         'cost' => true,
         'sold' => true,
         'sold_on' => true,
-        'sold_by' => true,
+        'sold_id' => true,
         'storage_fees' => true,
         'deadline' => true,
         'created_at' => true,
-        'tenant' => true
+        'user_id' => true,
+        'user' => true
     ];
 }

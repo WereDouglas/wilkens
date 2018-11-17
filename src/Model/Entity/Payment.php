@@ -7,10 +7,11 @@ use Cake\ORM\Entity;
  * Payment Entity
  *
  * @property string $id
- * @property float $amount_paid
- * @property string $paid_by
- * @property \Cake\I18n\FrozenTime $created_at
  * @property string $bill_id
+ * @property float $amount
+ * @property \Cake\I18n\FrozenDate $date
+ * @property \Cake\I18n\FrozenTime $created_at
+ * @property string $reciever_id
  *
  * @property \App\Model\Entity\Bill $bill
  */
@@ -27,9 +28,12 @@ class Payment extends Entity
      * @var array
      */
     protected $_accessible = [
-        'amount_paid' => true,
-        'paid_by' => true,
+        'id' => true,
+        'bill_id' => true,
+        'amount' => true,
+        'date' => true,
         'created_at' => true,
+        'reciever_id' => true,
         'bill' => true
     ];
 }

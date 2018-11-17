@@ -17,7 +17,7 @@ class DepositsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.deposits',
-        'app.clients',
+        'app.users',
         'app.accounts'
     ];
 

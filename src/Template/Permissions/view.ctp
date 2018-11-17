@@ -67,10 +67,13 @@
                 <th scope="col"><?= __('Password') ?></th>
                 <th scope="col"><?= __('Active') ?></th>
                 <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('Company Id') ?></th>
                 <th scope="col"><?= __('Photo Dir') ?></th>
                 <th scope="col"><?= __('Photo Size') ?></th>
                 <th scope="col"><?= __('Photo Type') ?></th>
+                <th scope="col"><?= __('Type') ?></th>
+                <th scope="col"><?= __('Title') ?></th>
+                <th scope="col"><?= __('Company Id') ?></th>
+                <th scope="col"><?= __('User Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($permission->users as $users): ?>
@@ -85,10 +88,13 @@
                 <td><?= h($users->password) ?></td>
                 <td><?= h($users->active) ?></td>
                 <td><?= h($users->created_at) ?></td>
-                <td><?= h($users->company_id) ?></td>
                 <td><?= h($users->photo_dir) ?></td>
                 <td><?= h($users->photo_size) ?></td>
                 <td><?= h($users->photo_type) ?></td>
+                <td><?= h($users->type) ?></td>
+                <td><?= h($users->title) ?></td>
+                <td><?= h($users->company_id) ?></td>
+                <td><?= h($users->user_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>

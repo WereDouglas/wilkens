@@ -17,7 +17,7 @@ class ConfiscationsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.confiscations',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

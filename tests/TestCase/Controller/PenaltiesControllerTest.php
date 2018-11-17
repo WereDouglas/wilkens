@@ -17,7 +17,8 @@ class PenaltiesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.penalties',
-        'app.tenants'
+        'app.users',
+        'app.rents'
     ];
 
     /**

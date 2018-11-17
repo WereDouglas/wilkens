@@ -28,7 +28,6 @@ class PropertiesFixture extends TestFixture
         'category' => ['type' => 'string', 'length' => 20, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'lng' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
         'lat' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
-        'commission' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
@@ -58,20 +57,19 @@ class PropertiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '6bb1e237-6513-4b1e-9591-b9c35ad6bf38',
+                'id' => '14ba5679-04b2-4261-b7df-418ffa860d2d',
                 'name' => 'Lorem ip',
                 'details' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'no_of_rooms' => 1,
-                'manager_id' => 'cff169fe-60cc-4ffb-9801-9096842b5fb9',
-                'legal_id' => 'bc4e9a73-a8ed-4fd4-946c-bbdbaa4c96fe',
+                'manager_id' => 'f6353621-0849-434b-b136-52d2801b0e6b',
+                'legal_id' => 'd43bf818-64f5-4ef7-b550-045bd5c16606',
                 'terms' => 'Lorem ipsum dolor sit amet',
                 'location' => 'Lorem ipsum dolor sit amet',
                 'category' => 'Lorem ipsum dolor ',
                 'lng' => 1,
                 'lat' => 1,
-                'commission' => 1,
-                'created_at' => 1541854158,
-                'user_id' => '03a1627f-5b26-4453-8533-24fc98b4d8a0'
+                'created_at' => 1542316526,
+                'user_id' => '36503340-d3a2-46ab-81a2-2fd6b1e6c8fd'
             ],
         ];
         parent::init();

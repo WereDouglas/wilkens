@@ -21,7 +21,7 @@ class PenaltiesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Tenants']
+            'contain' => ['Users', 'Rents']
         ];
         $penalties = $this->paginate($this->Penalties);
 
@@ -38,7 +38,7 @@ class PenaltiesController extends AppController
     public function view($id = null)
     {
         $penalty = $this->Penalties->get($id, [
-            'contain' => ['Tenants']
+            'contain' => ['Users', 'Rents']
         ]);
 
         $this->set('penalty', $penalty);
@@ -55,14 +55,28 @@ class PenaltiesController extends AppController
         if ($this->request->is('post')) {
             $penalty = $this->Penalties->patchEntity($penalty, $this->request->getData());
             if ($this->Penalties->save($penalty)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $penalty->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The penalty has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
+            }
             $this->Flash->error(__('The penalty could not be saved. Please, try again.'));
         }
-        $tenants = $this->Penalties->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('penalty', 'tenants'));
+        $users = $this->Penalties->Users->find('list', ['limit' => 200]);
+        $rents = $this->Penalties->Rents->find('list', ['limit' => 200]);
+        $this->set(compact('penalty', 'users', 'rents'));
     }
 
     /**
@@ -86,8 +100,9 @@ class PenaltiesController extends AppController
             }
             $this->Flash->error(__('The penalty could not be saved. Please, try again.'));
         }
-        $tenants = $this->Penalties->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('penalty', 'tenants'));
+        $users = $this->Penalties->Users->find('list', ['limit' => 200]);
+        $rents = $this->Penalties->Rents->find('list', ['limit' => 200]);
+        $this->set(compact('penalty', 'users', 'rents'));
     }
 
     /**

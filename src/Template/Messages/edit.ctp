@@ -14,7 +14,9 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Messages'), ['action' => 'index']) ?></li>
-          </ul>
+        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?></li>
+    </ul>
 </nav>
 <div class="messages form large-9 medium-8 columns content">
     <?= $this->Form->create($message) ?>

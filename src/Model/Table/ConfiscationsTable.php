@@ -9,7 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Confiscations Model
  *
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsTo $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Confiscation get($primaryKey, $options = [])
  * @method \App\Model\Entity\Confiscation newEntity($data = null, array $options = [])
@@ -37,8 +38,11 @@ class ConfiscationsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey(['id', 'tenant_id']);
 
-        $this->belongsTo('Tenants', [
-            'foreignKey' => 'tenant_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'sold_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -80,11 +84,6 @@ class ConfiscationsTable extends Table
             ->allowEmpty('sold_on');
 
         $validator
-            ->scalar('sold_by')
-            ->maxLength('sold_by', 20)
-            ->allowEmpty('sold_by');
-
-        $validator
             ->numeric('storage_fees')
             ->requirePresence('storage_fees', 'create')
             ->notEmpty('storage_fees');
@@ -109,7 +108,8 @@ class ConfiscationsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['tenant_id'], 'Tenants'));
+        $rules->add($rules->existsIn(['sold_id'], 'Users'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

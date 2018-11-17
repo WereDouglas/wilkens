@@ -23,16 +23,20 @@
             <td><?= h($payment->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Paid By') ?></th>
-            <td><?= h($payment->paid_by) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Bill') ?></th>
             <td><?= $payment->has('bill') ? $this->Html->link($payment->bill->id, ['controller' => 'Bills', 'action' => 'view', $payment->bill->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Amount Paid') ?></th>
-            <td><?= $this->Number->format($payment->amount_paid) ?></td>
+            <th scope="row"><?= __('Reciever Id') ?></th>
+            <td><?= h($payment->reciever_id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Amount') ?></th>
+            <td><?= $this->Number->format($payment->amount) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Date') ?></th>
+            <td><?= h($payment->date) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created At') ?></th>

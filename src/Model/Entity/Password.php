@@ -6,7 +6,7 @@ use Cake\ORM\Entity;
 /**
  * Password Entity
  *
- * @property string $id
+ * @property int $id
  * @property string $password
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $user_id

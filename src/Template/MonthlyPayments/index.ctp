@@ -10,6 +10,8 @@
         <li><?= $this->Html->link(__('New Monthly Payment'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="monthlyPayments index large-9 medium-8 columns content">
@@ -26,6 +28,7 @@
                 <th scope="col"><?= $this->Paginator->sort('date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('rent_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -41,6 +44,7 @@
                 <td><?= h($monthlyPayment->date) ?></td>
                 <td><?= h($monthlyPayment->created_at) ?></td>
                 <td><?= $monthlyPayment->has('rent') ? $this->Html->link($monthlyPayment->rent->id, ['controller' => 'Rents', 'action' => 'view', $monthlyPayment->rent->id]) : '' ?></td>
+                <td><?= $monthlyPayment->has('user') ? $this->Html->link($monthlyPayment->user->id, ['controller' => 'Users', 'action' => 'view', $monthlyPayment->user->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $monthlyPayment->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $monthlyPayment->id]) ?>

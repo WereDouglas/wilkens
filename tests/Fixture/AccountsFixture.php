@@ -24,10 +24,11 @@ class AccountsFixture extends TestFixture
         'bank_name' => ['type' => 'string', 'length' => 20, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'fk_accounts_users1_idx' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
+            'fk_accounts_users1_idx1' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'fk_accounts_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -45,12 +46,12 @@ class AccountsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'f6d53e2f-717b-457f-9f91-a3ceb146e3aa',
+                'id' => '89a4f8d8-1f13-4fd0-b164-c9345e524827',
                 'no' => 'Lorem ipsum dolor ',
                 'type' => 'Lorem ipsum dolor sit amet',
                 'account_name' => 'Lorem ipsum dolor ',
                 'bank_name' => 'Lorem ipsum dolor ',
-                'user_id' => 'c857a622-9794-43c7-bc9d-a08d4d180255'
+                'user_id' => '02e9c886-6d1c-44fa-b8c4-f2c5194b4d11'
             ],
         ];
         parent::init();

@@ -52,9 +52,21 @@ class ExceptionsController extends AppController
         if ($this->request->is('post')) {
             $exception = $this->Exceptions->patchEntity($exception, $this->request->getData());
             if ($this->Exceptions->save($exception)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $exception->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The exception has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The exception could not be saved. Please, try again.'));
         }

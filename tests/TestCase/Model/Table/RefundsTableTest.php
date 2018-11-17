@@ -25,7 +25,7 @@ class RefundsTableTest extends TestCase
      */
     public $fixtures = [
         'app.refunds',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

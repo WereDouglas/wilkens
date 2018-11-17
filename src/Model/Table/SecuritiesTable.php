@@ -9,7 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Securities Model
  *
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsTo $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Security get($primaryKey, $options = [])
  * @method \App\Model\Entity\Security newEntity($data = null, array $options = [])
@@ -37,8 +39,14 @@ class SecuritiesTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Tenants', [
-            'foreignKey' => 'tenant_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'requested_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'approved_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -82,19 +90,8 @@ class SecuritiesTable extends Table
             ->notEmpty('approved');
 
         $validator
-            ->scalar('requested_by')
-            ->maxLength('requested_by', 60)
-            ->allowEmpty('requested_by');
-
-        $validator
-            ->scalar('approved_by')
-            ->maxLength('approved_by', 60)
-            ->allowEmpty('approved_by');
-
-        $validator
-            ->scalar('refunded')
-            ->requirePresence('refunded', 'create')
-            ->notEmpty('refunded');
+            ->numeric('refunded')
+            ->allowEmpty('refunded');
 
         $validator
             ->integer('no')
@@ -113,7 +110,9 @@ class SecuritiesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['tenant_id'], 'Tenants'));
+        $rules->add($rules->existsIn(['requested_id'], 'Users'));
+        $rules->add($rules->existsIn(['approved_id'], 'Users'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

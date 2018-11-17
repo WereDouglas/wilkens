@@ -9,8 +9,11 @@ use Cake\Validation\Validator;
 /**
  * Deposits Model
  *
- * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\BelongsTo $Clients
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\AccountsTable|\Cake\ORM\Association\BelongsTo $Accounts
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Deposit get($primaryKey, $options = [])
  * @method \App\Model\Entity\Deposit newEntity($data = null, array $options = [])
@@ -38,12 +41,20 @@ class DepositsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey(['id', 'client_id']);
 
-        $this->belongsTo('Clients', [
-            'foreignKey' => 'client_id',
-            'joinType' => 'INNER'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'prepared_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'approved_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'deposited_id'
         ]);
         $this->belongsTo('Accounts', [
-            'foreignKey' => 'account_id',
+            'foreignKey' => 'account_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -59,6 +70,10 @@ class DepositsTable extends Table
         $validator
             ->uuid('id')
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->numeric('total_amount')
+            ->allowEmpty('total_amount');
 
         $validator
             ->numeric('rent_amount')
@@ -81,22 +96,6 @@ class DepositsTable extends Table
             ->notEmpty('date');
 
         $validator
-            ->scalar('prepared_by')
-            ->maxLength('prepared_by', 36)
-            ->requirePresence('prepared_by', 'create')
-            ->notEmpty('prepared_by');
-
-        $validator
-            ->scalar('approved_by')
-            ->maxLength('approved_by', 1000)
-            ->allowEmpty('approved_by');
-
-        $validator
-            ->scalar('deposited_by')
-            ->maxLength('deposited_by', 1000)
-            ->allowEmpty('deposited_by');
-
-        $validator
             ->scalar('remarks')
             ->allowEmpty('remarks');
 
@@ -108,6 +107,16 @@ class DepositsTable extends Table
         $validator
             ->dateTime('created_at')
             ->allowEmpty('created_at');
+
+        $validator
+            ->scalar('account_no')
+            ->maxLength('account_no', 45)
+            ->allowEmpty('account_no');
+
+        $validator
+            ->scalar('account_name')
+            ->maxLength('account_name', 45)
+            ->allowEmpty('account_name');
 
         return $validator;
     }
@@ -121,8 +130,11 @@ class DepositsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['client_id'], 'Clients'));
+        $rules->add($rules->existsIn(['prepared_id'], 'Users'));
+        $rules->add($rules->existsIn(['approved_id'], 'Users'));
+        $rules->add($rules->existsIn(['deposited_id'], 'Users'));
         $rules->add($rules->existsIn(['account_id'], 'Accounts'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

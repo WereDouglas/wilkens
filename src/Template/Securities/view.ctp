@@ -11,6 +11,8 @@
         <li><?= $this->Form->postLink(__('Delete Security'), ['action' => 'delete', $security->id], ['confirm' => __('Are you sure you want to delete # {0}?', $security->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Securities'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Security'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?> </li>
     </ul>
@@ -35,24 +37,24 @@
             <td><?= h($security->approved) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Requested By') ?></th>
-            <td><?= h($security->requested_by) ?></td>
+            <th scope="row"><?= __('Requested Id') ?></th>
+            <td><?= h($security->requested_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Approved By') ?></th>
-            <td><?= h($security->approved_by) ?></td>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $security->has('user') ? $this->Html->link($security->user->id, ['controller' => 'Users', 'action' => 'view', $security->user->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Refunded') ?></th>
-            <td><?= h($security->refunded) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Tenant') ?></th>
-            <td><?= $security->has('tenant') ? $this->Html->link($security->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $security->tenant->id]) : '' ?></td>
+            <th scope="row"><?= __('User Id') ?></th>
+            <td><?= h($security->user_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Amount') ?></th>
             <td><?= $this->Number->format($security->amount) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Refunded') ?></th>
+            <td><?= $this->Number->format($security->refunded) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('No') ?></th>

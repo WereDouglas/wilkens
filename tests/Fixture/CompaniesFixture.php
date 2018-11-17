@@ -20,7 +20,7 @@ class CompaniesFixture extends TestFixture
         'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'name' => ['type' => 'string', 'length' => 65, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'address' => ['type' => 'string', 'length' => 65, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'photo' => ['type' => 'string', 'length' => 65, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'photo' => ['type' => 'upload.file', 'length' => 65, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'photo_dir' => ['type' => 'string', 'length' => 60, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'photo_size' => ['type' => 'string', 'length' => 20, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'photo_type' => ['type' => 'string', 'length' => 30, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -43,10 +43,10 @@ class CompaniesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '39f2bff8-d782-46e4-a532-e78e744a1539',
+                'id' => 'c87e340c-e2bf-4714-8743-dd818fd3649c',
                 'name' => 'Lorem ipsum dolor sit amet',
                 'address' => 'Lorem ipsum dolor sit amet',
-                'photo' => 'Lorem ipsum dolor sit amet',
+                'photo' => '',
                 'photo_dir' => 'Lorem ipsum dolor sit amet',
                 'photo_size' => 'Lorem ipsum dolor ',
                 'photo_type' => 'Lorem ipsum dolor sit amet'

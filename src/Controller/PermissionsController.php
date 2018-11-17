@@ -52,9 +52,23 @@ class PermissionsController extends AppController
         if ($this->request->is('post')) {
             $permission = $this->Permissions->patchEntity($permission, $this->request->getData());
             if ($this->Permissions->save($permission)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $permission->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
+
                 $this->Flash->success(__('The permission has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed'.' '.$this->invalidFields();
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The permission could not be saved. Please, try again.'));
         }
@@ -78,10 +92,12 @@ class PermissionsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $permission = $this->Permissions->patchEntity($permission, $this->request->getData());
             if ($this->Permissions->save($permission)) {
+
                 $this->Flash->success(__('The permission has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
+
             $this->Flash->error(__('The permission could not be saved. Please, try again.'));
         }
         $roles = $this->Permissions->Roles->find('list', ['limit' => 200]);

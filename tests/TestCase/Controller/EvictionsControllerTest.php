@@ -17,7 +17,7 @@ class EvictionsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.evictions',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

@@ -9,10 +9,14 @@ use Cake\Validation\Validator;
 /**
  * Rents Model
  *
- * @property \App\Model\Table\BankingDepositsTable|\Cake\ORM\Association\BelongsTo $BankingDeposits
  * @property \App\Model\Table\BranchesTable|\Cake\ORM\Association\BelongsTo $Branches
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsTo $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\DepositsTable|\Cake\ORM\Association\BelongsTo $Deposits
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property |\Cake\ORM\Association\BelongsTo $Units
  * @property \App\Model\Table\MonthlyPaymentsTable|\Cake\ORM\Association\HasMany $MonthlyPayments
+ * @property |\Cake\ORM\Association\HasMany $Penalties
  *
  * @method \App\Model\Entity\Rent get($primaryKey, $options = [])
  * @method \App\Model\Entity\Rent newEntity($data = null, array $options = [])
@@ -40,17 +44,31 @@ class RentsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('BankingDeposits', [
-            'foreignKey' => 'banking_deposit_id'
-        ]);
         $this->belongsTo('Branches', [
             'foreignKey' => 'branch_id'
         ]);
-        $this->belongsTo('Tenants', [
-            'foreignKey' => 'tenant_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'receive_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'landlord_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Deposits', [
+            'foreignKey' => 'deposit_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'occupant_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Units', [
+            'foreignKey' => 'unit_id',
             'joinType' => 'INNER'
         ]);
         $this->hasMany('MonthlyPayments', [
+            'foreignKey' => 'rent_id'
+        ]);
+        $this->hasMany('Penalties', [
             'foreignKey' => 'rent_id'
         ]);
     }
@@ -110,11 +128,6 @@ class RentsTable extends Table
             ->notEmpty('for_commission');
 
         $validator
-            ->scalar('paid_by')
-            ->maxLength('paid_by', 50)
-            ->allowEmpty('paid_by');
-
-        $validator
             ->scalar('paid_to_client')
             ->requirePresence('paid_to_client', 'create')
             ->notEmpty('paid_to_client');
@@ -131,8 +144,7 @@ class RentsTable extends Table
 
         $validator
             ->integer('unpaid_months')
-            ->requirePresence('unpaid_months', 'create')
-            ->notEmpty('unpaid_months');
+            ->allowEmpty('unpaid_months');
 
         $validator
             ->integer('paid_months')
@@ -140,23 +152,16 @@ class RentsTable extends Table
 
         $validator
             ->numeric('vat')
-            ->requirePresence('vat', 'create')
-            ->notEmpty('vat');
+            ->allowEmpty('vat');
 
         $validator
             ->numeric('balance')
-            ->requirePresence('balance', 'create')
-            ->notEmpty('balance');
+            ->allowEmpty('balance');
 
         $validator
             ->scalar('cheque_no')
             ->maxLength('cheque_no', 30)
             ->allowEmpty('cheque_no');
-
-        $validator
-            ->scalar('recieved_by')
-            ->maxLength('recieved_by', 36)
-            ->allowEmpty('recieved_by');
 
         $validator
             ->scalar('editable')
@@ -179,9 +184,12 @@ class RentsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['banking_deposit_id'], 'BankingDeposits'));
         $rules->add($rules->existsIn(['branch_id'], 'Branches'));
-        $rules->add($rules->existsIn(['tenant_id'], 'Tenants'));
+        $rules->add($rules->existsIn(['receive_id'], 'Users'));
+        $rules->add($rules->existsIn(['landlord_id'], 'Users'));
+        $rules->add($rules->existsIn(['deposit_id'], 'Deposits'));
+        $rules->add($rules->existsIn(['occupant_id'], 'Users'));
+        $rules->add($rules->existsIn(['unit_id'], 'Units'));
 
         return $rules;
     }

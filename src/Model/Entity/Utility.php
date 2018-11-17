@@ -11,9 +11,9 @@ use Cake\ORM\Entity;
  * @property string $starting_reading
  * @property float $unit_cost
  * @property string $account_no
- * @property string $tenant_id
+ * @property string $user_id
  *
- * @property \App\Model\Entity\Tenant $tenant
+ * @property \App\Model\Entity\User $user
  */
 class Utility extends Entity
 {
@@ -28,10 +28,12 @@ class Utility extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'name' => true,
         'starting_reading' => true,
         'unit_cost' => true,
         'account_no' => true,
-        'tenant' => true
+        'user_id' => true,
+        'user' => true
     ];
 }

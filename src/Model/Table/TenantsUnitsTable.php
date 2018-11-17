@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * TenantsUnits Model
  *
  * @property \App\Model\Table\UnitsTable|\Cake\ORM\Association\BelongsTo $Units
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsTo $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\TenantsUnit get($primaryKey, $options = [])
  * @method \App\Model\Entity\TenantsUnit newEntity($data = null, array $options = [])
@@ -36,14 +36,14 @@ class TenantsUnitsTable extends Table
 
         $this->setTable('tenants_units');
         $this->setDisplayField('unit_id');
-        $this->setPrimaryKey(['unit_id', 'tenant_id']);
+        $this->setPrimaryKey(['unit_id', 'user_id']);
 
         $this->belongsTo('Units', [
             'foreignKey' => 'unit_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Tenants', [
-            'foreignKey' => 'tenant_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -58,7 +58,7 @@ class TenantsUnitsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['unit_id'], 'Units'));
-        $rules->add($rules->existsIn(['tenant_id'], 'Tenants'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

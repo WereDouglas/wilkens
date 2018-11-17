@@ -23,12 +23,16 @@
             <td><?= h($penalty->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Paid By') ?></th>
-            <td><?= h($penalty->paid_by) ?></td>
+            <th scope="row"><?= __('User Id') ?></th>
+            <td><?= h($penalty->user_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Tenant') ?></th>
-            <td><?= $penalty->has('tenant') ? $this->Html->link($penalty->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $penalty->tenant->id]) : '' ?></td>
+            <th scope="row"><?= __('Rent Id') ?></th>
+            <td><?= h($penalty->rent_id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Paid') ?></th>
+            <td><?= h($penalty->paid) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Total') ?></th>

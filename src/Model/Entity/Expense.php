@@ -13,6 +13,8 @@ use Cake\ORM\Entity;
  * @property float $total
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $requisition_id
+ * @property string $editable
+ * @property string $no
  *
  * @property \App\Model\Entity\Requisition $requisition
  */
@@ -29,11 +31,15 @@ class Expense extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'item' => true,
         'qty' => true,
         'cost' => true,
         'total' => true,
         'created_at' => true,
+        'requisition_id' => true,
+        'editable' => true,
+        'no' => true,
         'requisition' => true
     ];
 }

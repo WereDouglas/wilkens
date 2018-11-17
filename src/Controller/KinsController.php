@@ -55,9 +55,23 @@ class KinsController extends AppController
         if ($this->request->is('post')) {
             $kin = $this->Kins->patchEntity($kin, $this->request->getData());
             if ($this->Kins->save($kin)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $kin->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The kin has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
+            }
+
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                // $message = 'failed' . json_encode($kin->getErrors());
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The kin could not be saved. Please, try again.'));
         }

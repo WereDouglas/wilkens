@@ -11,7 +11,9 @@
         <li><?= $this->Form->postLink(__('Delete Kin'), ['action' => 'delete', $kin->id], ['confirm' => __('Are you sure you want to delete # {0}?', $kin->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Kins'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Kin'), ['action' => 'add']) ?> </li>
-   </ul>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+    </ul>
 </nav>
 <div class="kins view large-9 medium-8 columns content">
     <h3><?= h($kin->name) ?></h3>
@@ -31,10 +33,6 @@
         <tr>
             <th scope="row"><?= __('Email') ?></th>
             <td><?= h($kin->email) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Photo') ?></th>
-            <td><?= h($kin->photo) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('User') ?></th>

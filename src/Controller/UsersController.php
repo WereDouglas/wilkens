@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Controller;
 
 use App\Controller\AppController;
-
 
 /**
  * Users Controller
@@ -28,8 +26,6 @@ class UsersController extends AppController
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
-        if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api'))
-            $this->set('_serialize', 'users');
     }
 
     /**
@@ -42,11 +38,10 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Companies', 'Permissions', 'Roles', 'Accounts', 'Clients', 'Contacts', 'Employees', 'Kins', 'Passwords', 'Tenants']
+            'contain' => ['Companies', 'Permissions', 'Roles', 'Users', 'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities']
         ]);
+
         $this->set('user', $user);
-        if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api'))
-            $this->set('_serialize', 'user');
     }
 
     /**
@@ -59,7 +54,6 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-
             if ($this->Users->save($user)) {
                 if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
                     $id = $user->id;
@@ -67,21 +61,18 @@ class UsersController extends AppController
                     $this->set('_serialize', 'id');
                     return;
                 }
-
                 $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-               // throw new MissingWidgetException();
-                    $message = 'The user could not be saved. Please, try again.';
-                    $this->set(compact('message'));
-                    $this->set('_serialize', 'message');
-                    return;
 
+                return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed'.' '.$this->invalidFields();
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-
         $companies = $this->Users->Companies->find('list', ['limit' => 200]);
         $permissions = $this->Users->Permissions->find('list', ['limit' => 200]);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
@@ -95,10 +86,8 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public
-    function edit($id = null)
+    public function edit($id = null)
     {
-        $ids = $id;
         $user = $this->Users->get($id, [
             'contain' => ['Permissions', 'Roles']
         ]);
@@ -114,7 +103,7 @@ class UsersController extends AppController
         $companies = $this->Users->Companies->find('list', ['limit' => 200]);
         $permissions = $this->Users->Permissions->find('list', ['limit' => 200]);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'companies', 'permissions', 'roles', 'ids'));
+        $this->set(compact('user', 'companies', 'permissions', 'roles'));
     }
 
     /**
@@ -124,8 +113,7 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public
-    function delete($id = null)
+    public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);

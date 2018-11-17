@@ -17,15 +17,16 @@ class PasswordsFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'password' => ['type' => 'string', 'length' => 60, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'password' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'fk_passwords_users1_idx' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
+            'fk_passwords_users1_idx1' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'fk_passwords_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -43,10 +44,10 @@ class PasswordsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '3b0dba75-7861-4792-a65c-05107f6dccc5',
+                'id' => 1,
                 'password' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1541811595,
-                'user_id' => 'c9f81bfc-d183-4f1d-b69d-e4fd24ea50db'
+                'created_at' => 1542415244,
+                'user_id' => '5cc2f6ff-2481-4854-b950-b7c6879b1365'
             ],
         ];
         parent::init();

@@ -9,7 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Damages Model
  *
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsTo $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Damage get($primaryKey, $options = [])
  * @method \App\Model\Entity\Damage newEntity($data = null, array $options = [])
@@ -37,8 +38,11 @@ class DamagesTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Tenants', [
-            'foreignKey' => 'tenant_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'prepared_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -67,11 +71,6 @@ class DamagesTable extends Table
         $validator
             ->date('date')
             ->allowEmpty('date');
-
-        $validator
-            ->scalar('prepared_by')
-            ->maxLength('prepared_by', 1000)
-            ->allowEmpty('prepared_by');
 
         $validator
             ->scalar('paid')
@@ -103,7 +102,8 @@ class DamagesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['tenant_id'], 'Tenants'));
+        $rules->add($rules->existsIn(['prepared_id'], 'Users'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

@@ -29,14 +29,17 @@ class TenantsFixture extends TestFixture
         'passport' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'client_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'unit_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'property_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_tenants_users1_idx' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
-            'fk_tenants_clients1_idx' => ['type' => 'index', 'columns' => ['client_id'], 'length' => []],
+            'tenants_units_id_FK_idx' => ['type' => 'index', 'columns' => ['unit_id'], 'length' => []],
+            'tenants_properties_id_FK_idx' => ['type' => 'index', 'columns' => ['property_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'tenants_clients_id_FK' => ['type' => 'foreign', 'columns' => ['client_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'tenants_properties_id_FK' => ['type' => 'foreign', 'columns' => ['property_id'], 'references' => ['properties', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'tenants_units_id_FK' => ['type' => 'foreign', 'columns' => ['unit_id'], 'references' => ['units', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'tenants_users_id_FK' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
@@ -55,7 +58,7 @@ class TenantsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'd51bfc92-51b1-4981-9b3f-94836485ba6b',
+                'id' => 'cb444ef2-ee8f-4b1b-be67-cc209fdccba5',
                 'start_date' => 'Lorem ip',
                 'end_date' => 'Lorem ip',
                 'rent_start_due_day' => 'Lorem ip',
@@ -65,9 +68,10 @@ class TenantsFixture extends TestFixture
                 'work_address' => 'Lorem ipsum dolor sit amet',
                 'nin' => 'Lorem ipsum dolor sit amet',
                 'passport' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1541811597,
-                'user_id' => '9d41bea7-498a-4c87-89cc-9c992d9d4337',
-                'client_id' => 'bb6ec350-2e85-4be4-b2c6-c9744529ca1c'
+                'created_at' => 1542316527,
+                'user_id' => '6f288ae6-0a3f-4e10-a346-56274958a69d',
+                'unit_id' => 'd310a957-ea5e-4d1b-8dda-565ec3efd600',
+                'property_id' => '3e57e31c-40e3-42a6-a77f-424e31357d1f'
             ],
         ];
         parent::init();

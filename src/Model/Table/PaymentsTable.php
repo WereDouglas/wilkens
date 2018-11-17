@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Payments Model
  *
  * @property \App\Model\Table\BillsTable|\Cake\ORM\Association\BelongsTo $Bills
+ * @property |\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Payment get($primaryKey, $options = [])
  * @method \App\Model\Entity\Payment newEntity($data = null, array $options = [])
@@ -41,6 +42,9 @@ class PaymentsTable extends Table
             'foreignKey' => 'bill_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'reciever_id'
+        ]);
     }
 
     /**
@@ -56,13 +60,12 @@ class PaymentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->numeric('amount_paid')
-            ->allowEmpty('amount_paid');
+            ->numeric('amount')
+            ->allowEmpty('amount');
 
         $validator
-            ->scalar('paid_by')
-            ->maxLength('paid_by', 60)
-            ->allowEmpty('paid_by');
+            ->date('date')
+            ->allowEmpty('date');
 
         $validator
             ->dateTime('created_at')
@@ -81,6 +84,7 @@ class PaymentsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['bill_id'], 'Bills'));
+        $rules->add($rules->existsIn(['reciever_id'], 'Users'));
 
         return $rules;
     }

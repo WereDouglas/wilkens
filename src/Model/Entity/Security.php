@@ -12,12 +12,13 @@ use Cake\ORM\Entity;
  * @property string $method
  * @property string $paid_back
  * @property string $approved
- * @property string $requested_by
- * @property string $approved_by
- * @property string $refunded
+ * @property string $requested_id
+ * @property string $approved_id
+ * @property float $refunded
  * @property int $no
- * @property string $tenant_id
+ * @property string $user_id
  *
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Tenant $tenant
  */
 class Security extends Entity
@@ -33,16 +34,18 @@ class Security extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'date' => true,
         'amount' => true,
         'method' => true,
         'paid_back' => true,
         'approved' => true,
-        'requested_by' => true,
-        'approved_by' => true,
+        'requested_id' => true,
+        'approved_id' => true,
         'refunded' => true,
         'no' => true,
-        'tenant_id' => true,
+        'user_id' => true,
+        'user' => true,
         'tenant' => true
     ];
 }

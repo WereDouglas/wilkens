@@ -14,6 +14,7 @@
  */
 namespace App;
 
+use App\Middleware\LoggingMiddleware;
 use Cake\Core\Configure;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
@@ -35,6 +36,8 @@ class Application extends BaseApplication
      */
     public function bootstrap()
     {
+        $this->addPlugin('Migrations');
+
         $this->addPlugin('RestApi', ['bootstrap' => true]);
 
         // Call parent to load bootstrap from files.
@@ -68,6 +71,7 @@ class Application extends BaseApplication
     public function middleware($middlewareQueue)
     {
         $middlewareQueue
+            ->add(new LoggingMiddleware())
             // Catch any exceptions in the lower layers,
             // and make an error page/response
             ->add(ErrorHandlerMiddleware::class)

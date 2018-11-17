@@ -55,9 +55,21 @@ class PasswordsController extends AppController
         if ($this->request->is('post')) {
             $password = $this->Passwords->patchEntity($password, $this->request->getData());
             if ($this->Passwords->save($password)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $password->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The password has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The password could not be saved. Please, try again.'));
         }

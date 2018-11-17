@@ -60,26 +60,60 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
     $routes->scope('/api', function (RouteBuilder $routes) {
-        $routes->resources('Users');
+        $routes->resources('Companies');
+        $routes->resources('Branches');
+        $routes->resources('Departments');
+        $routes->resources('Permissions');
+        $routes->resources('Employees');
+        $routes->resources('Roles');
+        $routes->resources('Accounts');
+        $routes->resources('Bills');
+        $routes->resources('Branches');
+        $routes->resources('Roles');
+        $routes->resources('Clients');
+        $routes->resources('Confiscations');
+        $routes->resources('Contacts');
+        $routes->resources('Damages');
+        $routes->resources('Departments');
+        $routes->resources('Deposits');
+        $routes->resources('Employees');
+        $routes->resources('Evictions');
+        $routes->resources('Exceptions');
+        $routes->resources('Expenses');
+        $routes->resources('Installments');
+        $routes->resources('Kins');
+        $routes->resources('Messages');
+        $routes->resources('Passwords');
+        $routes->resources('Payments');
+        $routes->resources('Penalties');
+        $routes->resources('Properties');
+        $routes->resources('Refunds');
+        $routes->resources('Rents');
+        $routes->resources('Requisitions');
+        $routes->resources('Securities');
         $routes->resources('Tenants');
-    });
+        $routes->resources('Units');
+        $routes->resources('Users');
+        $routes->resources('Utilities');
 
-    /**
-     * Connect catchall routes for all controllers.
-     *
-     * Using the argument `DashedRoute`, the `fallbacks` method is a shortcut for
-     *    `$routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);`
-     *    `$routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);`
-     *
-     * Any route class can be used with this method, such as:
-     * - DashedRoute
-     * - InflectedRoute
-     * - Route
-     * - Or your own route class
-     *
-     * You can remove these routes once you've connected the
-     * routes you want in your application.
-     */
+        /**
+         * Connect catchall routes for all controllers.
+         *
+         * Using the argument `DashedRoute`, the `fallbacks` method is a shortcut for
+         *    `$routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);`
+         *    `$routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);`
+         *
+         * Any route class can be used with this method, such as:
+         * - DashedRoute
+         * - InflectedRoute
+         * - Route
+         * - Or your own route class
+         *
+         * You can remove these routes once you've connected the
+         * routes you want in your application.
+         */
+
+    });
     $routes->fallbacks(DashedRoute::class);
 });
 

@@ -18,10 +18,11 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('amount_paid') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('paid_by') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('bill_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('amount') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('reciever_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -29,10 +30,11 @@
             <?php foreach ($payments as $payment): ?>
             <tr>
                 <td><?= h($payment->id) ?></td>
-                <td><?= $this->Number->format($payment->amount_paid) ?></td>
-                <td><?= h($payment->paid_by) ?></td>
-                <td><?= h($payment->created_at) ?></td>
                 <td><?= $payment->has('bill') ? $this->Html->link($payment->bill->id, ['controller' => 'Bills', 'action' => 'view', $payment->bill->id]) : '' ?></td>
+                <td><?= $this->Number->format($payment->amount) ?></td>
+                <td><?= h($payment->date) ?></td>
+                <td><?= h($payment->created_at) ?></td>
+                <td><?= h($payment->reciever_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $payment->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $payment->id]) ?>

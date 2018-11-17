@@ -21,7 +21,7 @@ class BillsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Utilities']
+            'contain' => ['Createds', 'Utilities', 'Users']
         ];
         $bills = $this->paginate($this->Bills);
 
@@ -38,7 +38,7 @@ class BillsController extends AppController
     public function view($id = null)
     {
         $bill = $this->Bills->get($id, [
-            'contain' => ['Utilities', 'Payments']
+            'contain' => ['Createds', 'Utilities', 'Users', 'Payments']
         ]);
 
         $this->set('bill', $bill);
@@ -55,14 +55,28 @@ class BillsController extends AppController
         if ($this->request->is('post')) {
             $bill = $this->Bills->patchEntity($bill, $this->request->getData());
             if ($this->Bills->save($bill)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $bill->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The bill has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The bill could not be saved. Please, try again.'));
         }
+        $createds = $this->Bills->Createds->find('list', ['limit' => 200]);
         $utilities = $this->Bills->Utilities->find('list', ['limit' => 200]);
-        $this->set(compact('bill', 'utilities'));
+        $users = $this->Bills->Users->find('list', ['limit' => 200]);
+        $this->set(compact('bill', 'createds', 'utilities', 'users'));
     }
 
     /**
@@ -86,8 +100,10 @@ class BillsController extends AppController
             }
             $this->Flash->error(__('The bill could not be saved. Please, try again.'));
         }
+        $createds = $this->Bills->Createds->find('list', ['limit' => 200]);
         $utilities = $this->Bills->Utilities->find('list', ['limit' => 200]);
-        $this->set(compact('bill', 'utilities'));
+        $users = $this->Bills->Users->find('list', ['limit' => 200]);
+        $this->set(compact('bill', 'createds', 'utilities', 'users'));
     }
 
     /**

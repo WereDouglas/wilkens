@@ -35,7 +35,7 @@ class ContactsTable extends Table
 
         $this->setTable('contacts');
         $this->setDisplayField('id');
-        $this->setPrimaryKey(['id', 'user_id']);
+        $this->setPrimaryKey(['id']);
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
@@ -57,12 +57,12 @@ class ContactsTable extends Table
 
         $validator
             ->scalar('type')
-            ->maxLength('type', 10)
+            ->maxLength('type', 30)
             ->allowEmpty('type');
 
         $validator
             ->scalar('contact')
-            ->maxLength('contact', 10)
+            ->maxLength('contact', 60)
             ->allowEmpty('contact');
 
         return $validator;

@@ -19,8 +19,9 @@ class CompaniesControllerTest extends IntegrationTestCase
         'app.companies',
         'app.branches',
         'app.departments',
+        'app.employees',
         'app.messages',
-        'app.requisitions'
+        'app.users'
     ];
 
     /**

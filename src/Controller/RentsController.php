@@ -21,7 +21,7 @@ class RentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['BankingDeposits', 'Branches', 'Tenants']
+            'contain' => ['Branches', 'Users', 'Deposits', 'Units']
         ];
         $rents = $this->paginate($this->Rents);
 
@@ -38,7 +38,7 @@ class RentsController extends AppController
     public function view($id = null)
     {
         $rent = $this->Rents->get($id, [
-            'contain' => ['BankingDeposits', 'Branches', 'Tenants', 'MonthlyPayments']
+            'contain' => ['Branches', 'Users', 'Deposits', 'Units', 'MonthlyPayments', 'Penalties']
         ]);
 
         $this->set('rent', $rent);
@@ -55,16 +55,29 @@ class RentsController extends AppController
         if ($this->request->is('post')) {
             $rent = $this->Rents->patchEntity($rent, $this->request->getData());
             if ($this->Rents->save($rent)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $rent->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The rent has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The rent could not be saved. Please, try again.'));
         }
-        $bankingDeposits = $this->Rents->BankingDeposits->find('list', ['limit' => 200]);
         $branches = $this->Rents->Branches->find('list', ['limit' => 200]);
-        $tenants = $this->Rents->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('rent', 'bankingDeposits', 'branches', 'tenants'));
+        $users = $this->Rents->Users->find('list', ['limit' => 200]);
+        $deposits = $this->Rents->Deposits->find('list', ['limit' => 200]);
+        $units = $this->Rents->Units->find('list', ['limit' => 200]);
+        $this->set(compact('rent', 'branches', 'users', 'deposits', 'units'));
     }
 
     /**
@@ -88,10 +101,11 @@ class RentsController extends AppController
             }
             $this->Flash->error(__('The rent could not be saved. Please, try again.'));
         }
-        $bankingDeposits = $this->Rents->BankingDeposits->find('list', ['limit' => 200]);
         $branches = $this->Rents->Branches->find('list', ['limit' => 200]);
-        $tenants = $this->Rents->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('rent', 'bankingDeposits', 'branches', 'tenants'));
+        $users = $this->Rents->Users->find('list', ['limit' => 200]);
+        $deposits = $this->Rents->Deposits->find('list', ['limit' => 200]);
+        $units = $this->Rents->Units->find('list', ['limit' => 200]);
+        $this->set(compact('rent', 'branches', 'users', 'deposits', 'units'));
     }
 
     /**

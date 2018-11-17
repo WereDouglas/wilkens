@@ -9,11 +9,12 @@ use Cake\Validation\Validator;
 /**
  * Requisitions Model
  *
- * @property \App\Model\Table\RequestedBiesTable|\Cake\ORM\Association\BelongsTo $RequestedBies
- * @property \App\Model\Table\ManagersTable|\Cake\ORM\Association\BelongsTo $Managers
- * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\BelongsTo $Clients
- * @property \App\Model\Table\CompaniesTable|\Cake\ORM\Association\BelongsTo $Companies
- * @property \App\Model\Table\PropertiesTable|\Cake\ORM\Association\BelongsTo $Properties
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property |\Cake\ORM\Association\BelongsTo $Properties
+ * @property |\Cake\ORM\Association\BelongsTo $Units
  * @property \App\Model\Table\ExpensesTable|\Cake\ORM\Association\HasMany $Expenses
  *
  * @method \App\Model\Entity\Requisition get($primaryKey, $options = [])
@@ -42,20 +43,24 @@ class RequisitionsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('RequestedBies', [
-            'foreignKey' => 'requested_by_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'approved_id'
         ]);
-        $this->belongsTo('Managers', [
-            'foreignKey' => 'manager_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'paid_id'
         ]);
-        $this->belongsTo('Clients', [
-            'foreignKey' => 'client_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'requested_id'
         ]);
-        $this->belongsTo('Companies', [
-            'foreignKey' => 'company_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
         $this->belongsTo('Properties', [
             'foreignKey' => 'property_id'
+        ]);
+        $this->belongsTo('Units', [
+            'foreignKey' => 'unit_id'
         ]);
         $this->hasMany('Expenses', [
             'foreignKey' => 'requisition_id'
@@ -92,7 +97,8 @@ class RequisitionsTable extends Table
         $validator
             ->scalar('no')
             ->maxLength('no', 20)
-            ->allowEmpty('no');
+            ->requirePresence('no', 'create')
+            ->notEmpty('no');
 
         $validator
             ->scalar('remarks')
@@ -104,19 +110,9 @@ class RequisitionsTable extends Table
             ->notEmpty('approved');
 
         $validator
-            ->scalar('approved_by')
-            ->maxLength('approved_by', 36)
-            ->allowEmpty('approved_by');
-
-        $validator
             ->scalar('paid')
             ->requirePresence('paid', 'create')
             ->notEmpty('paid');
-
-        $validator
-            ->scalar('paid_by')
-            ->maxLength('paid_by', 36)
-            ->allowEmpty('paid_by');
 
         $validator
             ->scalar('method')
@@ -149,11 +145,12 @@ class RequisitionsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['requested_by_id'], 'RequestedBies'));
-        $rules->add($rules->existsIn(['manager_id'], 'Managers'));
-        $rules->add($rules->existsIn(['client_id'], 'Clients'));
-        $rules->add($rules->existsIn(['company_id'], 'Companies'));
+        $rules->add($rules->existsIn(['approved_id'], 'Users'));
+        $rules->add($rules->existsIn(['paid_id'], 'Users'));
+        $rules->add($rules->existsIn(['requested_id'], 'Users'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['property_id'], 'Properties'));
+        $rules->add($rules->existsIn(['unit_id'], 'Units'));
 
         return $rules;
     }

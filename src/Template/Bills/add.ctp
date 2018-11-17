@@ -3,34 +3,36 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bill $bill
  */
-
-
-
-$links_array = [
-    ['List Bills', ['action' => 'index']],
-
-];
-$active =['yes','no'];
-
-$input_array = [
-    ['created_on', ['class' => 'form-control', 'placeholder' => 'Created on']],
-    ['due_date', ['class' => 'form-control', 'placeholder' => 'Due date']],
-    ['previous_reading', ['class' => 'form-control', 'placeholder' => 'Previous reading']],
-    ['current_reading', ['class' => 'form-control', 'placeholder' => 'Current reading']],
-    ['units_used', ['class' => 'form-control', 'placeholder' => 'Units used']],
-    ['unit_cost', ['class' => 'form-control', 'placeholder' => 'Cost']],
-    ['total_cost', ['options' => $active]],
-    ['created_by', ['class' => 'form-control']],
-    ['paid', ['options' => $active]],
-    ['created_at', ['class' => 'form-control']],
-    ['utility_id', ['options' => $utilities]]
-];
-
-$this->extend('/Common/add');
-$this->assign('links', json_encode($links_array));
-$this->assign('inputs', json_encode($input_array));
-
-$this->start('form_object');
-echo $this->Form->create($bill);
-$this->end();
-
+?>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('List Bills'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Utilities'), ['controller' => 'Utilities', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Utility'), ['controller' => 'Utilities', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Payments'), ['controller' => 'Payments', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Payment'), ['controller' => 'Payments', 'action' => 'add']) ?></li>
+    </ul>
+</nav>
+<div class="bills form large-9 medium-8 columns content">
+    <?= $this->Form->create($bill) ?>
+    <fieldset>
+        <legend><?= __('Add Bill') ?></legend>
+        <?php
+            echo $this->Form->control('created_on');
+            echo $this->Form->control('due_date', ['empty' => true]);
+            echo $this->Form->control('previous_reading');
+            echo $this->Form->control('current_reading');
+            echo $this->Form->control('units_used');
+            echo $this->Form->control('unit_cost');
+            echo $this->Form->control('total_cost');
+            echo $this->Form->control('created_id');
+            echo $this->Form->control('paid');
+            echo $this->Form->control('created_at');
+            echo $this->Form->control('utility_id', ['options' => $utilities]);
+            echo $this->Form->control('user_id');
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
+</div>

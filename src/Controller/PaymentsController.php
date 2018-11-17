@@ -21,7 +21,7 @@ class PaymentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Bills']
+            'contain' => ['Bills', 'Users']
         ];
         $payments = $this->paginate($this->Payments);
 
@@ -38,7 +38,7 @@ class PaymentsController extends AppController
     public function view($id = null)
     {
         $payment = $this->Payments->get($id, [
-            'contain' => ['Bills']
+            'contain' => ['Bills', 'Users']
         ]);
 
         $this->set('payment', $payment);
@@ -55,14 +55,27 @@ class PaymentsController extends AppController
         if ($this->request->is('post')) {
             $payment = $this->Payments->patchEntity($payment, $this->request->getData());
             if ($this->Payments->save($payment)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $payment->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The payment has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The payment could not be saved. Please, try again.'));
         }
         $bills = $this->Payments->Bills->find('list', ['limit' => 200]);
-        $this->set(compact('payment', 'bills'));
+        $users = $this->Payments->Users->find('list', ['limit' => 200]);
+        $this->set(compact('payment', 'bills', 'users'));
     }
 
     /**
@@ -87,7 +100,8 @@ class PaymentsController extends AppController
             $this->Flash->error(__('The payment could not be saved. Please, try again.'));
         }
         $bills = $this->Payments->Bills->find('list', ['limit' => 200]);
-        $this->set(compact('payment', 'bills'));
+        $users = $this->Payments->Users->find('list', ['limit' => 200]);
+        $this->set(compact('payment', 'bills', 'users'));
     }
 
     /**

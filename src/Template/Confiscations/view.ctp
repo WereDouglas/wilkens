@@ -11,8 +11,8 @@
         <li><?= $this->Form->postLink(__('Delete Confiscation'), ['action' => 'delete', $confiscation->id], ['confirm' => __('Are you sure you want to delete # {0}?', $confiscation->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Confiscations'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Confiscation'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="confiscations view large-9 medium-8 columns content">
@@ -31,12 +31,12 @@
             <td><?= h($confiscation->sold) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Sold By') ?></th>
-            <td><?= h($confiscation->sold_by) ?></td>
+            <th scope="row"><?= __('Sold Id') ?></th>
+            <td><?= h($confiscation->sold_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Tenant') ?></th>
-            <td><?= $confiscation->has('tenant') ? $this->Html->link($confiscation->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $confiscation->tenant->id]) : '' ?></td>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $confiscation->has('user') ? $this->Html->link($confiscation->user->id, ['controller' => 'Users', 'action' => 'view', $confiscation->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Cost') ?></th>

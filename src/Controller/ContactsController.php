@@ -55,9 +55,21 @@ class ContactsController extends AppController
         if ($this->request->is('post')) {
             $contact = $this->Contacts->patchEntity($contact, $this->request->getData());
             if ($this->Contacts->save($contact)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $contact->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The contact has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The contact could not be saved. Please, try again.'));
         }

@@ -10,14 +10,14 @@ use Cake\ORM\Entity;
  * @property string $details
  * @property float $amount
  * @property \Cake\I18n\FrozenDate $date
- * @property string $prepared_by
+ * @property string $prepared_id
  * @property string $paid
  * @property string $repaired
  * @property \Cake\I18n\FrozenDate $date_repaired
  * @property \Cake\I18n\FrozenTime $created_at
- * @property string $tenant_id
+ * @property string $user_id
  *
- * @property \App\Model\Entity\Tenant $tenant
+ * @property \App\Model\Entity\User $user
  */
 class Damage extends Entity
 {
@@ -32,15 +32,16 @@ class Damage extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'details' => true,
         'amount' => true,
         'date' => true,
-        'prepared_by' => true,
+        'prepared_id' => true,
         'paid' => true,
         'repaired' => true,
         'date_repaired' => true,
         'created_at' => true,
-        'tenant_id' => true,
-        'tenant' => true
+        'user_id' => true,
+        'user' => true
     ];
 }

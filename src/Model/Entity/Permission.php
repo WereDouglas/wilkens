@@ -25,6 +25,7 @@ class Permission extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'description' => true,
         'roles' => true,
         'users' => true

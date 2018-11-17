@@ -11,8 +11,8 @@
         <li><?= $this->Form->postLink(__('Delete Refund'), ['action' => 'delete', $refund->id], ['confirm' => __('Are you sure you want to delete # {0}?', $refund->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Refunds'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Refund'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="refunds view large-9 medium-8 columns content">
@@ -31,12 +31,12 @@
             <td><?= h($refund->approved) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Approved By') ?></th>
-            <td><?= h($refund->approved_by) ?></td>
+            <th scope="row"><?= __('Approved Id') ?></th>
+            <td><?= h($refund->approved_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Tenant') ?></th>
-            <td><?= $refund->has('tenant') ? $this->Html->link($refund->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $refund->tenant->id]) : '' ?></td>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $refund->has('user') ? $this->Html->link($refund->user->id, ['controller' => 'Users', 'action' => 'view', $refund->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Amount') ?></th>

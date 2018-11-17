@@ -43,7 +43,7 @@ class ExceptionsFixture extends TestFixture
                 'id' => 1,
                 'message' => 'Lorem ipsum dolor sit amet',
                 'process' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1541811594
+                'created_at' => 1542316524
             ],
         ];
         parent::init();

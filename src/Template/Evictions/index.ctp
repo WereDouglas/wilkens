@@ -8,7 +8,9 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Eviction'), ['action' => 'add']) ?></li>
-           </ul>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+    </ul>
 </nav>
 <div class="evictions index large-9 medium-8 columns content">
     <h3><?= __('Evictions') ?></h3>
@@ -25,10 +27,10 @@
                 <th scope="col"><?= $this->Paginator->sort('evicted') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('details') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('evicted_on') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('evicted_by') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('evicted_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('reason') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('remarks') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('tenant_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -45,10 +47,10 @@
                 <td><?= h($eviction->evicted) ?></td>
                 <td><?= h($eviction->details) ?></td>
                 <td><?= h($eviction->evicted_on) ?></td>
-                <td><?= h($eviction->evicted_by) ?></td>
+                <td><?= h($eviction->evicted_id) ?></td>
                 <td><?= h($eviction->reason) ?></td>
                 <td><?= h($eviction->remarks) ?></td>
-                <td><?= $eviction->has('tenant') ? $this->Html->link($eviction->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $eviction->tenant->id]) : '' ?></td>
+                <td><?= $eviction->has('user') ? $this->Html->link($eviction->user->id, ['controller' => 'Users', 'action' => 'view', $eviction->user->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $eviction->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $eviction->id]) ?>

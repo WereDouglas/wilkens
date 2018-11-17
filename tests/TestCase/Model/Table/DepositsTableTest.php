@@ -25,7 +25,7 @@ class DepositsTableTest extends TestCase
      */
     public $fixtures = [
         'app.deposits',
-        'app.clients',
+        'app.users',
         'app.accounts'
     ];
 

@@ -17,7 +17,7 @@ class RefundsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.refunds',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

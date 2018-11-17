@@ -7,14 +7,15 @@ use Cake\ORM\Entity;
  * Unit Entity
  *
  * @property string $id
- * @property string $type
+ * @property string $types
  * @property string $name
- * @property string $state
+ * @property string $states
  * @property string $occupied
  * @property float $cost
  * @property string $description
  * @property int $rooms
  * @property string $property_id
+ * @property string $user_id
  *
  * @property \App\Model\Entity\Property $property
  * @property \App\Model\Entity\Tenant[] $tenants
@@ -32,14 +33,16 @@ class Unit extends Entity
      * @var array
      */
     protected $_accessible = [
-        'type' => true,
+        'id' => true,
+        'types' => true,
         'name' => true,
-        'state' => true,
+        'states' => true,
         'occupied' => true,
         'cost' => true,
         'description' => true,
         'rooms' => true,
         'property_id' => true,
+        'user_id' => true,
         'property' => true,
         'tenants' => true
     ];

@@ -55,9 +55,22 @@ class AccountsController extends AppController
         if ($this->request->is('post')) {
             $account = $this->Accounts->patchEntity($account, $this->request->getData());
             if ($this->Accounts->save($account)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $account->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The account has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed '.' '.json_encode($this->invalidFields());
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The account could not be saved. Please, try again.'));
         }
@@ -74,7 +87,6 @@ class AccountsController extends AppController
      */
     public function edit($id = null)
     {
-        $ids = $id;
         $account = $this->Accounts->get($id, [
             'contain' => []
         ]);
@@ -88,7 +100,7 @@ class AccountsController extends AppController
             $this->Flash->error(__('The account could not be saved. Please, try again.'));
         }
         $users = $this->Accounts->Users->find('list', ['limit' => 200]);
-        $this->set(compact('account', 'users','$ids'));
+        $this->set(compact('account', 'users'));
     }
 
     /**

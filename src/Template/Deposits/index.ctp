@@ -8,7 +8,11 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Deposit'), ['action' => 'add']) ?></li>
-       </ul>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+    </ul>
 </nav>
 <div class="deposits index large-9 medium-8 columns content">
     <h3><?= __('Deposits') ?></h3>
@@ -16,17 +20,20 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('total_amount') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('rent_amount') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('expense_amount') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('method') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('prepared_by') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('approved_by') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('deposited_by') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('prepared_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('approved_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('deposited_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('complete') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('client_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('account_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('account_no') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('account_name') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -34,17 +41,20 @@
             <?php foreach ($deposits as $deposit): ?>
             <tr>
                 <td><?= h($deposit->id) ?></td>
+                <td><?= $this->Number->format($deposit->total_amount) ?></td>
                 <td><?= $this->Number->format($deposit->rent_amount) ?></td>
                 <td><?= $this->Number->format($deposit->expense_amount) ?></td>
                 <td><?= h($deposit->method) ?></td>
                 <td><?= h($deposit->date) ?></td>
-                <td><?= h($deposit->prepared_by) ?></td>
-                <td><?= h($deposit->approved_by) ?></td>
-                <td><?= h($deposit->deposited_by) ?></td>
+                <td><?= h($deposit->prepared_id) ?></td>
+                <td><?= h($deposit->approved_id) ?></td>
+                <td><?= h($deposit->deposited_id) ?></td>
                 <td><?= h($deposit->complete) ?></td>
                 <td><?= h($deposit->created_at) ?></td>
-                <td><?= $deposit->has('client') ? $this->Html->link($deposit->client->id, ['controller' => 'Clients', 'action' => 'view', $deposit->client->id]) : '' ?></td>
                 <td><?= $deposit->has('account') ? $this->Html->link($deposit->account->id, ['controller' => 'Accounts', 'action' => 'view', $deposit->account->id]) : '' ?></td>
+                <td><?= $deposit->has('user') ? $this->Html->link($deposit->user->id, ['controller' => 'Users', 'action' => 'view', $deposit->user->id]) : '' ?></td>
+                <td><?= h($deposit->account_no) ?></td>
+                <td><?= h($deposit->account_name) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $deposit->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $deposit->id]) ?>

@@ -21,7 +21,7 @@ class ConfiscationsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ];
         $confiscations = $this->paginate($this->Confiscations);
 
@@ -38,7 +38,7 @@ class ConfiscationsController extends AppController
     public function view($id = null)
     {
         $confiscation = $this->Confiscations->get($id, [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ]);
 
         $this->set('confiscation', $confiscation);
@@ -55,14 +55,26 @@ class ConfiscationsController extends AppController
         if ($this->request->is('post')) {
             $confiscation = $this->Confiscations->patchEntity($confiscation, $this->request->getData());
             if ($this->Confiscations->save($confiscation)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $confiscation->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The confiscation has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The confiscation could not be saved. Please, try again.'));
         }
-        $tenants = $this->Confiscations->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('confiscation', 'tenants'));
+        $users = $this->Confiscations->Users->find('list', ['limit' => 200]);
+        $this->set(compact('confiscation', 'users'));
     }
 
     /**
@@ -86,8 +98,8 @@ class ConfiscationsController extends AppController
             }
             $this->Flash->error(__('The confiscation could not be saved. Please, try again.'));
         }
-        $tenants = $this->Confiscations->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('confiscation', 'tenants'));
+        $users = $this->Confiscations->Users->find('list', ['limit' => 200]);
+        $this->set(compact('confiscation', 'users'));
     }
 
     /**

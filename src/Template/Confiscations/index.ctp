@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Confiscation'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="confiscations index large-9 medium-8 columns content">
@@ -21,11 +23,11 @@
                 <th scope="col"><?= $this->Paginator->sort('cost') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('sold') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('sold_on') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sold_by') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('sold_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('storage_fees') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('deadline') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('tenant_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -38,11 +40,11 @@
                 <td><?= $this->Number->format($confiscation->cost) ?></td>
                 <td><?= h($confiscation->sold) ?></td>
                 <td><?= h($confiscation->sold_on) ?></td>
-                <td><?= h($confiscation->sold_by) ?></td>
+                <td><?= h($confiscation->sold_id) ?></td>
                 <td><?= $this->Number->format($confiscation->storage_fees) ?></td>
                 <td><?= h($confiscation->deadline) ?></td>
                 <td><?= h($confiscation->created_at) ?></td>
-                <td><?= $confiscation->has('tenant') ? $this->Html->link($confiscation->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $confiscation->tenant->id]) : '' ?></td>
+                <td><?= $confiscation->has('user') ? $this->Html->link($confiscation->user->id, ['controller' => 'Users', 'action' => 'view', $confiscation->user->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $confiscation->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $confiscation->id]) ?>

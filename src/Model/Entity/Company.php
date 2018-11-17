@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property string $id
  * @property string $name
  * @property string $address
- * @property string $photo
+ * @property $photo
  * @property string $photo_dir
  * @property string $photo_size
  * @property string $photo_type
@@ -18,7 +18,6 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Department[] $departments
  * @property \App\Model\Entity\Employee[] $employees
  * @property \App\Model\Entity\Message[] $messages
- * @property \App\Model\Entity\Requisition[] $requisitions
  * @property \App\Model\Entity\User[] $users
  */
 class Company extends Entity
@@ -34,6 +33,7 @@ class Company extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'name' => true,
         'address' => true,
         'photo' => true,
@@ -44,7 +44,6 @@ class Company extends Entity
         'departments' => true,
         'employees' => true,
         'messages' => true,
-        'requisitions' => true,
         'users' => true
     ];
 }

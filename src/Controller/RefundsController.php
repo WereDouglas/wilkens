@@ -21,7 +21,7 @@ class RefundsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ];
         $refunds = $this->paginate($this->Refunds);
 
@@ -38,7 +38,7 @@ class RefundsController extends AppController
     public function view($id = null)
     {
         $refund = $this->Refunds->get($id, [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ]);
 
         $this->set('refund', $refund);
@@ -55,14 +55,26 @@ class RefundsController extends AppController
         if ($this->request->is('post')) {
             $refund = $this->Refunds->patchEntity($refund, $this->request->getData());
             if ($this->Refunds->save($refund)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $refund->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The refund has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The refund could not be saved. Please, try again.'));
         }
-        $tenants = $this->Refunds->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('refund', 'tenants'));
+        $users = $this->Refunds->Users->find('list', ['limit' => 200]);
+        $this->set(compact('refund', 'users'));
     }
 
     /**
@@ -86,8 +98,8 @@ class RefundsController extends AppController
             }
             $this->Flash->error(__('The refund could not be saved. Please, try again.'));
         }
-        $tenants = $this->Refunds->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('refund', 'tenants'));
+        $users = $this->Refunds->Users->find('list', ['limit' => 200]);
+        $this->set(compact('refund', 'users'));
     }
 
     /**

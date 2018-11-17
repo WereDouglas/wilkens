@@ -8,8 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Refunds'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="refunds form large-9 medium-8 columns content">
@@ -25,9 +25,9 @@
             echo $this->Form->control('date');
             echo $this->Form->control('paid');
             echo $this->Form->control('approved');
-            echo $this->Form->control('approved_by');
+            echo $this->Form->control('approved_id');
             echo $this->Form->control('created_at');
-            echo $this->Form->control('tenant_id', ['options' => $tenants]);
+            echo $this->Form->control('user_id', ['options' => $users]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

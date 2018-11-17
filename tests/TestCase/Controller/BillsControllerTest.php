@@ -17,7 +17,9 @@ class BillsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.bills',
+        'app.createds',
         'app.utilities',
+        'app.users',
         'app.payments'
     ];
 

@@ -11,8 +11,16 @@
         <li><?= $this->Form->postLink(__('Delete Rent'), ['action' => 'delete', $rent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rent->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Rents'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Rent'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Clients'), ['controller' => 'Clients', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Client'), ['controller' => 'Clients', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Deposits'), ['controller' => 'Deposits', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Deposit'), ['controller' => 'Deposits', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Monthly Payments'), ['controller' => 'MonthlyPayments', 'action' => 'index']) ?> </li>
@@ -35,16 +43,8 @@
             <td><?= h($rent->no) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Paid By') ?></th>
-            <td><?= h($rent->paid_by) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Paid To Client') ?></th>
             <td><?= h($rent->paid_to_client) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Banking Deposit Id') ?></th>
-            <td><?= h($rent->banking_deposit_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Branch') ?></th>
@@ -55,16 +55,28 @@
             <td><?= h($rent->cheque_no) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Recieved By') ?></th>
-            <td><?= h($rent->recieved_by) ?></td>
+            <th scope="row"><?= __('Receive Id') ?></th>
+            <td><?= h($rent->receive_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Editable') ?></th>
             <td><?= h($rent->editable) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Tenant') ?></th>
-            <td><?= $rent->has('tenant') ? $this->Html->link($rent->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $rent->tenant->id]) : '' ?></td>
+            <th scope="row"><?= __('Landlord Id') ?></th>
+            <td><?= h($rent->landlord_id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Deposit') ?></th>
+            <td><?= $rent->has('deposit') ? $this->Html->link($rent->deposit->id, ['controller' => 'Deposits', 'action' => 'view', $rent->deposit->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Occupant Id') ?></th>
+            <td><?= h($rent->occupant_id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Unit Id') ?></th>
+            <td><?= h($rent->unit_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Total Cost') ?></th>
@@ -133,6 +145,7 @@
                 <th scope="col"><?= __('Date') ?></th>
                 <th scope="col"><?= __('Created At') ?></th>
                 <th scope="col"><?= __('Rent Id') ?></th>
+                <th scope="col"><?= __('User Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($rent->monthly_payments as $monthlyPayments): ?>
@@ -146,6 +159,7 @@
                 <td><?= h($monthlyPayments->date) ?></td>
                 <td><?= h($monthlyPayments->created_at) ?></td>
                 <td><?= h($monthlyPayments->rent_id) ?></td>
+                <td><?= h($monthlyPayments->user_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'MonthlyPayments', 'action' => 'view', $monthlyPayments->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'MonthlyPayments', 'action' => 'edit', $monthlyPayments->id]) ?>

@@ -14,6 +14,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Securities'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
     </ul>
@@ -28,11 +30,11 @@
             echo $this->Form->control('method');
             echo $this->Form->control('paid_back');
             echo $this->Form->control('approved');
-            echo $this->Form->control('requested_by');
-            echo $this->Form->control('approved_by');
+            echo $this->Form->control('requested_id');
+            echo $this->Form->control('approved_id', ['options' => $users, 'empty' => true]);
             echo $this->Form->control('refunded');
             echo $this->Form->control('no');
-            echo $this->Form->control('tenant_id', ['options' => $tenants]);
+            echo $this->Form->control('user_id');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -14,10 +14,11 @@ use Cake\ORM\Entity;
  * @property string $units_used
  * @property float $unit_cost
  * @property float $total_cost
- * @property string $created_by
+ * @property string $created_id
  * @property string $paid
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $utility_id
+ * @property string $user_id
  *
  * @property \App\Model\Entity\Utility $utility
  * @property \App\Model\Entity\Payment[] $payments
@@ -35,6 +36,7 @@ class Bill extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'created_on' => true,
         'due_date' => true,
         'previous_reading' => true,
@@ -42,10 +44,11 @@ class Bill extends Entity
         'units_used' => true,
         'unit_cost' => true,
         'total_cost' => true,
-        'created_by' => true,
+        'created_id' => true,
         'paid' => true,
         'created_at' => true,
         'utility_id' => true,
+        'user_id' => true,
         'utility' => true,
         'payments' => true
     ];

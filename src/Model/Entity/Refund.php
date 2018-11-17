@@ -15,11 +15,11 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate $date
  * @property string $paid
  * @property string $approved
- * @property string $approved_by
+ * @property string $approved_id
  * @property \Cake\I18n\FrozenTime $created_at
- * @property string $tenant_id
+ * @property string $user_id
  *
- * @property \App\Model\Entity\Tenant $tenant
+ * @property \App\Model\Entity\User $user
  */
 class Refund extends Entity
 {
@@ -34,6 +34,7 @@ class Refund extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'amount' => true,
         'bills' => true,
         'damages' => true,
@@ -42,9 +43,9 @@ class Refund extends Entity
         'date' => true,
         'paid' => true,
         'approved' => true,
-        'approved_by' => true,
+        'approved_id' => true,
         'created_at' => true,
-        'tenant_id' => true,
-        'tenant' => true
+        'user_id' => true,
+        'user' => true
     ];
 }

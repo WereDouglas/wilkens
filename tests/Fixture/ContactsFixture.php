@@ -22,10 +22,11 @@ class ContactsFixture extends TestFixture
         'contact' => ['type' => 'string', 'length' => 10, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'fk_contacts_users1_idx' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
+            'fk_contacts_users1_idx1' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id', 'user_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'fk_contacts_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -43,10 +44,10 @@ class ContactsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'd541f7e3-41ab-47c5-8f06-e32e3a5644ac',
+                'id' => '44751ed4-cef8-4141-b6fc-161bf6908241',
                 'type' => 'Lorem ip',
                 'contact' => 'Lorem ip',
-                'user_id' => '53ac4f0f-55d6-4540-bd7b-d00c9e6618ac'
+                'user_id' => '42e5a121-6f1a-4977-ad6e-169f6566298b'
             ],
         ];
         parent::init();

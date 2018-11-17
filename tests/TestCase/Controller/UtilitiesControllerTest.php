@@ -17,7 +17,7 @@ class UtilitiesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.utilities',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

@@ -19,7 +19,7 @@ class DepartmentsFixture extends TestFixture
     public $fields = [
         'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'name' => ['type' => 'string', 'length' => 25, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'company_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'company_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_departments_companies1_idx' => ['type' => 'index', 'columns' => ['company_id'], 'length' => []],
         ],
@@ -43,9 +43,9 @@ class DepartmentsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'a86d6ced-dcfc-4201-a007-28e93c888822',
+                'id' => '1d5f3e30-c95e-4c90-aa8e-b5c9eebd456c',
                 'name' => 'Lorem ipsum dolor sit a',
-                'company_id' => '2037e149-3f5d-49d7-94c7-44386bd384ed'
+                'company_id' => 'df7fbc6e-eea9-457c-9bc7-03cdeca3367a'
             ],
         ];
         parent::init();

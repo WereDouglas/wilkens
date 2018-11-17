@@ -7,10 +7,10 @@ use Cake\ORM\Entity;
  * TenantsUnit Entity
  *
  * @property string $unit_id
- * @property string $tenant_id
+ * @property string $user_id
  *
  * @property \App\Model\Entity\Unit $unit
- * @property \App\Model\Entity\Tenant $tenant
+ * @property \App\Model\Entity\User $user
  */
 class TenantsUnit extends Entity
 {
@@ -26,6 +26,6 @@ class TenantsUnit extends Entity
      */
     protected $_accessible = [
         'unit' => true,
-        'tenant' => true
+        'user' => true
     ];
 }

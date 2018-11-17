@@ -22,12 +22,13 @@ class UtilitiesFixture extends TestFixture
         'starting_reading' => ['type' => 'string', 'length' => 60, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'unit_cost' => ['type' => 'float', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
         'account_no' => ['type' => 'string', 'length' => 60, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'tenant_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'fk_utilities_tenants1_idx' => ['type' => 'index', 'columns' => ['tenant_id'], 'length' => []],
+            'fk_utilities_users1_idx' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id', 'tenant_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'fk_utilities_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -45,12 +46,12 @@ class UtilitiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '2b2ed72b-f802-4264-9ae0-85d10dc6e0fa',
+                'id' => '3b5caabd-76ef-4bd4-9c25-b45adb151767',
                 'name' => 'Lorem ipsum dolor sit amet',
                 'starting_reading' => 'Lorem ipsum dolor sit amet',
                 'unit_cost' => 1,
                 'account_no' => 'Lorem ipsum dolor sit amet',
-                'tenant_id' => '849c3c76-9b95-4cd6-9712-a29469afc8aa'
+                'user_id' => '99c985af-ff1f-462c-a6e8-75fad5ef4a90'
             ],
         ];
         parent::init();

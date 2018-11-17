@@ -13,7 +13,6 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\DepartmentsTable|\Cake\ORM\Association\HasMany $Departments
  * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\HasMany $Employees
  * @property \App\Model\Table\MessagesTable|\Cake\ORM\Association\HasMany $Messages
- * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Users
  *
  * @method \App\Model\Entity\Company get($primaryKey, $options = [])
@@ -54,9 +53,6 @@ class CompaniesTable extends Table
         $this->hasMany('Messages', [
             'foreignKey' => 'company_id'
         ]);
-        $this->hasMany('Requisitions', [
-            'foreignKey' => 'company_id'
-        ]);
         $this->hasMany('Users', [
             'foreignKey' => 'company_id'
         ]);
@@ -85,8 +81,6 @@ class CompaniesTable extends Table
             ->allowEmpty('address');
 
         $validator
-            ->scalar('photo')
-            ->maxLength('photo', 65)
             ->allowEmpty('photo');
 
         $validator

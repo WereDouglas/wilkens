@@ -26,8 +26,10 @@ class Contact extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'type' => true,
         'contact' => true,
+        'user_id' => true,
         'user' => true
     ];
 }

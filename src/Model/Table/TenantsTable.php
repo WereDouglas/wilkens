@@ -10,15 +10,8 @@ use Cake\Validation\Validator;
  * Tenants Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\BelongsTo $Clients
- * @property \App\Model\Table\ConfiscationsTable|\Cake\ORM\Association\HasMany $Confiscations
- * @property \App\Model\Table\DamagesTable|\Cake\ORM\Association\HasMany $Damages
- * @property \App\Model\Table\EvictionsTable|\Cake\ORM\Association\HasMany $Evictions
- * @property \App\Model\Table\PenaltiesTable|\Cake\ORM\Association\HasMany $Penalties
- * @property \App\Model\Table\RefundsTable|\Cake\ORM\Association\HasMany $Refunds
- * @property \App\Model\Table\RentsTable|\Cake\ORM\Association\HasMany $Rents
- * @property \App\Model\Table\SecuritiesTable|\Cake\ORM\Association\HasMany $Securities
- * @property \App\Model\Table\UtilitiesTable|\Cake\ORM\Association\HasMany $Utilities
+ * @property \App\Model\Table\UnitsTable|\Cake\ORM\Association\BelongsTo $Units
+ * @property |\Cake\ORM\Association\BelongsTo $Properties
  * @property \App\Model\Table\UnitsTable|\Cake\ORM\Association\BelongsToMany $Units
  *
  * @method \App\Model\Entity\Tenant get($primaryKey, $options = [])
@@ -51,33 +44,11 @@ class TenantsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Clients', [
-            'foreignKey' => 'client_id',
-            'joinType' => 'INNER'
+        $this->belongsTo('Units', [
+            'foreignKey' => 'unit_id'
         ]);
-        $this->hasMany('Confiscations', [
-            'foreignKey' => 'tenant_id'
-        ]);
-        $this->hasMany('Damages', [
-            'foreignKey' => 'tenant_id'
-        ]);
-        $this->hasMany('Evictions', [
-            'foreignKey' => 'tenant_id'
-        ]);
-        $this->hasMany('Penalties', [
-            'foreignKey' => 'tenant_id'
-        ]);
-        $this->hasMany('Refunds', [
-            'foreignKey' => 'tenant_id'
-        ]);
-        $this->hasMany('Rents', [
-            'foreignKey' => 'tenant_id'
-        ]);
-        $this->hasMany('Securities', [
-            'foreignKey' => 'tenant_id'
-        ]);
-        $this->hasMany('Utilities', [
-            'foreignKey' => 'tenant_id'
+        $this->belongsTo('Properties', [
+            'foreignKey' => 'property_id'
         ]);
         $this->belongsToMany('Units', [
             'foreignKey' => 'tenant_id',
@@ -162,7 +133,8 @@ class TenantsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['client_id'], 'Clients'));
+        $rules->add($rules->existsIn(['unit_id'], 'Units'));
+        $rules->add($rules->existsIn(['property_id'], 'Properties'));
 
         return $rules;
     }

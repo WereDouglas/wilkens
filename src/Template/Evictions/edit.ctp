@@ -14,7 +14,9 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Evictions'), ['action' => 'index']) ?></li>
-            </ul>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+    </ul>
 </nav>
 <div class="evictions form large-9 medium-8 columns content">
     <?= $this->Form->create($eviction) ?>
@@ -30,9 +32,10 @@
             echo $this->Form->control('evicted');
             echo $this->Form->control('details');
             echo $this->Form->control('evicted_on', ['empty' => true]);
-            echo $this->Form->control('evicted_by');
+            echo $this->Form->control('evicted_id');
             echo $this->Form->control('reason');
             echo $this->Form->control('remarks');
+            echo $this->Form->control('user_id', ['options' => $users]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

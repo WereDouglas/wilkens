@@ -21,7 +21,7 @@ class DamagesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ];
         $damages = $this->paginate($this->Damages);
 
@@ -38,7 +38,7 @@ class DamagesController extends AppController
     public function view($id = null)
     {
         $damage = $this->Damages->get($id, [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ]);
 
         $this->set('damage', $damage);
@@ -55,14 +55,26 @@ class DamagesController extends AppController
         if ($this->request->is('post')) {
             $damage = $this->Damages->patchEntity($damage, $this->request->getData());
             if ($this->Damages->save($damage)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $damage->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The damage has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The damage could not be saved. Please, try again.'));
         }
-        $tenants = $this->Damages->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('damage', 'tenants'));
+        $users = $this->Damages->Users->find('list', ['limit' => 200]);
+        $this->set(compact('damage', 'users'));
     }
 
     /**
@@ -86,8 +98,8 @@ class DamagesController extends AppController
             }
             $this->Flash->error(__('The damage could not be saved. Please, try again.'));
         }
-        $tenants = $this->Damages->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('damage', 'tenants'));
+        $users = $this->Damages->Users->find('list', ['limit' => 200]);
+        $this->set(compact('damage', 'users'));
     }
 
     /**

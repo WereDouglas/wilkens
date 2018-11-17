@@ -10,6 +10,10 @@ use Cake\Validation\Validator;
  * Units Model
  *
  * @property \App\Model\Table\PropertiesTable|\Cake\ORM\Association\BelongsTo $Properties
+ * @property |\Cake\ORM\Association\BelongsTo $Users
+ * @property |\Cake\ORM\Association\HasMany $Rents
+ * @property |\Cake\ORM\Association\HasMany $Requisitions
+ * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\HasMany $Tenants
  * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsToMany $Tenants
  *
  * @method \App\Model\Entity\Unit get($primaryKey, $options = [])
@@ -42,6 +46,18 @@ class UnitsTable extends Table
             'foreignKey' => 'property_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Rents', [
+            'foreignKey' => 'unit_id'
+        ]);
+        $this->hasMany('Requisitions', [
+            'foreignKey' => 'unit_id'
+        ]);
+        $this->hasMany('Tenants', [
+            'foreignKey' => 'unit_id'
+        ]);
         $this->belongsToMany('Tenants', [
             'foreignKey' => 'unit_id',
             'targetForeignKey' => 'tenant_id',
@@ -62,9 +78,9 @@ class UnitsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('type')
-            ->maxLength('type', 10)
-            ->allowEmpty('type');
+            ->scalar('types')
+            ->maxLength('types', 10)
+            ->allowEmpty('types');
 
         $validator
             ->scalar('name')
@@ -73,9 +89,9 @@ class UnitsTable extends Table
             ->notEmpty('name');
 
         $validator
-            ->scalar('state')
-            ->maxLength('state', 60)
-            ->allowEmpty('state');
+            ->scalar('states')
+            ->maxLength('states', 60)
+            ->allowEmpty('states');
 
         $validator
             ->scalar('occupied')
@@ -107,6 +123,7 @@ class UnitsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['property_id'], 'Properties'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

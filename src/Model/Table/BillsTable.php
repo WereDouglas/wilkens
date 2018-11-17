@@ -9,7 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Bills Model
  *
+ * @property |\Cake\ORM\Association\BelongsTo $Createds
  * @property \App\Model\Table\UtilitiesTable|\Cake\ORM\Association\BelongsTo $Utilities
+ * @property |\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\PaymentsTable|\Cake\ORM\Association\HasMany $Payments
  *
  * @method \App\Model\Entity\Bill get($primaryKey, $options = [])
@@ -38,9 +40,15 @@ class BillsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
+        $this->belongsTo('Createds', [
+            'foreignKey' => 'created_id'
+        ]);
         $this->belongsTo('Utilities', [
             'foreignKey' => 'utility_id',
             'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Payments', [
             'foreignKey' => 'bill_id'
@@ -93,11 +101,6 @@ class BillsTable extends Table
             ->allowEmpty('total_cost');
 
         $validator
-            ->scalar('created_by')
-            ->maxLength('created_by', 60)
-            ->allowEmpty('created_by');
-
-        $validator
             ->scalar('paid')
             ->requirePresence('paid', 'create')
             ->notEmpty('paid');
@@ -118,7 +121,9 @@ class BillsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->existsIn(['created_id'], 'Createds'));
         $rules->add($rules->existsIn(['utility_id'], 'Utilities'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

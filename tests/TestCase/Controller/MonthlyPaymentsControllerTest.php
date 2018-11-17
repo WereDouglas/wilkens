@@ -17,7 +17,8 @@ class MonthlyPaymentsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.monthly_payments',
-        'app.rents'
+        'app.rents',
+        'app.users'
     ];
 
     /**

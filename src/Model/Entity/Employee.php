@@ -22,6 +22,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Company $company
  * @property \App\Model\Entity\Branch $branch
  * @property \App\Model\Entity\Department $department
+ * @property \App\Model\Entity\Rent[] $rents
  */
 class Employee extends Entity
 {
@@ -36,6 +37,7 @@ class Employee extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'user_id' => true,
         'company_id' => true,
         'branch_id' => true,
@@ -49,6 +51,7 @@ class Employee extends Entity
         'user' => true,
         'company' => true,
         'branch' => true,
-        'department' => true
+        'department' => true,
+        'rents' => true
     ];
 }

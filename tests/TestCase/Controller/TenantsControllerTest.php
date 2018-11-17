@@ -18,15 +18,8 @@ class TenantsControllerTest extends IntegrationTestCase
     public $fixtures = [
         'app.tenants',
         'app.users',
-        'app.confiscations',
-        'app.damages',
-        'app.evictions',
-        'app.penalties',
-        'app.refunds',
-        'app.rents',
-        'app.securities',
-        'app.utilities',
         'app.units',
+        'app.properties',
         'app.tenants_units'
     ];
 

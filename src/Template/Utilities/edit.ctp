@@ -14,7 +14,9 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Utilities'), ['action' => 'index']) ?></li>
-      </ul>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+    </ul>
 </nav>
 <div class="utilities form large-9 medium-8 columns content">
     <?= $this->Form->create($utility) ?>
@@ -25,6 +27,7 @@
             echo $this->Form->control('starting_reading');
             echo $this->Form->control('unit_cost');
             echo $this->Form->control('account_no');
+            echo $this->Form->control('user_id', ['options' => $users]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

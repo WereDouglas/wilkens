@@ -20,11 +20,11 @@ class DepartmentsController extends AppController
      */
     public function index()
     {
-        $query = $this->Departments->find()
-            ->select(['id','name', 'company_name' => 'Companies.name'])
-            ->contain(['Companies']);
+        $this->paginate = [
+            'contain' => ['Companies']
+        ];
+        $departments = $this->paginate($this->Departments);
 
-        $departments = $this->paginate($query);
         $this->set(compact('departments'));
     }
 
@@ -38,7 +38,7 @@ class DepartmentsController extends AppController
     public function view($id = null)
     {
         $department = $this->Departments->get($id, [
-            'contain' => ['Companies']
+            'contain' => ['Companies', 'Employees']
         ]);
 
         $this->set('department', $department);
@@ -55,9 +55,21 @@ class DepartmentsController extends AppController
         if ($this->request->is('post')) {
             $department = $this->Departments->patchEntity($department, $this->request->getData());
             if ($this->Departments->save($department)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $department->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The department has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed'.' '.$this->invalidFields();
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The department could not be saved. Please, try again.'));
         }
@@ -80,6 +92,7 @@ class DepartmentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $department = $this->Departments->patchEntity($department, $this->request->getData());
             if ($this->Departments->save($department)) {
+
                 $this->Flash->success(__('The department has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

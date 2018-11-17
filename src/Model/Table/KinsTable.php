@@ -35,7 +35,7 @@ class KinsTable extends Table
 
         $this->setTable('kins');
         $this->setDisplayField('name');
-        $this->setPrimaryKey(['id', 'user_id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
@@ -69,11 +69,6 @@ class KinsTable extends Table
             ->email('email')
             ->allowEmpty('email');
 
-        $validator
-            ->scalar('photo')
-            ->maxLength('photo', 65)
-            ->allowEmpty('photo');
-
         return $validator;
     }
 
@@ -86,7 +81,7 @@ class KinsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
+
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;

@@ -23,10 +23,7 @@ class BranchesController extends AppController
         $this->paginate = [
             'contain' => ['Companies']
         ];
-        $query = $this->Branches->find()
-            ->select(['id','name','company_name'=>'Companies.name'])
-            ->contain(['Companies']);
-        $branches = $this->paginate($query);
+        $branches = $this->paginate($this->Branches);
 
         $this->set(compact('branches'));
     }
@@ -41,7 +38,7 @@ class BranchesController extends AppController
     public function view($id = null)
     {
         $branch = $this->Branches->get($id, [
-            'contain' => ['Companies']
+            'contain' => ['Companies', 'Employees', 'Rents']
         ]);
 
         $this->set('branch', $branch);
@@ -58,8 +55,21 @@ class BranchesController extends AppController
         if ($this->request->is('post')) {
             $branch = $this->Branches->patchEntity($branch, $this->request->getData());
             if ($this->Branches->save($branch)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $branch->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The branch has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The branch could not be saved. Please, try again.'));
         }

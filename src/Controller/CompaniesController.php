@@ -35,7 +35,7 @@ class CompaniesController extends AppController
     public function view($id = null)
     {
         $company = $this->Companies->get($id, [
-            'contain' => ['Branches', 'Departments', 'Messages', 'Requisitions']
+            'contain' => ['Branches', 'Departments', 'Employees', 'Messages', 'Users']
         ]);
 
         $this->set('company', $company);
@@ -52,9 +52,21 @@ class CompaniesController extends AppController
         if ($this->request->is('post')) {
             $company = $this->Companies->patchEntity($company, $this->request->getData());
             if ($this->Companies->save($company)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $company->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The company has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The company could not be saved. Please, try again.'));
         }

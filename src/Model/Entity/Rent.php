@@ -15,9 +15,7 @@ use Cake\ORM\Entity;
  * @property float $for_client
  * @property float $percentage_used
  * @property float $for_commission
- * @property string $paid_by
  * @property string $paid_to_client
- * @property string $banking_deposit_id
  * @property \Cake\I18n\FrozenDate $start_date
  * @property \Cake\I18n\FrozenDate $end_date
  * @property int $unpaid_months
@@ -26,13 +24,19 @@ use Cake\ORM\Entity;
  * @property float $balance
  * @property string $branch_id
  * @property string $cheque_no
- * @property string $recieved_by
+ * @property string $receive_id
  * @property string $editable
  * @property \Cake\I18n\FrozenTime $created_at
- * @property string $tenant_id
+ * @property string $landlord_id
+ * @property string $deposit_id
+ * @property string $occupant_id
+ * @property string $unit_id
  *
- * @property \App\Model\Entity\BankingDeposit $banking_deposit
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Branch $branch
+ * @property \App\Model\Entity\Employee $employee
+ * @property \App\Model\Entity\Client $client
+ * @property \App\Model\Entity\Deposit $deposit
  * @property \App\Model\Entity\Tenant $tenant
  * @property \App\Model\Entity\MonthlyPayment[] $monthly_payments
  */
@@ -49,6 +53,7 @@ class Rent extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'date' => true,
         'method' => true,
         'no' => true,
@@ -57,9 +62,7 @@ class Rent extends Entity
         'for_client' => true,
         'percentage_used' => true,
         'for_commission' => true,
-        'paid_by' => true,
         'paid_to_client' => true,
-        'banking_deposit_id' => true,
         'start_date' => true,
         'end_date' => true,
         'unpaid_months' => true,
@@ -68,12 +71,18 @@ class Rent extends Entity
         'balance' => true,
         'branch_id' => true,
         'cheque_no' => true,
-        'recieved_by' => true,
+        'receive_id' => true,
         'editable' => true,
         'created_at' => true,
-        'tenant_id' => true,
-        'banking_deposit' => true,
+        'landlord_id' => true,
+        'deposit_id' => true,
+        'occupant_id' => true,
+        'unit_id' => true,
+        'user' => true,
         'branch' => true,
+        'employee' => true,
+        'client' => true,
+        'deposit' => true,
         'tenant' => true,
         'monthly_payments' => true
     ];

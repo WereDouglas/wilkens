@@ -17,7 +17,7 @@ class DamagesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.damages',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

@@ -21,7 +21,7 @@ class SecuritiesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ];
         $securities = $this->paginate($this->Securities);
 
@@ -38,7 +38,7 @@ class SecuritiesController extends AppController
     public function view($id = null)
     {
         $security = $this->Securities->get($id, [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ]);
 
         $this->set('security', $security);
@@ -55,14 +55,26 @@ class SecuritiesController extends AppController
         if ($this->request->is('post')) {
             $security = $this->Securities->patchEntity($security, $this->request->getData());
             if ($this->Securities->save($security)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $security->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The security has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The security could not be saved. Please, try again.'));
         }
-        $tenants = $this->Securities->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('security', 'tenants'));
+        $users = $this->Securities->Users->find('list', ['limit' => 200]);
+        $this->set(compact('security', 'users'));
     }
 
     /**
@@ -86,8 +98,8 @@ class SecuritiesController extends AppController
             }
             $this->Flash->error(__('The security could not be saved. Please, try again.'));
         }
-        $tenants = $this->Securities->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('security', 'tenants'));
+        $users = $this->Securities->Users->find('list', ['limit' => 200]);
+        $this->set(compact('security', 'users'));
     }
 
     /**

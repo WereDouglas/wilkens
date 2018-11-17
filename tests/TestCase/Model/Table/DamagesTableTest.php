@@ -25,7 +25,7 @@ class DamagesTableTest extends TestCase
      */
     public $fixtures = [
         'app.damages',
-        'app.tenants'
+        'app.users'
     ];
 
     /**

@@ -18,8 +18,10 @@
         <legend><?= __('Add Penalty') ?></legend>
         <?php
             echo $this->Form->control('total');
-            echo $this->Form->control('paid_by');
+            echo $this->Form->control('user_id');
+            echo $this->Form->control('rent_id');
             echo $this->Form->control('created_at');
+            echo $this->Form->control('paid');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

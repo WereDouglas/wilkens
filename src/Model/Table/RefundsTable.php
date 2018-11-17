@@ -9,7 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Refunds Model
  *
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsTo $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Approver
  *
  * @method \App\Model\Entity\Refund get($primaryKey, $options = [])
  * @method \App\Model\Entity\Refund newEntity($data = null, array $options = [])
@@ -37,8 +38,11 @@ class RefundsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Tenants', [
-            'foreignKey' => 'tenant_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'approved_id'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -92,11 +96,6 @@ class RefundsTable extends Table
             ->notEmpty('approved');
 
         $validator
-            ->scalar('approved_by')
-            ->maxLength('approved_by', 36)
-            ->allowEmpty('approved_by');
-
-        $validator
             ->dateTime('created_at')
             ->allowEmpty('created_at');
 
@@ -112,7 +111,8 @@ class RefundsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['tenant_id'], 'Tenants'));
+        $rules->add($rules->existsIn(['approved_id'], 'Users'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

@@ -34,6 +34,7 @@ class Message extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'content' => true,
         'contact' => true,
         'subject' => true,

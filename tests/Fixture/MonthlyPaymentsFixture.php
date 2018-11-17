@@ -26,11 +26,15 @@ class MonthlyPaymentsFixture extends TestFixture
         'date' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'rent_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
-            'fk_monthly_payments_rents1_idx' => ['type' => 'index', 'columns' => ['rent_id'], 'length' => []],
+            'fk_monthly_payments_rents1_idx1' => ['type' => 'index', 'columns' => ['rent_id'], 'length' => []],
+            'fk_monthly_payments_users1_idx' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id', 'rent_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'fk_monthly_payments_rents1' => ['type' => 'foreign', 'columns' => ['rent_id'], 'references' => ['rents', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'fk_monthly_payments_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -48,15 +52,16 @@ class MonthlyPaymentsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'd80efa0e-cfb1-4279-b0f2-ba401d8c9750',
+                'id' => 'b812713e-d301-43cc-a677-0a5af7b8937c',
                 'total_amount' => 1,
                 'to_client' => 1,
                 'for_commission' => 1,
                 'month' => 'Lorem ip',
                 'year' => 'Lorem ip',
-                'date' => '2018-11-10',
-                'created_at' => 1541811595,
-                'rent_id' => '525e6673-807b-4caa-8464-aa6a34de4504'
+                'date' => '2018-11-15',
+                'created_at' => 1542316524,
+                'rent_id' => 'fc4bd708-ac89-401a-84aa-c7323c159243',
+                'user_id' => '42bb01f5-8fb2-4d58-9de2-b607e9b9fde5'
             ],
         ];
         parent::init();

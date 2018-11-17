@@ -8,7 +8,9 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Contact'), ['action' => 'add']) ?></li>
-     </ul>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+    </ul>
 </nav>
 <div class="contacts index large-9 medium-8 columns content">
     <h3><?= __('Contacts') ?></h3>
@@ -28,7 +30,7 @@
                 <td><?= h($contact->id) ?></td>
                 <td><?= h($contact->type) ?></td>
                 <td><?= h($contact->contact) ?></td>
-                <td><?= $contact->has('user') ? $this->Html->link($contact->user->id, ['controller' => 'Users', 'action' => 'view', $contact->user->id]) : '' ?></td>
+                <td><?= $contact->has('user') ? $this->Html->link($contact->user->first_name.' '.$contact->user->last_name, ['controller' => 'Users', 'action' => 'view', $contact->user->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $contact->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $contact->id]) ?>

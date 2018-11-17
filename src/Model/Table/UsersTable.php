@@ -10,13 +10,30 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \App\Model\Table\CompaniesTable|\Cake\ORM\Association\BelongsTo $Companies
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\AccountsTable|\Cake\ORM\Association\HasMany $Accounts
+ * @property |\Cake\ORM\Association\HasMany $Bills
  * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\HasMany $Clients
+ * @property \App\Model\Table\ConfiscationsTable|\Cake\ORM\Association\HasMany $Confiscations
  * @property \App\Model\Table\ContactsTable|\Cake\ORM\Association\HasMany $Contacts
+ * @property \App\Model\Table\DamagesTable|\Cake\ORM\Association\HasMany $Damages
+ * @property \App\Model\Table\DepositsTable|\Cake\ORM\Association\HasMany $Deposits
  * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\HasMany $Employees
+ * @property \App\Model\Table\EvictionsTable|\Cake\ORM\Association\HasMany $Evictions
+ * @property |\Cake\ORM\Association\HasMany $Installments
  * @property \App\Model\Table\KinsTable|\Cake\ORM\Association\HasMany $Kins
+ * @property \App\Model\Table\MonthlyPaymentsTable|\Cake\ORM\Association\HasMany $MonthlyPayments
  * @property \App\Model\Table\PasswordsTable|\Cake\ORM\Association\HasMany $Passwords
+ * @property \App\Model\Table\PenaltiesTable|\Cake\ORM\Association\HasMany $Penalties
+ * @property \App\Model\Table\PropertiesTable|\Cake\ORM\Association\HasMany $Properties
+ * @property \App\Model\Table\RefundsTable|\Cake\ORM\Association\HasMany $Refunds
+ * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
+ * @property \App\Model\Table\SecuritiesTable|\Cake\ORM\Association\HasMany $Securities
  * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\HasMany $Tenants
+ * @property \App\Model\Table\TenantsUnitsTable|\Cake\ORM\Association\HasMany $TenantsUnits
+ * @property |\Cake\ORM\Association\HasMany $Units
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Cliental
+ * @property \App\Model\Table\UtilitiesTable|\Cake\ORM\Association\HasMany $Utilities
  * @property \App\Model\Table\PermissionsTable|\Cake\ORM\Association\BelongsToMany $Permissions
  * @property \App\Model\Table\RolesTable|\Cake\ORM\Association\BelongsToMany $Roles
  *
@@ -49,25 +66,76 @@ class UsersTable extends Table
         $this->belongsTo('Companies', [
             'foreignKey' => 'company_id'
         ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('Accounts', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Bills', [
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Clients', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Confiscations', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('Contacts', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Damages', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Deposits', [
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Employees', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Evictions', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Installments', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('Kins', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('MonthlyPayments', [
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Passwords', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Penalties', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Properties', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Refunds', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Requisitions', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Securities', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('Tenants', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('TenantsUnits', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Units', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Users', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Utilities', [
             'foreignKey' => 'user_id'
         ]);
         $this->belongsToMany('Permissions', [
@@ -81,7 +149,6 @@ class UsersTable extends Table
             'joinTable' => 'roles_users'
         ]);
         $this->addBehavior('Josegonzalez/Upload.Upload', [
-
             'photo'=> [
                 'fields' => [
                     // if these fields or their defaults exist
@@ -120,17 +187,13 @@ class UsersTable extends Table
 
         $validator
             ->scalar('contact')
-            ->maxLength('contact', 25)
+            ->maxLength('contact', 50)
             ->allowEmpty('contact');
 
         $validator
             ->email('email')
             ->allowEmpty('email');
 
-        $validator
-            ->scalar('photo')
-            ->maxLength('photo', 65)
-            ->allowEmpty('photo');
 
         $validator
             ->scalar('address')
@@ -164,6 +227,15 @@ class UsersTable extends Table
             ->maxLength('photo_type', 30)
             ->allowEmpty('photo_type');
 
+        $validator
+            ->scalar('type')
+            ->allowEmpty('type');
+
+        $validator
+            ->scalar('title')
+            ->maxLength('title', 80)
+            ->allowEmpty('title');
+
         return $validator;
     }
 
@@ -176,9 +248,14 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
+
         $rules->add($rules->existsIn(['company_id'], 'Companies'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
+    }
+    protected function _getFullName()
+    {
+        return   $this->_properties['first_name'] .  '  ' . $this->_properties['last_name'];
     }
 }

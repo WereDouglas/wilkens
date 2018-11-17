@@ -8,7 +8,9 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Message'), ['action' => 'add']) ?></li>
-         </ul>
+        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?></li>
+    </ul>
 </nav>
 <div class="messages index large-9 medium-8 columns content">
     <h3><?= __('Messages') ?></h3>

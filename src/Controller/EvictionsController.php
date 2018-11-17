@@ -21,7 +21,7 @@ class EvictionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ];
         $evictions = $this->paginate($this->Evictions);
 
@@ -38,7 +38,7 @@ class EvictionsController extends AppController
     public function view($id = null)
     {
         $eviction = $this->Evictions->get($id, [
-            'contain' => ['Tenants']
+            'contain' => ['Users']
         ]);
 
         $this->set('eviction', $eviction);
@@ -55,14 +55,26 @@ class EvictionsController extends AppController
         if ($this->request->is('post')) {
             $eviction = $this->Evictions->patchEntity($eviction, $this->request->getData());
             if ($this->Evictions->save($eviction)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $eviction->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The eviction has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The eviction could not be saved. Please, try again.'));
         }
-        $tenants = $this->Evictions->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('eviction', 'tenants'));
+        $users = $this->Evictions->Users->find('list', ['limit' => 200]);
+        $this->set(compact('eviction', 'users'));
     }
 
     /**
@@ -86,8 +98,8 @@ class EvictionsController extends AppController
             }
             $this->Flash->error(__('The eviction could not be saved. Please, try again.'));
         }
-        $tenants = $this->Evictions->Tenants->find('list', ['limit' => 200]);
-        $this->set(compact('eviction', 'tenants'));
+        $users = $this->Evictions->Users->find('list', ['limit' => 200]);
+        $this->set(compact('eviction', 'users'));
     }
 
     /**

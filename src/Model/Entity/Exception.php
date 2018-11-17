@@ -24,6 +24,7 @@ class Exception extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'message' => true,
         'process' => true,
         'created_at' => true

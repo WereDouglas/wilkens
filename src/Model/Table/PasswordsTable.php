@@ -52,19 +52,18 @@ class PasswordsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->uuid('id')
+            ->integer('id')
             ->allowEmpty('id', 'create');
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 60)
+            ->maxLength('password', 255)
             ->requirePresence('password', 'create')
             ->notEmpty('password');
 
         $validator
             ->dateTime('created_at')
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
+            ->allowEmpty('created_at');
 
         return $validator;
     }

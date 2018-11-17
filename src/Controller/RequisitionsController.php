@@ -21,7 +21,7 @@ class RequisitionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['RequestedBies', 'Managers', 'Clients', 'Companies', 'Properties']
+            'contain' => ['Users', 'Properties', 'Units']
         ];
         $requisitions = $this->paginate($this->Requisitions);
 
@@ -38,7 +38,7 @@ class RequisitionsController extends AppController
     public function view($id = null)
     {
         $requisition = $this->Requisitions->get($id, [
-            'contain' => ['RequestedBies', 'Managers', 'Clients', 'Companies', 'Properties', 'Expenses']
+            'contain' => ['Users', 'Properties', 'Units', 'Expenses']
         ]);
 
         $this->set('requisition', $requisition);
@@ -55,18 +55,28 @@ class RequisitionsController extends AppController
         if ($this->request->is('post')) {
             $requisition = $this->Requisitions->patchEntity($requisition, $this->request->getData());
             if ($this->Requisitions->save($requisition)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $requisition->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The requisition has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The requisition could not be saved. Please, try again.'));
         }
-        $requestedBies = $this->Requisitions->RequestedBies->find('list', ['limit' => 200]);
-        $managers = $this->Requisitions->Managers->find('list', ['limit' => 200]);
-        $clients = $this->Requisitions->Clients->find('list', ['limit' => 200]);
-        $companies = $this->Requisitions->Companies->find('list', ['limit' => 200]);
+        $users = $this->Requisitions->Users->find('list', ['limit' => 200]);
         $properties = $this->Requisitions->Properties->find('list', ['limit' => 200]);
-        $this->set(compact('requisition', 'requestedBies', 'managers', 'clients', 'companies', 'properties'));
+        $units = $this->Requisitions->Units->find('list', ['limit' => 200]);
+        $this->set(compact('requisition', 'users', 'properties', 'units'));
     }
 
     /**
@@ -90,12 +100,10 @@ class RequisitionsController extends AppController
             }
             $this->Flash->error(__('The requisition could not be saved. Please, try again.'));
         }
-        $requestedBies = $this->Requisitions->RequestedBies->find('list', ['limit' => 200]);
-        $managers = $this->Requisitions->Managers->find('list', ['limit' => 200]);
-        $clients = $this->Requisitions->Clients->find('list', ['limit' => 200]);
-        $companies = $this->Requisitions->Companies->find('list', ['limit' => 200]);
+        $users = $this->Requisitions->Users->find('list', ['limit' => 200]);
         $properties = $this->Requisitions->Properties->find('list', ['limit' => 200]);
-        $this->set(compact('requisition', 'requestedBies', 'managers', 'clients', 'companies', 'properties'));
+        $units = $this->Requisitions->Units->find('list', ['limit' => 200]);
+        $this->set(compact('requisition', 'users', 'properties', 'units'));
     }
 
     /**

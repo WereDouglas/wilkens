@@ -25,11 +25,7 @@ class RequisitionsTableTest extends TestCase
      */
     public $fixtures = [
         'app.requisitions',
-        'app.requested_bies',
-        'app.managers',
-        'app.clients',
-        'app.companies',
-        'app.properties',
+        'app.users',
         'app.expenses'
     ];
 

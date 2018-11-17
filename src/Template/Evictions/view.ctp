@@ -10,7 +10,10 @@
         <li><?= $this->Html->link(__('Edit Eviction'), ['action' => 'edit', $eviction->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Eviction'), ['action' => 'delete', $eviction->id], ['confirm' => __('Are you sure you want to delete # {0}?', $eviction->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Evictions'), ['action' => 'index']) ?> </li>
-          </ul>
+        <li><?= $this->Html->link(__('New Eviction'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+    </ul>
 </nav>
 <div class="evictions view large-9 medium-8 columns content">
     <h3><?= h($eviction->id) ?></h3>
@@ -28,8 +31,8 @@
             <td><?= h($eviction->details) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Evicted By') ?></th>
-            <td><?= h($eviction->evicted_by) ?></td>
+            <th scope="row"><?= __('Evicted Id') ?></th>
+            <td><?= h($eviction->evicted_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Reason') ?></th>
@@ -40,8 +43,8 @@
             <td><?= h($eviction->remarks) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Tenant') ?></th>
-            <td><?= $eviction->has('tenant') ? $this->Html->link($eviction->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $eviction->tenant->id]) : '' ?></td>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $eviction->has('user') ? $this->Html->link($eviction->user->id, ['controller' => 'Users', 'action' => 'view', $eviction->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Balance') ?></th>

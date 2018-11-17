@@ -4,15 +4,28 @@
  * @var \App\Model\Entity\Exception[]|\Cake\Collection\CollectionInterface $exceptions
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Exception'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="exceptions index large-9 medium-8 columns content">
-    <h3><?= __('Exceptions') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<?=$this->Html->css('base.css')?>
+<?= $this->element('tableCss') ?>
+
+<div class="exceptions index large-12 medium-12 columns content">
+    <div class="header medium-3">
+        <ul class="header-dropdown m-r--5">
+            <span><?= __('Exceptions') ?></span>
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+
+                </a>
+                <ul class="dropdown-menu pull-right">
+
+                    <li><?= $this->Html->link(__('New Exception'), ['action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <table cellpadding="0" cellspacing="0"  class="table table-bordered table-striped table-hover dataTable js-exportable">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -49,3 +62,4 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
+<?= $this->element('tableScripts') ?>

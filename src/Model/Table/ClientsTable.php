@@ -10,10 +10,7 @@ use Cake\Validation\Validator;
  * Clients Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\DepositsTable|\Cake\ORM\Association\HasMany $Deposits
- * @property \App\Model\Table\PropertiesTable|\Cake\ORM\Association\HasMany $Properties
- * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\HasMany $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Client get($primaryKey, $options = [])
  * @method \App\Model\Entity\Client newEntity($data = null, array $options = [])
@@ -45,17 +42,8 @@ class ClientsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('Deposits', [
-            'foreignKey' => 'client_id'
-        ]);
-        $this->hasMany('Properties', [
-            'foreignKey' => 'client_id'
-        ]);
-        $this->hasMany('Requisitions', [
-            'foreignKey' => 'client_id'
-        ]);
-        $this->hasMany('Tenants', [
-            'foreignKey' => 'client_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'manager_id'
         ]);
     }
 
@@ -114,6 +102,10 @@ class ClientsTable extends Table
             ->dateTime('created_at')
             ->allowEmpty('created_at');
 
+        $validator
+            ->date('last_banked')
+            ->allowEmpty('last_banked');
+
         return $validator;
     }
 
@@ -127,6 +119,7 @@ class ClientsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['manager_id'], 'Users'));
 
         return $rules;
     }

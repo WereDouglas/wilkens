@@ -18,17 +18,20 @@ class ExpensesFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'item' => ['type' => 'string', 'length' => 60, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'item' => ['type' => 'string', 'length' => 60, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'qty' => ['type' => 'float', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'cost' => ['type' => 'float', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'total' => ['type' => 'float', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'requisition_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'editable' => ['type' => 'string', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'no' => ['type' => 'string', 'length' => 20, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
-            'fk_expenses_requisitions1_idx' => ['type' => 'index', 'columns' => ['requisition_id'], 'length' => []],
+            'fk_expenses_requisitions1_idx1' => ['type' => 'index', 'columns' => ['requisition_id'], 'length' => []],
+            'fk_exp_req_id_idx' => ['type' => 'index', 'columns' => ['no'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id', 'requisition_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -46,13 +49,15 @@ class ExpensesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'c1e6c206-c004-456a-86db-5ab6d506ba44',
+                'id' => '22df194f-33dc-4ee7-97d0-44e83ecab036',
                 'item' => 'Lorem ipsum dolor sit amet',
                 'qty' => 1,
                 'cost' => 1,
                 'total' => 1,
-                'created_at' => 1541811595,
-                'requisition_id' => '0fa99945-2acf-48f0-a82e-6b393a6e94bd'
+                'created_at' => 1542316524,
+                'requisition_id' => '1b2aa2b4-d006-4497-b155-05940da35a67',
+                'editable' => 'Lorem ipsum dolor sit amet',
+                'no' => 'Lorem ipsum dolor '
             ],
         ];
         parent::init();

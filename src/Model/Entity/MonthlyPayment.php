@@ -15,8 +15,10 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate $date
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $rent_id
+ * @property string $user_id
  *
  * @property \App\Model\Entity\Rent $rent
+ * @property \App\Model\Entity\User $user
  */
 class MonthlyPayment extends Entity
 {
@@ -38,6 +40,9 @@ class MonthlyPayment extends Entity
         'year' => true,
         'date' => true,
         'created_at' => true,
-        'rent' => true
+        'rent_id' => true,
+        'user_id' => true,
+        'rent' => true,
+        'user' => true
     ];
 }

@@ -9,7 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Penalties Model
  *
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsTo $Tenants
+ * @property |\Cake\ORM\Association\BelongsTo $Users
+ * @property |\Cake\ORM\Association\BelongsTo $Rents
  *
  * @method \App\Model\Entity\Penalty get($primaryKey, $options = [])
  * @method \App\Model\Entity\Penalty newEntity($data = null, array $options = [])
@@ -37,9 +38,12 @@ class PenaltiesTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey(['id', 'tenant_id']);
 
-        $this->belongsTo('Tenants', [
-            'foreignKey' => 'tenant_id',
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Rents', [
+            'foreignKey' => 'rent_id'
         ]);
     }
 
@@ -60,13 +64,13 @@ class PenaltiesTable extends Table
             ->allowEmpty('total');
 
         $validator
-            ->scalar('paid_by')
-            ->maxLength('paid_by', 60)
-            ->allowEmpty('paid_by');
-
-        $validator
             ->dateTime('created_at')
             ->allowEmpty('created_at');
+
+        $validator
+            ->scalar('paid')
+            ->maxLength('paid', 10)
+            ->allowEmpty('paid');
 
         return $validator;
     }
@@ -80,7 +84,8 @@ class PenaltiesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['tenant_id'], 'Tenants'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['rent_id'], 'Rents'));
 
         return $rules;
     }

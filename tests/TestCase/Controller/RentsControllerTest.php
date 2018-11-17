@@ -17,10 +17,12 @@ class RentsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.rents',
-        'app.banking_deposits',
         'app.branches',
-        'app.tenants',
-        'app.monthly_payments'
+        'app.users',
+        'app.deposits',
+        'app.units',
+        'app.monthly_payments',
+        'app.penalties'
     ];
 
     /**

@@ -17,11 +17,9 @@ class RequisitionsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.requisitions',
-        'app.requested_bies',
-        'app.managers',
-        'app.clients',
-        'app.companies',
+        'app.users',
         'app.properties',
+        'app.units',
         'app.expenses'
     ];
 

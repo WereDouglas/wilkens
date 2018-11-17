@@ -16,12 +16,12 @@ use Cake\ORM\Entity;
  * @property string $evicted
  * @property string $details
  * @property \Cake\I18n\FrozenDate $evicted_on
- * @property string $evicted_by
+ * @property string $evicted_id
  * @property string $reason
  * @property string $remarks
- * @property string $tenant_id
+ * @property string $user_id
  *
- * @property \App\Model\Entity\Tenant $tenant
+ * @property \App\Model\Entity\User $user
  */
 class Eviction extends Entity
 {
@@ -36,6 +36,7 @@ class Eviction extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'balance' => true,
         'date' => true,
         'costs_incurred' => true,
@@ -45,9 +46,10 @@ class Eviction extends Entity
         'evicted' => true,
         'details' => true,
         'evicted_on' => true,
-        'evicted_by' => true,
+        'evicted_id' => true,
         'reason' => true,
         'remarks' => true,
-        'tenant' => true
+        'user_id' => true,
+        'user' => true
     ];
 }

@@ -25,6 +25,8 @@ class PermissionsUsersFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['permission_id', 'user_id'], 'length' => []],
+            'fk_permissions_has_users_permissions1' => ['type' => 'foreign', 'columns' => ['permission_id'], 'references' => ['permissions', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'fk_permissions_has_users_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -43,7 +45,7 @@ class PermissionsUsersFixture extends TestFixture
         $this->records = [
             [
                 'permission_id' => 1,
-                'user_id' => '0bda5aa3-e667-4e12-931c-4e9c12e09049'
+                'user_id' => '5a3dd8bd-3046-4ed9-96a5-1a213d529d1a'
             ],
         ];
         parent::init();

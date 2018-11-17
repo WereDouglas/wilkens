@@ -17,7 +17,9 @@ class BranchesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.branches',
-        'app.companies'
+        'app.companies',
+        'app.employees',
+        'app.rents'
     ];
 
     /**

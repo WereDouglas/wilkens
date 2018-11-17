@@ -8,9 +8,10 @@ use Cake\ORM\Entity;
  *
  * @property string $id
  * @property float $total
- * @property string $paid_by
+ * @property string $user_id
+ * @property string $rent_id
  * @property \Cake\I18n\FrozenTime $created_at
- * @property string $tenant_id
+ * @property string $paid
  *
  * @property \App\Model\Entity\Tenant $tenant
  */
@@ -27,9 +28,12 @@ class Penalty extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'total' => true,
-        'paid_by' => true,
+        'user_id' => true,
+        'rent_id' => true,
         'created_at' => true,
+        'paid' => true,
         'tenant' => true
     ];
 }

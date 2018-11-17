@@ -13,6 +13,8 @@
         <li><?= $this->Html->link(__('New Monthly Payment'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="monthlyPayments view large-9 medium-8 columns content">
@@ -33,6 +35,10 @@
         <tr>
             <th scope="row"><?= __('Rent') ?></th>
             <td><?= $monthlyPayment->has('rent') ? $this->Html->link($monthlyPayment->rent->id, ['controller' => 'Rents', 'action' => 'view', $monthlyPayment->rent->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $monthlyPayment->has('user') ? $this->Html->link($monthlyPayment->user->id, ['controller' => 'Users', 'action' => 'view', $monthlyPayment->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Total Amount') ?></th>

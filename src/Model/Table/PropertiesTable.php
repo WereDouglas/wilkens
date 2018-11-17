@@ -10,9 +10,10 @@ use Cake\Validation\Validator;
  * Properties Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Legals
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Managers
- * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property |\Cake\ORM\Association\HasMany $Requisitions
+ * @property |\Cake\ORM\Association\HasMany $Tenants
  * @property \App\Model\Table\UnitsTable|\Cake\ORM\Association\HasMany $Units
  *
  * @method \App\Model\Entity\Property get($primaryKey, $options = [])
@@ -41,12 +42,10 @@ class PropertiesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Managers', [
-            'className'=>'Users',
+        $this->belongsTo('Users', [
             'foreignKey' => 'manager_id'
         ]);
-        $this->belongsTo('Legals', [
-            'className'=>'Users',
+        $this->belongsTo('Users', [
             'foreignKey' => 'legal_id'
         ]);
         $this->belongsTo('Users', [
@@ -54,6 +53,9 @@ class PropertiesTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Requisitions', [
+            'foreignKey' => 'property_id'
+        ]);
+        $this->hasMany('Tenants', [
             'foreignKey' => 'property_id'
         ]);
         $this->hasMany('Units', [
@@ -111,11 +113,6 @@ class PropertiesTable extends Table
             ->allowEmpty('lat');
 
         $validator
-            ->integer('commission')
-            ->requirePresence('commission', 'create')
-            ->notEmpty('commission');
-
-        $validator
             ->dateTime('created_at')
             ->allowEmpty('created_at');
 
@@ -131,9 +128,8 @@ class PropertiesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-
-        $rules->add($rules->existsIn(['manager_id'], 'Managers'));
-        $rules->add($rules->existsIn(['legal_id'], 'Legals'));
+        $rules->add($rules->existsIn(['manager_id'], 'Users'));
+        $rules->add($rules->existsIn(['legal_id'], 'Users'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;

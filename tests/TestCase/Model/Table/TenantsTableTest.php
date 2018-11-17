@@ -27,14 +27,9 @@ class TenantsTableTest extends TestCase
         'app.tenants',
         'app.users',
         'app.clients',
-        'app.confiscations',
-        'app.damages',
-        'app.evictions',
         'app.penalties',
-        'app.refunds',
         'app.rents',
         'app.securities',
-        'app.utilities',
         'app.units'
     ];
 

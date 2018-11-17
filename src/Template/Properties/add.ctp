@@ -2,43 +2,37 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Property $property
- * @var \App\Model\Entity\Client[]|\Cake\Collection\CollectionInterface $clients
- * @var \App\Model\Entity\Employee[]|\Cake\Collection\CollectionInterface $managers
- * @var \App\Model\Entity\Employee[]|\Cake\Collection\CollectionInterface $legals
  */
-
-
-
-$links_array = [
-    ['List Properties', ['action' => 'index']],
-    ['List Clients', ['controller' => 'Clients', 'action' => 'index']],
-    ['New Client', ['controller' => 'Clients', 'action' => 'add']]
-];
-$active =['yes','no'];
-$active =['Flat','Bangalow','Apartments','Office Space'];
-
-
-$input_array = [
-    ['user_id', ['options' => $users]],
-    ['name', ['class' => 'form-control', 'placeholder' => 'Name']],
-    ['details', ['class' => 'form-control', 'placeholder' => 'Details']],
-    ['no_of_rooms', ['class' => 'form-control', 'placeholder' => 'No of rooms']],
-    ['manager_id', ['options' => $users]],
-    ['legal_id', ['options' => $users]],
-    ['terms', ['class' => 'form-control', 'placeholder' => 'Terms']],
-    ['location', ['class' => 'form-control']],
-    ['category', ['options' => $category]],
-    ['lng', ['class' => 'form-control', 'placeholder' => 'Longitude']],
-    ['lat', ['class' => 'form-control', 'placeholder' => 'Latitude']],
-    ['commission', ['class' => 'form-control', 'placeholder' => 'Commission']],
-    ['created_at', ['class' => 'form-control', 'placeholder' => 'Created at']]
-
-];
-
-$this->extend('/Common/add');
-$this->assign('links', json_encode($links_array));
-$this->assign('inputs', json_encode($input_array));
-
-$this->start('form_object');
-echo $this->Form->create($property);
-$this->end();
+?>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('List Properties'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Managers'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Manager'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
+    </ul>
+</nav>
+<div class="properties form large-9 medium-8 columns content">
+    <?= $this->Form->create($property) ?>
+    <fieldset>
+        <legend><?= __('Add Property') ?></legend>
+        <?php
+            echo $this->Form->control('name');
+            echo $this->Form->control('details');
+            echo $this->Form->control('no_of_rooms');
+            echo $this->Form->control('manager_id', ['options' => $managers, 'empty' => true]);
+            echo $this->Form->control('legal_id', ['options' => $legal, 'empty' => true]);
+            echo $this->Form->control('terms');
+            echo $this->Form->control('location');
+            echo $this->Form->control('category');
+            echo $this->Form->control('lng');
+            echo $this->Form->control('lat');
+            echo $this->Form->control('created_at');
+            echo $this->Form->control('user_id', ['options' => $users]);
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
+</div>

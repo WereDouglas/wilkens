@@ -6,11 +6,11 @@ use Cake\ORM\Entity;
 /**
  * RolesUser Entity
  *
- * @property int $role_id
  * @property string $user_id
+ * @property int $role_id
  *
- * @property \App\Model\Entity\Role $role
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Role $role
  */
 class RolesUser extends Entity
 {
@@ -25,7 +25,7 @@ class RolesUser extends Entity
      * @var array
      */
     protected $_accessible = [
-        'role' => true,
-        'user' => true
+        'user' => true,
+        'role' => true
     ];
 }

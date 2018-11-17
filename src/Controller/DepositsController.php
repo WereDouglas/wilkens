@@ -21,7 +21,7 @@ class DepositsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Clients', 'Accounts']
+            'contain' => ['Users', 'Accounts']
         ];
         $deposits = $this->paginate($this->Deposits);
 
@@ -38,7 +38,7 @@ class DepositsController extends AppController
     public function view($id = null)
     {
         $deposit = $this->Deposits->get($id, [
-            'contain' => ['Clients', 'Accounts']
+            'contain' => ['Users', 'Accounts']
         ]);
 
         $this->set('deposit', $deposit);
@@ -55,15 +55,27 @@ class DepositsController extends AppController
         if ($this->request->is('post')) {
             $deposit = $this->Deposits->patchEntity($deposit, $this->request->getData());
             if ($this->Deposits->save($deposit)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $deposit->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The deposit has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // throw new MissingWidgetException();
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The deposit could not be saved. Please, try again.'));
         }
-        $clients = $this->Deposits->Clients->find('list', ['limit' => 200]);
+        $users = $this->Deposits->Users->find('list', ['limit' => 200]);
         $accounts = $this->Deposits->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('deposit', 'clients', 'accounts'));
+        $this->set(compact('deposit', 'users', 'accounts'));
     }
 
     /**
@@ -87,9 +99,9 @@ class DepositsController extends AppController
             }
             $this->Flash->error(__('The deposit could not be saved. Please, try again.'));
         }
-        $clients = $this->Deposits->Clients->find('list', ['limit' => 200]);
+        $users = $this->Deposits->Users->find('list', ['limit' => 200]);
         $accounts = $this->Deposits->Accounts->find('list', ['limit' => 200]);
-        $this->set(compact('deposit', 'clients', 'accounts'));
+        $this->set(compact('deposit', 'users', 'accounts'));
     }
 
     /**

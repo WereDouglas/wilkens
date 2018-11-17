@@ -17,12 +17,11 @@ use Cake\ORM\Entity;
  * @property string $delivery_method
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $user_id
+ * @property \Cake\I18n\FrozenDate $last_banked
+ * @property string $manager_id
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Deposit[] $deposits
- * @property \App\Model\Entity\Property[] $properties
- * @property \App\Model\Entity\Requisition[] $requisitions
- * @property \App\Model\Entity\Tenant[] $tenants
+ * @property \App\Model\Entity\Rent[] $rents
  */
 class Client extends Entity
 {
@@ -37,6 +36,7 @@ class Client extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'commission' => true,
         'contract' => true,
         'start_date' => true,
@@ -47,10 +47,9 @@ class Client extends Entity
         'delivery_method' => true,
         'created_at' => true,
         'user_id' => true,
+        'last_banked' => true,
+        'manager_id' => true,
         'user' => true,
-        'deposits' => true,
-        'properties' => true,
-        'requisitions' => true,
-        'tenants' => true
+        'rents' => true
     ];
 }

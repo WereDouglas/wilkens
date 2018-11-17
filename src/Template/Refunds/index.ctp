@@ -8,8 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Refund'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="refunds index large-9 medium-8 columns content">
@@ -26,9 +26,9 @@
                 <th scope="col"><?= $this->Paginator->sort('date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('paid') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('approved') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('approved_by') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('approved_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('tenant_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -44,9 +44,9 @@
                 <td><?= h($refund->date) ?></td>
                 <td><?= h($refund->paid) ?></td>
                 <td><?= h($refund->approved) ?></td>
-                <td><?= h($refund->approved_by) ?></td>
+                <td><?= h($refund->approved_id) ?></td>
                 <td><?= h($refund->created_at) ?></td>
-                <td><?= $refund->has('tenant') ? $this->Html->link($refund->tenant->id, ['controller' => 'Tenants', 'action' => 'view', $refund->tenant->id]) : '' ?></td>
+                <td><?= $refund->has('user') ? $this->Html->link($refund->user->id, ['controller' => 'Users', 'action' => 'view', $refund->user->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $refund->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $refund->id]) ?>
