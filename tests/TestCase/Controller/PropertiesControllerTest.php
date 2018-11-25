@@ -19,7 +19,6 @@ class PropertiesControllerTest extends IntegrationTestCase
         'app.properties',
         'app.users',
         'app.requisitions',
-        'app.tenants',
         'app.units'
     ];
 

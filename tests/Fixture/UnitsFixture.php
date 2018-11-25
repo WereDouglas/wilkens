@@ -52,7 +52,7 @@ class UnitsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '34c4187e-4282-4b43-9a78-dd2b5fa6533c',
+                'id' => '5a09df4d-ad86-4310-a5a8-d11f0e5213f5',
                 'types' => 'Lorem ip',
                 'name' => 'Lorem ipsum dolor sit amet',
                 'states' => 'Lorem ipsum dolor sit amet',
@@ -60,8 +60,8 @@ class UnitsFixture extends TestFixture
                 'cost' => 1,
                 'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'rooms' => 1,
-                'property_id' => 'dbd821ae-c9f3-4378-ad48-ca43007b7f09',
-                'user_id' => '9832ea03-d63e-427f-a248-f36af14bf5ae'
+                'property_id' => '1e7b0b47-c435-476e-9bc0-77f5fe405fbf',
+                'user_id' => '386abd63-b83b-49a1-a46c-1de8439b7f93'
             ],
         ];
         parent::init();

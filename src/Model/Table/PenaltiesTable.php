@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Penalties Model
  *
- * @property |\Cake\ORM\Association\BelongsTo $Users
- * @property |\Cake\ORM\Association\BelongsTo $Rents
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\RentsTable|\Cake\ORM\Association\BelongsTo $Rents
  *
  * @method \App\Model\Entity\Penalty get($primaryKey, $options = [])
  * @method \App\Model\Entity\Penalty newEntity($data = null, array $options = [])
@@ -36,7 +36,7 @@ class PenaltiesTable extends Table
 
         $this->setTable('penalties');
         $this->setDisplayField('id');
-        $this->setPrimaryKey(['id', 'tenant_id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',

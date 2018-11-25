@@ -3,32 +3,15 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Rent $rent
  */
+$links_array = [
+    ['List Rents', ['action' => 'index']],
+    ['List Penalties', ['controller' => 'Penalties', 'action' => 'index']],
+    ['List Users', ['controller' => 'Users', 'action' => 'index']]
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Rent'), ['action' => 'edit', $rent->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Rent'), ['action' => 'delete', $rent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rent->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Rents'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Rent'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Clients'), ['controller' => 'Clients', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Client'), ['controller' => 'Clients', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Deposits'), ['controller' => 'Deposits', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Deposit'), ['controller' => 'Deposits', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Monthly Payments'), ['controller' => 'MonthlyPayments', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Monthly Payment'), ['controller' => 'MonthlyPayments', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
 <div class="rents view large-9 medium-8 columns content">
-    <h3><?= h($rent->id) ?></h3>
+    <?= $this->Element('nav',['links'=>$links_array,'title'=> h($rent->id)]);   ?>
+
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Id') ?></th>
@@ -71,12 +54,8 @@
             <td><?= $rent->has('deposit') ? $this->Html->link($rent->deposit->id, ['controller' => 'Deposits', 'action' => 'view', $rent->deposit->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Occupant Id') ?></th>
-            <td><?= h($rent->occupant_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Unit Id') ?></th>
-            <td><?= h($rent->unit_id) ?></td>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $rent->has('user') ? $this->Html->link($rent->user->full_name, ['controller' => 'Users', 'action' => 'view', $rent->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Total Cost') ?></th>
@@ -164,6 +143,37 @@
                     <?= $this->Html->link(__('View'), ['controller' => 'MonthlyPayments', 'action' => 'view', $monthlyPayments->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'MonthlyPayments', 'action' => 'edit', $monthlyPayments->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'MonthlyPayments', 'action' => 'delete', $monthlyPayments->id], ['confirm' => __('Are you sure you want to delete # {0}?', $monthlyPayments->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+    <div class="related">
+        <h4><?= __('Related Penalties') ?></h4>
+        <?php if (!empty($rent->penalties)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Total') ?></th>
+                <th scope="col"><?= __('User Id') ?></th>
+                <th scope="col"><?= __('Rent Id') ?></th>
+                <th scope="col"><?= __('Created At') ?></th>
+                <th scope="col"><?= __('Paid') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($rent->penalties as $penalties): ?>
+            <tr>
+                <td><?= h($penalties->id) ?></td>
+                <td><?= h($penalties->total) ?></td>
+                <td><?= h($penalties->user_id) ?></td>
+                <td><?= h($penalties->rent_id) ?></td>
+                <td><?= h($penalties->created_at) ?></td>
+                <td><?= h($penalties->paid) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Penalties', 'action' => 'view', $penalties->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Penalties', 'action' => 'edit', $penalties->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Penalties', 'action' => 'delete', $penalties->id], ['confirm' => __('Are you sure you want to delete # {0}?', $penalties->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

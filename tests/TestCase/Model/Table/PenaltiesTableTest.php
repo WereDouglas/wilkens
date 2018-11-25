@@ -25,7 +25,8 @@ class PenaltiesTableTest extends TestCase
      */
     public $fixtures = [
         'app.penalties',
-        'app.tenants'
+        'app.users',
+        'app.rents'
     ];
 
     /**

@@ -2,7 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-
+use Cake\Auth\DefaultPasswordHasher;
 /**
  * User Entity
  *
@@ -27,6 +27,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Company $company
  * @property \App\Model\Entity\User[] $users
  * @property \App\Model\Entity\Account[] $accounts
+ * @property \App\Model\Entity\Bill[] $bills
  * @property \App\Model\Entity\Client[] $clients
  * @property \App\Model\Entity\Confiscation[] $confiscations
  * @property \App\Model\Entity\Contact[] $contacts
@@ -34,7 +35,9 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Deposit[] $deposits
  * @property \App\Model\Entity\Employee[] $employees
  * @property \App\Model\Entity\Eviction[] $evictions
+ * @property \App\Model\Entity\Installment[] $installments
  * @property \App\Model\Entity\Kin[] $kins
+ * @property \App\Model\Entity\Log[] $logs
  * @property \App\Model\Entity\MonthlyPayment[] $monthly_payments
  * @property \App\Model\Entity\Password[] $passwords
  * @property \App\Model\Entity\Penalty[] $penalties
@@ -44,6 +47,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Security[] $securities
  * @property \App\Model\Entity\Tenant[] $tenants
  * @property \App\Model\Entity\TenantsUnit[] $tenants_units
+ * @property \App\Model\Entity\Unit[] $units
  * @property \App\Model\Entity\Utility[] $utilities
  * @property \App\Model\Entity\Permission[] $permissions
  * @property \App\Model\Entity\Role[] $roles
@@ -61,7 +65,7 @@ class User extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id'=>true,
+        'id' => true,
         'first_name' => true,
         'last_name' => true,
         'contact' => true,
@@ -81,6 +85,7 @@ class User extends Entity
         'company' => true,
         'users' => true,
         'accounts' => true,
+        'bills' => true,
         'clients' => true,
         'confiscations' => true,
         'contacts' => true,
@@ -88,7 +93,9 @@ class User extends Entity
         'deposits' => true,
         'employees' => true,
         'evictions' => true,
+        'installments' => true,
         'kins' => true,
+        'logs' => true,
         'monthly_payments' => true,
         'passwords' => true,
         'penalties' => true,
@@ -98,6 +105,7 @@ class User extends Entity
         'securities' => true,
         'tenants' => true,
         'tenants_units' => true,
+        'units' => true,
         'utilities' => true,
         'permissions' => true,
         'roles' => true
@@ -111,4 +119,29 @@ class User extends Entity
     protected $_hidden = [
         'password'
     ];
+
+    protected function _getFullName()
+    {
+        return $this->_properties['first_name'] . '  ' .
+            $this->_properties['last_name'];
+    }
+
+    protected function _getFullUrl()
+    {
+        return $this->_properties['photo_dir'] . '' . $this->_properties['photo'];
+    }
+    protected function _setPassword($value)
+    {
+        if (strlen($value)) {
+            $hasher = new DefaultPasswordHasher();
+            return $hasher->hash($value);
+        }
+    }
+    public function validationDefault(Validator $validator)
+    {
+        return $validator
+            ->notEmpty('contact', 'A contact is required')
+            ->notEmpty('password', 'A password is required');
+    }
+
 }

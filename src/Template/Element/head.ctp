@@ -14,6 +14,7 @@
 	<?=$this->Html->css('style.css')?>
 	<?=$this->Html->css('all-themes.css')?>
 	<?=$this->Html->css('waitMe.css')?>
+
     <?=$this->fetch('meta')?>
     <?=$this->fetch('css')?>
     <?=$this->fetch('script')?>

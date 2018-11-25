@@ -5,7 +5,7 @@
  */
 ?>
 <?=$this->Html->css('base.css')?>
-<?= $this->element('tableCss') ?>
+
 
 <div class="exceptions index large-12 medium-12 columns content">
     <div class="header medium-3">
@@ -62,4 +62,4 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
-<?= $this->element('tableScripts') ?>
+

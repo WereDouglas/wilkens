@@ -20,7 +20,6 @@ class RentsControllerTest extends IntegrationTestCase
         'app.branches',
         'app.users',
         'app.deposits',
-        'app.units',
         'app.monthly_payments',
         'app.penalties'
     ];

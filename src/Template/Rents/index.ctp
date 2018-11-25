@@ -3,34 +3,20 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Rent[]|\Cake\Collection\CollectionInterface $rents
  */
+$links_array = [
+    ['List Rents', ['action' => 'index']],
+    ['List Penalties', ['controller' => 'Penalties', 'action' => 'index']],
+    ['List Users', ['controller' => 'Users', 'action' => 'index']]
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Rent'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Clients'), ['controller' => 'Clients', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Client'), ['controller' => 'Clients', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Deposits'), ['controller' => 'Deposits', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Deposit'), ['controller' => 'Deposits', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Monthly Payments'), ['controller' => 'MonthlyPayments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Monthly Payment'), ['controller' => 'MonthlyPayments', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="rents index large-9 medium-8 columns content">
-    <h3><?= __('Rents') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<div class="rents index large-12 medium-12 columns content">
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>'List of  Rent Payments']);   ?>
+
+    <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover dataTable js-exportable">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Tenant') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('method') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('no') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('total_cost') ?></th>
@@ -52,22 +38,20 @@
                 <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('landlord_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('deposit_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('occupant_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('unit_id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($rents as $rent): ?>
             <tr>
-                <td><?= h($rent->id) ?></td>
                 <td><?= h($rent->date) ?></td>
+                <td><?= h($rent->occupant->full_name) ?></td>
                 <td><?= h($rent->method) ?></td>
                 <td><?= h($rent->no) ?></td>
                 <td><?= $this->Number->format($rent->total_cost) ?></td>
                 <td><?= $this->Number->format($rent->total_paid) ?></td>
                 <td><?= $this->Number->format($rent->for_client) ?></td>
-                <td><?= $this->Number->format($rent->percentage_used) ?></td>
+                <td><?= $this->Number->format($rent->percentage_used) ?>%</td>
                 <td><?= $this->Number->format($rent->for_commission) ?></td>
                 <td><?= h($rent->paid_to_client) ?></td>
                 <td><?= h($rent->start_date) ?></td>
@@ -81,10 +65,9 @@
                 <td><?= h($rent->receive_id) ?></td>
                 <td><?= h($rent->editable) ?></td>
                 <td><?= h($rent->created_at) ?></td>
-                <td><?= h($rent->landlord_id) ?></td>
+                <td><?= h($rent->landlord->full_name) ?></td>
                 <td><?= $rent->has('deposit') ? $this->Html->link($rent->deposit->id, ['controller' => 'Deposits', 'action' => 'view', $rent->deposit->id]) : '' ?></td>
-                <td><?= h($rent->occupant_id) ?></td>
-                <td><?= h($rent->unit_id) ?></td>
+
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $rent->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rent->id]) ?>
@@ -105,3 +88,4 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
+<?= $this->element('tableScripts') ?>

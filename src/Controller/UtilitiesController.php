@@ -66,7 +66,8 @@ class UtilitiesController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+                //var_dump($rent->getErrors());
+                //  exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

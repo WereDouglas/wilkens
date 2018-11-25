@@ -20,11 +20,11 @@ class LogsController extends AppController
      */
     public function index()
     {
+
         $this->paginate = [
             'contain' => ['Users']
         ];
         $logs = $this->paginate($this->Logs);
-
         $this->set(compact('logs'));
     }
 

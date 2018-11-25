@@ -21,7 +21,7 @@ class InstallmentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users','Receivers']
         ];
         $installments = $this->paginate($this->Installments);
 
@@ -38,7 +38,7 @@ class InstallmentsController extends AppController
     public function view($id = null)
     {
         $installment = $this->Installments->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Users','Receivers']
         ]);
 
         $this->set('installment', $installment);
@@ -62,9 +62,12 @@ class InstallmentsController extends AppController
                     return;
                 }
                 $this->Flash->success(__('The installment has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+               // var_dump($installment->getErrors());
+               //  exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');
@@ -91,9 +94,22 @@ class InstallmentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $installment = $this->Installments->patchEntity($installment, $this->request->getData());
             if ($this->Installments->save($installment)) {
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    $id = $installment->id;
+                    $this->set(compact('id'));
+                    $this->set('_serialize', 'id');
+                    return;
+                }
                 $this->Flash->success(__('The installment has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                 var_dump($installment->getErrors());
+                 exit;
+                $message = 'failed';
+                $this->set(compact('message'));
+                $this->set('_serialize', 'message');
+                return;
             }
             $this->Flash->error(__('The installment could not be saved. Please, try again.'));
         }

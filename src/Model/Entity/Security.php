@@ -6,7 +6,7 @@ use Cake\ORM\Entity;
 /**
  * Security Entity
  *
- * @property string $id
+ * @property int $id
  * @property \Cake\I18n\FrozenDate $date
  * @property float $amount
  * @property string $method
@@ -15,11 +15,9 @@ use Cake\ORM\Entity;
  * @property string $requested_id
  * @property string $approved_id
  * @property float $refunded
- * @property int $no
  * @property string $user_id
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Tenant $tenant
  */
 class Security extends Entity
 {
@@ -34,7 +32,7 @@ class Security extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
+        'id'=>true,
         'date' => true,
         'amount' => true,
         'method' => true,
@@ -43,9 +41,7 @@ class Security extends Entity
         'requested_id' => true,
         'approved_id' => true,
         'refunded' => true,
-        'no' => true,
         'user_id' => true,
-        'user' => true,
-        'tenant' => true
+        'user' => true
     ];
 }

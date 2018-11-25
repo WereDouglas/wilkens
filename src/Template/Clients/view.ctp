@@ -3,26 +3,21 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Client $client
  */
+$links_array = [
+    ['List Clients', ['action' => 'index']],
+    ['List Users', ['controller' => 'Users', 'action' => 'index']],
+    ['New User', ['controller' => 'Users', 'action' => 'add']],
+
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Client'), ['action' => 'edit', $client->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Client'), ['action' => 'delete', $client->id], ['confirm' => __('Are you sure you want to delete # {0}?', $client->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Clients'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Client'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+
 <div class="clients view large-9 medium-8 columns content">
-    <h3><?= h($client->id) ?></h3>
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>h($client->user->full_name)]);   ?>
+
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($client->id) ?></td>
+            <th scope="row"><?= __('Name') ?></th>
+            <td><?= h($client->user->full_name) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Active') ?></th>
@@ -40,13 +35,10 @@
             <th scope="row"><?= __('Delivery Method') ?></th>
             <td><?= h($client->delivery_method) ?></td>
         </tr>
+
         <tr>
-            <th scope="row"><?= __('User Id') ?></th>
-            <td><?= h($client->user_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $client->has('user') ? $this->Html->link($client->user->id, ['controller' => 'Users', 'action' => 'view', $client->user->id]) : '' ?></td>
+            <th scope="row"><?= __('Client') ?></th>
+            <td><?= $client->has('user') ? $this->Html->link($client->user->full_name, ['controller' => 'Users', 'action' => 'view', $client->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Commission') ?></th>

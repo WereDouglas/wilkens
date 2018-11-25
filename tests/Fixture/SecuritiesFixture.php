@@ -17,7 +17,7 @@ class SecuritiesFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'date' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'amount' => ['type' => 'float', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'method' => ['type' => 'string', 'length' => 10, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -26,7 +26,6 @@ class SecuritiesFixture extends TestFixture
         'requested_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'approved_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'refunded' => ['type' => 'float', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
-        'no' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_securities_approved_id_idx' => ['type' => 'index', 'columns' => ['approved_id'], 'length' => []],
@@ -55,17 +54,16 @@ class SecuritiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '81081c02-8e31-483e-be6a-b92ea0c29e69',
-                'date' => '2018-11-15',
+                'id' => 1,
+                'date' => '2018-11-23',
                 'amount' => 1,
                 'method' => 'Lorem ip',
                 'paid_back' => 'Lorem ipsum dolor sit amet',
                 'approved' => 'Lorem ipsum dolor sit amet',
-                'requested_id' => 'a5b09fa7-7ed6-478b-8408-603cdc433733',
-                'approved_id' => 'ccf20c81-dddb-4fbc-8259-edca558cef23',
+                'requested_id' => '0e9c126d-d5ad-4505-bb3b-29e8220c0011',
+                'approved_id' => '296fc0da-3b29-4a29-80ee-e949bfc64b83',
                 'refunded' => 1,
-                'no' => 1,
-                'user_id' => 'bc6540d3-0747-4b16-9edd-3fc4af244cdf'
+                'user_id' => '32ff5389-29d4-47ed-aa93-4bd138646642'
             ],
         ];
         parent::init();

@@ -3,30 +3,19 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Company $company
  */
+$links_array = [
+    ['List Companies', ['action' => 'index']],
+    ['New Company', ['action' => 'add']],
+    ['List Branches', ['controller' => 'Branches', 'action' => 'index']],
+    ['New Branch', ['controller' => 'Branches', 'action' => 'add']]
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Company'), ['action' => 'edit', $company->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Company'), ['action' => 'delete', $company->id], ['confirm' => __('Are you sure you want to delete # {0}?', $company->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Companies'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Company'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Messages'), ['controller' => 'Messages', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Message'), ['controller' => 'Messages', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="companies view large-9 medium-8 columns content">
-    <h3><?= h($company->name) ?></h3>
-    <table class="vertical-table">
-        <tr>
+
+<div class="companies view large-12 medium-12 columns content">
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>h($company->name)]);   ?>
+
+    <table class="vertical-table" class="table table-bordered table-striped table-hover dataTable js-exportable">
+         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= h($company->id) ?></td>
         </tr>
@@ -58,7 +47,7 @@
     <div class="related">
         <h4><?= __('Related Branches') ?></h4>
         <?php if (!empty($company->branches)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover dataTable js-exportable">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Name') ?></th>
@@ -83,7 +72,7 @@
     <div class="related">
         <h4><?= __('Related Departments') ?></h4>
         <?php if (!empty($company->departments)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover dataTable js-exportable">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Name') ?></th>
@@ -108,7 +97,7 @@
     <div class="related">
         <h4><?= __('Related Employees') ?></h4>
         <?php if (!empty($company->employees)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover dataTable js-exportable">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('User Id') ?></th>
@@ -149,7 +138,7 @@
     <div class="related">
         <h4><?= __('Related Messages') ?></h4>
         <?php if (!empty($company->messages)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover dataTable js-exportable">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Content') ?></th>
@@ -192,7 +181,7 @@
     <div class="related">
         <h4><?= __('Related Users') ?></h4>
         <?php if (!empty($company->users)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover dataTable js-exportable">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('First Name') ?></th>
@@ -242,4 +231,7 @@
         </table>
         <?php endif; ?>
     </div>
+    <?= $this->Html->link(__('Edit Company'), ['action' => 'edit', $company->id]) ?>
+    <?= $this->Form->postLink(__('Delete Company'), ['action' => 'delete', $company->id], ['confirm' => __('Are you sure you want to delete # {0}?', $company->id)]) ?>
 </div>
+<?= $this->element('tableScripts') ?>

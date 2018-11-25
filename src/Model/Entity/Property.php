@@ -20,9 +20,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $user_id
  *
- * @property \App\Model\Entity\User $manager
- * @property \App\Model\Entity\User $legal
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Requisition[] $requisitions
  * @property \App\Model\Entity\Unit[] $units
  */
 class Property extends Entity
@@ -38,7 +37,7 @@ class Property extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
+        'id'=>true,
         'name' => true,
         'details' => true,
         'no_of_rooms' => true,
@@ -51,9 +50,8 @@ class Property extends Entity
         'lat' => true,
         'created_at' => true,
         'user_id' => true,
-        'manager' => true,
-        'legal' => true,
         'user' => true,
+        'requisitions' => true,
         'units' => true
     ];
 }

@@ -64,20 +64,20 @@ class DepositsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '3eea288f-c821-4980-b141-96b68a37150e',
+                'id' => 'f0a6e239-7f2d-41c9-aabe-d030cd62a32d',
                 'total_amount' => 1,
                 'rent_amount' => 1,
                 'expense_amount' => 1,
                 'method' => 'Lorem ip',
-                'date' => '2018-11-15',
-                'prepared_id' => '8461610e-90b0-4b0e-985d-70ec271e28e8',
-                'approved_id' => '808cda89-0e5f-4ee5-8c4c-ae3a0c5db7b1',
-                'deposited_id' => 'b9e60230-aa47-4766-94b1-6909b9d19f6e',
+                'date' => '2018-11-21',
+                'prepared_id' => '5cb94de4-5a80-476a-ac9c-ffbe61b5ba87',
+                'approved_id' => '32369107-18b2-4932-90c5-c5b6ac727c4e',
+                'deposited_id' => '067077b3-eaf8-4f70-82bb-692c6349e4b2',
                 'remarks' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'complete' => 'Lorem ipsum dolor sit amet',
-                'created_at' => 1542316523,
-                'account_id' => '400bd866-9ac0-48ec-9277-b65248d29428',
-                'user_id' => 'b089c291-3576-4c20-bc8f-3d800edb911b',
+                'created_at' => 1542841644,
+                'account_id' => '9620e548-31c6-4ac1-aa68-9c69dca0cbed',
+                'user_id' => 'd8a41c18-d830-48b0-ba28-d44377cdeddf',
                 'account_no' => 'Lorem ipsum dolor sit amet',
                 'account_name' => 'Lorem ipsum dolor sit amet'
             ],

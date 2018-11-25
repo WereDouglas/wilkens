@@ -3,29 +3,20 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Company[]|\Cake\Collection\CollectionInterface $companies
  */
+$links_array = [
+    ['List Companies', ['action' => 'index']],
+    ['New Company', ['action' => 'add']],
+    ['List Branches', ['controller' => 'Branches', 'action' => 'index']],
+    ['New Branch', ['controller' => 'Branches', 'action' => 'add']]
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Company'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Messages'), ['controller' => 'Messages', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Message'), ['controller' => 'Messages', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
 <div class="companies index large-9 medium-8 columns content">
-    <h3><?= __('Companies') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>'Companies']);   ?>
+    <table cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('address') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('photo') ?></th>
@@ -38,10 +29,25 @@
         <tbody>
             <?php foreach ($companies as $company): ?>
             <tr>
-                <td><?= h($company->id) ?></td>
+
                 <td><?= h($company->name) ?></td>
                 <td><?= h($company->address) ?></td>
-                <td><?= h($company->photo) ?></td>
+                <td>
+                    <?php
+
+                    if (h($company->photo==""))
+                    {
+                        ?>
+                        <img  src="webroot\img\user.png"  alt="User"/>
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <img  src="<?= $company->full_url; ?>"   alt="photo"/>
+                        <?php
+                    }
+                    ?>
+                </td>
                 <td><?= h($company->photo_dir) ?></td>
                 <td><?= h($company->photo_size) ?></td>
                 <td><?= h($company->photo_type) ?></td>

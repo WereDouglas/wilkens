@@ -25,6 +25,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Account $account
+ * @property \App\Model\Entity\Rent[] $rents
  */
 class Deposit extends Entity
 {
@@ -39,7 +40,7 @@ class Deposit extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
+        'id'=>true,
         'total_amount' => true,
         'rent_amount' => true,
         'expense_amount' => true,
@@ -56,6 +57,7 @@ class Deposit extends Entity
         'account_no' => true,
         'account_name' => true,
         'user' => true,
-        'account' => true
+        'account' => true,
+        'rents' => true
     ];
 }

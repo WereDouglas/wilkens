@@ -13,7 +13,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $paid
  *
- * @property \App\Model\Entity\Tenant $tenant
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Rent $rent
  */
 class Penalty extends Entity
 {
@@ -28,12 +29,13 @@ class Penalty extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
+        'id'=>true,
         'total' => true,
         'user_id' => true,
         'rent_id' => true,
         'created_at' => true,
         'paid' => true,
-        'tenant' => true
+        'user' => true,
+        'rent' => true
     ];
 }

@@ -18,14 +18,14 @@ class PropertiesFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'name' => ['type' => 'string', 'length' => 10, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'name' => ['type' => 'string', 'length' => 60, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'details' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'no_of_rooms' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'manager_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'legal_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'terms' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'location' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'category' => ['type' => 'string', 'length' => 20, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'category' => ['type' => 'string', 'length' => 80, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'lng' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
         'lat' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
@@ -57,19 +57,19 @@ class PropertiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '14ba5679-04b2-4261-b7df-418ffa860d2d',
-                'name' => 'Lorem ip',
+                'id' => '099106c2-a717-4954-93bd-c51bde715507',
+                'name' => 'Lorem ipsum dolor sit amet',
                 'details' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'no_of_rooms' => 1,
-                'manager_id' => 'f6353621-0849-434b-b136-52d2801b0e6b',
-                'legal_id' => 'd43bf818-64f5-4ef7-b550-045bd5c16606',
+                'manager_id' => 'd8830b4c-7a98-4b39-a0bd-98e1b54bb294',
+                'legal_id' => '7d788a32-4e46-4c02-a9d7-5987f491082b',
                 'terms' => 'Lorem ipsum dolor sit amet',
                 'location' => 'Lorem ipsum dolor sit amet',
-                'category' => 'Lorem ipsum dolor ',
+                'category' => 'Lorem ipsum dolor sit amet',
                 'lng' => 1,
                 'lat' => 1,
-                'created_at' => 1542316526,
-                'user_id' => '36503340-d3a2-46ab-81a2-2fd6b1e6c8fd'
+                'created_at' => 1542754599,
+                'user_id' => '373529a8-e892-469b-865d-57251c5aec98'
             ],
         ];
         parent::init();

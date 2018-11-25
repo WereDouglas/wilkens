@@ -30,15 +30,12 @@ use Cake\ORM\Entity;
  * @property string $landlord_id
  * @property string $deposit_id
  * @property string $occupant_id
- * @property string $unit_id
  *
- * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Branch $branch
- * @property \App\Model\Entity\Employee $employee
- * @property \App\Model\Entity\Client $client
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Deposit $deposit
- * @property \App\Model\Entity\Tenant $tenant
  * @property \App\Model\Entity\MonthlyPayment[] $monthly_payments
+ * @property \App\Model\Entity\Penalty[] $penalties
  */
 class Rent extends Entity
 {
@@ -53,7 +50,7 @@ class Rent extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
+        'id'=>true,
         'date' => true,
         'method' => true,
         'no' => true,
@@ -77,13 +74,10 @@ class Rent extends Entity
         'landlord_id' => true,
         'deposit_id' => true,
         'occupant_id' => true,
-        'unit_id' => true,
-        'user' => true,
         'branch' => true,
-        'employee' => true,
-        'client' => true,
+        'user' => true,
         'deposit' => true,
-        'tenant' => true,
-        'monthly_payments' => true
+        'monthly_payments' => true,
+        'penalties' => true
     ];
 }

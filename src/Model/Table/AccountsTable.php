@@ -35,7 +35,7 @@ class AccountsTable extends Table
         parent::initialize($config);
 
         $this->setTable('accounts');
-        $this->setDisplayField('id');
+        $this->setDisplayField('no');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
@@ -61,7 +61,7 @@ class AccountsTable extends Table
 
         $validator
             ->scalar('no')
-            ->maxLength('no', 20)
+            ->maxLength('no', 60)
             ->requirePresence('no', 'create')
             ->notEmpty('no');
 
@@ -71,13 +71,13 @@ class AccountsTable extends Table
 
         $validator
             ->scalar('account_name')
-            ->maxLength('account_name', 20)
+            ->maxLength('account_name', 60)
             ->requirePresence('account_name', 'create')
             ->notEmpty('account_name');
 
         $validator
             ->scalar('bank_name')
-            ->maxLength('bank_name', 20)
+            ->maxLength('bank_name', 60)
             ->allowEmpty('bank_name');
 
         return $validator;

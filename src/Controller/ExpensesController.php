@@ -64,8 +64,10 @@ class ExpensesController extends AppController
                 $this->Flash->success(__('The expense has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                // var_dump($expense->getErrors());
+                // exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

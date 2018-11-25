@@ -66,8 +66,8 @@ class KinsController extends AppController
             }
 
             if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
-                // $message = 'failed' . json_encode($kin->getErrors());
+                //  var_dump($kin->getErrors());
+                // exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

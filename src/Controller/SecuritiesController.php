@@ -21,7 +21,7 @@ class SecuritiesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users','Requesteds','Approveds']
         ];
         $securities = $this->paginate($this->Securities);
 
@@ -38,7 +38,7 @@ class SecuritiesController extends AppController
     public function view($id = null)
     {
         $security = $this->Securities->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Users','Requesteds','Approveds']
         ]);
 
         $this->set('security', $security);
@@ -62,10 +62,11 @@ class SecuritiesController extends AppController
                     return;
                 }
                 $this->Flash->success(__('The security has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                 var_dump($security->getErrors());
+                 exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

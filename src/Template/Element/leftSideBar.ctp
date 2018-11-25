@@ -2,7 +2,7 @@
     <!-- User Info -->
     <div class="user-info">
         <div class="image">
-            <img src="webroot\img\user.png" width="48" height="48" alt="User"/>
+            <img src="<?php echo IMAGES.'user.png';?>" width="auto" height="50" alt="User"/>
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
@@ -36,7 +36,7 @@
                     <span>Users</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('New User'), ['controller' => 'Users','action' => 'add']) ?></li>
                     <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -83,7 +83,6 @@
                     </li>
                 </ul>
             </li>
-
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
@@ -127,8 +126,8 @@
                     <span>Employees</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Employees'), ['action' => 'index']) ?> </li>
-                    <li><?= $this->Html->link(__('New Employee'), ['action' => 'add']) ?> </li>
+                    <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees','action' => 'index']) ?> </li>
+                    <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees','action' => 'add']) ?> </li>
                 </ul>
             </li>
             <li>
@@ -140,7 +139,7 @@
                 </a>
                 <ul class="ml-menu">
                     <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Branch'), ['action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches','action' => 'add']) ?></li>
                 </ul>
             </li>
             <li>
@@ -152,7 +151,7 @@
                 </a>
                 <ul class="ml-menu">
                     <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Department'), ['action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments','action' => 'add']) ?></li>
                 </ul>
             </li>
 
@@ -197,7 +196,7 @@
                     <span>Properties</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New Property'), ['action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('New Property'), ['controller' => 'Properties','action' => 'add']) ?></li>
                     <li>
                     <li><?= $this->Html->link(__('List Properties'), ['controller' => 'Properties', 'action' => 'index']) ?></li>
 
@@ -227,6 +226,18 @@
                     <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
 
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <div class="icon">
+                        <i class="material-icons col-pink">lock</i>
+                    </div>
+                    <span>Installments</span>
+                </a>
+                <ul class="ml-menu">
+                    <li><?= $this->Html->link(__('List'), ['controller' => 'Installments', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New'), ['controller' => 'Installments', 'action' => 'add']) ?></li>
                 </ul>
 
             </li>
@@ -307,8 +318,8 @@
                             <span>Expenses</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Expenses'), ['action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Expense'), ['action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Expenses'), ['controller' => 'Expenses','action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Expense'), ['controller' => 'Expenses','action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -323,17 +334,9 @@
                     <span>Banking & Deposits</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Deposits</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Deposits'), ['controller' => 'Deposits', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Deposit'), ['controller' => 'Deposits', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Deposits'), ['controller' => 'Deposits', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Deposit'), ['controller' => 'Deposits', 'action' => 'add']) ?></li>
 
-                        </ul>
-                    </li>
                 </ul>
             </li>
             <li>
@@ -352,8 +355,8 @@
                             <span>Bills</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Bills'), ['action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Bill'), ['action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Bills'), ['controller' => 'Bills','action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Bill'), ['controller' => 'Bills','action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -396,7 +399,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons col-purple">transfer_with</i>
+                    <i class="material-icons">swap_calls</i>
                     <span>Evictions</span>
                 </a>
                 <ul class="ml-menu">
@@ -419,30 +422,14 @@
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">swap_calls</i>
-                    <span>Exceptions</span>
+                    <span>Logs</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Contacts</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <span>Exceptions</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <span>Messages</span>
-                                </a>
-                            <li><?= $this->Html->link(__('List Messages'), ['controller' => 'Messages', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Message'), ['controller' => 'Messages', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('Logs'), ['controller' => 'Logs', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('Exceptions'), ['controller' => 'Exceptions', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('Messages'), ['controller' => 'Messages', 'action' => 'index']) ?></li>
 
-                            </li>
-                        </ul>
-                    </li>
+
                 </ul>
 
             </li>
@@ -459,7 +446,7 @@
     <!-- Footer -->
     <div class="legal">
         <div class="copyright">
-            &copy; 2016 - 2017 <a href="javascript:void(0);">Estate manager</a>.
+            &copy; <?php echo date('Y')?> <a href="javascript:void(0);">Estate manager</a>.
         </div>
         <div class="version">
             <b>Version: </b> 1.0.5

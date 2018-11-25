@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  * @property string $type
  * @property \Cake\I18n\FrozenDate $date
  * @property string $details
- * @property string $no
+ * @property int $no
  * @property string $remarks
  * @property string $approved
  * @property string $approved_id
@@ -26,6 +26,8 @@ use Cake\ORM\Entity;
  * @property string $unit_id
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Property $property
+ * @property \App\Model\Entity\Unit $unit
  * @property \App\Model\Entity\Expense[] $expenses
  */
 class Requisition extends Entity
@@ -45,7 +47,6 @@ class Requisition extends Entity
         'type' => true,
         'date' => true,
         'details' => true,
-        'no' => true,
         'remarks' => true,
         'approved' => true,
         'approved_id' => true,
@@ -60,6 +61,9 @@ class Requisition extends Entity
         'property_id' => true,
         'unit_id' => true,
         'user' => true,
-        'expenses' => true
+        'property' => true,
+        'unit' => true,
+        'expenses' => true,
+        'no' => true
     ];
 }

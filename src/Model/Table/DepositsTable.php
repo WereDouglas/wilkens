@@ -10,10 +10,11 @@ use Cake\Validation\Validator;
  * Deposits Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Prepareds
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Approveds
  * @property \App\Model\Table\AccountsTable|\Cake\ORM\Association\BelongsTo $Accounts
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Depositeds
+ * @property \App\Model\Table\RentsTable|\Cake\ORM\Association\HasMany $Rents
  *
  * @method \App\Model\Entity\Deposit get($primaryKey, $options = [])
  * @method \App\Model\Entity\Deposit newEntity($data = null, array $options = [])
@@ -39,15 +40,21 @@ class DepositsTable extends Table
 
         $this->setTable('deposits');
         $this->setDisplayField('id');
-        $this->setPrimaryKey(['id', 'client_id']);
+        $this->setPrimaryKey('id');
 
-        $this->belongsTo('Users', [
+        $this->belongsTo('Prepareds', [
+            'className'=>'Users',
+            'propertyName'=>'prepared',
             'foreignKey' => 'prepared_id'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Approveds', [
+            'className'=>'Users',
+            'propertyName'=>'approved',
             'foreignKey' => 'approved_id'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Depositeds', [
+            'className'=>'Users',
+            'propertyName'=>'deposited',
             'foreignKey' => 'deposited_id'
         ]);
         $this->belongsTo('Accounts', [
@@ -56,6 +63,9 @@ class DepositsTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Rents', [
+            'foreignKey' => 'deposit_id'
         ]);
     }
 
@@ -87,7 +97,7 @@ class DepositsTable extends Table
 
         $validator
             ->scalar('method')
-            ->maxLength('method', 10)
+            ->maxLength('method', 50)
             ->allowEmpty('method');
 
         $validator
@@ -130,9 +140,9 @@ class DepositsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['prepared_id'], 'Users'));
-        $rules->add($rules->existsIn(['approved_id'], 'Users'));
-        $rules->add($rules->existsIn(['deposited_id'], 'Users'));
+        $rules->add($rules->existsIn(['prepared_id'], 'Prepareds'));
+        $rules->add($rules->existsIn(['approved_id'], 'Approveds'));
+        $rules->add($rules->existsIn(['deposited_id'], 'Depositeds'));
         $rules->add($rules->existsIn(['account_id'], 'Accounts'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 

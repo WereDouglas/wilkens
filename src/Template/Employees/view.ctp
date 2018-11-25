@@ -3,37 +3,23 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Employee $employee
  */
+$links_array = [
+    ['List Employees', ['action' => 'index']],
+    ['List Users', ['controller' => 'Users', 'action' => 'index']],
+    ['New User', ['controller' => 'Users', 'action' => 'add']],
+    ['List Companies', ['controller' => 'Companies', 'action' => 'index']]
+
+];
 ?>
-<?=$this->Html->css('base.css')?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Employee'), ['action' => 'edit', $employee->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Employee'), ['action' => 'delete', $employee->id], ['confirm' => __('Are you sure you want to delete # {0}?', $employee->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Employees'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Employee'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+
 <div class="employees view large-9 medium-8 columns content">
-    <h3><?= h($employee->name) ?></h3>
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>h($employee->user->full_name)]);   ?>
+
     <table class="vertical-table">
+
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($employee->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $employee->has('user') ? $this->Html->link($employee->user->id, ['controller' => 'Users', 'action' => 'view', $employee->user->id]) : '' ?></td>
+            <th scope="row"><?= __('Employee') ?></th>
+            <td><?= $employee->has('user') ? $this->Html->link($employee->user->full_name, ['controller' => 'Users', 'action' => 'view', $employee->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Company') ?></th>

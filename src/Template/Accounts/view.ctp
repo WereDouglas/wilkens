@@ -3,27 +3,21 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Account $account
  */
+$links_array = [
+    ['List Accounts', ['action' => 'index']],
+    ['List Users', ['controller' => 'Users', 'action' => 'index']],
+    ['New User', ['controller' => 'Users', 'action' => 'add']],
+    ['List Deposits', ['controller' => 'Deposits', 'action' => 'index']],
+    ['New Deposit', ['controller' => 'Deposits', 'action' => 'add']]
+
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Account'), ['action' => 'edit', $account->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Account'), ['action' => 'delete', $account->id], ['confirm' => __('Are you sure you want to delete # {0}?', $account->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Accounts'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Account'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Deposits'), ['controller' => 'Deposits', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Deposit'), ['controller' => 'Deposits', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+
 <div class="accounts view large-9 medium-8 columns content">
-    <h3><?= h($account->id) ?></h3>
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>h($account->no)]);   ?>
+
     <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($account->id) ?></td>
-        </tr>
+
         <tr>
             <th scope="row"><?= __('No') ?></th>
             <td><?= h($account->no) ?></td>
@@ -42,7 +36,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('User') ?></th>
-            <td><?= $account->has('user') ? $this->Html->link($account->user->id, ['controller' => 'Users', 'action' => 'view', $account->user->id]) : '' ?></td>
+            <td><?= $account->has('user') ? $this->Html->link($account->user->full_name, ['controller' => 'Users', 'action' => 'view', $account->user->id]) : '' ?></td>
         </tr>
     </table>
     <div class="related">

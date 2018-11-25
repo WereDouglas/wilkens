@@ -3,31 +3,18 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Rent $rent
  */
+$links_array = [
+    ['List Rents', ['action' => 'index']],
+    ['List Penalties', ['controller' => 'Penalties', 'action' => 'index']],
+    ['List Users', ['controller' => 'Users', 'action' => 'index']]
+];
+$active =['yes','no'];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Rents'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Clients'), ['controller' => 'Clients', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Client'), ['controller' => 'Clients', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Deposits'), ['controller' => 'Deposits', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Deposit'), ['controller' => 'Deposits', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Monthly Payments'), ['controller' => 'MonthlyPayments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Monthly Payment'), ['controller' => 'MonthlyPayments', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
 <div class="rents form large-9 medium-8 columns content">
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>'Add Rent']);   ?>
     <?= $this->Form->create($rent) ?>
     <fieldset>
-        <legend><?= __('Add Rent') ?></legend>
         <?php
             echo $this->Form->control('date');
             echo $this->Form->control('method');
@@ -47,12 +34,11 @@
             echo $this->Form->control('branch_id', ['options' => $branches, 'empty' => true]);
             echo $this->Form->control('cheque_no');
             echo $this->Form->control('receive_id');
-            echo $this->Form->control('editable');
+            echo $this->Form->control('editable',['options'=>$active]);
             echo $this->Form->control('created_at');
             echo $this->Form->control('landlord_id');
             echo $this->Form->control('deposit_id', ['options' => $deposits, 'empty' => true]);
-            echo $this->Form->control('occupant_id');
-            echo $this->Form->control('unit_id');
+            echo $this->Form->control('occupant_id', ['options' => $users]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

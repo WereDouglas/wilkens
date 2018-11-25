@@ -35,7 +35,7 @@ class ExpensesTable extends Table
 
         $this->setTable('expenses');
         $this->setDisplayField('id');
-        $this->setPrimaryKey(['id', 'requisition_id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Requisitions', [
             'foreignKey' => 'requisition_id',
@@ -85,8 +85,7 @@ class ExpensesTable extends Table
             ->allowEmpty('editable');
 
         $validator
-            ->scalar('no')
-            ->maxLength('no', 20)
+            ->integer('no')
             ->requirePresence('no', 'create')
             ->notEmpty('no');
 

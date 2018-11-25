@@ -11,12 +11,11 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\BranchesTable|\Cake\ORM\Association\BelongsTo $Branches
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Landlords
  * @property \App\Model\Table\DepositsTable|\Cake\ORM\Association\BelongsTo $Deposits
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property |\Cake\ORM\Association\BelongsTo $Units
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Occupants
  * @property \App\Model\Table\MonthlyPaymentsTable|\Cake\ORM\Association\HasMany $MonthlyPayments
- * @property |\Cake\ORM\Association\HasMany $Penalties
+ * @property \App\Model\Table\PenaltiesTable|\Cake\ORM\Association\HasMany $Penalties
  *
  * @method \App\Model\Entity\Rent get($primaryKey, $options = [])
  * @method \App\Model\Entity\Rent newEntity($data = null, array $options = [])
@@ -50,20 +49,22 @@ class RentsTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'receive_id'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Landlords', [
+            'className'=>'Users',
             'foreignKey' => 'landlord_id',
+            'propertyName'=>'landlord',
             'joinType' => 'INNER'
+
         ]);
         $this->belongsTo('Deposits', [
             'foreignKey' => 'deposit_id'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Occupants', [
+            'className'=>'Users',
             'foreignKey' => 'occupant_id',
+            'propertyName'=>'occupant',
             'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Units', [
-            'foreignKey' => 'unit_id',
-            'joinType' => 'INNER'
+
         ]);
         $this->hasMany('MonthlyPayments', [
             'foreignKey' => 'rent_id'
@@ -92,7 +93,7 @@ class RentsTable extends Table
 
         $validator
             ->scalar('method')
-            ->maxLength('method', 10)
+            ->maxLength('method', 50)
             ->requirePresence('method', 'create')
             ->notEmpty('method');
 
@@ -186,10 +187,9 @@ class RentsTable extends Table
     {
         $rules->add($rules->existsIn(['branch_id'], 'Branches'));
         $rules->add($rules->existsIn(['receive_id'], 'Users'));
-        $rules->add($rules->existsIn(['landlord_id'], 'Users'));
+        $rules->add($rules->existsIn(['landlord_id'], 'Landlords'));
         $rules->add($rules->existsIn(['deposit_id'], 'Deposits'));
-        $rules->add($rules->existsIn(['occupant_id'], 'Users'));
-        $rules->add($rules->existsIn(['unit_id'], 'Units'));
+        $rules->add($rules->existsIn(['occupant_id'], 'Occupants'));
 
         return $rules;
     }

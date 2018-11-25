@@ -12,7 +12,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\CompaniesTable|\Cake\ORM\Association\BelongsTo $Companies
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\AccountsTable|\Cake\ORM\Association\HasMany $Accounts
- * @property |\Cake\ORM\Association\HasMany $Bills
+ * @property \App\Model\Table\BillsTable|\Cake\ORM\Association\HasMany $Bills
  * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\HasMany $Clients
  * @property \App\Model\Table\ConfiscationsTable|\Cake\ORM\Association\HasMany $Confiscations
  * @property \App\Model\Table\ContactsTable|\Cake\ORM\Association\HasMany $Contacts
@@ -20,8 +20,9 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\DepositsTable|\Cake\ORM\Association\HasMany $Deposits
  * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\HasMany $Employees
  * @property \App\Model\Table\EvictionsTable|\Cake\ORM\Association\HasMany $Evictions
- * @property |\Cake\ORM\Association\HasMany $Installments
+ * @property \App\Model\Table\InstallmentsTable|\Cake\ORM\Association\HasMany $Installments
  * @property \App\Model\Table\KinsTable|\Cake\ORM\Association\HasMany $Kins
+ * @property \App\Model\Table\LogsTable|\Cake\ORM\Association\HasMany $Logs
  * @property \App\Model\Table\MonthlyPaymentsTable|\Cake\ORM\Association\HasMany $MonthlyPayments
  * @property \App\Model\Table\PasswordsTable|\Cake\ORM\Association\HasMany $Passwords
  * @property \App\Model\Table\PenaltiesTable|\Cake\ORM\Association\HasMany $Penalties
@@ -31,8 +32,8 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SecuritiesTable|\Cake\ORM\Association\HasMany $Securities
  * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\HasMany $Tenants
  * @property \App\Model\Table\TenantsUnitsTable|\Cake\ORM\Association\HasMany $TenantsUnits
- * @property |\Cake\ORM\Association\HasMany $Units
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Cliental
+ * @property \App\Model\Table\UnitsTable|\Cake\ORM\Association\HasMany $Units
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Tens
  * @property \App\Model\Table\UtilitiesTable|\Cake\ORM\Association\HasMany $Utilities
  * @property \App\Model\Table\PermissionsTable|\Cake\ORM\Association\BelongsToMany $Permissions
  * @property \App\Model\Table\RolesTable|\Cake\ORM\Association\BelongsToMany $Roles
@@ -60,7 +61,7 @@ class UsersTable extends Table
         parent::initialize($config);
 
         $this->setTable('users');
-        $this->setDisplayField('first_name');
+        $this->setDisplayField('full_name');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Companies', [
@@ -102,6 +103,9 @@ class UsersTable extends Table
         $this->hasMany('Kins', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Logs', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('MonthlyPayments', [
             'foreignKey' => 'user_id'
         ]);
@@ -132,7 +136,9 @@ class UsersTable extends Table
         $this->hasMany('Units', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('Users', [
+        $this->hasMany('Tens', [
+            'className'=>'Users',
+            'propertyName'=>'tenancy',
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Utilities', [
@@ -187,17 +193,16 @@ class UsersTable extends Table
 
         $validator
             ->scalar('contact')
-            ->maxLength('contact', 50)
+            ->maxLength('contact', 25)
             ->allowEmpty('contact');
 
         $validator
             ->email('email')
             ->allowEmpty('email');
 
-
         $validator
             ->scalar('address')
-            ->maxLength('address', 50)
+            ->maxLength('address', 300)
             ->allowEmpty('address');
 
         $validator
@@ -250,12 +255,8 @@ class UsersTable extends Table
     {
 
         $rules->add($rules->existsIn(['company_id'], 'Companies'));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['user_id'], 'Tens'));
 
         return $rules;
-    }
-    protected function _getFullName()
-    {
-        return   $this->_properties['first_name'] .  '  ' . $this->_properties['last_name'];
     }
 }

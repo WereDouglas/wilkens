@@ -3,23 +3,19 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Department[]|\Cake\Collection\CollectionInterface $departments
  */
+$links_array = [
+    ['Add Departments', ['action' => 'add']],
+    ['List Departments', ['action' => 'index']],
+    ['List Companies', ['controller' => 'Companies', 'action' => 'index']],
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Department'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
 <div class="departments index large-9 medium-8 columns content">
-    <h3><?= __('Departments') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>'Department']);   ?>
+    <table cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('company_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -28,7 +24,7 @@
         <tbody>
             <?php foreach ($departments as $department): ?>
             <tr>
-                <td><?= h($department->id) ?></td>
+
                 <td><?= h($department->name) ?></td>
                 <td><?= $department->has('company') ? $this->Html->link($department->company->name, ['controller' => 'Companies', 'action' => 'view', $department->company->id]) : '' ?></td>
                 <td class="actions">

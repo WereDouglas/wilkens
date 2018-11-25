@@ -13,12 +13,13 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-
+$active = ['yes','no'];
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <?=$this->element('head')?>
+<?=$this->Html->css('base.css')?>
 </head>
 <body class="theme-red">
     <!-- Top Bar -->

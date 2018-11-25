@@ -56,6 +56,17 @@ class CompaniesTable extends Table
         $this->hasMany('Users', [
             'foreignKey' => 'company_id'
         ]);
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'photo'=> [
+                'fields' => [
+                    // if these fields or their defaults exist
+                    // the values will be set.
+                    'dir' => 'photo_dir', // defaults to `dir`
+                    'size' => 'photo_size', // defaults to `size`
+                    'type' => 'photo_type', // defaults to `type`
+                ],
+            ],
+        ]);
     }
 
     /**
@@ -80,8 +91,7 @@ class CompaniesTable extends Table
             ->maxLength('address', 65)
             ->allowEmpty('address');
 
-        $validator
-            ->allowEmpty('photo');
+
 
         $validator
             ->scalar('photo_dir')

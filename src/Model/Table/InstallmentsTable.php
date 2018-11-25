@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Installments Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Receivers
  *
  * @method \App\Model\Entity\Installment get($primaryKey, $options = [])
  * @method \App\Model\Entity\Installment newEntity($data = null, array $options = [])
@@ -42,7 +42,9 @@ class InstallmentsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Receivers', [
+            'className'=>'Users',
+            'propertyName'=>'receiver',
             'foreignKey' => 'received_id'
         ]);
     }
@@ -104,8 +106,7 @@ class InstallmentsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['received_id'], 'Users'));
-
+        $rules->add($rules->existsIn(['received_id'], 'Receivers'));
         return $rules;
     }
 }

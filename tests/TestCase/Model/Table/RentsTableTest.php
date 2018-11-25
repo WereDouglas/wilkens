@@ -25,13 +25,11 @@ class RentsTableTest extends TestCase
      */
     public $fixtures = [
         'app.rents',
-        'app.users',
         'app.branches',
-        'app.employees',
-        'app.clients',
+        'app.users',
         'app.deposits',
-        'app.tenants',
-        'app.monthly_payments'
+        'app.monthly_payments',
+        'app.penalties'
     ];
 
     /**

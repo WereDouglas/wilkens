@@ -18,14 +18,8 @@ use Cake\ORM\Entity;
  * @property string $passport
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $user_id
- * @property string $unit_id
- * @property string $property_id
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Client $client
- * @property \App\Model\Entity\Penalty[] $penalties
- * @property \App\Model\Entity\Rent[] $rents
- * @property \App\Model\Entity\Security[] $securities
  * @property \App\Model\Entity\Unit[] $units
  */
 class Tenant extends Entity
@@ -41,7 +35,6 @@ class Tenant extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
         'start_date' => true,
         'end_date' => true,
         'rent_start_due_day' => true,
@@ -53,13 +46,7 @@ class Tenant extends Entity
         'passport' => true,
         'created_at' => true,
         'user_id' => true,
-        'unit_id' => true,
-        'property_id' => true,
         'user' => true,
-        'client' => true,
-        'penalties' => true,
-        'rents' => true,
-        'securities' => true,
         'units' => true
     ];
 }

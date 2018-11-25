@@ -48,11 +48,11 @@ class PenaltiesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '12a0c098-dcf8-41e1-9270-d8356b190f4d',
+                'id' => '3b66bfb1-b983-4c63-99fe-9096e576608d',
                 'total' => 1,
-                'user_id' => '6ca4784f-d8cf-4fcc-bd3f-1c8c5338847a',
-                'rent_id' => 'd59e381b-f035-4b54-9f57-3b84629fc6e1',
-                'created_at' => 1542316525,
+                'user_id' => 'd983f565-81cc-4550-9853-37eee021009b',
+                'rent_id' => '49b2ad7c-1e82-4f7f-a3e2-54ba2fa6b51c',
+                'created_at' => 1542843319,
                 'paid' => 'Lorem ip'
             ],
         ];

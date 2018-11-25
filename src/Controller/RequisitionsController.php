@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Requisitions Controller
@@ -21,7 +23,7 @@ class RequisitionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'Properties', 'Units']
+            'contain' => ['Users', 'Properties', 'Units','Approveds','Paids','Requesteds']
         ];
         $requisitions = $this->paginate($this->Requisitions);
 
@@ -38,7 +40,7 @@ class RequisitionsController extends AppController
     public function view($id = null)
     {
         $requisition = $this->Requisitions->get($id, [
-            'contain' => ['Users', 'Properties', 'Units', 'Expenses']
+            'contain' => ['Users', 'Properties', 'Units', 'Expenses','Approveds','Paids','Requesteds']
         ]);
 
         $this->set('requisition', $requisition);
@@ -54,18 +56,24 @@ class RequisitionsController extends AppController
         $requisition = $this->Requisitions->newEntity();
         if ($this->request->is('post')) {
             $requisition = $this->Requisitions->patchEntity($requisition, $this->request->getData());
+
             if ($this->Requisitions->save($requisition)) {
                 if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                    $id = $requisition->id;
-                    $this->set(compact('id'));
-                    $this->set('_serialize', 'id');
+
+                    $query = TableRegistry::get('Requisitions')->find()
+                        ->where(['id' => $requisition->id])
+                        ->first();
+                    $no = $query->no;
+                    $this->set(compact('no'));
+                    $this->set('_serialize', 'no');
                     return;
                 }
                 $this->Flash->success(__('The requisition has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+               // var_dump($requisition->getErrors());
+              //  exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

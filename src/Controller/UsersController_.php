@@ -25,8 +25,6 @@ class UsersController extends AppController
             ->select(['id', 'first_name', 'last_name', 'contact', 'email', 'photo', 'address', 'active', 'created_at', 'photo_dir', 'company_id' => 'Companies.name'])
             ->contain(['Companies']);
         $users = $this->paginate($query);
-
-
         $this->set(compact('users'));
     }
 
@@ -67,8 +65,7 @@ class UsersController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-              echo  $user->getInvalidField();
-                return;
+
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

@@ -21,7 +21,7 @@ class DepositsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'Accounts']
+            'contain' => ['Users', 'Accounts','Prepareds','Approveds','Depositeds']
         ];
         $deposits = $this->paginate($this->Deposits);
 
@@ -38,7 +38,7 @@ class DepositsController extends AppController
     public function view($id = null)
     {
         $deposit = $this->Deposits->get($id, [
-            'contain' => ['Users', 'Accounts']
+            'contain' => ['Users', 'Accounts', 'Rents']
         ]);
 
         $this->set('deposit', $deposit);
@@ -62,10 +62,11 @@ class DepositsController extends AppController
                     return;
                 }
                 $this->Flash->success(__('The deposit has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                  //var_dump($deposit->getErrors());
+                 // exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

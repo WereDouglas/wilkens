@@ -14,7 +14,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created_at
  * @property string $requisition_id
  * @property string $editable
- * @property string $no
+ * @property int $no
  *
  * @property \App\Model\Entity\Requisition $requisition
  */
@@ -31,7 +31,7 @@ class Expense extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
+        'id'=>true,
         'item' => true,
         'qty' => true,
         'cost' => true,

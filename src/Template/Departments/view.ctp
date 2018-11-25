@@ -3,27 +3,17 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Department $department
  */
+$links_array = [
+    ['Add Departments', ['action' => 'add']],
+    ['List Departments', ['action' => 'index']],
+    ['List Companies', ['controller' => 'Companies', 'action' => 'index']],
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Department'), ['action' => 'edit', $department->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Department'), ['action' => 'delete', $department->id], ['confirm' => __('Are you sure you want to delete # {0}?', $department->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Departments'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Department'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
 <div class="departments view large-9 medium-8 columns content">
-    <h3><?= h($department->name) ?></h3>
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>$department->name]);   ?>
+
     <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($department->id) ?></td>
-        </tr>
+
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($department->name) ?></td>
@@ -38,7 +28,7 @@
         <?php if (!empty($department->employees)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th scope="col"><?= __('Id') ?></th>
+
                 <th scope="col"><?= __('User Id') ?></th>
                 <th scope="col"><?= __('Company Id') ?></th>
                 <th scope="col"><?= __('Branch Id') ?></th>
@@ -53,7 +43,7 @@
             </tr>
             <?php foreach ($department->employees as $employees): ?>
             <tr>
-                <td><?= h($employees->id) ?></td>
+
                 <td><?= h($employees->user_id) ?></td>
                 <td><?= h($employees->company_id) ?></td>
                 <td><?= h($employees->branch_id) ?></td>
@@ -74,4 +64,7 @@
         </table>
         <?php endif; ?>
     </div>
+    <li><?= $this->Html->link(__('Edit Department'), ['action' => 'edit', $department->id]) ?> </li>
+    <li><?= $this->Form->postLink(__('Delete Department'), ['action' => 'delete', $department->id], ['confirm' => __('Are you sure you want to delete # {0}?', $department->id)]) ?> </li>
+
 </div>

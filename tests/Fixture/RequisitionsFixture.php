@@ -21,7 +21,7 @@ class RequisitionsFixture extends TestFixture
         'type' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'date' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'details' => ['type' => 'text', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-        'no' => ['type' => 'string', 'length' => 20, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'no' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'remarks' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'approved' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'approved_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
@@ -30,7 +30,7 @@ class RequisitionsFixture extends TestFixture
         'method' => ['type' => 'string', 'length' => 10, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'repaired' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'requested_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
-        'category' => ['type' => 'string', 'length' => 10, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'category' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'created_at' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'user_id' => ['type' => 'uuid', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'property_id' => ['type' => 'uuid', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
@@ -44,7 +44,7 @@ class RequisitionsFixture extends TestFixture
             'req_unit_id_FK_idx' => ['type' => 'index', 'columns' => ['unit_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['no'], 'length' => []],
             'fk_requisitions_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'req_prop_id_FK' => ['type' => 'foreign', 'columns' => ['property_id'], 'references' => ['properties', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'req_unit_id_FK' => ['type' => 'foreign', 'columns' => ['unit_id'], 'references' => ['units', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
@@ -68,24 +68,24 @@ class RequisitionsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'ec85e289-8e23-4787-95a9-9e86e677835d',
+                'id' => '9dfca7b0-886c-4712-9800-c44c06de40e9',
                 'type' => 'Lorem ipsum dolor sit amet',
-                'date' => '2018-11-15',
+                'date' => '2018-11-23',
                 'details' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'no' => 'Lorem ipsum dolor ',
+                'no' => 1,
                 'remarks' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'approved' => 'Lorem ipsum dolor sit amet',
-                'approved_id' => '84616810-c2ce-446b-8dd6-4925d3bb493b',
+                'approved_id' => '3e6715f2-c403-46d1-99c7-858b04c77224',
                 'paid' => 'Lorem ipsum dolor sit amet',
-                'paid_id' => '961d7e80-f179-46d4-b5e8-babce3374960',
+                'paid_id' => '4a939ba6-aac6-441a-b338-6ce0e1b0d159',
                 'method' => 'Lorem ip',
                 'repaired' => 'Lorem ipsum dolor sit amet',
-                'requested_id' => '201957ed-b368-40c5-bf73-d59ac71eef0b',
-                'category' => 'Lorem ip',
-                'created_at' => 1542316526,
-                'user_id' => '7fba5404-61e9-4029-bdfb-f389c6bf1644',
-                'property_id' => '8076572f-49b9-4096-b732-25a62045b05c',
-                'unit_id' => 'd67c9625-a75b-4278-93b5-4f0ba657434d'
+                'requested_id' => '131ae1df-dd56-4ede-8921-3b1c2aa4490d',
+                'category' => 'Lorem ipsum dolor sit amet',
+                'created_at' => 1542999619,
+                'user_id' => '94b9639f-475e-4dce-9602-6b464623c05b',
+                'property_id' => '5477a6e6-d086-4c67-8e94-56663e852dd7',
+                'unit_id' => '8e0edb53-65c4-4de0-9311-445fce5df728'
             ],
         ];
         parent::init();

@@ -52,15 +52,15 @@ class InstallmentsFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => '9c1489a7-b2ca-4987-958c-5ee724f172be',
-                'user_id' => '9864faa0-a306-4208-b7e2-9d9556b41326',
+                'id' => '4e0affe8-66e2-4cff-962a-a0bc9d27b47d',
+                'user_id' => '78576f88-4ddf-43d1-9962-3fd80356fe76',
                 'amount' => 1,
                 'paid' => 'Lorem ipsum dolor sit amet',
                 'no' => 1,
-                'date' => '2018-11-15',
-                'received_id' => '3d48f9a1-fae9-4a1c-bac0-8de4bf52cf82',
+                'date' => '2018-11-23',
+                'received_id' => '545fac50-5c0c-48aa-9b3b-ded4d1c0ab8e',
                 'method' => 'Lorem ipsum dolor sit amet',
-                'deadline' => '2018-11-15',
+                'deadline' => '2018-11-23',
                 'balance' => 1
             ],
         ];

@@ -3,24 +3,16 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Branch $branch
  */
+$links_array = [
+    ['List Branches', ['action' => 'index']],
+    ['List Companies', ['controller' => 'Companies', 'action' => 'index']],
+    ['New Company', ['controller' => 'Companies', 'action' => 'add']],
+    ['New Employee', ['controller' => 'Employees', 'action' => 'add']]
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Branch'), ['action' => 'edit', $branch->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Branch'), ['action' => 'delete', $branch->id], ['confirm' => __('Are you sure you want to delete # {0}?', $branch->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Branches'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Branch'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
 <div class="branches view large-9 medium-8 columns content">
-    <h3><?= h($branch->name) ?></h3>
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>h($branch->name)]);   ?>
+
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Id') ?></th>

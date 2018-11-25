@@ -20,12 +20,12 @@ class PropertiesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $properties = $this->paginate($this->Properties);
-
-        $this->set(compact('properties'));
+       // $this->paginate = [
+       //     'contain' => ['Users','Managers','Legals']
+       // ];
+        $properties = $this->Properties->find('all')
+        ->contain(['Users','Managers','Legals']);
+        $this->set(compact('properties',$properties));
     }
 
     /**
@@ -38,7 +38,7 @@ class PropertiesController extends AppController
     public function view($id = null)
     {
         $property = $this->Properties->get($id, [
-            'contain' => ['Users', 'Requisitions', 'Tenants', 'Units']
+            'contain' => ['Users', 'Requisitions', 'Units','Managers','Legals']
         ]);
 
         $this->set('property', $property);
@@ -64,8 +64,10 @@ class PropertiesController extends AppController
                 $this->Flash->success(__('The property has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                //var_dump($property->getErrors());
+                //exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

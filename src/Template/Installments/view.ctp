@@ -1,37 +1,31 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $installment
+ * @var \App\Model\Entity\Installment $installment
  */
+$links_array = [
+    ['List Installments', ['action' => 'index']],
+    ['New Installment', ['action' => 'add']]
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Installment'), ['action' => 'edit', $installment->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Installment'), ['action' => 'delete', $installment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $installment->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Installments'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Installment'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
+
 <div class="installments view large-9 medium-8 columns content">
-    <h3><?= h($installment->id) ?></h3>
-    <table class="vertical-table">
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>$installment->user->full_name]);   ?>
+        <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($installment->id) ?></td>
+            <th scope="row"><?= __('Tenant') ?></th>
+            <td><?= $installment->has('user') ? $this->Html->link($installment->user->full_name, ['controller' => 'Users', 'action' => 'view', $installment->user->id]) : '' ?></td>
         </tr>
+
         <tr>
-            <th scope="row"><?= __('User Id') ?></th>
-            <td><?= h($installment->user_id) ?></td>
+            <th scope="row"><?= __('Received by: ') ?></th>
+            <td><?= h($installment->receiver->full_name) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Paid') ?></th>
             <td><?= h($installment->paid) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Received Id') ?></th>
-            <td><?= h($installment->received_id) ?></td>
-        </tr>
+
         <tr>
             <th scope="row"><?= __('Method') ?></th>
             <td><?= h($installment->method) ?></td>
@@ -57,4 +51,7 @@
             <td><?= h($installment->deadline) ?></td>
         </tr>
     </table>
+
+    <?= $this->Html->link(__('Edit Installment'), ['action' => 'edit', $installment->id]) ?>
+    <?= $this->Form->postLink(__('Delete Installment'), ['action' => 'delete', $installment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $installment->id)]) ?>
 </div>

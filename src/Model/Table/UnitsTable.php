@@ -10,10 +10,8 @@ use Cake\Validation\Validator;
  * Units Model
  *
  * @property \App\Model\Table\PropertiesTable|\Cake\ORM\Association\BelongsTo $Properties
- * @property |\Cake\ORM\Association\BelongsTo $Users
- * @property |\Cake\ORM\Association\HasMany $Rents
- * @property |\Cake\ORM\Association\HasMany $Requisitions
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\HasMany $Tenants
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
  * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsToMany $Tenants
  *
  * @method \App\Model\Entity\Unit get($primaryKey, $options = [])
@@ -49,13 +47,7 @@ class UnitsTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('Rents', [
-            'foreignKey' => 'unit_id'
-        ]);
         $this->hasMany('Requisitions', [
-            'foreignKey' => 'unit_id'
-        ]);
-        $this->hasMany('Tenants', [
             'foreignKey' => 'unit_id'
         ]);
         $this->belongsToMany('Tenants', [

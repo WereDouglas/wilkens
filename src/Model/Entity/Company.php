@@ -46,4 +46,8 @@ class Company extends Entity
         'messages' => true,
         'users' => true
     ];
+    protected function _getFullUrl()
+    {
+        return $this->_properties['photo_dir'] . '' . $this->_properties['photo'];
+    }
 }

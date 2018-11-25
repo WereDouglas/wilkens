@@ -66,8 +66,9 @@ class AccountsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
-                $message = 'failed '.' '.json_encode($this->invalidFields());
+               //var_dump($account->getErrors());
+               // exit;
+                $message = 'failed ';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');
                 return;

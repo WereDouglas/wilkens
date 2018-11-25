@@ -4,12 +4,19 @@
  * @var \App\Model\Entity\Unit $unit
  */
 ?>
+<?=$this->Html->css('base.css')?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Units'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Properties'), ['controller' => 'Properties', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Property'), ['controller' => 'Properties', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Requisitions'), ['controller' => 'Requisitions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Requisition'), ['controller' => 'Requisitions', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
     </ul>
@@ -27,7 +34,7 @@
             echo $this->Form->control('description');
             echo $this->Form->control('rooms');
             echo $this->Form->control('property_id', ['options' => $properties]);
-            echo $this->Form->control('user_id');
+            echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
             echo $this->Form->control('tenants._ids', ['options' => $tenants]);
         ?>
     </fieldset>

@@ -12,7 +12,6 @@ use App\Controller\AppController;
  */
 class CompaniesController extends AppController
 {
-
     /**
      * Index method
      *

@@ -18,6 +18,8 @@ use Cake\ORM\Entity;
  * @property string $user_id
  *
  * @property \App\Model\Entity\Property $property
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Requisition[] $requisitions
  * @property \App\Model\Entity\Tenant[] $tenants
  */
 class Unit extends Entity
@@ -33,7 +35,6 @@ class Unit extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
         'types' => true,
         'name' => true,
         'states' => true,
@@ -44,6 +45,8 @@ class Unit extends Entity
         'property_id' => true,
         'user_id' => true,
         'property' => true,
+        'user' => true,
+        'requisitions' => true,
         'tenants' => true
     ];
 }

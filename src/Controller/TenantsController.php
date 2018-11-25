@@ -20,12 +20,10 @@ class TenantsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Properties']
-        ];
-        $tenants = $this->paginate($this->Tenants);
+        $tenants  =  $this->Tenants->find('all')
+       ->contain(['Users']);
 
-        $this->set(compact('tenants'));
+        $this->set(compact('tenants',$tenants));
     }
 
     /**
@@ -38,7 +36,7 @@ class TenantsController extends AppController
     public function view($id = null)
     {
         $tenant = $this->Tenants->get($id, [
-            'contain' => ['Users', 'Properties', 'Units']
+            'contain' => ['Users', 'Units']
         ]);
 
         $this->set('tenant', $tenant);
@@ -64,8 +62,10 @@ class TenantsController extends AppController
                 $this->Flash->success(__('The tenant has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+               //  var_dump($tenant->getErrors());
+               // exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');
@@ -74,9 +74,8 @@ class TenantsController extends AppController
             $this->Flash->error(__('The tenant could not be saved. Please, try again.'));
         }
         $users = $this->Tenants->Users->find('list', ['limit' => 200]);
-        $properties = $this->Tenants->Properties->find('list', ['limit' => 200]);
         $units = $this->Tenants->Units->find('list', ['limit' => 200]);
-        $this->set(compact('tenant', 'users', 'properties', 'units'));
+        $this->set(compact('tenant', 'users', 'units'));
     }
 
     /**
@@ -101,9 +100,8 @@ class TenantsController extends AppController
             $this->Flash->error(__('The tenant could not be saved. Please, try again.'));
         }
         $users = $this->Tenants->Users->find('list', ['limit' => 200]);
-        $properties = $this->Tenants->Properties->find('list', ['limit' => 200]);
         $units = $this->Tenants->Units->find('list', ['limit' => 200]);
-        $this->set(compact('tenant', 'users', 'properties', 'units'));
+        $this->set(compact('tenant', 'users', 'units'));
     }
 
     /**

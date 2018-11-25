@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -21,7 +22,7 @@ class RentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Branches', 'Users', 'Deposits', 'Units']
+            'contain' => ['Branches', 'Users', 'Deposits', 'Landlords', 'Occupants']
         ];
         $rents = $this->paginate($this->Rents);
 
@@ -38,7 +39,7 @@ class RentsController extends AppController
     public function view($id = null)
     {
         $rent = $this->Rents->get($id, [
-            'contain' => ['Branches', 'Users', 'Deposits', 'Units', 'MonthlyPayments', 'Penalties']
+            'contain' => ['Branches', 'Users', 'Deposits', 'MonthlyPayments', 'Penalties']
         ]);
 
         $this->set('rent', $rent);
@@ -64,8 +65,10 @@ class RentsController extends AppController
                 $this->Flash->success(__('The rent has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
+            }
+            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+               // var_dump($rent->getErrors());
+                //  exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');
@@ -76,9 +79,30 @@ class RentsController extends AppController
         $branches = $this->Rents->Branches->find('list', ['limit' => 200]);
         $users = $this->Rents->Users->find('list', ['limit' => 200]);
         $deposits = $this->Rents->Deposits->find('list', ['limit' => 200]);
-        $units = $this->Rents->Units->find('list', ['limit' => 200]);
-        $this->set(compact('rent', 'branches', 'users', 'deposits', 'units'));
+        $this->set(compact('rent', 'branches', 'users', 'deposits'));
     }
+    public function report()
+    {
+        $rents =Array();
+        if ($this->request->is('post')) {
+            $values = $this->request->getData();
+            echo $start_date= date('Y-m-d',strtotime($values['start_date']));
+            echo '<br>';
+            echo $end_date= date('Y-m-d',strtotime($values['end_date']));
+
+            $rents = $this->Rents->find('all', [
+                'conditions' => ['Rents.date  >=' => $start_date,'Rents.date  <=' => $end_date],
+                'contain' => ['Branches', 'Users', 'Deposits', 'Landlords', 'Occupants']
+            ]);
+            if(!$rents) {
+                $this->Flash->error(__('No results.'));
+
+            }
+        }
+
+        $this->set(compact('rents', 'branches', 'users', 'deposits'));
+    }
+
 
     /**
      * Edit method
@@ -104,8 +128,7 @@ class RentsController extends AppController
         $branches = $this->Rents->Branches->find('list', ['limit' => 200]);
         $users = $this->Rents->Users->find('list', ['limit' => 200]);
         $deposits = $this->Rents->Deposits->find('list', ['limit' => 200]);
-        $units = $this->Rents->Units->find('list', ['limit' => 200]);
-        $this->set(compact('rent', 'branches', 'users', 'deposits', 'units'));
+        $this->set(compact('rent', 'branches', 'users', 'deposits'));
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Controller
@@ -20,12 +21,15 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Companies']
-        ];
-        $users = $this->paginate($this->Users);
-
+        $query = $this->Users->find()
+            ->select(['id', 'first_name', 'last_name', 'contact','type', 'title','email', 'photo','photo_size','photo_type', 'address', 'active', 'created_at', 'photo_dir', 'company_id' => 'Companies.name','Company_name'=>'Companies.name'])
+            ->contain(['Companies']);
+        $users = $this->paginate($query);
         $this->set(compact('users'));
+
+       // $user = $this->Users->find('all')
+      //      ->contain( ['Companies', 'Permissions', 'Roles', 'Users', 'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities','Landlords']);
+      //  $this->set('users', $user);
     }
 
     /**
@@ -54,29 +58,47 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
+            $query = TableRegistry::get('Users')->find()
+                ->where(['id' => $user->id])
+                ->first();
+            if ($query) {
                 if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                    $id = $user->id;
-                    $this->set(compact('id'));
-                    $this->set('_serialize', 'id');
+                    // var_dump($user->getErrors());
+                    // exit;
+                    $message = 'exits';
+                    $this->set(compact('message'));
+                    $this->set('_serialize', 'message');
                     return;
                 }
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->error(__('The user could not be saved. Information already saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // throw new MissingWidgetException();
-                $message = 'failed'.' '.$this->invalidFields();
-                $this->set(compact('message'));
-                $this->set('_serialize', 'message');
-                return;
+            } else {
+                if ($this->Users->save($user)) {
+                    if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                        $id = $user->id;
+                        $this->set(compact('id'));
+                        $this->set('_serialize', 'id');
+                        return;
+                    }
+                    $this->Flash->success(__('The user has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                    // var_dump($user->getErrors());
+                    // exit;
+                    $message = 'failed';
+                    $this->set(compact('message'));
+                    $this->set('_serialize', 'message');
+                    return;
+                }
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $companies = $this->Users->Companies->find('list', ['limit' => 200]);
         $permissions = $this->Users->Permissions->find('list', ['limit' => 200]);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'companies', 'permissions', 'roles'));
+        $users = $this->Users->Users->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'companies', 'permissions', 'roles','users'));
     }
 
     /**
@@ -103,7 +125,8 @@ class UsersController extends AppController
         $companies = $this->Users->Companies->find('list', ['limit' => 200]);
         $permissions = $this->Users->Permissions->find('list', ['limit' => 200]);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'companies', 'permissions', 'roles'));
+        $users = $this->Users->Users->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'companies', 'permissions', 'roles','users'));
     }
 
     /**
@@ -125,4 +148,24 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function login()
+    {
+        $this->layout= '';
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error(__('Invalid username or password, try again'));
+        }
+    }
+
+    public function logout()
+    {
+        $session = $this->request->session();
+        $session->destroy();
+        return $this->redirect($this->Auth->logout());
+    }
+
 }

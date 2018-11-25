@@ -32,7 +32,7 @@ class Installment extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
+        'id'=>true,
         'user_id' => true,
         'amount' => true,
         'paid' => true,

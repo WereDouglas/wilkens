@@ -3,24 +3,14 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Department $department
  */
+$links_array = [
+    ['Add Departments', ['action' => 'add']],
+    ['List Departments', ['action' => 'index']],
+    ['List Companies', ['controller' => 'Companies', 'action' => 'index']],
+];
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $department->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $department->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Departments'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
 <div class="departments form large-9 medium-8 columns content">
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>'Edit Department']);   ?>
     <?= $this->Form->create($department) ?>
     <fieldset>
         <legend><?= __('Edit Department') ?></legend>
@@ -31,4 +21,10 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
+    <?= $this->Form->postLink(
+        __('Delete'),
+        ['action' => 'delete', $department->id],
+        ['confirm' => __('Are you sure you want to delete # {0}?', $department->id)]
+    )
+    ?>
 </div>
