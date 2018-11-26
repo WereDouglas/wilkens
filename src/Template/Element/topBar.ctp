@@ -33,7 +33,8 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="../../index.html">WILKEN</a>
+                <img src="<?= $this->Url->build($this->session->read('company_image')); ?>" width="auto" height="50" style="all: unset; height: 50px;" alt="photo"/>
+                <a class="navbar-brand" href="#"><?php echo $this->session->read('company_name'); ?></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">

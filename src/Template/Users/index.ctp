@@ -53,7 +53,7 @@ $links_array = [
                     if (h($user->photo==""))
                     {
                         ?>
-                        <img  src="webroot\img\user.png"  alt="User"/>
+                        <img  src="<?= $this->Url->image('user.png'); ?>"  alt="User"/>
                         <?php
                     }
                     else{

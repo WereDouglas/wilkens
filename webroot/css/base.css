@@ -459,6 +459,6 @@ meta.foundation-version{font-family:"{{ VERSION }}"}meta.foundation-mq-small{fon
 }
 img {
     border-radius: 50%;
-    height: 30px;
+    height: 50px;
     width: auto;
 }

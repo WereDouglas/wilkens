@@ -38,10 +38,18 @@
 
     <div class="card">
         <div class="body">
-            <?= $this->Form->create() ?>
+            <?php echo $this->Form->create('users', array(
+                'inputDefaults' => array(
+                    'div' => 'form-group',
+                    'label' => false,
+                    'wrapInput' => false,
+                    'class' => 'form-control'
+                ),
+
+            )); ?>
             <div class="logo align-justify">
                 <div class="form-line">
-                    <img align="center" src="webroot\img\logo.png" height="100px" width="auto" alt="User"/>
+                      <img align="center" src="webroot\img\logo.png" style="margin-left: 26%;" height="100px" width="auto" alt="User"/>
                 </div>
 
             </div>
@@ -51,9 +59,11 @@
                             <i class="material-icons">person</i>
                         </span>
                 <div class="form-line">
-                    <input type="text" class="form-control" name="username" placeholder="Username" required
+
+                    <input type="text" class="form-control" name="contact" placeholder="Username" required
                            autofocus>
                 </div>
+
             </div>
             <div class="input-group">
                         <span class="input-group-addon">

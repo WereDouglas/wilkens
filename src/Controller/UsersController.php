@@ -25,11 +25,14 @@ class UsersController extends AppController
             ->select(['id', 'first_name', 'last_name', 'contact','type', 'title','email', 'photo','photo_size','photo_type', 'address', 'active', 'created_at', 'photo_dir', 'company_id' => 'Companies.name','Company_name'=>'Companies.name'])
             ->contain(['Companies']);
         $users = $this->paginate($query);
-        $this->set(compact('users'));
+
+        $this->set(compact('users','current_user'));
 
        // $user = $this->Users->find('all')
       //      ->contain( ['Companies', 'Permissions', 'Roles', 'Users', 'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities','Landlords']);
       //  $this->set('users', $user);
+
+
     }
 
     /**
@@ -73,7 +76,7 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Information already saved.'));
 
             } else {
-                if ($this->Users->save($user)) {
+                if ($this->Users->save($user, ['checkExisting' => true])) {
                     if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
                         $id = $user->id;
                         $this->set(compact('id'));
@@ -84,8 +87,8 @@ class UsersController extends AppController
                     return $this->redirect(['action' => 'index']);
                 }
                 if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                    // var_dump($user->getErrors());
-                    // exit;
+                     var_dump($user->getErrors());
+                     exit;
                     $message = 'failed';
                     $this->set(compact('message'));
                     $this->set('_serialize', 'message');
@@ -114,7 +117,7 @@ class UsersController extends AppController
             'contain' => ['Permissions', 'Roles']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user = $this->Users->patchEntity($user, $this->request->getData(), ['accessibleFields' => ['password' => false]]);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -154,10 +157,33 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
+
                 $this->Auth->setUser($user);
+                $current_user =  $this->Auth->user('first_name').' '.$this->Auth->user('last_name');
+                $user_image =  $this->Auth->user('photo_dir').''.$this->Auth->user('photo');
+                $user_id =  $this->Auth->user('id');
+                $user_contact =  $this->Auth->user('contact');
+                $company_id =  $this->Auth->user('company_id');
+
+                $this->request->session()->write('name',  $current_user);
+                $this->request->session()->write('image',  $user_image);
+                $this->request->session()->write('contact',  $user_contact);
+                $this->request->session()->write('id',  $user_id);
+
+
+                $companies = TableRegistry::get('Companies');
+                $company= $companies->get( $company_id);
+//                var_dump($company);
+//                echo $company['photo'];
+//                exit();
+                $this->request->session()->write('company_image',$company['photo_dir'].''. $company['photo']);
+                $this->request->session()->write('company_name', $company['name']);
+
+               // $this->Cookie->write('company_image',$company['photo_dir'].''. $company['photo']);
                 return $this->redirect($this->Auth->redirectUrl());
+            }else {
+                $this->Flash->error(__('Invalid username or password, try again'));
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
 

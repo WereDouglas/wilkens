@@ -1,7 +1,7 @@
 <?=$this->Html->charset()?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?php echo 'Wilkens';?>:
+        <?php echo $this->session->read('company_name');;?>:
         <?=$this->fetch('title')?>
     </title>
     <?=$this->Html->meta('icon')?>

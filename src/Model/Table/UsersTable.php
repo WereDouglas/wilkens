@@ -33,7 +33,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\HasMany $Tenants
  * @property \App\Model\Table\TenantsUnitsTable|\Cake\ORM\Association\HasMany $TenantsUnits
  * @property \App\Model\Table\UnitsTable|\Cake\ORM\Association\HasMany $Units
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Tens
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Users
  * @property \App\Model\Table\UtilitiesTable|\Cake\ORM\Association\HasMany $Utilities
  * @property \App\Model\Table\PermissionsTable|\Cake\ORM\Association\BelongsToMany $Permissions
  * @property \App\Model\Table\RolesTable|\Cake\ORM\Association\BelongsToMany $Roles
@@ -136,9 +136,8 @@ class UsersTable extends Table
         $this->hasMany('Units', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('Tens', [
-            'className'=>'Users',
-            'propertyName'=>'tenancy',
+        $this->hasMany('Users', [
+
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Utilities', [
@@ -255,7 +254,7 @@ class UsersTable extends Table
     {
 
         $rules->add($rules->existsIn(['company_id'], 'Companies'));
-        $rules->add($rules->existsIn(['user_id'], 'Tens'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }
