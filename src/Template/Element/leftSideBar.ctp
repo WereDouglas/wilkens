@@ -10,8 +10,7 @@
                 <?php
             } else {
                 ?>
-                <img src="<?= $this->Url->build($this->session->read('image')); ?>" width="auto" height="100" alt="photo"/>
-                <?php
+                <img src="<?= $this->Url->build($this->session->read('image')); ?>" width="auto" height="100" alt="photo"/>  <?php
             }
             ?>
         </div>

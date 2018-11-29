@@ -37,6 +37,8 @@ class AppController extends Controller
      *
      * @return void
      */
+
+    public $helpers = array('Session');
     public function initialize()
     {
         parent::initialize();
@@ -45,6 +47,7 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
+        //$this->loadComponent('Session');
 
         /*
          * Enable the following component for recommended CakePHP security settings.

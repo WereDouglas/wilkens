@@ -153,7 +153,8 @@ class UsersController extends AppController
     }
     public function login()
     {
-        $this->layout= '';
+        //$this->layout= '';
+        $this->viewBuilder()->setLayout('');
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -165,19 +166,13 @@ class UsersController extends AppController
                 $user_contact =  $this->Auth->user('contact');
                 $company_id =  $this->Auth->user('company_id');
 
-                $this->request->session()->write('name',  $current_user);
-                $this->request->session()->write('image',  $user_image);
-                $this->request->session()->write('contact',  $user_contact);
-                $this->request->session()->write('id',  $user_id);
-
-
+                $session = $this->getRequest()->getSession();
                 $companies = TableRegistry::get('Companies');
                 $company= $companies->get( $company_id);
 //                var_dump($company);
 //                echo $company['photo'];
 //                exit();
-                $this->request->session()->write('company_image',$company['photo_dir'].''. $company['photo']);
-                $this->request->session()->write('company_name', $company['name']);
+                $session->write(['name'=> $current_user,'image'=>  $user_image,'contact'=>$user_contact,'id'=>  $user_id,'company_image'=>$company['photo_dir'].''. $company['photo'],'company_name'=> $company['name']]);
 
                // $this->Cookie->write('company_image',$company['photo_dir'].''. $company['photo']);
                 return $this->redirect($this->Auth->redirectUrl());
