@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Rents Controller
@@ -102,7 +103,34 @@ class RentsController extends AppController
 
         $this->set(compact('rents', 'branches', 'users', 'deposits'));
     }
+    public function financial()
+    {
+        $rents =Array();
+        if ($this->request->is('post')) {
+            $values = $this->request->getData();
+            echo $start_date= date('Y-m-d',strtotime($values['start_date']));
+            echo '<br>';
+            echo $end_date= date('Y-m-d',strtotime($values['end_date']));
 
+            $rents = $this->Rents->find('all', [
+                'conditions' => ['Rents.date  >=' => $start_date,'Rents.date  <=' => $end_date,'Rents.landlord_id'=>$values['user_id']],
+                'contain' => ['Branches', 'Users', 'Deposits', 'Landlords', 'Occupants'],
+                'groupField' => 'Landlords.first_name'
+            ]);
+            if(!$rents) {
+                $this->Flash->error(__('No results.'));
+
+            }
+        }
+       // $users   = TableRegistry::get('Users')->find('all')->where(['type' => 'client']);
+        $users   = TableRegistry::get('Users')->find('all', [
+            'conditions' => ['Users.type =' => 'client'],
+            'keyField' => 'id',
+            'valueField' => 'first_name'
+        ]);
+
+        $this->set(compact('rents', 'branches', 'users', 'deposits'));
+    }
 
     /**
      * Edit method

@@ -19,7 +19,7 @@
     <?= $this->Html->css('bootstrap.css') ?>
 
     <!-- Waves Effect Css -->
-    <?= $this->Html->css('wave.css') ?>
+    <?= $this->Html->css('waves.css') ?>
 
     <?= $this->Html->css('animate.css') ?>
     <!-- Animation Css -->
@@ -60,7 +60,7 @@
                         </span>
                 <div class="form-line">
 
-                    <input type="text" class="form-control" name="contact" placeholder="Username" required
+                    <input type="text" class="form-control" name="contact" placeholder="Contact" required
                            autofocus>
                 </div>
 
@@ -75,7 +75,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-8 p-t-5">
-                    <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
+                    <input type="checkbox" name="rememberme" id="rememberme" value="1" checked  class="filled-in chk-col-pink">
                     <label for="rememberme">Remember Me</label>
                 </div>
                 <div class="col-xs-4">
@@ -83,16 +83,15 @@
                 </div>
             </div>
             <div class="row m-t-15 m-b--20">
-
                 <div class="col-xs-6 align-right">
-                    <a href="forgot-password.html">Forgot Password?</a>
+                    <a href="#">Forgot Password?</a>
                 </div>
             </div>
             <?= $this->Form->end() ?>
         </div>
     </div>
 </div>
-<?= $this->Html->script(['jquery.min', 'bootstrap', 'bootstrap-select', 'jquery.slimscroll', 'waves', 'admin', 'demo', 'autosize.js', 'moment.js', 'bootstrap-material-datetimepicker.js', 'basic-form-elements.js', 'sign-in.js']); ?>
+<?= $this->Html->script(['jquery.min', 'bootstrap','waves', 'jquery.validate','admin','sign-in.js']); ?>
 
 </body>
 

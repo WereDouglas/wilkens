@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \App\Model\Table\CompaniesTable|\Cake\ORM\Association\BelongsTo $Companies
+ * @property \App\Model\Table\RentsTable|\Cake\ORM\Association\BelongsTo $Rents
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\AccountsTable|\Cake\ORM\Association\HasMany $Accounts
  * @property \App\Model\Table\BillsTable|\Cake\ORM\Association\HasMany $Bills
@@ -142,6 +143,9 @@ class UsersTable extends Table
         ]);
         $this->hasMany('Utilities', [
             'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Rents', [
+            'foreignKey' => 'occupant_id'
         ]);
         $this->belongsToMany('Permissions', [
             'foreignKey' => 'user_id',

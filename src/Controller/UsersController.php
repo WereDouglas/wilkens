@@ -44,8 +44,9 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+        //echo $id;
         $user = $this->Users->get($id, [
-            'contain' => ['Companies', 'Permissions', 'Roles', 'Users', 'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities']
+            'contain' => ['Companies', 'Permissions','Rents', 'Roles',  'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities']
         ]);
 
         $this->set('user', $user);
@@ -153,7 +154,12 @@ class UsersController extends AppController
     }
     public function login()
     {
-        //$this->layout= '';
+        $SessionData = $this->getRequest()->getSession()->read('name');
+
+        if (!empty($SessionData))
+        {
+            $this->redirect(array('controller' => 'users', 'action' => 'index'));
+        }
         $this->viewBuilder()->setLayout('');
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -169,12 +175,29 @@ class UsersController extends AppController
                 $session = $this->getRequest()->getSession();
                 $companies = TableRegistry::get('Companies');
                 $company= $companies->get( $company_id);
-//                var_dump($company);
-//                echo $company['photo'];
-//                exit();
+
                 $session->write(['name'=> $current_user,'image'=>  $user_image,'contact'=>$user_contact,'id'=>  $user_id,'company_image'=>$company['photo_dir'].''. $company['photo'],'company_name'=> $company['name']]);
 
-               // $this->Cookie->write('company_image',$company['photo_dir'].''. $company['photo']);
+               // $values = $this->request->getData();
+                if ($this->request->getData('rememberme') == 1) {
+                    // remove "remember me checkbox"
+
+
+                    unset($this->request->data['User']['remember_me']);
+                    // hash the user's password
+                    $this->request->data['User']['contact'] = $this->Auth->user('contact');
+
+                    $this->Cookie->write('remember_me_cookie', $this->request->data['User'], true, '2 weeks');
+                //   var_dump( $this->Cookie->read('remember_me_cookie'));
+                 //   exit();
+
+                  //  unset($this->request->getData(['User']['rememberme']);
+                    // write the cookie
+                    $this->Cookie->write('remember_me_cookie', $this->Auth->user('id'), true, '2 weeks');
+                    //echo $this->Cookie->read('remember_me_cookie');
+
+                }
+
                 return $this->redirect($this->Auth->redirectUrl());
             }else {
                 $this->Flash->error(__('Invalid username or password, try again'));
@@ -184,6 +207,7 @@ class UsersController extends AppController
 
     public function logout()
     {
+       // $this->Cookie->delete('remember_me_cookie');
         $session = $this->request->session();
         $session->destroy();
         return $this->redirect($this->Auth->logout());

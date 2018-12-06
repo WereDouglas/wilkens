@@ -21,3 +21,8 @@ li a {
 li a:hover {
     background-color: #111111;
 }
+.row {
+
+  max-width:100% !important;
+
+}

@@ -16,7 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-
+use Cake\ORM\TableRegistry;
 /**
  * Application Controller
  *
@@ -38,7 +38,10 @@ class AppController extends Controller
      * @return void
      */
 
+
     public $helpers = array('Session');
+
+
     public function initialize()
     {
         parent::initialize();
@@ -47,6 +50,8 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
+        $this->loadComponent('Cookie');
+
         //$this->loadComponent('Session');
 
         /*
@@ -73,13 +78,31 @@ class AppController extends Controller
                 ]
             ]
         ]);
-
-
     }
+    public $users = array('User');
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['add']);
+        $this->Auth->allow(['add','login']);
         $this->set('loggedIn', $this->Auth->user());
+
+        $users = $this->Auth->user();
+
+        $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
+        $this->Cookie->httpOnly = true;
+
+        if (!$this->Auth->user('loggedIn') && $this->Cookie->read('remember_me_cookie')) {
+            $cookie = $this->Cookie->read('remember_me_cookie');
+
+            $user = TableRegistry::get('Users')->find()
+                ->where(['contact' => $cookie])
+                ->first();
+            if($user){
+                $this->redirect('/users');
+            }
+            if ($user && $this->Auth->user('id')) {
+                $this->redirect('/users/logout'); // destroy session & cookie
+            }
+        }
     }
     function startsWith($haystack, $needle)
     {

@@ -93,6 +93,34 @@
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
+                        <i class="material-icons col-green">style</i>
+                    </div>
+                    <span>Rent Payments</span>
+                </a>
+                <ul class="ml-menu">
+                    <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('Reports'), ['controller' => 'Rents', 'action' => 'report']) ?></li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <div class="icon">
+                        <i class="material-icons col-purple">view_list</i>
+                    </div>
+                    <span>Reports</span>
+                </a>
+                <ul class="ml-menu">
+                    <li><?= $this->Html->link(__('Financial Report'), ['controller' => 'Rents', 'action' => 'financial']) ?></li>
+
+                    <li><?= $this->Html->link(__('Reports'), ['controller' => 'Rents', 'action' => 'report']) ?></li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <div class="icon">
                         <i class="material-icons col-orange">work_outline</i>
                     </div>
                     <span>Companies</span>
@@ -222,20 +250,7 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <div class="icon">
-                        <i class="material-icons col-green">style</i>
-                    </div>
-                    <span>Rent Payments</span>
-                </a>
-                <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
-                    <li><?= $this->Html->link(__('Reports'), ['controller' => 'Rents', 'action' => 'report']) ?></li>
 
-                </ul>
-            </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
@@ -407,7 +422,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">swap_calls</i>
+                    <i class="material-icons">track_changes</i>
                     <span>Evictions</span>
                 </a>
                 <ul class="ml-menu">
@@ -418,7 +433,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">swap_calls</i>
+                    <i class="material-icons">remove_from_queues</i>
                     <span>Refunds</span>
                 </a>
                 <ul class="ml-menu">
@@ -429,7 +444,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">swap_calls</i>
+                    <i class="material-icons">error_outline</i>
                     <span>Logs</span>
                 </a>
                 <ul class="ml-menu">
