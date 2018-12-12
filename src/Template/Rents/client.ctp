@@ -34,6 +34,16 @@ $links_array = [
                         <div class="row clearfix">
                             <div class="col-sm-3">
                                 <div class="form-group">
+                                    <select class="form-control show-tick" id="user_id" name="user_id">
+                                        <?php foreach ($users as $user): ?>
+                                            <option value="<?= $user->id; ?>"><?= $user->full_name; ?></option>
+
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
                                     <?php echo $this->Form->input('start_date', array(
                                         'div' => 'form-line',
                                         'class' => 'datepicker form-control',
@@ -52,7 +62,7 @@ $links_array = [
 
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-sm-3">
                                 <?php echo $this->Form->submit('GENERATE', array(
                                     'div' => 'form-group',
                                     'class' => 'btn btn-success btn-lg m-l-15 waves-effect'

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -22,16 +23,123 @@ class UsersController extends AppController
     public function index()
     {
         $query = $this->Users->find()
-            ->select(['id', 'first_name', 'last_name', 'contact','type', 'title','email', 'photo','photo_size','photo_type', 'address', 'active', 'created_at', 'photo_dir', 'company_id' => 'Companies.name','Company_name'=>'Companies.name'])
+            ->select([
+                'id',
+                'first_name',
+                'last_name',
+                'contact',
+                'type',
+                'title',
+                'email',
+                'photo',
+                'photo_size',
+                'photo_type',
+                'address',
+                'active',
+                'created_at',
+                'photo_dir',
+                'company_id' => 'Companies.name',
+                'Company_name' => 'Companies.name'
+            ])
             ->contain(['Companies']);
         $users = $this->paginate($query);
 
-        $this->set(compact('users','current_user'));
+        $this->set(compact('users', 'current_user'));
 
-       // $user = $this->Users->find('all')
-      //      ->contain( ['Companies', 'Permissions', 'Roles', 'Users', 'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities','Landlords']);
-      //  $this->set('users', $user);
+        // $user = $this->Users->find('all')
+        //      ->contain( ['Companies', 'Permissions', 'Roles', 'Users', 'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities','Landlords']);
+        //  $this->set('users', $user);
 
+
+    }
+
+    public function client()
+    {
+        $query = $this->Users->find()
+            ->where(['type =' => 'client'])
+            ->select([
+                'id',
+                'first_name',
+                'last_name',
+                'contact',
+                'type',
+                'title',
+                'email',
+                'photo',
+                'photo_size',
+                'photo_type',
+                'address',
+                'active',
+                'created_at',
+                'photo_dir',
+                'company_id' => 'Companies.name',
+                'Company_name' => 'Companies.name'
+            ])
+            ->contain(['Companies']);
+        $users = $this->paginate($query);
+
+
+        $this->set(compact('users'));
+
+
+    }
+
+    public function tenant()
+    {
+        $query = $this->Users->find()
+            ->select([
+                'id',
+                'first_name',
+                'last_name',
+                'contact',
+                'type',
+                'title',
+                'email',
+                'photo',
+                'photo_size',
+                'photo_type',
+                'address',
+                'active',
+                'created_at',
+                'photo_dir',
+                'company_id' => 'Companies.name',
+                'Company_name' => 'Companies.name'
+            ])
+            ->select($this->Users->Landlords)
+            ->contain(['Companies', 'Landlords'])
+            ->where(['Users.type =' => 'tenant']);
+        $users = $this->paginate($query);
+        $this->set(compact('users', 'current_user'));
+
+
+    }
+
+    public function employee()
+    {
+        $query = $this->Users->find()
+            ->where(['type =' => 'employee'])
+            ->select([
+                'id',
+                'first_name',
+                'last_name',
+                'contact',
+                'type',
+                'title',
+                'email',
+                'photo',
+                'photo_size',
+                'photo_type',
+                'address',
+                'active',
+                'created_at',
+                'photo_dir',
+                'company_id' => 'Companies.name',
+                'Company_name' => 'Companies.name'
+            ])
+            ->contain(['Companies']);
+        $users = $this->paginate($query);
+
+        $this->set(compact('users', 'current_user'));
 
     }
 
@@ -44,12 +152,70 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        //echo $id;
-        $user = $this->Users->get($id, [
-            'contain' => ['Companies', 'Permissions','Rents', 'Roles',  'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities']
-        ]);
 
-        $this->set('user', $user);
+        $user = $this->Users->get($id, [
+            'contain' => [
+                'Companies',
+                'Permissions',
+                'Rents',
+                'Roles',
+                'Accounts',
+                'Bills',
+                'Clients',
+                'Confiscations',
+                'Contacts',
+                'Damages',
+                'Deposits',
+                'Employees',
+                'Evictions',
+                'Installments',
+                'Kins',
+                'MonthlyPayments',
+                'Passwords',
+                'Penalties',
+                'Properties',
+                'Refunds',
+                'Requisitions',
+                'Securities',
+                'Tenants',
+                'Units',
+                'Utilities'
+            ]
+        ]);
+        $tenants = $this->Users->find()
+            ->where(['Users.user_id =' => $id])
+            ->select([
+                'id',
+                'property_name' => 'p.name',
+                'first_name',
+                'last_name',
+                'contact',
+                'room' => 'u.name',
+                'cost' => 'u.cost',
+                'security' => 's.amount',
+            ])
+            ->join(
+                [
+                    'u' => [
+                        'table' => 'units',
+                        'type' => 'LEFT',
+                        'conditions' => ['u.user_id' => new \Cake\Database\Expression\IdentifierExpression('Users.id')]
+                    ],
+                    'p' => [
+                        'table' => 'properties',
+                        'type' => 'LEFT',
+                        'conditions' => ['p.id' => new \Cake\Database\Expression\IdentifierExpression('u.property_id')]
+                    ],
+                    's' => [
+                        'table' => 'securities',
+                        'type' => 'LEFT',
+                        'conditions' => [
+                            's.user_id =' => new \Cake\Database\Expression\IdentifierExpression('Users.id')
+                        ]
+                    ]
+                ]);
+
+        $this->set(compact('user', 'tenants'));
     }
 
     /**
@@ -88,8 +254,8 @@ class UsersController extends AppController
                     return $this->redirect(['action' => 'index']);
                 }
                 if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                     var_dump($user->getErrors());
-                     exit;
+                   // var_dump($user->getErrors());
+                   // exit;
                     $message = 'failed';
                     $this->set(compact('message'));
                     $this->set('_serialize', 'message');
@@ -102,7 +268,7 @@ class UsersController extends AppController
         $permissions = $this->Users->Permissions->find('list', ['limit' => 200]);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $users = $this->Users->Users->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'companies', 'permissions', 'roles','users'));
+        $this->set(compact('user', 'companies', 'permissions', 'roles', 'users'));
     }
 
     /**
@@ -118,7 +284,8 @@ class UsersController extends AppController
             'contain' => ['Permissions', 'Roles']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData(), ['accessibleFields' => ['password' => false]]);
+            $user = $this->Users->patchEntity($user, $this->request->getData(),
+                ['accessibleFields' => ['password' => false]]);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -130,7 +297,7 @@ class UsersController extends AppController
         $permissions = $this->Users->Permissions->find('list', ['limit' => 200]);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $users = $this->Users->Users->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'companies', 'permissions', 'roles','users'));
+        $this->set(compact('user', 'companies', 'permissions', 'roles', 'users'));
     }
 
     /**
@@ -152,12 +319,12 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
     public function login()
     {
         $SessionData = $this->getRequest()->getSession()->read('name');
 
-        if (!empty($SessionData))
-        {
+        if (!empty($SessionData)) {
             $this->redirect(array('controller' => 'users', 'action' => 'index'));
         }
         $this->viewBuilder()->setLayout('');
@@ -166,19 +333,26 @@ class UsersController extends AppController
             if ($user) {
 
                 $this->Auth->setUser($user);
-                $current_user =  $this->Auth->user('first_name').' '.$this->Auth->user('last_name');
-                $user_image =  $this->Auth->user('photo_dir').''.$this->Auth->user('photo');
-                $user_id =  $this->Auth->user('id');
-                $user_contact =  $this->Auth->user('contact');
-                $company_id =  $this->Auth->user('company_id');
+                $current_user = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
+                $user_image = $this->Auth->user('photo_dir') . '' . $this->Auth->user('photo');
+                $user_id = $this->Auth->user('id');
+                $user_contact = $this->Auth->user('contact');
+                $company_id = $this->Auth->user('company_id');
 
                 $session = $this->getRequest()->getSession();
                 $companies = TableRegistry::get('Companies');
-                $company= $companies->get( $company_id);
+                $company = $companies->get($company_id);
 
-                $session->write(['name'=> $current_user,'image'=>  $user_image,'contact'=>$user_contact,'id'=>  $user_id,'company_image'=>$company['photo_dir'].''. $company['photo'],'company_name'=> $company['name']]);
+                $session->write([
+                    'name' => $current_user,
+                    'image' => $user_image,
+                    'contact' => $user_contact,
+                    'id' => $user_id,
+                    'company_image' => $company['photo_dir'] . '' . $company['photo'],
+                    'company_name' => $company['name']
+                ]);
 
-               // $values = $this->request->getData();
+                // $values = $this->request->getData();
                 if ($this->request->getData('rememberme') == 1) {
                     // remove "remember me checkbox"
 
@@ -188,10 +362,10 @@ class UsersController extends AppController
                     $this->request->data['User']['contact'] = $this->Auth->user('contact');
 
                     $this->Cookie->write('remember_me_cookie', $this->request->data['User'], true, '2 weeks');
-                //   var_dump( $this->Cookie->read('remember_me_cookie'));
-                 //   exit();
+                    //   var_dump( $this->Cookie->read('remember_me_cookie'));
+                    //   exit();
 
-                  //  unset($this->request->getData(['User']['rememberme']);
+                    //  unset($this->request->getData(['User']['rememberme']);
                     // write the cookie
                     $this->Cookie->write('remember_me_cookie', $this->Auth->user('id'), true, '2 weeks');
                     //echo $this->Cookie->read('remember_me_cookie');
@@ -199,7 +373,7 @@ class UsersController extends AppController
                 }
 
                 return $this->redirect($this->Auth->redirectUrl());
-            }else {
+            } else {
                 $this->Flash->error(__('Invalid username or password, try again'));
             }
         }
@@ -207,7 +381,7 @@ class UsersController extends AppController
 
     public function logout()
     {
-       // $this->Cookie->delete('remember_me_cookie');
+        // $this->Cookie->delete('remember_me_cookie');
         $session = $this->request->session();
         $session->destroy();
         return $this->redirect($this->Auth->logout());

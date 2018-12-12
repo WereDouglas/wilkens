@@ -12,9 +12,6 @@ $links_array = [
 ];
 ?>
 
-
-
-
     <?= $this->Element('nav',['links'=>$links_array,'title'=>'View User']);   ?>
 
 
@@ -46,10 +43,21 @@ $links_array = [
                         <li role="presentation" class="active"><a href="#home" data-toggle="tab">PROFILE</a></li>
                         <li role="presentation"><a href="#profile" data-toggle="tab">DEPOSITS</a></li>
                         <li role="presentation"><a href="#messages" data-toggle="tab">REQUISITIONS</a></li>
-                        <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
-                        <li role="presentation"><a href="#accounts" data-toggle="tab">ACCOUNTS</a></li>
+
+                        <li role="presentation"><a href="#contacts" data-toggle="tab">CONTACTS</a></li>
                         <li role="presentation"><a href="#rent" data-toggle="tab">RENT</a></li>
-                        <li role="presentation"><a href="#other" data-toggle="tab">SETTINGS</a></li>
+                        <li role="presentation"><a href="#confiscation" data-toggle="tab">CONFISCATIONS</a></li>
+                        <li role="presentation"><a href="#damages" data-toggle="tab">DAMAGES</a></li>
+                        <li role="presentation"><a href="#evictions" data-toggle="tab">EVICTIONS</a></li>
+                        <li role="presentation"><a href="#kins" data-toggle="tab">KINS</a></li>
+                        <li role="presentation"><a href="#monthly" data-toggle="tab">MONTHLY PAY</a></li>
+                        <li role="presentation"><a href="#passwords" data-toggle="tab">PASSWORDS</a></li>
+                        <li role="presentation"><a href="#penalties" data-toggle="tab">PENALTIES</a></li>
+                        <li role="presentation"><a href="#refunds" data-toggle="tab">REFUNDS</a></li>
+                        <li role="presentation"><a href="#security" data-toggle="tab">SECURITY</a></li>
+                        <li role="presentation"><a href="#tenant" data-toggle="tab">TENANTS</a></li>
+                        <li role="presentation"><a href="#units" data-toggle="tab">UNITS</a></li>
+                        <li role="presentation"><a href="#utilities" data-toggle="tab">UTILITIES</a></li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -112,10 +120,7 @@ $links_array = [
                                     <th scope="row"><?= __('Photo Dir') ?></th>
                                     <td><?= h($user->photo_dir) ?></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row"><?= __('Photo Type') ?></th>
-                                    <td><?= h($user->photo_type) ?></td>
-                                </tr>
+
                                 <tr>
                                     <th scope="row"><?= __('Type') ?></th>
                                     <td><?= h($user->type) ?></td>
@@ -128,14 +133,8 @@ $links_array = [
                                     <th scope="row"><?= __('Company') ?></th>
                                     <td><?= $user->has('company') ? $this->Html->link($user->company->name, ['controller' => 'Companies', 'action' => 'view', $user->company->id]) : '' ?></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row"><?= __('User Id') ?></th>
-                                    <td><?= h($user->user_id) ?></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><?= __('Photo Size') ?></th>
-                                    <td><?= $this->Number->format($user->photo_size) ?></td>
-                                </tr>
+
+
                                 <tr>
                                     <th scope="row"><?= __('Created At') ?></th>
                                     <td><?= h($user->created_at) ?></td>
@@ -215,8 +214,8 @@ $links_array = [
                                                 <th scope="col"><?= __('Photo Type') ?></th>
                                                 <th scope="col"><?= __('Type') ?></th>
                                                 <th scope="col"><?= __('Title') ?></th>
-                                                <th scope="col"><?= __('Company Id') ?></th>
-                                                <th scope="col"><?= __('User Id') ?></th>
+
+
                                                 <th scope="col" class="actions"><?= __('Actions') ?></th>
                                             </tr>
                                             <?php foreach ($user->users as $users): ?>
@@ -237,8 +236,7 @@ $links_array = [
                                                     <td><?= h($users->photo_type) ?></td>
                                                     <td><?= h($users->type) ?></td>
                                                     <td><?= h($users->title) ?></td>
-                                                    <td><?= h($users->company_id) ?></td>
-                                                    <td><?= h($users->user_id) ?></td>
+
                                                     <td class="actions">
                                                         <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
                                                         <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>
@@ -261,7 +259,7 @@ $links_array = [
                                                 <th scope="col"><?= __('Type') ?></th>
                                                 <th scope="col"><?= __('Account Name') ?></th>
                                                 <th scope="col"><?= __('Bank Name') ?></th>
-                                                <th scope="col"><?= __('User Id') ?></th>
+
                                                 <th scope="col" class="actions"><?= __('Actions') ?></th>
                                             </tr>
                                             <?php foreach ($user->accounts as $accounts): ?>
@@ -271,7 +269,7 @@ $links_array = [
                                                     <td><?= h($accounts->type) ?></td>
                                                     <td><?= h($accounts->account_name) ?></td>
                                                     <td><?= h($accounts->bank_name) ?></td>
-                                                    <td><?= h($accounts->user_id) ?></td>
+
                                                     <td class="actions">
                                                         <?= $this->Html->link(__('View'), ['controller' => 'Accounts', 'action' => 'view', $accounts->id]) ?>
                                                         <?= $this->Html->link(__('Edit'), ['controller' => 'Accounts', 'action' => 'edit', $accounts->id]) ?>
@@ -287,7 +285,6 @@ $links_array = [
 
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="profile">
-                            <b>BANKING/DEPOSITS</b>
 
                             <div class="related">
                                 <h4><?= __('Related Deposits') ?></h4>
@@ -307,7 +304,7 @@ $links_array = [
                                             <th scope="col"><?= __('Complete') ?></th>
                                             <th scope="col"><?= __('Created At') ?></th>
                                             <th scope="col"><?= __('Account Id') ?></th>
-                                            <th scope="col"><?= __('User Id') ?></th>
+
                                             <th scope="col"><?= __('Account No') ?></th>
                                             <th scope="col"><?= __('Account Name') ?></th>
                                             <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -315,8 +312,8 @@ $links_array = [
                                         <?php foreach ($user->deposits as $deposits): ?>
                                             <tr>
 
-                                                <td><?= h($deposits->total_amount) ?></td>
-                                                <td><?= h($deposits->rent_amount) ?></td>
+                                                <td><?= number_format($deposits->total_amount) ?></td>
+                                                <td><?= number_format($deposits->rent_amount) ?></td>
                                                 <td><?= h($deposits->expense_amount) ?></td>
                                                 <td><?= h($deposits->method) ?></td>
                                                 <td><?= h($deposits->date) ?></td>
@@ -327,7 +324,7 @@ $links_array = [
                                                 <td><?= h($deposits->complete) ?></td>
                                                 <td><?= h($deposits->created_at) ?></td>
                                                 <td><?= h($deposits->account_id) ?></td>
-                                                <td><?= h($deposits->user_id) ?></td>
+
                                                 <td><?= h($deposits->account_no) ?></td>
                                                 <td><?= h($deposits->account_name) ?></td>
                                                 <td class="actions">
@@ -400,17 +397,9 @@ $links_array = [
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="settings">
-                            <b>Settings Content</b>
-                            <p>
-                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                sadipscing mel.
-                            </p>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="accounts">
-                            <b>Settings Content</b>
+
+                        <div role="tabpanel" class="tab-pane fade" id="contacts">
+
                             <div class="related">
                                 <h4><?= __('Related Contacts') ?></h4>
                                 <?php if (!empty($user->contacts)): ?>
@@ -419,7 +408,7 @@ $links_array = [
 
                                             <th scope="col"><?= __('Type') ?></th>
                                             <th scope="col"><?= __('Contact') ?></th>
-                                            <th scope="col"><?= __('User Id') ?></th>
+
                                             <th scope="col" class="actions"><?= __('Actions') ?></th>
                                         </tr>
                                         <?php foreach ($user->contacts as $contacts): ?>
@@ -427,7 +416,7 @@ $links_array = [
 
                                                 <td><?= h($contacts->type) ?></td>
                                                 <td><?= h($contacts->contact) ?></td>
-                                                <td><?= h($contacts->user_id) ?></td>
+
                                                 <td class="actions">
                                                     <?= $this->Html->link(__('View'), ['controller' => 'Contacts', 'action' => 'view', $contacts->id]) ?>
                                                     <?= $this->Html->link(__('Edit'), ['controller' => 'Contacts', 'action' => 'edit', $contacts->id]) ?>
@@ -440,82 +429,564 @@ $links_array = [
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="rent">
+                            <div class="related">
                             <b>Rents</b>
                             <p>
                                 <?php if (!empty($user->rents)): ?>
                             <table cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <th scope="col"><?= $this->Paginator->sort('date') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('Tenant') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('method') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('no') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('total_cost') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('total_paid') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('for_client') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('percentage_used') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('for_commission') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('paid_to_client') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('start_date') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('end_date') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('unpaid_months') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('paid_months') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('vat') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('balance') ?></th>
+                                    <th scope="col"><?='date' ?></th>
 
-                                    <th scope="col"><?= $this->Paginator->sort('cheque_no') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('receive_id') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('editable') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('landlord_id') ?></th>
+                                    <th scope="col"><?='method' ?></th>
+                                    <th scope="col"><?= 'no' ?></th>
+                                    <th scope="col"><?= 'total_cost' ?></th>
+                                    <th scope="col"><?='total_paid' ?></th>
+                                    <th scope="col"><?= 'for_client' ?></th>
+                                    <th scope="col"><?= 'percentage_used' ?></th>
+                                    <th scope="col"><?= 'for_commission' ?></th>
+                                    <th scope="col"><?= 'paid_to_client' ?></th>
+                                    <th scope="col"><?= 'start_date' ?></th>
+                                    <th scope="col"><?= 'end_date' ?></th>
+                                    <th scope="col"><?= 'unpaid_months' ?></th>
+                                    <th scope="col"><?= 'paid_months' ?></th>
+                                    <th scope="col"><?= 'vat' ?></th>
+                                    <th scope="col"><?= 'balance' ?></th>
 
-                                    <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                    <th scope="col"><?= 'cheque_no' ?></th>
+                                    <th scope="col"><?= 'receive_id' ?></th>
+                                    <th scope="col"><?= 'editable' ?></th>
+                                    <th scope="col"><?= 'created_at' ?></th>
+
+                                    <th scope="col" class="actions"><?= __('Actions')?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($user->$rents as $rent): ?>
+                                <?php foreach ($user->rents as $rents): ?>
                                     <tr>
-                                        <td><?= h($rent->date) ?></td>
-                                        <td><?= h($rent->occupant->full_name) ?></td>
-                                        <td><?= h($rent->method) ?></td>
-                                        <td><?= h($rent->no) ?></td>
-                                        <td><?= $this->Number->format($rent->total_cost) ?></td>
-                                        <td><?= $this->Number->format($rent->total_paid) ?></td>
-                                        <td><?= $this->Number->format($rent->for_client) ?></td>
-                                        <td><?= $this->Number->format($rent->percentage_used) ?>%</td>
-                                        <td><?= $this->Number->format($rent->for_commission) ?></td>
-                                        <td><?= h($rent->paid_to_client) ?></td>
-                                        <td><?= h($rent->start_date) ?></td>
-                                        <td><?= h($rent->end_date) ?></td>
-                                        <td><?= $this->Number->format($rent->unpaid_months) ?></td>
-                                        <td><?= $this->Number->format($rent->paid_months) ?></td>
-                                        <td><?= $this->Number->format($rent->vat) ?></td>
-                                        <td><?= $this->Number->format($rent->balance) ?></td>
-                                        <td><?= h($rent->cheque_no) ?></td>
-                                        <td><?= h($rent->receive_id) ?></td>
-                                        <td><?= h($rent->editable) ?></td>
-                                        <td><?= h($rent->created_at) ?></td>
-                                        <td><?= h($rent->landlord->full_name) ?></td>
+                                        <td><?= h($rents->date) ?></td>
+
+                                        <td><?= h($rents->method) ?></td>
+                                        <td><?= h($rents->no) ?></td>
+                                        <td><?= $this->Number->format($rents->total_cost) ?></td>
+                                        <td><?= $this->Number->format($rents->total_paid) ?></td>
+                                        <td><?= $this->Number->format($rents->for_client) ?></td>
+                                        <td><?= $this->Number->format($rents->percentage_used) ?>%</td>
+                                        <td><?= $this->Number->format($rents->for_commission) ?></td>
+                                        <td><?= h($rents->paid_to_client) ?></td>
+                                        <td><?= h($rents->start_date) ?></td>
+                                        <td><?= h($rents->end_date) ?></td>
+                                        <td><?= $this->Number->format($rents->unpaid_months) ?></td>
+                                        <td><?= $this->Number->format($rents->paid_months) ?></td>
+                                        <td><?= $this->Number->format($rents->vat) ?></td>
+                                        <td><?= $this->Number->format($rents->balance) ?></td>
+                                        <td><?= h($rents->cheque_no) ?></td>
+                                        <td><?= h($rents->receive_id) ?></td>
+                                        <td><?= h($rents->editable) ?></td>
+                                        <td><?= h($rents->created_at) ?></td>
 
                                         <td class="actions">
-                                            <?= $this->Html->link(__('View'), ['action' => 'view', $rent->id]) ?>
-                                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rent->id]) ?>
-                                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $rent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rent->id)]) ?>
+                                            <?= $this->Html->link(__('View'), ['action' => 'view', $rents->id]) ?>
+                                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rents->id]) ?>
+                                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $rents->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rents->id)]) ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                                 </tbody>
                             </table>
                             <?php endif; ?>
-                            </p>
+                                </p>
+                            </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="other">
-                            <b>Settings Content</b>
-                            <p>
-                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                sadipscing mel.
-                            </p>
+                        <div role="tabpanel" class="tab-pane fade" id="confiscation">
+                            <div class="related">
+                                <h4><?= __('Related Confiscations') ?></h4>
+                                <?php if (!empty($user->confiscations)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Date') ?></th>
+                                            <th scope="col"><?= __('Details') ?></th>
+                                            <th scope="col"><?= __('Cost') ?></th>
+                                            <th scope="col"><?= __('Sold') ?></th>
+                                            <th scope="col"><?= __('Sold On') ?></th>
+                                            <th scope="col"><?= __('Sold Id') ?></th>
+                                            <th scope="col"><?= __('Storage Fees') ?></th>
+                                            <th scope="col"><?= __('Deadline') ?></th>
+                                            <th scope="col"><?= __('Created At') ?></th>
+                                            <th scope="col"><?= __('User Id') ?></th>
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->confiscations as $confiscations): ?>
+                                            <tr>
+
+                                                <td><?= h($confiscations->date) ?></td>
+                                                <td><?= h($confiscations->details) ?></td>
+                                                <td><?= h($confiscations->cost) ?></td>
+                                                <td><?= h($confiscations->sold) ?></td>
+                                                <td><?= h($confiscations->sold_on) ?></td>
+                                                <td><?= h($confiscations->sold_id) ?></td>
+                                                <td><?= h($confiscations->storage_fees) ?></td>
+                                                <td><?= h($confiscations->deadline) ?></td>
+                                                <td><?= h($confiscations->created_at) ?></td>
+                                                <td><?= h($confiscations->user_id) ?></td>
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Confiscations', 'action' => 'view', $confiscations->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Confiscations', 'action' => 'edit', $confiscations->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Confiscations', 'action' => 'delete', $confiscations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $confiscations->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="damages">
+                            <div class="related">
+                                <h4><?= __('Related Damages') ?></h4>
+                                <?php if (!empty($user->damages)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Details') ?></th>
+                                            <th scope="col"><?= __('Amount') ?></th>
+                                            <th scope="col"><?= __('Date') ?></th>
+                                            <th scope="col"><?= __('Prepared Id') ?></th>
+                                            <th scope="col"><?= __('Paid') ?></th>
+                                            <th scope="col"><?= __('Repaired') ?></th>
+                                            <th scope="col"><?= __('Date Repaired') ?></th>
+                                            <th scope="col"><?= __('Created At') ?></th>
+
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->damages as $damages): ?>
+                                            <tr>
+
+                                                <td><?= h($damages->details) ?></td>
+                                                <td><?= h($damages->amount) ?></td>
+                                                <td><?= h($damages->date) ?></td>
+                                                <td><?= h($damages->prepared_id) ?></td>
+                                                <td><?= h($damages->paid) ?></td>
+                                                <td><?= h($damages->repaired) ?></td>
+                                                <td><?= h($damages->date_repaired) ?></td>
+                                                <td><?= h($damages->created_at) ?></td>
+
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Damages', 'action' => 'view', $damages->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Damages', 'action' => 'edit', $damages->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Damages', 'action' => 'delete', $damages->id], ['confirm' => __('Are you sure you want to delete # {0}?', $damages->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="evictions">
+                            <div class="related">
+                                <h4><?= __('Related Evictions') ?></h4>
+                                <?php if (!empty($user->evictions)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Balance') ?></th>
+                                            <th scope="col"><?= __('Date') ?></th>
+                                            <th scope="col"><?= __('Costs Incurred') ?></th>
+                                            <th scope="col"><?= __('Repair Costs') ?></th>
+                                            <th scope="col"><?= __('Bill Costs') ?></th>
+                                            <th scope="col"><?= __('Disposal Costs') ?></th>
+                                            <th scope="col"><?= __('Evicted') ?></th>
+                                            <th scope="col"><?= __('Details') ?></th>
+                                            <th scope="col"><?= __('Evicted On') ?></th>
+
+                                            <th scope="col"><?= __('Reason') ?></th>
+                                            <th scope="col"><?= __('Remarks') ?></th>
+
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->evictions as $evictions): ?>
+                                            <tr>
+
+                                                <td><?= h($evictions->balance) ?></td>
+                                                <td><?= h($evictions->date) ?></td>
+                                                <td><?= h($evictions->costs_incurred) ?></td>
+                                                <td><?= h($evictions->repair_costs) ?></td>
+                                                <td><?= h($evictions->bill_costs) ?></td>
+                                                <td><?= h($evictions->disposal_costs) ?></td>
+                                                <td><?= h($evictions->evicted) ?></td>
+                                                <td><?= h($evictions->details) ?></td>
+                                                <td><?= h($evictions->evicted_on) ?></td>
+
+                                                <td><?= h($evictions->reason) ?></td>
+                                                <td><?= h($evictions->remarks) ?></td>
+
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Evictions', 'action' => 'view', $evictions->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Evictions', 'action' => 'edit', $evictions->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Evictions', 'action' => 'delete', $evictions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $evictions->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="kins">
+
+                            <div class="related">
+                                <h4><?= __('Related Kins') ?></h4>
+                                <?php if (!empty($user->kins)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Name') ?></th>
+                                            <th scope="col"><?= __('Contact') ?></th>
+                                            <th scope="col"><?= __('Email') ?></th>
+                                            <th scope="col"><?= __('Photo') ?></th>
+                                            <th scope="col"><?= __('User Id') ?></th>
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->kins as $kins): ?>
+                                            <tr>
+
+                                                <td><?= h($kins->name) ?></td>
+                                                <td><?= h($kins->contact) ?></td>
+                                                <td><?= h($kins->email) ?></td>
+                                                <td><?= h($kins->photo) ?></td>
+                                                <td><?= h($kins->user_id) ?></td>
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Kins', 'action' => 'view', $kins->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Kins', 'action' => 'edit', $kins->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Kins', 'action' => 'delete', $kins->id], ['confirm' => __('Are you sure you want to delete # {0}?', $kins->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="monthly">
+
+                            <div class="related">
+                                <h4><?= __('Related Monthly Payments') ?></h4>
+                                <?php if (!empty($user->monthly_payments)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Total Amount') ?></th>
+                                            <th scope="col"><?= __('To Client') ?></th>
+                                            <th scope="col"><?= __('For Commission') ?></th>
+                                            <th scope="col"><?= __('Month') ?></th>
+                                            <th scope="col"><?= __('Year') ?></th>
+                                            <th scope="col"><?= __('Date') ?></th>
+                                            <th scope="col"><?= __('Created At') ?></th>
+
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->monthly_payments as $monthlyPayments): ?>
+                                            <tr>
+
+                                                <td><?= h($monthlyPayments->total_amount) ?></td>
+                                                <td><?= h($monthlyPayments->to_client) ?></td>
+                                                <td><?= h($monthlyPayments->for_commission) ?></td>
+                                                <td><?= h($monthlyPayments->month) ?></td>
+                                                <td><?= h($monthlyPayments->year) ?></td>
+                                                <td><?= h($monthlyPayments->date) ?></td>
+                                                <td><?= h($monthlyPayments->created_at) ?></td>
+
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'MonthlyPayments', 'action' => 'view', $monthlyPayments->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'MonthlyPayments', 'action' => 'edit', $monthlyPayments->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'MonthlyPayments', 'action' => 'delete', $monthlyPayments->id], ['confirm' => __('Are you sure you want to delete # {0}?', $monthlyPayments->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="passwords">
+
+                            <div class="related">
+                                <h4><?= __('Related Passwords') ?></h4>
+                                <?php if (!empty($user->passwords)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Password') ?></th>
+                                            <th scope="col"><?= __('Created At') ?></th>
+
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->passwords as $passwords): ?>
+                                            <tr>
+
+                                                <td><?= h($passwords->password) ?></td>
+                                                <td><?= h($passwords->created_at) ?></td>
+
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Passwords', 'action' => 'view', $passwords->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Passwords', 'action' => 'edit', $passwords->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Passwords', 'action' => 'delete', $passwords->id], ['confirm' => __('Are you sure you want to delete # {0}?', $passwords->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="penalties">
+                            <div class="related">
+                                <h4><?= __('Related Penalties') ?></h4>
+                                <?php if (!empty($user->penalties)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Total') ?></th>
+
+                                            <th scope="col"><?= __('Created At') ?></th>
+                                            <th scope="col"><?= __('Paid') ?></th>
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->penalties as $penalties): ?>
+                                            <tr>
+
+                                                <td><?= h($penalties->total) ?></td>
+
+                                                <td><?= h($penalties->created_at) ?></td>
+                                                <td><?= h($penalties->paid) ?></td>
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Penalties', 'action' => 'view', $penalties->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Penalties', 'action' => 'edit', $penalties->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Penalties', 'action' => 'delete', $penalties->id], ['confirm' => __('Are you sure you want to delete # {0}?', $penalties->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="refunds">
+
+                            <div class="related">
+                                <h4><?= __('Related Refunds') ?></h4>
+                                <?php if (!empty($user->refunds)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Amount') ?></th>
+                                            <th scope="col"><?= __('Bills') ?></th>
+                                            <th scope="col"><?= __('Damages') ?></th>
+                                            <th scope="col"><?= __('Rent Due') ?></th>
+                                            <th scope="col"><?= __('Amount Refundable') ?></th>
+                                            <th scope="col"><?= __('Date') ?></th>
+                                            <th scope="col"><?= __('Paid') ?></th>
+                                            <th scope="col"><?= __('Approved') ?></th>
+
+                                            <th scope="col"><?= __('Created At') ?></th>
+
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->refunds as $refunds): ?>
+                                            <tr>
+
+                                                <td><?= h($refunds->amount) ?></td>
+                                                <td><?= h($refunds->bills) ?></td>
+                                                <td><?= h($refunds->damages) ?></td>
+                                                <td><?= h($refunds->rent_due) ?></td>
+                                                <td><?= h($refunds->amount_refundable) ?></td>
+                                                <td><?= h($refunds->date) ?></td>
+                                                <td><?= h($refunds->paid) ?></td>
+                                                <td><?= h($refunds->approved) ?></td>
+
+                                                <td><?= h($refunds->created_at) ?></td>
+
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Refunds', 'action' => 'view', $refunds->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Refunds', 'action' => 'edit', $refunds->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Refunds', 'action' => 'delete', $refunds->id], ['confirm' => __('Are you sure you want to delete # {0}?', $refunds->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="security">
+
+                            <div class="related">
+                                <h4><?= __('Related Securities') ?></h4>
+                                <?php if (!empty($user->securities)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Date') ?></th>
+                                            <th scope="col"><?= __('Amount') ?></th>
+                                            <th scope="col"><?= __('Method') ?></th>
+                                            <th scope="col"><?= __('Paid Back') ?></th>
+                                            <th scope="col"><?= __('Approved') ?></th>
+
+                                            <th scope="col"><?= __('Refunded') ?></th>
+                                            <th scope="col"><?= __('No') ?></th>
+
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->securities as $securities): ?>
+                                            <tr>
+
+                                                <td><?= h($securities->date) ?></td>
+                                                <td><?= h($securities->amount) ?></td>
+                                                <td><?= h($securities->method) ?></td>
+                                                <td><?= h($securities->paid_back) ?></td>
+                                                <td><?= h($securities->approved) ?></td>
+
+
+                                                <td><?= h($securities->refunded) ?></td>
+                                                <td><?= h($securities->no) ?></td>
+
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Securities', 'action' => 'view', $securities->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Securities', 'action' => 'edit', $securities->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Securities', 'action' => 'delete', $securities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $securities->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tenant">
+
+
+                            <div class="related">
+                                <h4><?= __('Tenants/Occupants') ?></h4>
+                                <?php if (!empty($tenants)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th scope="col"><?= __('Property') ?></th>
+                                            <th scope="col"><?= __('Room') ?></th>
+                                            <th scope="col"><?= __('First name') ?></th>
+                                            <th scope="col"><?= __('Last name') ?></th>
+                                            <th scope="col"><?= __('Contact') ?></th>
+                                            <th scope="col"><?= __('Cost') ?></th>
+                                            <th scope="col"><?= __('Security') ?></th>
+                                        </tr>
+                                        <?php foreach ($tenants as $tenant): ?>
+                                            <tr>
+                                                <td><?= h($tenant->property_name) ?></td>
+                                                <td><?= h($tenant->room) ?></td>
+                                                <td><?= h($tenant->first_name) ?></td>
+                                                <td><?= h($tenant->last_name) ?></td>
+                                                <td><?= h($tenant->contact) ?></td>
+                                                <td><?= number_format($tenant->cost) ?></td>
+                                                <td><?= number_format($tenant->security) ?></td>
+
+
+
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+
+
+                            <div class="related">
+                                <h4><?= __('Related Tenants') ?></h4>
+                                <?php if (!empty($user->tenants)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Start Date') ?></th>
+                                            <th scope="col"><?= __('End Date') ?></th>
+                                            <th scope="col"><?= __('Rent Start Due Day') ?></th>
+                                            <th scope="col"><?= __('Active') ?></th>
+                                            <th scope="col"><?= __('Notice') ?></th>
+                                            <th scope="col"><?= __('Amount To Pay') ?></th>
+                                            <th scope="col"><?= __('Work Address') ?></th>
+                                            <th scope="col"><?= __('Nin') ?></th>
+                                            <th scope="col"><?= __('Passport') ?></th>
+                                            <th scope="col"><?= __('Created At') ?></th>
+
+
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->tenants as $tenants): ?>
+                                            <tr>
+
+                                                <td><?= h($tenants->start_date) ?></td>
+                                                <td><?= h($tenants->end_date) ?></td>
+                                                <td><?= h($tenants->rent_start_due_day) ?></td>
+                                                <td><?= h($tenants->active) ?></td>
+                                                <td><?= h($tenants->notice) ?></td>
+                                                <td><?= h($tenants->amount_to_pay) ?></td>
+                                                <td><?= h($tenants->work_address) ?></td>
+                                                <td><?= h($tenants->nin) ?></td>
+                                                <td><?= h($tenants->passport) ?></td>
+                                                <td><?= h($tenants->created_at) ?></td>
+
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Tenants', 'action' => 'view', $tenants->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Tenants', 'action' => 'edit', $tenants->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tenants', 'action' => 'delete', $tenants->id], ['confirm' => __('Are you sure you want to delete # {0}?', $tenants->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="units">
+
+
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="utilities">
+                            <div class="related">
+                                <h4><?= __('Related Utilities') ?></h4>
+                                <?php if (!empty($user->utilities)): ?>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+
+                                            <th scope="col"><?= __('Name') ?></th>
+                                            <th scope="col"><?= __('Starting Reading') ?></th>
+                                            <th scope="col"><?= __('Unit Cost') ?></th>
+                                            <th scope="col"><?= __('Account No') ?></th>
+
+                                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                                        </tr>
+                                        <?php foreach ($user->utilities as $utilities): ?>
+                                            <tr>
+
+                                                <td><?= h($utilities->name) ?></td>
+                                                <td><?= h($utilities->starting_reading) ?></td>
+                                                <td><?= h($utilities->unit_cost) ?></td>
+                                                <td><?= h($utilities->account_no) ?></td>
+
+                                                <td class="actions">
+                                                    <?= $this->Html->link(__('View'), ['controller' => 'Utilities', 'action' => 'view', $utilities->id]) ?>
+                                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Utilities', 'action' => 'edit', $utilities->id]) ?>
+                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Utilities', 'action' => 'delete', $utilities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $utilities->id)]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php endif; ?>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -543,7 +1014,7 @@ $links_array = [
                 <th scope="col"><?= __('Code') ?></th>
                 <th scope="col"><?= __('Delivery Method') ?></th>
                 <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
+
                 <th scope="col"><?= __('Last Banked') ?></th>
                 <th scope="col"><?= __('Manager Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -560,7 +1031,7 @@ $links_array = [
                 <td><?= h($clients->code) ?></td>
                 <td><?= h($clients->delivery_method) ?></td>
                 <td><?= h($clients->created_at) ?></td>
-                <td><?= h($clients->user_id) ?></td>
+
                 <td><?= h($clients->last_banked) ?></td>
                 <td><?= h($clients->manager_id) ?></td>
                 <td class="actions">
@@ -573,96 +1044,15 @@ $links_array = [
         </table>
         <?php endif; ?>
     </div>
-    <div class="related">
-        <h4><?= __('Related Confiscations') ?></h4>
-        <?php if (!empty($user->confiscations)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
 
-                <th scope="col"><?= __('Date') ?></th>
-                <th scope="col"><?= __('Details') ?></th>
-                <th scope="col"><?= __('Cost') ?></th>
-                <th scope="col"><?= __('Sold') ?></th>
-                <th scope="col"><?= __('Sold On') ?></th>
-                <th scope="col"><?= __('Sold Id') ?></th>
-                <th scope="col"><?= __('Storage Fees') ?></th>
-                <th scope="col"><?= __('Deadline') ?></th>
-                <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->confiscations as $confiscations): ?>
-            <tr>
-
-                <td><?= h($confiscations->date) ?></td>
-                <td><?= h($confiscations->details) ?></td>
-                <td><?= h($confiscations->cost) ?></td>
-                <td><?= h($confiscations->sold) ?></td>
-                <td><?= h($confiscations->sold_on) ?></td>
-                <td><?= h($confiscations->sold_id) ?></td>
-                <td><?= h($confiscations->storage_fees) ?></td>
-                <td><?= h($confiscations->deadline) ?></td>
-                <td><?= h($confiscations->created_at) ?></td>
-                <td><?= h($confiscations->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Confiscations', 'action' => 'view', $confiscations->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Confiscations', 'action' => 'edit', $confiscations->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Confiscations', 'action' => 'delete', $confiscations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $confiscations->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
 
     <div class="related">
-        <h4><?= __('Related Damages') ?></h4>
-        <?php if (!empty($user->damages)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Details') ?></th>
-                <th scope="col"><?= __('Amount') ?></th>
-                <th scope="col"><?= __('Date') ?></th>
-                <th scope="col"><?= __('Prepared Id') ?></th>
-                <th scope="col"><?= __('Paid') ?></th>
-                <th scope="col"><?= __('Repaired') ?></th>
-                <th scope="col"><?= __('Date Repaired') ?></th>
-                <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->damages as $damages): ?>
-            <tr>
-
-                <td><?= h($damages->details) ?></td>
-                <td><?= h($damages->amount) ?></td>
-                <td><?= h($damages->date) ?></td>
-                <td><?= h($damages->prepared_id) ?></td>
-                <td><?= h($damages->paid) ?></td>
-                <td><?= h($damages->repaired) ?></td>
-                <td><?= h($damages->date_repaired) ?></td>
-                <td><?= h($damages->created_at) ?></td>
-                <td><?= h($damages->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Damages', 'action' => 'view', $damages->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Damages', 'action' => 'edit', $damages->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Damages', 'action' => 'delete', $damages->id], ['confirm' => __('Are you sure you want to delete # {0}?', $damages->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-
-    <div class="related">
-        <h4><?= __('Related Employees') ?></h4>
+        <h4><?= __('Employee information') ?></h4>
         <?php if (!empty($user->employees)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
 
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col"><?= __('Company Id') ?></th>
+
                 <th scope="col"><?= __('Branch Id') ?></th>
                 <th scope="col"><?= __('Department Id') ?></th>
                 <th scope="col"><?= __('Start Date') ?></th>
@@ -676,8 +1066,7 @@ $links_array = [
             <?php foreach ($user->employees as $employees): ?>
             <tr>
 
-                <td><?= h($employees->user_id) ?></td>
-                <td><?= h($employees->company_id) ?></td>
+
                 <td><?= h($employees->branch_id) ?></td>
                 <td><?= h($employees->department_id) ?></td>
                 <td><?= h($employees->start_date) ?></td>
@@ -696,182 +1085,7 @@ $links_array = [
         </table>
         <?php endif; ?>
     </div>
-    <div class="related">
-        <h4><?= __('Related Evictions') ?></h4>
-        <?php if (!empty($user->evictions)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Balance') ?></th>
-                <th scope="col"><?= __('Date') ?></th>
-                <th scope="col"><?= __('Costs Incurred') ?></th>
-                <th scope="col"><?= __('Repair Costs') ?></th>
-                <th scope="col"><?= __('Bill Costs') ?></th>
-                <th scope="col"><?= __('Disposal Costs') ?></th>
-                <th scope="col"><?= __('Evicted') ?></th>
-                <th scope="col"><?= __('Details') ?></th>
-                <th scope="col"><?= __('Evicted On') ?></th>
-                <th scope="col"><?= __('Evicted Id') ?></th>
-                <th scope="col"><?= __('Reason') ?></th>
-                <th scope="col"><?= __('Remarks') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->evictions as $evictions): ?>
-            <tr>
-
-                <td><?= h($evictions->balance) ?></td>
-                <td><?= h($evictions->date) ?></td>
-                <td><?= h($evictions->costs_incurred) ?></td>
-                <td><?= h($evictions->repair_costs) ?></td>
-                <td><?= h($evictions->bill_costs) ?></td>
-                <td><?= h($evictions->disposal_costs) ?></td>
-                <td><?= h($evictions->evicted) ?></td>
-                <td><?= h($evictions->details) ?></td>
-                <td><?= h($evictions->evicted_on) ?></td>
-                <td><?= h($evictions->evicted_id) ?></td>
-                <td><?= h($evictions->reason) ?></td>
-                <td><?= h($evictions->remarks) ?></td>
-                <td><?= h($evictions->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Evictions', 'action' => 'view', $evictions->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Evictions', 'action' => 'edit', $evictions->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Evictions', 'action' => 'delete', $evictions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $evictions->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Kins') ?></h4>
-        <?php if (!empty($user->kins)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('Contact') ?></th>
-                <th scope="col"><?= __('Email') ?></th>
-                <th scope="col"><?= __('Photo') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->kins as $kins): ?>
-            <tr>
-
-                <td><?= h($kins->name) ?></td>
-                <td><?= h($kins->contact) ?></td>
-                <td><?= h($kins->email) ?></td>
-                <td><?= h($kins->photo) ?></td>
-                <td><?= h($kins->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Kins', 'action' => 'view', $kins->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Kins', 'action' => 'edit', $kins->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Kins', 'action' => 'delete', $kins->id], ['confirm' => __('Are you sure you want to delete # {0}?', $kins->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Monthly Payments') ?></h4>
-        <?php if (!empty($user->monthly_payments)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Total Amount') ?></th>
-                <th scope="col"><?= __('To Client') ?></th>
-                <th scope="col"><?= __('For Commission') ?></th>
-                <th scope="col"><?= __('Month') ?></th>
-                <th scope="col"><?= __('Year') ?></th>
-                <th scope="col"><?= __('Date') ?></th>
-                <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('Rent Id') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->monthly_payments as $monthlyPayments): ?>
-            <tr>
-
-                <td><?= h($monthlyPayments->total_amount) ?></td>
-                <td><?= h($monthlyPayments->to_client) ?></td>
-                <td><?= h($monthlyPayments->for_commission) ?></td>
-                <td><?= h($monthlyPayments->month) ?></td>
-                <td><?= h($monthlyPayments->year) ?></td>
-                <td><?= h($monthlyPayments->date) ?></td>
-                <td><?= h($monthlyPayments->created_at) ?></td>
-                <td><?= h($monthlyPayments->rent_id) ?></td>
-                <td><?= h($monthlyPayments->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'MonthlyPayments', 'action' => 'view', $monthlyPayments->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'MonthlyPayments', 'action' => 'edit', $monthlyPayments->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'MonthlyPayments', 'action' => 'delete', $monthlyPayments->id], ['confirm' => __('Are you sure you want to delete # {0}?', $monthlyPayments->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Passwords') ?></h4>
-        <?php if (!empty($user->passwords)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Password') ?></th>
-                <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->passwords as $passwords): ?>
-            <tr>
-
-                <td><?= h($passwords->password) ?></td>
-                <td><?= h($passwords->created_at) ?></td>
-                <td><?= h($passwords->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Passwords', 'action' => 'view', $passwords->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Passwords', 'action' => 'edit', $passwords->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Passwords', 'action' => 'delete', $passwords->id], ['confirm' => __('Are you sure you want to delete # {0}?', $passwords->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Penalties') ?></h4>
-        <?php if (!empty($user->penalties)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Total') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col"><?= __('Rent Id') ?></th>
-                <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('Paid') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->penalties as $penalties): ?>
-            <tr>
-
-                <td><?= h($penalties->total) ?></td>
-                <td><?= h($penalties->user_id) ?></td>
-                <td><?= h($penalties->rent_id) ?></td>
-                <td><?= h($penalties->created_at) ?></td>
-                <td><?= h($penalties->paid) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Penalties', 'action' => 'view', $penalties->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Penalties', 'action' => 'edit', $penalties->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Penalties', 'action' => 'delete', $penalties->id], ['confirm' => __('Are you sure you want to delete # {0}?', $penalties->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
+     <div class="related">
         <h4><?= __('Related Properties') ?></h4>
         <?php if (!empty($user->properties)): ?>
         <table cellpadding="0" cellspacing="0">
@@ -880,15 +1094,14 @@ $links_array = [
                 <th scope="col"><?= __('Name') ?></th>
                 <th scope="col"><?= __('Details') ?></th>
                 <th scope="col"><?= __('No Of Rooms') ?></th>
-                <th scope="col"><?= __('Manager Id') ?></th>
-                <th scope="col"><?= __('Legal Id') ?></th>
+
                 <th scope="col"><?= __('Terms') ?></th>
                 <th scope="col"><?= __('Location') ?></th>
                 <th scope="col"><?= __('Category') ?></th>
                 <th scope="col"><?= __('Lng') ?></th>
                 <th scope="col"><?= __('Lat') ?></th>
                 <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
+
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($user->properties as $properties): ?>
@@ -897,15 +1110,14 @@ $links_array = [
                 <td><?= h($properties->name) ?></td>
                 <td><?= h($properties->details) ?></td>
                 <td><?= h($properties->no_of_rooms) ?></td>
-                <td><?= h($properties->manager_id) ?></td>
-                <td><?= h($properties->legal_id) ?></td>
+
                 <td><?= h($properties->terms) ?></td>
                 <td><?= h($properties->location) ?></td>
                 <td><?= h($properties->category) ?></td>
                 <td><?= h($properties->lng) ?></td>
                 <td><?= h($properties->lat) ?></td>
                 <td><?= h($properties->created_at) ?></td>
-                <td><?= h($properties->user_id) ?></td>
+
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Properties', 'action' => 'view', $properties->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Properties', 'action' => 'edit', $properties->id]) ?>
@@ -916,190 +1128,5 @@ $links_array = [
         </table>
         <?php endif; ?>
     </div>
-    <div class="related">
-        <h4><?= __('Related Refunds') ?></h4>
-        <?php if (!empty($user->refunds)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
 
-                <th scope="col"><?= __('Amount') ?></th>
-                <th scope="col"><?= __('Bills') ?></th>
-                <th scope="col"><?= __('Damages') ?></th>
-                <th scope="col"><?= __('Rent Due') ?></th>
-                <th scope="col"><?= __('Amount Refundable') ?></th>
-                <th scope="col"><?= __('Date') ?></th>
-                <th scope="col"><?= __('Paid') ?></th>
-                <th scope="col"><?= __('Approved') ?></th>
-                <th scope="col"><?= __('Approved Id') ?></th>
-                <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->refunds as $refunds): ?>
-            <tr>
-
-                <td><?= h($refunds->amount) ?></td>
-                <td><?= h($refunds->bills) ?></td>
-                <td><?= h($refunds->damages) ?></td>
-                <td><?= h($refunds->rent_due) ?></td>
-                <td><?= h($refunds->amount_refundable) ?></td>
-                <td><?= h($refunds->date) ?></td>
-                <td><?= h($refunds->paid) ?></td>
-                <td><?= h($refunds->approved) ?></td>
-                <td><?= h($refunds->approved_id) ?></td>
-                <td><?= h($refunds->created_at) ?></td>
-                <td><?= h($refunds->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Refunds', 'action' => 'view', $refunds->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Refunds', 'action' => 'edit', $refunds->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Refunds', 'action' => 'delete', $refunds->id], ['confirm' => __('Are you sure you want to delete # {0}?', $refunds->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-
-    <div class="related">
-        <h4><?= __('Related Securities') ?></h4>
-        <?php if (!empty($user->securities)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Date') ?></th>
-                <th scope="col"><?= __('Amount') ?></th>
-                <th scope="col"><?= __('Method') ?></th>
-                <th scope="col"><?= __('Paid Back') ?></th>
-                <th scope="col"><?= __('Approved') ?></th>
-                <th scope="col"><?= __('Requested Id') ?></th>
-                <th scope="col"><?= __('Approved Id') ?></th>
-                <th scope="col"><?= __('Refunded') ?></th>
-                <th scope="col"><?= __('No') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->securities as $securities): ?>
-            <tr>
-
-                <td><?= h($securities->date) ?></td>
-                <td><?= h($securities->amount) ?></td>
-                <td><?= h($securities->method) ?></td>
-                <td><?= h($securities->paid_back) ?></td>
-                <td><?= h($securities->approved) ?></td>
-                <td><?= h($securities->requested_id) ?></td>
-                <td><?= h($securities->approved_id) ?></td>
-                <td><?= h($securities->refunded) ?></td>
-                <td><?= h($securities->no) ?></td>
-                <td><?= h($securities->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Securities', 'action' => 'view', $securities->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Securities', 'action' => 'edit', $securities->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Securities', 'action' => 'delete', $securities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $securities->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Tenants') ?></h4>
-        <?php if (!empty($user->tenants)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Start Date') ?></th>
-                <th scope="col"><?= __('End Date') ?></th>
-                <th scope="col"><?= __('Rent Start Due Day') ?></th>
-                <th scope="col"><?= __('Active') ?></th>
-                <th scope="col"><?= __('Notice') ?></th>
-                <th scope="col"><?= __('Amount To Pay') ?></th>
-                <th scope="col"><?= __('Work Address') ?></th>
-                <th scope="col"><?= __('Nin') ?></th>
-                <th scope="col"><?= __('Passport') ?></th>
-                <th scope="col"><?= __('Created At') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col"><?= __('Unit Id') ?></th>
-                <th scope="col"><?= __('Property Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->tenants as $tenants): ?>
-            <tr>
-
-                <td><?= h($tenants->start_date) ?></td>
-                <td><?= h($tenants->end_date) ?></td>
-                <td><?= h($tenants->rent_start_due_day) ?></td>
-                <td><?= h($tenants->active) ?></td>
-                <td><?= h($tenants->notice) ?></td>
-                <td><?= h($tenants->amount_to_pay) ?></td>
-                <td><?= h($tenants->work_address) ?></td>
-                <td><?= h($tenants->nin) ?></td>
-                <td><?= h($tenants->passport) ?></td>
-                <td><?= h($tenants->created_at) ?></td>
-                <td><?= h($tenants->user_id) ?></td>
-                <td><?= h($tenants->unit_id) ?></td>
-                <td><?= h($tenants->property_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Tenants', 'action' => 'view', $tenants->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Tenants', 'action' => 'edit', $tenants->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tenants', 'action' => 'delete', $tenants->id], ['confirm' => __('Are you sure you want to delete # {0}?', $tenants->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Tenants Units') ?></h4>
-        <?php if (!empty($user->tenants_units)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Unit Id') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->tenants_units as $tenantsUnits): ?>
-            <tr>
-                <td><?= h($tenantsUnits->unit_id) ?></td>
-                <td><?= h($tenantsUnits->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'TenantsUnits', 'action' => 'view', $tenantsUnits->unit_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'TenantsUnits', 'action' => 'edit', $tenantsUnits->unit_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'TenantsUnits', 'action' => 'delete', $tenantsUnits->unit_id], ['confirm' => __('Are you sure you want to delete # {0}?', $tenantsUnits->unit_id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Utilities') ?></h4>
-        <?php if (!empty($user->utilities)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-
-                <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('Starting Reading') ?></th>
-                <th scope="col"><?= __('Unit Cost') ?></th>
-                <th scope="col"><?= __('Account No') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($user->utilities as $utilities): ?>
-            <tr>
-
-                <td><?= h($utilities->name) ?></td>
-                <td><?= h($utilities->starting_reading) ?></td>
-                <td><?= h($utilities->unit_cost) ?></td>
-                <td><?= h($utilities->account_no) ?></td>
-                <td><?= h($utilities->user_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Utilities', 'action' => 'view', $utilities->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Utilities', 'action' => 'edit', $utilities->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Utilities', 'action' => 'delete', $utilities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $utilities->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
 

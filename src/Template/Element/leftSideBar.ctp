@@ -45,6 +45,10 @@
                 <ul class="ml-menu">
                     <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
                     <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('Clients'), ['controller' => 'Users', 'action' => 'client']) ?></li>
+                    <li><?= $this->Html->link(__('Tenants'), ['controller' => 'Users', 'action' => 'tenant']) ?></li>
+                    <li><?= $this->Html->link(__('Employees'), ['controller' => 'Users', 'action' => 'employee']) ?></li>
+
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <span>Accounts</span>
@@ -101,6 +105,7 @@
                     <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
                     <li><?= $this->Html->link(__('Reports'), ['controller' => 'Rents', 'action' => 'report']) ?></li>
+                    <li><?= $this->Html->link(__('View by client'), ['controller' => 'Rents', 'action' => 'client']) ?></li>
 
                 </ul>
             </li>

@@ -9,94 +9,185 @@ $links_array = [
     ['New Requisition', ['controller' => 'Requisitions', 'action' => 'add']],
 ];
 ?>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <?=$this->Html->css('base.css')?>
-
+<?=$this->Html->css('invoice.css')?>
 <div class="requisitions view large-9 medium-8 columns content">
+
+
     <?= $this->Element('nav',['links'=>$links_array,'title'=>$requisition->no]);   ?>
 
-    <table class="vertical-table">
 
-        <tr>
-            <th scope="row"><?= __('Type') ?></th>
-            <td><?= h($requisition->type) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Approved') ?></th>
-            <td><?= h($requisition->approved) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Approved by') ?></th>
-            <td><?= h($requisition->approver->full_name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Paid') ?></th>
-            <td><?= h($requisition->paid) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Paid by') ?></th>
-            <td><?= h($requisition->paider->full_name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Method') ?></th>
-            <td><?= h($requisition->method) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Repaired') ?></th>
-            <td><?= h($requisition->repaired) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Requested by') ?></th>
-            <td><?= h($requisition->requested->full_name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Category') ?></th>
-            <td><?= h($requisition->category) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $requisition->has('user') ? $this->Html->link($requisition->user->full_name, ['controller' => 'Users', 'action' => 'view', $requisition->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Property') ?></th>
-            <td><?= $requisition->has('property') ? $this->Html->link($requisition->property->name, ['controller' => 'Properties', 'action' => 'view', $requisition->property->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Unit') ?></th>
-            <td><?= $requisition->has('unit') ? $this->Html->link($requisition->unit->name, ['controller' => 'Units', 'action' => 'view', $requisition->unit->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('No') ?></th>
-            <td><?= $this->Number->format($requisition->no) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Date') ?></th>
-            <td><?= h($requisition->date) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created At') ?></th>
-            <td><?= h($requisition->created_at) ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Details') ?></h4>
-        <?= $this->Text->autoParagraph(h($requisition->details)); ?>
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                       REQUISITION
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another action</a></li>
+                                <li><a href="javascript:void(0);">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div id="invoice">
+
+                        <div class="toolbar hidden-print">
+                            <div class="text-right">
+                                <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                                <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="invoice overflow-auto">
+                            <div style="min-width: 600px">
+                                <header>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a target="_blank" href="#">
+                                                <img src="<?= $this->Url->build($this->session->read('company_image')); ?>" data-holder-rendered="true" />
+                                            </a>
+                                        </div>
+                                        <div class="col company-details">
+                                            <h2 class="name">
+                                                <a target="_blank" href="https://lobianijs.com">
+                                                    <?= $requisition->has('property') ? $this->Html->link($requisition->property->name, ['controller' => 'Properties', 'action' => 'view', $requisition->property->id]) : '' ?></td>
+
+                                                </a>
+                                            </h2>
+                                            <div><?= __('Unit') ?>: <?= $requisition->has('unit') ? $this->Html->link($requisition->unit->name, ['controller' => 'Units', 'action' => 'view', $requisition->unit->id]) : '' ?></div>
+
+                                        </div>
+                                    </div>
+                                </header>
+                                <main>
+                                    <div class="row contacts">
+                                        <div class="col invoice-to">
+                                            <div class="text-gray-light">REQ TO:</div>
+                                            <h2 class="to"><?= $requisition->has('user') ? $this->Html->link($requisition->user->full_name, ['controller' => 'Users', 'action' => 'view', $requisition->user->id]) : '' ?></h2>
+                                            <div class="address"><?= __('User') ?>
+                                                <?= $requisition->has('user') ? $this->Html->link($requisition->user->full_name, ['controller' => 'Users', 'action' => 'view', $requisition->user->id]) : '' ?></div>
+                                            <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
+                                            <div class="row">
+                                                <h4><?= __('Details') ?></h4>
+                                                <?= $this->Text->autoParagraph(h($requisition->details)); ?>
+                                            </div>
+                                            <div class="row">
+                                                <h4><?= __('Remarks') ?></h4>
+                                                <?= $this->Text->autoParagraph(h($requisition->remarks)); ?>
+                                            </div>
+                                            <div class="row">
+                                                <?= __('Method') ?> : <?= h($requisition->method) ?>
+                                            </div>
+
+                                        </div>
+                                        <div class="col invoice-details">
+                                            <h1 class="invoice-id">REQ <?= $this->Number->format($requisition->no) ?></h1>
+                                            <div class="date"><?= __('Created At') ?> : <?= h($requisition->created_at) ?></div>
+                                            <div class="date">Due Date: <?= date('d-M-yy', strtotime($requisition->date)) ?></div>
+                                        </div>
+                                    </div>
+                                    <table border="0" cellspacing="0" cellpadding="0">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="text-left">DESCRIPTION</th>
+                                            <th class="text-right">COST</th>
+                                            <th class="text-right">QUANTITY</th>
+                                            <th class="text-right">TOTAL</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <?php
+                                        $sum = 0;
+                                        foreach ($requisition->expenses as $expenses): ?>
+                                         <?php  $sum += $expenses->total?>
+                                            <tr>
+                                                <td class="no"><?= h($expenses->no) ?></td>
+                                                <td class="text-left"><?= h($expenses->item) ?></td>
+                                                <td class="unit"><?= number_format($expenses->cost) ?></td>
+                                                <td class="qty"><?= h($expenses->qty) ?></td>
+                                                <td class="total"><?= number_format($expenses->total) ?></td>
+
+
+                                            </tr>
+                                        <?php endforeach; ?>
+
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">SUBTOTAL</td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">GRAND TOTAL</td>
+                                            <td><?php echo number_format($sum)?></td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                    <div class="thanks">HN</div>
+                                    <div class="notices">
+                                        <div>REMARKS:</div>
+                                        <div>
+                                       <?= __('Type') ?>
+                                                   <?= h($requisition->type) ?><?= __('Approved') ?> : <?= h($requisition->approved) ?><br>
+                                                 <?= __('Approved by') ?> :<?= h($requisition->approver->full_name) ?><br>
+
+                                                        <?= __('Paid') ?> :<?= h($requisition->paid) ?><br>
+
+                                                        <?= __('Paid by') ?>: <?= h($requisition->paider->full_name) ?><br>
+
+
+                                            <?= __('Repaired') ?>: <?= h($requisition->repaired) ?><br><?= __('Requested by') ?></th>
+                                                   <?= h($requisition->requested->full_name) ?><?= __('Category') ?><br>
+                                                   <?= h($requisition->category) ?><br>
+                                                <?= __('Property') ?><br>
+
+                                               <?= __('No') ?> : <?= $this->Number->format($requisition->no) ?><br>
+                                                <?= __('Date') ?> : <?= h($requisition->date) ?><br>
+
+
+                                        </div>
+                                    </div>
+                                </main>
+                                <footer>
+                                    Invoice was created on a computer and is valid without the signature and seal.
+                                </footer>
+                            </div>
+                            <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row">
-        <h4><?= __('Remarks') ?></h4>
-        <?= $this->Text->autoParagraph(h($requisition->remarks)); ?>
-    </div>
+
+
     <div class="related">
-        <h4><?= __('Related Expenses') ?></h4>
+        <h4><?= __('Manage Expenses') ?></h4>
         <?php if (!empty($requisition->expenses)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-
                 <th scope="col"><?= __('Item') ?></th>
                 <th scope="col"><?= __('Qty') ?></th>
                 <th scope="col"><?= __('Cost') ?></th>
                 <th scope="col"><?= __('Total') ?></th>
                 <th scope="col"><?= __('Created At') ?></th>
-
                 <th scope="col"><?= __('Editable') ?></th>
                 <th scope="col"><?= __('No') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -106,8 +197,8 @@ $links_array = [
 
                 <td><?= h($expenses->item) ?></td>
                 <td><?= h($expenses->qty) ?></td>
-                <td><?= h($expenses->cost) ?></td>
-                <td><?= h($expenses->total) ?></td>
+                <td><?= number_format($expenses->cost) ?></td>
+                <td><?= number_format($expenses->total) ?></td>
                 <td><?= h($expenses->created_at) ?></td>
 
                 <td><?= h($expenses->editable) ?></td>
@@ -123,3 +214,15 @@ $links_array = [
         <?php endif; ?>
     </div>
 </div>
+
+<script >
+    $('#printInvoice').click(function(){
+        Popup($('.invoice')[0].outerHTML);
+        function Popup(data)
+        {
+            window.print();
+            return true;
+        }
+    });
+
+</script>

@@ -35,6 +35,7 @@ class Unit extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id'=>true,
         'types' => true,
         'name' => true,
         'states' => true,

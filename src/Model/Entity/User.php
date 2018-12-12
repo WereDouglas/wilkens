@@ -46,11 +46,11 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property \App\Model\Entity\Requisition[] $requisitions
  * @property \App\Model\Entity\Security[] $securities
  * @property \App\Model\Entity\Tenant[] $tenants
- * @property \App\Model\Entity\TenantsUnit[] $tenants_units
  * @property \App\Model\Entity\Unit[] $units
  * @property \App\Model\Entity\Utility[] $utilities
  * @property \App\Model\Entity\Permission[] $permissions
  * @property \App\Model\Entity\Role[] $roles
+ * @property \App\Model\Entity\Rent[] $rents
  */
 class User extends Entity
 {
@@ -108,7 +108,8 @@ class User extends Entity
         'units' => true,
         'utilities' => true,
         'permissions' => true,
-        'roles' => true
+        'roles' => true,
+        'rents' => true
     ];
 
     /**

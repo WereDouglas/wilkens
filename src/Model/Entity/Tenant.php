@@ -35,6 +35,7 @@ class Tenant extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id'=>true,
         'start_date' => true,
         'end_date' => true,
         'rent_start_due_day' => true,

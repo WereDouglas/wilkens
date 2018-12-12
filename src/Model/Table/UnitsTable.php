@@ -12,8 +12,8 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\PropertiesTable|\Cake\ORM\Association\BelongsTo $Properties
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
- * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\BelongsToMany $Tenants
- *
+
+
  * @method \App\Model\Entity\Unit get($primaryKey, $options = [])
  * @method \App\Model\Entity\Unit newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Unit[] newEntities(array $data, array $options = [])
@@ -50,11 +50,7 @@ class UnitsTable extends Table
         $this->hasMany('Requisitions', [
             'foreignKey' => 'unit_id'
         ]);
-        $this->belongsToMany('Tenants', [
-            'foreignKey' => 'unit_id',
-            'targetForeignKey' => 'tenant_id',
-            'joinTable' => 'tenants_units'
-        ]);
+
     }
 
     /**
@@ -115,7 +111,7 @@ class UnitsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['property_id'], 'Properties'));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+      //  $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

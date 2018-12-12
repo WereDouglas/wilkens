@@ -1,17 +1,18 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use http\QueryString;
 
 /**
  * Users Model
  *
  * @property \App\Model\Table\CompaniesTable|\Cake\ORM\Association\BelongsTo $Companies
- * @property \App\Model\Table\RentsTable|\Cake\ORM\Association\BelongsTo $Rents
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\RentsTable|\Cake\ORM\Association\HasMany $Rents
  * @property \App\Model\Table\AccountsTable|\Cake\ORM\Association\HasMany $Accounts
  * @property \App\Model\Table\BillsTable|\Cake\ORM\Association\HasMany $Bills
  * @property \App\Model\Table\ClientsTable|\Cake\ORM\Association\HasMany $Clients
@@ -32,9 +33,8 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\RequisitionsTable|\Cake\ORM\Association\HasMany $Requisitions
  * @property \App\Model\Table\SecuritiesTable|\Cake\ORM\Association\HasMany $Securities
  * @property \App\Model\Table\TenantsTable|\Cake\ORM\Association\HasMany $Tenants
- * @property \App\Model\Table\TenantsUnitsTable|\Cake\ORM\Association\HasMany $TenantsUnits
  * @property \App\Model\Table\UnitsTable|\Cake\ORM\Association\HasMany $Units
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Landlords
  * @property \App\Model\Table\UtilitiesTable|\Cake\ORM\Association\HasMany $Utilities
  * @property \App\Model\Table\PermissionsTable|\Cake\ORM\Association\BelongsToMany $Permissions
  * @property \App\Model\Table\RolesTable|\Cake\ORM\Association\BelongsToMany $Roles
@@ -68,12 +68,14 @@ class UsersTable extends Table
         $this->belongsTo('Companies', [
             'foreignKey' => 'company_id'
         ]);
-        $this->belongsTo('Users', [
+        $this->belongsTo('Landlords', [
+            'className' => 'Users',
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Accounts', [
             'foreignKey' => 'user_id'
         ]);
+
         $this->hasMany('Bills', [
             'foreignKey' => 'user_id'
         ]);
@@ -131,9 +133,7 @@ class UsersTable extends Table
         $this->hasMany('Tenants', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('TenantsUnits', [
-            'foreignKey' => 'user_id'
-        ]);
+
         $this->hasMany('Units', [
             'foreignKey' => 'user_id'
         ]);
@@ -157,8 +157,9 @@ class UsersTable extends Table
             'targetForeignKey' => 'role_id',
             'joinTable' => 'roles_users'
         ]);
+
         $this->addBehavior('Josegonzalez/Upload.Upload', [
-            'photo'=> [
+            'photo' => [
                 'fields' => [
                     // if these fields or their defaults exist
                     // the values will be set.
@@ -258,8 +259,49 @@ class UsersTable extends Table
     {
 
         $rules->add($rules->existsIn(['company_id'], 'Companies'));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['user_id'], 'Landlords'));
 
         return $rules;
+    }
+
+    public function findBasicInfo(Query $query, $options = [])
+    {
+        //$user_id = $options['user_id'];
+        return $query->select([
+            'id',
+            'first_name',
+            'last_name',
+            'contact',
+            'title',
+            'email',
+            'photo',
+            'photo_size',
+            'photo_type',
+            'address',
+            'active',
+            'created_at',
+            'photo_dir',
+             'type'
+        ]);
+    }
+
+    public function findTenantInfo(Query $query, $options = [])
+    {
+        $user_id = $options['user_id'] ?? null;
+
+        $query->find('basicInfo')
+            ->select([
+                'company_id' => 'Companies.name',
+                'Company_name' => 'Companies.name'
+            ])
+            ->select($this->Landlords)//
+            ->contain(['Companies', 'Landlords'])
+            ->where(['Users.type' => 'tenant']);
+
+        if($user_id){
+            $query->where(['Users.user_id' => $user_id]);
+        }
+
+        return $query;
     }
 }

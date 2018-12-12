@@ -16,7 +16,6 @@ $links_array = [
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('Tenant') ?></th>
-
                 <th scope="col"><?= $this->Paginator->sort('amount') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('paid') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('no') ?></th>
@@ -26,6 +25,7 @@ $links_array = [
                 <th scope="col"><?= $this->Paginator->sort('deadline') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('balance') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Received by') ?></th>
+                <td><?= $this->Paginator->sort('Landlord') ?></td>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -41,6 +41,7 @@ $links_array = [
                 <td><?= h($installment->deadline) ?></td>
                 <td><?= $this->Number->format($installment->balance) ?></td>
                 <td><?= h($installment->receiver->full_name) ?></td>
+                <td><?= h($installment->user->landlord->full_name) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $installment->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $installment->id]) ?>

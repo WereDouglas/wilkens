@@ -13,7 +13,7 @@ $links_array = [
 ];
 ?>
 <div class="users index large-12 medium-12 columns content">
-    <?= $this->Element('nav',['links'=>$links_array,'title'=>'List Users']);   ?>
+    <?= $this->Element('nav',['links'=>$links_array,'title'=>'List Clients/Landlords']);   ?>
 
     <table cellpadding="0" cellspacing="0"  class="table table-bordered table-striped table-hover dataTable js-exportable">
         <thead>

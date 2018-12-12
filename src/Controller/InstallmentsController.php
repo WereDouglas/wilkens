@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -20,10 +21,23 @@ class InstallmentsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users','Receivers']
-        ];
-        $installments = $this->paginate($this->Installments);
+        $installments =  $this->Installments->find('all', [
+            'contain' => ['Users' => ['finder' => 'tenantInfo'], 'Receivers']
+        ]);
+        $installments = $this->paginate($installments);
+       /* echo '<pre>';
+        var_dump($installments);
+        echo '<pre>';
+        exit();*/
+
+
+       /* $installments = $this->Installments->find('')
+            ->contain([
+                'Users' => function (Query $query)  {
+                    return $query->find('tenantInfo',[]);
+                }
+            ], 'Receivers');*/
+
 
         $this->set(compact('installments'));
     }
@@ -38,7 +52,7 @@ class InstallmentsController extends AppController
     public function view($id = null)
     {
         $installment = $this->Installments->get($id, [
-            'contain' => ['Users','Receivers']
+            'contain' => ['Users', 'Receivers']
         ]);
 
         $this->set('installment', $installment);
@@ -66,8 +80,8 @@ class InstallmentsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-               // var_dump($installment->getErrors());
-               //  exit;
+                // var_dump($installment->getErrors());
+                //  exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');
@@ -104,8 +118,8 @@ class InstallmentsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                 var_dump($installment->getErrors());
-                 exit;
+                var_dump($installment->getErrors());
+                exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

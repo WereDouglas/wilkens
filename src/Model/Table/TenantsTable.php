@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -127,5 +128,24 @@ class TenantsTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
+    }
+
+    public function findBasicInfo(Query $query, $options = [])
+    {
+        return $query->select([
+            'id',
+            'first_name' => 'u.first_name',
+            'last_name' => 'u.last_name',
+            'contact',
+
+        ])->join(
+            [
+                'u' => [
+                    'table' => 'Users',
+                    'type' => 'LEFT',
+                    'conditions' => ['u.id' => 'Tenants.user_id']
+                ]
+            ]);
+
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -66,7 +67,7 @@ class UnitsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-                // var_dump($unit->getErrors());
+               // var_dump($unit->getErrors());
                // exit;
                 $message = 'failed';
                 $this->set(compact('message'));

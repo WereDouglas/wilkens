@@ -41,6 +41,7 @@ class PropertiesController extends AppController
             'contain' => ['Users', 'Requisitions', 'Units','Managers','Legals']
         ]);
 
+
         $this->set('property', $property);
     }
 

@@ -1,6 +1,6 @@
 
 
-<div class="header medium-3">
+<div class="header medium-6">
     <ul class="header-dropdown m-r--5">
         <h3>
             <li class="dropdown">
