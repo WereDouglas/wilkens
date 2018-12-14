@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Rent;
 use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
+use function PHPSTORM_META\map;
 
 /**
  * Rents Controller
@@ -190,9 +192,12 @@ class RentsController extends AppController
             ]);
             //  echo $values['user_id'];
             //   $query = TableRegistry::getTableLocator()->get('Users')->find('basicInfo', ['user_id' => $id])
+
+
             $query = TableRegistry::getTableLocator()->get('Users')->find('basicInfo')
                 ->select([
                     'property_name' => 'p.name',
+                    'occupant_id' => 'Users.id',
                     'room' => 'u.name',
                     'cost' => 'u.cost',
                     'total_paid' => 'r.total_paid',
@@ -207,6 +212,7 @@ class RentsController extends AppController
                     'for_client' => 'r.for_client',
                     'tenancy_start' => 't.start_date',
                     'tenancy_end' => 't.end_date'
+
                 ])
                 ->join(
                     [
@@ -245,25 +251,63 @@ class RentsController extends AppController
                                 't.user_id =' => new \Cake\Database\Expression\IdentifierExpression('Users.id')
                             ]
                         ]
-                    ])->where([
+                    ])
+                ->where([
                     'Users.user_id =' => $values['user_id'],
                     'Users.active =' => 'yes'
                 ])->order(['room' => 'ASC']);
-            $financials = $this->paginate($query);
 
 
-            $tenancy  = $financials;
+            $payments = $query->all();
+            $occupants_ids = [];
+            foreach ($payments as $payment) {
+                if (empty($payment['date'])) {
+                    $occupants_ids[] = $payment['occupant_id'];
+                }
+            }
+            $maps = [];
+            foreach ($occupants_ids as $not_paid) {
+                $object = $this->Rents->find()
+                    ->select([
+                        'occupant_id' => 'occupant_id',
+                        'last_paid_date' => 'date',
+                        'last_paid_start_date' => 'start_date',
+                        'last_paid_end_date' => 'end_date'
+                    ])
+                    ->where(['occupant_id =' => $not_paid])
+                    ->order(['date' => 'DESC'])->limit(1)->first();
 
+                $maps[$object->get('occupant_id')] = $object;
+            }
 
-            /*echo '<pre>';
-            var_dump($tenancy);
+          /*  echo '<pre>';
+            var_dump($maps);
             echo '</pre>';
             exit();*/
+
+            $payments = $payments->map(function ($payment) use ($maps) {
+//                echo $payment->occupant_id;
+                //  exit;
+                if ($object = $maps[$payment->occupant_id] ?? null) {
+                    $payment->date = $object['last_paid_date'];
+                    $payment->last_paid_start_date = $object['last_paid_start_date'];
+                    $payment->last_paid_end_date = $object['last_paid_end_date'];
+                }
+                return $payment;
+            });
+
+            $financials = $payments;
+            $tenancy = $financials;
+            /*   echo '<pre>';
+               var_dump($tenancy);
+               echo '</pre>';
+               exit();*/
 
             $requisitions = TableRegistry::getTableLocator()->get('Requisitions')->find('all', [
                 'conditions' => [
                     'date  >=' => $start_date,
                     'date  <=' => $end_date,
+                    'paid  =' => 'no',
                     'user_id' => $values['user_id']
                 ]
             ])->select([
@@ -320,6 +364,7 @@ class RentsController extends AppController
             echo '</pre>';
             exit();*/
             $installments = $this->paginate($installments);
+            $client = TableRegistry::getTableLocator()->get('Users')->get($values['user_id']);
         }
 
         $users = TableRegistry::get('Users')->find('all', [
@@ -329,7 +374,7 @@ class RentsController extends AppController
         ]);
 
         $this->set(compact('rents', 'branches', 'users', 'deposits', 'financials', 'requisitions', 'cashs',
-            'installments','tenancy','end_date','start_date'));
+            'installments', 'tenancy', 'end_date', 'start_date', 'client'));
     }
 
     /**
