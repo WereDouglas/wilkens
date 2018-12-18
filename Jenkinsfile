@@ -1,13 +1,11 @@
 pipeline {
-  agent none
-  stages {
-    stage('Testing') {
-      steps {
-        bat(returnStatus: true, script: 'bat \'set\'')
-      }
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                bat 'set'
+            }
+        }
     }
-  }
-  environment {
-    test = 'tesing'
-  }
+
 }
