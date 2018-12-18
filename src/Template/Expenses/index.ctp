@@ -11,6 +11,7 @@ $links_array = [
 ];
 
 ?>
+<s>
 <div class="expenses index large-12 medium-12 columns content">
 
     <?= $this->Element('nav',['links'=>$links_array,'title'=>'Expenses']);   ?>

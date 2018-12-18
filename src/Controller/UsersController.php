@@ -386,5 +386,24 @@ class UsersController extends AppController
         $session->destroy();
         return $this->redirect($this->Auth->logout());
     }
+    public function edits($id = null)
+    {
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $user = $this->Users->get($id, [
+                'contain' => ['Permissions', 'Roles']
+            ]);
+
+            $user = $this->Users->patchEntity($user, $this->request->getData(),
+                ['accessibleFields' => ['password' => false]]);
+            if ($this->Users->save($user)) {
+                echo json_encode($this->request->getData());
+            }
+            echo json_encode($this->request->getData());
+        }
+        echo json_encode($this->request->getData());
+
+    }
 
 }

@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Expenses Controller
  *
@@ -78,6 +78,63 @@ class ExpensesController extends AppController
         $requisitions = $this->Expenses->Requisitions->find('list', ['limit' => 200]);
         $this->set(compact('expense', 'requisitions'));
     }
+    public function expense()
+    {
+        $rents = Array();
+        if ($this->request->is('post')) {
+            $values = $this->request->getData();
+            $start_date = date('Y-m-d', strtotime($values['start_date']));
+            //   echo '<br>';
+            $end_date = date('Y-m-d', strtotime($values['end_date']));
+
+            $requisitions = TableRegistry::getTableLocator()->get('Requisitions')->find('all', [
+                'conditions' => [
+                    'date  >=' => $start_date,
+                    'date  <=' => $end_date,
+                    'paid  =' => 'no',
+                    'user_id' => $values['user_id']
+                ]
+            ])->select([
+                'id'=> 'Requisitions.id',
+                'date' => 'Requisitions.date',
+                'type' => 'Requisitions.type',
+                'approved' => 'Requisitions.approved',
+                'paid' => 'Requisitions.paid',
+                'repaired' => 'Requisitions.repaired',
+                'method' => 'Requisitions.method',
+                'details' => 'Requisitions.details',
+                'no' => 'Requisitions.no',
+                'category',
+                'item' => 'e.item',
+                'qty' => 'e.qty',
+                'total' => 'e.total',
+                'cost' => 'e.cost'
+            ])
+                ->join(
+                    [
+                        'e' => [
+                            'table' => 'Expenses',
+                            'type' => 'LEFT',
+                            'conditions' => ['e.requisition_id' => new \Cake\Database\Expression\IdentifierExpression('Requisitions.id')]
+                        ]
+
+                    ]);
+            $requisitions = $this->paginate($requisitions);
+            $client = TableRegistry::getTableLocator()->get('Users')->get($values['user_id']);
+
+        }
+        if (!$requisitions) {
+            $this->Flash->error(__('No results.'));
+
+        }
+        $users = TableRegistry::get('Users')->find('all', [
+            'conditions' => ['Users.type =' => 'client'],
+            'keyField' => 'id',
+            'valueField' => 'first_name'
+        ]);
+        $this->set(compact( 'users',  'requisitions',  'end_date', 'start_date', 'client'));
+    }
+
 
     /**
      * Edit method

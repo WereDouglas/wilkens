@@ -12,13 +12,15 @@ $links_array = [
 
 ];
 ?>
+<?= $this->Html->css('table-fixed-header.css') ?>
 <div class="users index large-12 medium-12 columns content">
     <?= $this->Element('nav', ['links' => $links_array, 'title' => 'List Users']); ?>
 
     <table cellpadding="0" cellspacing="0"
-           class="table table-bordered table-striped table-hover dataTable js-exportable">
-        <thead>
+           class="table table-bordered table-striped table-hover dataTable js-exportable table-fixed-header" id="editable-table">
+        <thead class="header">
         <tr>
+
             <th scope="col">#</th>
             <th style="display: none" scope="col"><?= $this->Paginator->sort('id') ?></th>
             <th scope="col"><?= $this->Paginator->sort('first_name') ?></th>
@@ -39,9 +41,10 @@ $links_array = [
         <?php $ct = 1;
         foreach ($users as $user): ?>
             <tr>
+
                 <td><?= $ct++ ?></td>
-                <td style="display: none"><?= h($user->id) ?></td>
-                <td><?= h($user->first_name) ?></td>
+
+                <td id="<?= $user->id ?>" contenteditable="true"><?= h($user->first_name) ?></td>
                 <td><?= h($user->last_name) ?></td>
                 <td><?= h($user->contact) ?></td>
                 <td><?= h($user->email) ?></td>
@@ -87,4 +90,52 @@ $links_array = [
     </div>
 
 </div>
+<?= $this->Html->script([
+    'jquery.min',
+    'bootstrap',
+    'bootstrap-select',
+    'jquery.slimscroll',
+    'waves',
+    'admin',
+    'demo',
+    'autosize.js',
+    'moment.js',
+    'bootstrap-material-datetimepicker.js',
+    'basic-form-elements.js',
 
+]); ?>
+<script>
+    $(document).ready(function () {
+        $("#status").hide();
+        $(function () {
+            var message_status = $("#status");
+            $("td[contenteditable=true]").blur(function () {
+                // message_status.show();
+                var field_id = $(this).attr("id");
+                var value = $(this).text();
+                //  alert(field_id +" " + value);
+                console.log(field_id);
+              //  console.log(value);
+
+                var payload = {
+                    first_name: value
+
+                };
+
+                var data = new FormData();
+                data.append( "json", JSON.stringify( payload ) );
+
+                fetch("users/edits/"+field_id,
+                    {
+                        method: "POST",
+                        body: data
+                    })
+                    .then(function(res){ return res.json(); })
+                    .then(function(data){ alert( JSON.stringify( data ) ) })
+
+            });
+
+        });
+    });
+
+</script>

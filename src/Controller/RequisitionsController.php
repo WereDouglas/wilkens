@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\ORM\Query;
 
 /**
  * Requisitions Controller
@@ -22,12 +23,44 @@ class RequisitionsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Properties', 'Units','Approveds','Paids','Requesteds']
-        ];
-        $requisitions = $this->paginate($this->Requisitions);
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
+        $user_id = null;
+        if ($this->request->is('post')) {
+            $values = $this->request->getData();
+            $start_date = date('Y-m-d', strtotime($values['start_date']));
+            $end_date = date('Y-m-d', strtotime($values['end_date']));
+            $user_id = $values['user_id'];
+        }
+        $requisitions = $this->Requisitions->find()
+            ->enableAutoFields()
+            ->contain([
+                'Users',
+                'Properties',
+                'Units',
+                'Approveds',
+                'Paids',
+                'Requesteds',
+                'Expenses'
+            ])
+            ->where([
+                'date  >=' => $start_date,
+                'date  <=' => $end_date,
+                'Requisitions.user_id' => $user_id
+            ]);
 
-        $this->set(compact('requisitions'));
+      /*  echo '<pre>';
+        var_dump($requisitions);
+        exit;*/
+
+
+        $users = TableRegistry::getTableLocator()->get('Users')->find('all', [
+            'conditions' => ['Users.type =' => 'client'],
+            'keyField' => 'id',
+            'valueField' => 'first_name'
+        ]);
+
+        $this->set(compact('requisitions', 'users'));
     }
 
     /**
@@ -40,7 +73,7 @@ class RequisitionsController extends AppController
     public function view($id = null)
     {
         $requisition = $this->Requisitions->get($id, [
-            'contain' => ['Users', 'Properties', 'Units', 'Expenses','Approveds','Paids','Requesteds']
+            'contain' => ['Users', 'Properties', 'Units', 'Expenses', 'Approveds', 'Paids', 'Requesteds']
         ]);
 
         $this->set('requisition', $requisition);
@@ -72,8 +105,8 @@ class RequisitionsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
-               // var_dump($requisition->getErrors());
-              //  exit;
+                // var_dump($requisition->getErrors());
+                //  exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

@@ -274,7 +274,7 @@ $expenses_sum = 0;
 
             <?php endif; ?>
         </div>
-        <div class="related">
+        <div class="related" style="display: none">
 
             <?php if (!empty($requisitions)): ?>
                 <?php
@@ -354,13 +354,12 @@ $expenses_sum = 0;
             <?php endif; ?>
 
         </div>
-        <div class="related">
+        <div class="related" style="display: none">
 
             <?php if (!empty($cashs)): ?>
                 <table cellpadding="0" cellspacing="0">
                     <tr>
                         <th scope="col" colspan="12"><h4><?= __('Cash payments') ?></h4></th>
-
                     </tr>
                     <thead>
                     <tr>
@@ -436,7 +435,7 @@ $expenses_sum = 0;
                 </table>
             <?php endif; ?>
         </div>
-        <div class="related">
+        <div class="related" style="display: none">
 
             <?php if (!empty($installments)): ?>
 
@@ -495,7 +494,7 @@ $expenses_sum = 0;
             <?php endif; ?>
 
         </div>
-        <div class="related">
+        <div class="related" style="display: none">
 
             <?php if (!empty($tenancy)): ?>
 

@@ -10,21 +10,25 @@
                 <?php
             } else {
                 ?>
-                <img src="<?= $this->Url->build($this->session->read('image')); ?>" width="auto" height="100" alt="photo"/>  <?php
+                <img src="<?= $this->Url->build($this->session->read('image')); ?>" width="auto" height="100"
+                     alt="photo"/>  <?php
             }
             ?>
         </div>
         <div class="info-container">
-            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $this->session->read('contact'); ?></div>
+            <div class="name" data-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false"><?= $this->session->read('contact'); ?></div>
             <div class="email"><?= $this->session->read('name'); ?> </div>
             <div class="btn-group user-helper-dropdown">
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
-                    <li><i class="material-icons">person</i><?= $this->Html->link(__('Profile'), ['controller'=>'Users','action' => 'view',$this->session->read('id')]) ?></li>
+                    <li><i class="material-icons">person</i><?= $this->Html->link(__('Profile'),
+                            ['controller' => 'Users', 'action' => 'view', $this->session->read('id')]) ?></li>
 
                     <li role="separator" class="divider"></li>
                     <li>
-                        <i class="material-icons"></i><?= $this->Html->link('Sign Out', '/users/logout', ['class' => '']); ?>
+                        <i class="material-icons"></i><?= $this->Html->link('Sign Out', '/users/logout',
+                            ['class' => '']); ?>
                     </li>
                 </ul>
             </div>
@@ -47,15 +51,18 @@
                     <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('Clients'), ['controller' => 'Users', 'action' => 'client']) ?></li>
                     <li><?= $this->Html->link(__('Tenants'), ['controller' => 'Users', 'action' => 'tenant']) ?></li>
-                    <li><?= $this->Html->link(__('Employees'), ['controller' => 'Users', 'action' => 'employee']) ?></li>
+                    <li><?= $this->Html->link(__('Employees'),
+                            ['controller' => 'Users', 'action' => 'employee']) ?></li>
 
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <span>Accounts</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Accounts'), ['controller' => 'Accounts', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Account'), ['controller' => 'Accounts', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Accounts'),
+                                    ['controller' => 'Accounts', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Account'),
+                                    ['controller' => 'Accounts', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -64,8 +71,10 @@
                             <span>Contacts</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Contacts'), ['controller' => 'Contacts', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Contact'), ['controller' => 'Contacts', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Contacts'),
+                                    ['controller' => 'Contacts', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Contact'),
+                                    ['controller' => 'Contacts', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -74,8 +83,10 @@
                             <span>Emergency Contacts(Kins)</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Kins'), ['controller' => 'Kins', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Kin'), ['controller' => 'Kins', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Kins'),
+                                    ['controller' => 'Kins', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Kin'),
+                                    ['controller' => 'Kins', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -87,8 +98,10 @@
                             <span>Passwords</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Passwords'), ['controller' => 'Passwords', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Password'), ['controller' => 'Passwords', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Passwords'),
+                                    ['controller' => 'Passwords', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Password'),
+                                    ['controller' => 'Passwords', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -102,12 +115,53 @@
                     <span>Rent Payments</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('View by client'),
+                            ['controller' => 'Rents', 'action' => 'client']) ?></li>
                     <li><?= $this->Html->link(__('Reports'), ['controller' => 'Rents', 'action' => 'report']) ?></li>
-                    <li><?= $this->Html->link(__('View by client'), ['controller' => 'Rents', 'action' => 'client']) ?></li>
+                    <li><?= $this->Html->link(__('All  Rent Payments'),
+                            ['controller' => 'Rents', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
+
 
                 </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">payment</i>
+                    <span>Expenses & Requisitions</span>
+                </a>
+                <ul class="ml-menu">
+                    <li><?= $this->Html->link(__('List Requisitions'),
+                            ['controller' => 'Requisitions', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Requisition'), ['action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('Advanced'),
+                            ['controller' => 'Expenses', 'action' => 'expense']) ?></li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <span>Requisitions</span>
+                        </a>
+                        <ul class="ml-menu">
+
+                            <li><?= $this->Html->link(__('New Requisition'),
+                                    ['controller' => 'Requisitions', 'action' => 'add']) ?></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <span>Expenses</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li><?= $this->Html->link(__('List Expenses'),
+                                    ['controller' => 'Expenses', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Expense'),
+                                    ['controller' => 'Expenses', 'action' => 'add']) ?></li>
+
+                        </ul>
+                    </li>
+                </ul>
+
             </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
@@ -117,9 +171,13 @@
                     <span>Reports</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('Financial Report'), ['controller' => 'Rents', 'action' => 'financial']) ?></li>
+                    <li><?= $this->Html->link(__('Original Financial Report'),
+                            ['controller' => 'Rents', 'action' => 'original']) ?></li>
+                    <li><?= $this->Html->link(__('Financial Report'),
+                            ['controller' => 'Rents', 'action' => 'financial']) ?></li>
 
-                    <li><?= $this->Html->link(__('Reports'), ['controller' => 'Rents', 'action' => 'report']) ?></li>
+                    <li><?= $this->Html->link(__('Expenses'), ['controller' => 'Rents', 'action' => 'expense']) ?></li>
+
 
                 </ul>
             </li>
@@ -131,15 +189,19 @@
                     <span>Companies</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Companies'),
+                            ['controller' => 'Companies', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Company'),
+                            ['controller' => 'Companies', 'action' => 'add']) ?></li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <span>Branches</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Branches'),
+                                    ['controller' => 'Branches', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Branch'),
+                                    ['controller' => 'Branches', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -148,8 +210,10 @@
                             <span>Departments</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Departments'),
+                                    ['controller' => 'Departments', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Department'),
+                                    ['controller' => 'Departments', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -166,8 +230,10 @@
                     <span>Employees</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?> </li>
-                    <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?> </li>
+                    <li><?= $this->Html->link(__('List Employees'),
+                            ['controller' => 'Employees', 'action' => 'index']) ?> </li>
+                    <li><?= $this->Html->link(__('New Employee'),
+                            ['controller' => 'Employees', 'action' => 'add']) ?> </li>
                 </ul>
             </li>
             <li>
@@ -178,7 +244,8 @@
                     <span>Branches</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('List Branches'),
+                            ['controller' => 'Branches', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?></li>
                 </ul>
             </li>
@@ -190,8 +257,10 @@
                     <span>Departments</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Departments'),
+                            ['controller' => 'Departments', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Department'),
+                            ['controller' => 'Departments', 'action' => 'add']) ?></li>
                 </ul>
             </li>
 
@@ -213,8 +282,10 @@
                     <span>Permissions</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?></li>
-                    <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Permission'),
+                            ['controller' => 'Permissions', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Permissions'),
+                            ['controller' => 'Permissions', 'action' => 'index']) ?></li>
 
                 </ul>
             </li>
@@ -226,7 +297,8 @@
                     <span>Clients</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Clients'), ['controller' => 'Clients', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('List Clients'),
+                            ['controller' => 'Clients', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('New Client'), ['controller' => 'Clients', 'action' => 'add']) ?></li>
                 </ul>
             </li>
@@ -236,9 +308,11 @@
                     <span>Properties</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New Property'), ['controller' => 'Properties', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('New Property'),
+                            ['controller' => 'Properties', 'action' => 'add']) ?></li>
                     <li>
-                    <li><?= $this->Html->link(__('List Properties'), ['controller' => 'Properties', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('List Properties'),
+                            ['controller' => 'Properties', 'action' => 'index']) ?></li>
 
                     <a href="javascript:void(0);" class="menu-toggle">
                         <div class="icon">
@@ -247,7 +321,8 @@
                         <span>Units/Rooms</span>
                     </a>
                     <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List Units'), ['controller' => 'Units', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link(__('List Units'),
+                                ['controller' => 'Units', 'action' => 'index']) ?></li>
                         <li><?= $this->Html->link(__('New Unit'), ['controller' => 'Units', 'action' => 'add']) ?></li>
 
                     </ul>
@@ -277,7 +352,8 @@
                     <span>Tenants</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Tenants'), ['controller' => 'Tenants', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('List Tenants'),
+                            ['controller' => 'Tenants', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('New Tenant'), ['controller' => 'Tenants', 'action' => 'add']) ?></li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -289,8 +365,10 @@
                                     <span>Rent Payments</span>
                                 </a>
                                 <ul class="ml-menu">
-                                    <li><?= $this->Html->link(__('List Rents'), ['controller' => 'Rents', 'action' => 'index']) ?></li>
-                                    <li><?= $this->Html->link(__('New Rent'), ['controller' => 'Rents', 'action' => 'add']) ?></li>
+                                    <li><?= $this->Html->link(__('List Rents'),
+                                            ['controller' => 'Rents', 'action' => 'index']) ?></li>
+                                    <li><?= $this->Html->link(__('New Rent'),
+                                            ['controller' => 'Rents', 'action' => 'add']) ?></li>
                                 </ul>
                             </li>
                             <li>
@@ -305,8 +383,10 @@
                             <span>Security Deposits</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Securities'), ['controller' => 'Securities', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Security'), ['controller' => 'Securities', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Securities'),
+                                    ['controller' => 'Securities', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Security'),
+                                    ['controller' => 'Securities', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -315,8 +395,10 @@
                             <span>Penalties</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Penalties'), ['controller' => 'Penalties', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Penalty'), ['controller' => 'Penalties', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Penalties'),
+                                    ['controller' => 'Penalties', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Penalty'),
+                                    ['controller' => 'Penalties', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -324,36 +406,7 @@
                 </ul>
 
             </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">payment</i>
-                    <span>Expenses & Requisitions</span>
-                </a>
-                <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Requisitions</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Requisitions'), ['controller' => 'Requisitions', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Requisition'), ['controller' => 'Requisitions', 'action' => 'add']) ?></li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Expenses</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Expenses'), ['controller' => 'Expenses', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Expense'), ['controller' => 'Expenses', 'action' => 'add']) ?></li>
-
-                        </ul>
-                    </li>
-                </ul>
-
-            </li>
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <div class="icon">
@@ -362,8 +415,10 @@
                     <span>Banking & Deposits</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Deposits'), ['controller' => 'Deposits', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Deposit'), ['controller' => 'Deposits', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Deposits'),
+                            ['controller' => 'Deposits', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Deposit'),
+                            ['controller' => 'Deposits', 'action' => 'add']) ?></li>
 
                 </ul>
             </li>
@@ -375,16 +430,20 @@
                     <span>Utilities</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Utilities'), ['controller' => 'Utilities', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Utility'), ['controller' => 'Utilities', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Utilities'),
+                            ['controller' => 'Utilities', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Utility'),
+                            ['controller' => 'Utilities', 'action' => 'add']) ?></li>
 
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <span>Bills</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Bills'), ['controller' => 'Bills', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Bill'), ['controller' => 'Bills', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Bills'),
+                                    ['controller' => 'Bills', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Bill'),
+                                    ['controller' => 'Bills', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -393,8 +452,10 @@
                             <span>Payments</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?= $this->Html->link(__('List Payments'), ['controller' => 'Payments', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('New Payment'), ['controller' => 'Payments', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Payments'),
+                                    ['controller' => 'Payments', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Payment'),
+                                    ['controller' => 'Payments', 'action' => 'add']) ?></li>
 
                         </ul>
                     </li>
@@ -408,8 +469,10 @@
                     <span>Confiscations</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Confiscations'), ['controller' => 'Confiscations', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Confiscation'), ['controller' => 'Confiscations', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Confiscations'),
+                            ['controller' => 'Confiscations', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Confiscation'),
+                            ['controller' => 'Confiscations', 'action' => 'add']) ?></li>
                 </ul>
 
             </li>
@@ -421,7 +484,8 @@
                     <span>Property Repairs & Damages</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Damages'), ['controller' => 'Damages', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('List Damages'),
+                            ['controller' => 'Damages', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('New Damage'), ['controller' => 'Damages', 'action' => 'add']) ?></li>
                 </ul>
             </li>
@@ -431,8 +495,10 @@
                     <span>Evictions</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Evictions'), ['controller' => 'Evictions', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('New Eviction'), ['controller' => 'Evictions', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('List Evictions'),
+                            ['controller' => 'Evictions', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('New Eviction'),
+                            ['controller' => 'Evictions', 'action' => 'add']) ?></li>
                 </ul>
 
             </li>
@@ -442,7 +508,8 @@
                     <span>Refunds</span>
                 </a>
                 <ul class="ml-menu">
-                    <li><?= $this->Html->link(__('List Refunds'), ['controller' => 'Refunds', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('List Refunds'),
+                            ['controller' => 'Refunds', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('New Refund'), ['controller' => 'Refunds', 'action' => 'add']) ?></li>
                 </ul>
 
@@ -454,7 +521,8 @@
                 </a>
                 <ul class="ml-menu">
                     <li><?= $this->Html->link(__('Logs'), ['controller' => 'Logs', 'action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('Exceptions'), ['controller' => 'Exceptions', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('Exceptions'),
+                            ['controller' => 'Exceptions', 'action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('Messages'), ['controller' => 'Messages', 'action' => 'index']) ?></li>
 
 
