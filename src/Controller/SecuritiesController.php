@@ -55,7 +55,7 @@ class SecuritiesController extends AppController
         if ($this->request->is('post')) {
             $security = $this->Securities->patchEntity($security, $this->request->getData());
             if ($this->Securities->save($security)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $security->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -64,7 +64,7 @@ class SecuritiesController extends AppController
                 $this->Flash->success(__('The security has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                  var_dump($security->getErrors());
                  exit;
                 $message = 'failed';

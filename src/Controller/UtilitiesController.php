@@ -55,7 +55,7 @@ class UtilitiesController extends AppController
         if ($this->request->is('post')) {
             $utility = $this->Utilities->patchEntity($utility, $this->request->getData());
             if ($this->Utilities->save($utility)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $utility->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -65,7 +65,7 @@ class UtilitiesController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 //var_dump($rent->getErrors());
                 //  exit;
                 $message = 'failed';

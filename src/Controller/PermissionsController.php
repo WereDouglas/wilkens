@@ -52,7 +52,7 @@ class PermissionsController extends AppController
         if ($this->request->is('post')) {
             $permission = $this->Permissions->patchEntity($permission, $this->request->getData());
             if ($this->Permissions->save($permission)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $permission->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -63,7 +63,7 @@ class PermissionsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed'.' '.$this->invalidFields();
                 $this->set(compact('message'));

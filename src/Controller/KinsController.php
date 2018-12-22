@@ -55,7 +55,7 @@ class KinsController extends AppController
         if ($this->request->is('post')) {
             $kin = $this->Kins->patchEntity($kin, $this->request->getData());
             if ($this->Kins->save($kin)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $kin->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -65,7 +65,7 @@ class KinsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
 
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 //  var_dump($kin->getErrors());
                 // exit;
                 $message = 'failed';

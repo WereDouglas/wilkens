@@ -53,7 +53,7 @@ class TenantsController extends AppController
         if ($this->request->is('post')) {
             $tenant = $this->Tenants->patchEntity($tenant, $this->request->getData());
             if ($this->Tenants->save($tenant)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $tenant->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -63,7 +63,7 @@ class TenantsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                //  var_dump($tenant->getErrors());
                // exit;
                 $message = 'failed';

@@ -55,7 +55,7 @@ class DepositsController extends AppController
         if ($this->request->is('post')) {
             $deposit = $this->Deposits->patchEntity($deposit, $this->request->getData());
             if ($this->Deposits->save($deposit)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $deposit->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -64,7 +64,7 @@ class DepositsController extends AppController
                 $this->Flash->success(__('The deposit has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                   //var_dump($deposit->getErrors());
                  // exit;
                 $message = 'failed';

@@ -55,7 +55,7 @@ class ConfiscationsController extends AppController
         if ($this->request->is('post')) {
             $confiscation = $this->Confiscations->patchEntity($confiscation, $this->request->getData());
             if ($this->Confiscations->save($confiscation)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $confiscation->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -64,7 +64,7 @@ class ConfiscationsController extends AppController
                 $this->Flash->success(__('The confiscation has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed';
                 $this->set(compact('message'));

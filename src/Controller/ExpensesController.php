@@ -55,7 +55,7 @@ class ExpensesController extends AppController
         if ($this->request->is('post')) {
             $expense = $this->Expenses->patchEntity($expense, $this->request->getData());
             if ($this->Expenses->save($expense)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $expense->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -65,7 +65,7 @@ class ExpensesController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 // var_dump($expense->getErrors());
                 // exit;
                 $message = 'failed';

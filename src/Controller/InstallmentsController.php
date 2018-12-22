@@ -69,7 +69,7 @@ class InstallmentsController extends AppController
         if ($this->request->is('post')) {
             $installment = $this->Installments->patchEntity($installment, $this->request->getData());
             if ($this->Installments->save($installment)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $installment->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -79,7 +79,7 @@ class InstallmentsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 // var_dump($installment->getErrors());
                 //  exit;
                 $message = 'failed';
@@ -108,7 +108,7 @@ class InstallmentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $installment = $this->Installments->patchEntity($installment, $this->request->getData());
             if ($this->Installments->save($installment)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $installment->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -117,7 +117,7 @@ class InstallmentsController extends AppController
                 $this->Flash->success(__('The installment has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 var_dump($installment->getErrors());
                 exit;
                 $message = 'failed';

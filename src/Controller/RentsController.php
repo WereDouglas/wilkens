@@ -60,7 +60,7 @@ class RentsController extends AppController
         if ($this->request->is('post')) {
             $rent = $this->Rents->patchEntity($rent, $this->request->getData());
             if ($this->Rents->save($rent)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $rent->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -70,7 +70,7 @@ class RentsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 // var_dump($rent->getErrors());
                 //  exit;
                 $message = 'failed';

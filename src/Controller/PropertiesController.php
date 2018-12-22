@@ -56,7 +56,7 @@ class PropertiesController extends AppController
         if ($this->request->is('post')) {
             $property = $this->Properties->patchEntity($property, $this->request->getData());
             if ($this->Properties->save($property)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $property->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -66,7 +66,7 @@ class PropertiesController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 //var_dump($property->getErrors());
                 //exit;
                 $message = 'failed';
