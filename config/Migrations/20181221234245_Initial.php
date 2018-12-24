@@ -98,7 +98,7 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
                 'enum'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
@@ -404,12 +404,14 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('repaired', 'string', [
+            ->addColumn('repaired', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -856,7 +858,8 @@ class Initial extends AbstractMigration
                 'precision' => 10,
                 'scale' => 2,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
+                'values'=>['no','yes'],
                 'default' => null,
                 'limit' => null,
                 'null' => true,
@@ -1240,7 +1243,7 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
                 'values' => ['yes','no'],
                 'default' => null,
                 'limit' => 10,
@@ -1447,13 +1450,14 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
                 'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('approved', 'string', [
+            ->addColumn('approved', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -1674,7 +1678,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('approved', 'string', [
+            ->addColumn('approved', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -1684,7 +1689,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -1833,7 +1839,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('approved', 'string', [
+            ->addColumn('approved', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
