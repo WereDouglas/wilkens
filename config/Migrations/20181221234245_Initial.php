@@ -98,8 +98,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('paid', 'string', [
-                'enum'=>['yes','no'],
+            ->addColumn('paid', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -404,7 +404,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -856,7 +857,8 @@ class Initial extends AbstractMigration
                 'precision' => 10,
                 'scale' => 2,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
+                'values'=>['no','yes'],
                 'default' => null,
                 'limit' => null,
                 'null' => true,
@@ -1240,7 +1242,7 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
                 'values' => ['yes','no'],
                 'default' => null,
                 'limit' => 10,
@@ -1447,7 +1449,7 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
                 'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
@@ -1684,7 +1686,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('paid', 'string', [
+            ->addColumn('paid', 'enum', [
+                'values'=>['no','yes'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -1828,7 +1831,8 @@ class Initial extends AbstractMigration
                 'limit' => 10,
                 'null' => false,
             ])
-            ->addColumn('paid_back', 'string', [
+            ->addColumn('paid_back', 'enum', [
+                'values'=>['no','yes'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
