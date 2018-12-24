@@ -99,7 +99,11 @@ class Initial extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('paid', 'enum', [
+<<<<<<< HEAD
                 'values'=>['yes','no'],
+=======
+                'enum'=>['yes','no'],
+>>>>>>> 2337ed373054df5b6effc6bbcf4de58ecb1111e0
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -410,7 +414,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('repaired', 'string', [
+            ->addColumn('repaired', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -1455,7 +1460,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('approved', 'string', [
+            ->addColumn('approved', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -1676,7 +1682,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('approved', 'string', [
+            ->addColumn('approved', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -1687,7 +1694,11 @@ class Initial extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('paid', 'enum', [
+<<<<<<< HEAD
                 'values'=>['no','yes'],
+=======
+                'values'=>['yes','no'],
+>>>>>>> 2337ed373054df5b6effc6bbcf4de58ecb1111e0
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -1837,7 +1848,8 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('approved', 'string', [
+            ->addColumn('approved', 'enum', [
+                'values'=>['yes','no'],
                 'default' => null,
                 'limit' => null,
                 'null' => false,
