@@ -56,7 +56,7 @@ class ClientsController extends AppController
         if ($this->request->is('post')) {
             $client = $this->Clients->patchEntity($client, $this->request->getData());
             if ($this->Clients->save($client)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $client->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -66,7 +66,7 @@ class ClientsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
               // var_dump($client->getErrors());
               // exit;
                 $message = 'failed';

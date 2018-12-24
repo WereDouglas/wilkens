@@ -56,7 +56,7 @@ class UnitsController extends AppController
         if ($this->request->is('post')) {
             $unit = $this->Units->patchEntity($unit, $this->request->getData());
             if ($this->Units->save($unit)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $unit->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -66,7 +66,7 @@ class UnitsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                // var_dump($unit->getErrors());
                // exit;
                 $message = 'failed';

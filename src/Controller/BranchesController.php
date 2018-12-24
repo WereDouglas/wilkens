@@ -55,7 +55,7 @@ class BranchesController extends AppController
         if ($this->request->is('post')) {
             $branch = $this->Branches->patchEntity($branch, $this->request->getData());
             if ($this->Branches->save($branch)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $branch->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -64,7 +64,7 @@ class BranchesController extends AppController
                 $this->Flash->success(__('The branch has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed';
                 $this->set(compact('message'));

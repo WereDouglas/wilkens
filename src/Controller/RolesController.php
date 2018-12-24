@@ -52,7 +52,7 @@ class RolesController extends AppController
         if ($this->request->is('post')) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $role->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -61,7 +61,7 @@ class RolesController extends AppController
                 $this->Flash->success(__('The role has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed '.' '.json_encode($this->invalidFields());
                 $this->set(compact('message'));

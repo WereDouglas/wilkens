@@ -56,7 +56,7 @@ class DepartmentsController extends AppController
         if ($this->request->is('post')) {
             $department = $this->Departments->patchEntity($department, $this->request->getData());
             if ($this->Departments->save($department)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $department->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -65,7 +65,7 @@ class DepartmentsController extends AppController
                 $this->Flash->success(__('The department has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed'.' '.$this->invalidFields();
                 $this->set(compact('message'));

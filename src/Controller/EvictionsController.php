@@ -55,7 +55,7 @@ class EvictionsController extends AppController
         if ($this->request->is('post')) {
             $eviction = $this->Evictions->patchEntity($eviction, $this->request->getData());
             if ($this->Evictions->save($eviction)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $eviction->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -64,7 +64,7 @@ class EvictionsController extends AppController
                 $this->Flash->success(__('The eviction has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed';
                 $this->set(compact('message'));

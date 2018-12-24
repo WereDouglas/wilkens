@@ -55,7 +55,7 @@ class DamagesController extends AppController
         if ($this->request->is('post')) {
             $damage = $this->Damages->patchEntity($damage, $this->request->getData());
             if ($this->Damages->save($damage)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $damage->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -64,7 +64,7 @@ class DamagesController extends AppController
                 $this->Flash->success(__('The damage has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed';
                 $this->set(compact('message'));

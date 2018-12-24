@@ -55,7 +55,7 @@ class AccountsController extends AppController
         if ($this->request->is('post')) {
             $account = $this->Accounts->patchEntity($account, $this->request->getData());
             if ($this->Accounts->save($account)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $account->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -65,7 +65,7 @@ class AccountsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                //var_dump($account->getErrors());
                // exit;
                 $message = 'failed ';

@@ -55,7 +55,7 @@ class RefundsController extends AppController
         if ($this->request->is('post')) {
             $refund = $this->Refunds->patchEntity($refund, $this->request->getData());
             if ($this->Refunds->save($refund)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $refund->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -64,7 +64,7 @@ class RefundsController extends AppController
                 $this->Flash->success(__('The refund has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed';
                 $this->set(compact('message'));

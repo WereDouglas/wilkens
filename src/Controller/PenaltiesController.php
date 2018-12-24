@@ -55,7 +55,7 @@ class PenaltiesController extends AppController
         if ($this->request->is('post')) {
             $penalty = $this->Penalties->patchEntity($penalty, $this->request->getData());
             if ($this->Penalties->save($penalty)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $penalty->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -65,7 +65,7 @@ class PenaltiesController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 // var_dump($penalty->getErrors());
                //  exit;
                 $message = 'failed';

@@ -51,7 +51,7 @@ class CompaniesController extends AppController
         if ($this->request->is('post')) {
             $company = $this->Companies->patchEntity($company, $this->request->getData());
             if ($this->Companies->save($company)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $company->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -60,7 +60,7 @@ class CompaniesController extends AppController
                 $this->Flash->success(__('The company has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed';
                 $this->set(compact('message'));

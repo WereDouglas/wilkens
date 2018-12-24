@@ -55,7 +55,7 @@ class BillsController extends AppController
         if ($this->request->is('post')) {
             $bill = $this->Bills->patchEntity($bill, $this->request->getData());
             if ($this->Bills->save($bill)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
                     $id = $bill->id;
                     $this->set(compact('id'));
                     $this->set('_serialize', 'id');
@@ -64,7 +64,7 @@ class BillsController extends AppController
                 $this->Flash->success(__('The bill has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            } if ($this->usingApi) {
                 // throw new MissingWidgetException();
                 $message = 'failed';
                 $this->set(compact('message'));

@@ -91,7 +91,7 @@ class RequisitionsController extends AppController
             $requisition = $this->Requisitions->patchEntity($requisition, $this->request->getData());
 
             if ($this->Requisitions->save($requisition)) {
-                if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+                if ($this->usingApi) {
 
                     $query = TableRegistry::get('Requisitions')->find()
                         ->where(['id' => $requisition->id])
@@ -104,7 +104,7 @@ class RequisitionsController extends AppController
                 $this->Flash->success(__('The requisition has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
-            if ($this->startsWith($this->getRequest()->getRequestTarget(), '/api')) {
+            if ($this->usingApi) {
                 // var_dump($requisition->getErrors());
                 //  exit;
                 $message = 'failed';
