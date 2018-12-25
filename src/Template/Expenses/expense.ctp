@@ -126,18 +126,22 @@ $expenses_sum = 0;
                         <th scope="col"><?= __('Qty') ?></th>
                         <th scope="col"><?= __('Cost') ?></th>
                         <th scope="col"><?= __('Total') ?></th>
+                        <th scope="col"></th>
 
                     </tr>
                     <?php
 
-                    $expenses_sum = 0;
+                    $expenses_total = 0;
                     foreach ($result as $key => $value): ?>
                         <tr>
                             <td><span class="groups"> NO :<?= $key . ' ' ?>  </span></td>
-                            <td colspan="8"></td>
+                            <td colspan="7"></td>
                         </tr>
                         <?php
+                        $expenses_sum = 0;
                         foreach ($value as $key2 => $reqs):
+
+                            $expenses_total += $reqs['total'];
                             $expenses_sum += $reqs['total']
                             ?>
                             <tr>
@@ -149,20 +153,8 @@ $expenses_sum = 0;
                                 <td><?= $this->Number->format($reqs['cost']) ?></td>
                                 <td><?= $this->Number->format($reqs->total) ?></td>
                                 <td>
-
-
-                                    <table cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <th scope="col" colspan="2"><h4>SUMMARY</h4></th>
-                                        </tr>
-                                        <tr>
-                                            <td>TOTAL EXPENSES</td>
-                                            <td><span
-                                                    class="sub-totals"><?= $this->Number->format($expenses_sum) ?></span>
-                                            </td>
-                                        </tr>
-
-                                    </table>
+                                    SUB TOTAL <span
+                                        class="sub-totals"><?= $this->Number->format($expenses_sum) ?></span>
                                 </td>
 
                             </tr>
@@ -176,7 +168,7 @@ $expenses_sum = 0;
                         <td></td>
                         <td></td>
                         <td>TOTAL:</td>
-                        <td><span class="totals"><?= $this->Number->format($expenses_sum) ?></span></td>
+                        <td><span class="totals"><?= $this->Number->format($expenses_total) ?></span></td>
 
                     </tr>
                 </table>

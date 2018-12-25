@@ -22,7 +22,7 @@ class TenantsController extends AppController
     {
         $tenants  =  $this->Tenants->find('all')
        ->contain(['Users']);
-
+        $tenants = $this->paginate($tenants);
         $this->set(compact('tenants',$tenants));
     }
 

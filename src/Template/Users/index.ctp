@@ -106,6 +106,7 @@ $links_array = [
 ]); ?>
 <script>
     $(document).ready(function () {
+
         $("#status").hide();
         $(function () {
             var message_status = $("#status");

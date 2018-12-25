@@ -44,7 +44,9 @@ class UsersController extends AppController
             ->contain(['Companies']);
         $users = $this->paginate($query);
 
+
         $this->set(compact('users', 'current_user'));
+
 
         // $user = $this->Users->find('all')
         //      ->contain( ['Companies', 'Permissions', 'Roles', 'Users', 'Accounts', 'Bills', 'Clients', 'Confiscations', 'Contacts', 'Damages', 'Deposits', 'Employees', 'Evictions', 'Installments', 'Kins', 'MonthlyPayments', 'Passwords', 'Penalties', 'Properties', 'Refunds', 'Requisitions', 'Securities', 'Tenants', 'TenantsUnits', 'Units', 'Utilities','Landlords']);
@@ -76,12 +78,8 @@ class UsersController extends AppController
                 'Company_name' => 'Companies.name'
             ])
             ->contain(['Companies']);
-        $users = $this->paginate($query);
-
-
+        $users = $query;
         $this->set(compact('users'));
-
-
     }
 
     public function tenant()
@@ -108,8 +106,13 @@ class UsersController extends AppController
             ->select($this->Users->Landlords)
             ->contain(['Companies', 'Landlords'])
             ->where(['Users.type =' => 'tenant']);
-        $users = $this->paginate($query);
-        $this->set(compact('users', 'current_user'));
+        $users = $query;
+        $clients = TableRegistry::getTableLocator()->get('Users')->find('all', [
+            'conditions' => ['Users.type =' => 'client'],
+            'keyField' => 'id',
+            'valueField' => 'first_name'
+        ]);
+        $this->set(compact('users', 'current_user', 'clients'));
 
 
     }
@@ -137,7 +140,7 @@ class UsersController extends AppController
                 'Company_name' => 'Companies.name'
             ])
             ->contain(['Companies']);
-        $users = $this->paginate($query);
+        $users = $query;
 
         $this->set(compact('users', 'current_user'));
 
@@ -214,7 +217,6 @@ class UsersController extends AppController
                         ]
                     ]
                 ]);
-
         $this->set(compact('user', 'tenants'));
     }
 
@@ -233,8 +235,6 @@ class UsersController extends AppController
                 ->first();
             if ($query) {
                 if ($this->usingApi) {
-                    // var_dump($user->getErrors());
-                    // exit;
                     $message = 'exits';
                     $this->set(compact('message'));
                     $this->set('_serialize', 'message');
@@ -243,7 +243,7 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Information already saved.'));
 
             } else {
-                if ($this->Users->save($user, ['checkExisting' => true])) {
+                if ($this->Users->save($user)) {
                     if ($this->usingApi) {
                         $id = $user->id;
                         $this->set(compact('id'));
@@ -254,8 +254,8 @@ class UsersController extends AppController
                     return $this->redirect(['action' => 'index']);
                 }
                 if ($this->usingApi) {
-                   // var_dump($user->getErrors());
-                   // exit;
+                    // var_dump($user->getErrors());
+                    // exit;
                     $message = 'failed';
                     $this->set(compact('message'));
                     $this->set('_serialize', 'message');
@@ -300,6 +300,69 @@ class UsersController extends AppController
         $this->set(compact('user', 'companies', 'permissions', 'roles', 'users'));
     }
 
+
+    public function find()
+    {
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $values = $this->request->getData();
+            $query = TableRegistry::getTableLocator()->get('Users')->find('basicInfo')
+                ->select([
+                    'property_name' => 'p.name',
+                    'occupant_id' => 'Users.id',
+                    'room' => 'u.name',
+                    'cost' => 'u.cost',
+                    'security' => 's.amount',
+                    'start_date' => 't.start_date',
+                    'end_date' => 't.end_date'
+                ])
+                ->join(
+                    [
+                        'u' => [
+                            'table' => 'units',
+                            'type' => 'LEFT',
+                            'conditions' => ['u.user_id' => new \Cake\Database\Expression\IdentifierExpression('Users.id')]
+                        ],
+                        'p' => [
+                            'table' => 'properties',
+                            'type' => 'LEFT',
+                            'conditions' => ['p.id' => new \Cake\Database\Expression\IdentifierExpression('u.property_id')]
+                        ],
+
+                        's' => [
+                            'table' => 'securities',
+                            'type' => 'LEFT',
+                            'conditions' => [
+
+                                's.user_id =' => new \Cake\Database\Expression\IdentifierExpression('Users.id')
+                            ]
+                        ],
+                        't' => [
+                            'table' => 'tenants',
+                            'type' => 'LEFT',
+                            'conditions' => [
+                                't.user_id =' => new \Cake\Database\Expression\IdentifierExpression('Users.id')
+                            ]
+                        ]
+                    ])
+                ->where([
+                    'Users.user_id =' => $values['user_id'],
+                    'Users.active =' => 'yes'
+                ])->order(['room' => 'ASC']);
+            $tenants = $query->all();
+            $client = TableRegistry::getTableLocator()->get('Users')->get($values['user_id']);
+
+
+            $this->set(compact('users', 'tenants','client'));
+
+            return;
+        }
+        return $this->redirect(
+            ['controller' => 'Users', 'action' => 'tenant']
+        );
+
+    }
+
     /**
      * Delete method
      *
@@ -336,6 +399,7 @@ class UsersController extends AppController
                 $current_user = $this->Auth->user('first_name') . ' ' . $this->Auth->user('last_name');
                 $user_image = $this->Auth->user('photo_dir') . '' . $this->Auth->user('photo');
                 $user_id = $this->Auth->user('id');
+                $user_type = $this->Auth->user('type');
                 $user_contact = $this->Auth->user('contact');
                 $company_id = $this->Auth->user('company_id');
 
@@ -347,6 +411,7 @@ class UsersController extends AppController
                     'name' => $current_user,
                     'image' => $user_image,
                     'contact' => $user_contact,
+                    'user_type' => $user_type,
                     'id' => $user_id,
                     'company_image' => $company['photo_dir'] . '' . $company['photo'],
                     'company_name' => $company['name']
@@ -386,6 +451,7 @@ class UsersController extends AppController
         $session->destroy();
         return $this->redirect($this->Auth->logout());
     }
+
     public function edits($id = null)
     {
 

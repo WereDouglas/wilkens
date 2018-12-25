@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Clients Controller
@@ -43,6 +44,27 @@ class ClientsController extends AppController
         ]);
 
         $this->set('client', $client);
+    }
+    public function rent()
+    {
+        $rents = Array();
+        if ($this->request->is('post')) {
+            $values = $this->request->getData();
+            echo $start_date = date('Y-m-d', strtotime($values['start_date']));
+            echo '<br>';
+            echo $end_date = date('Y-m-d', strtotime($values['end_date']));
+
+            $rents = TableRegistry::getTableLocator()->get('Rents')->find('all', [
+                'conditions' => ['Rents.date  >=' => $start_date, 'Rents.date  <=' => $end_date,'Rents.landlord_id '=>$this->getRequest()->getSession()->read('id')],
+                'contain' => ['Branches', 'Users', 'Deposits', 'Landlords', 'Occupants']
+            ]);
+            if (!$rents) {
+                $this->Flash->error(__('No results.'));
+
+            }
+        }
+
+        $this->set(compact('rents', 'branches', 'users', 'deposits'));
     }
 
     /**

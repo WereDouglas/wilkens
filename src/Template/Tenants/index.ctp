@@ -13,7 +13,7 @@ $links_array = [
 
 <div class="tenants index large-12 medium-12 columns content">
     <?= $this->Element('nav', ['links' => $links_array, 'title' => 'Tenants']); ?>
-    <table cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <table cellpadding="0" cellspacing="0"  class="table table-bordered table-striped table-hover dataTable js-exportable">
         <thead>
             <tr>
                 <th style="display: none" scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -56,6 +56,21 @@ $links_array = [
             <?php endforeach; ?>
         </tbody>
     </table>
-
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+    </div>
 </div>
 <?= $this->element('tableScripts') ?>
+<script>
+
+    $('#example').dataTable({
+        "paging": false
+    });
+</script>

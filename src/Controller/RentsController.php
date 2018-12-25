@@ -399,6 +399,7 @@ class RentsController extends AppController
                             'table' => 'rents',
                             'type' => 'LEFT',
                             'conditions' => [
+                                'r.paid_to_client ' => 'yes',
                                 'r.date  >=' => $start_date,
                                 'r.date  <=' => $end_date,
                                 'r.occupant_id =' => new \Cake\Database\Expression\IdentifierExpression('Users.id')

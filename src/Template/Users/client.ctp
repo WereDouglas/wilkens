@@ -12,6 +12,7 @@ $links_array = [
 
 ];
 ?>
+<?= $this->element('tableCss') ?>
 <div class="users index large-12 medium-12 columns content">
     <?= $this->Element('nav',['links'=>$links_array,'title'=>'List Clients/Landlords']);   ?>
 
@@ -80,16 +81,8 @@ $links_array = [
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+
 
 </div>
+<?= $this->element('tableScripts') ?>
 

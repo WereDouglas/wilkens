@@ -7,10 +7,11 @@
 <?= $this->Html->css('base.css') ?>
 <?= $this->element('tableCss') ?>
 
-<div class="kins index large-9 medium-8 columns content">
-    <h3><?= __('Kins') ?></h3>
-    <div class="header medium-3">
+<div class="kins index large-12 medium-12 columns content">
+
+    <div class="header medium-6">
         <ul class="header-dropdown m-r--5">
+            <h3><?= __('Kins') ?></h3>
             <li class="dropdown">
                 <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown" role="button"
                    aria-haspopup="true" aria-expanded="false">
@@ -55,15 +56,6 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+
 </div>
 <?= $this->element('tableScripts') ?>
