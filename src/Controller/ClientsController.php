@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
 
 /**
@@ -123,6 +124,7 @@ class ClientsController extends AppController
                 'groupField' => 'Rents.date'
             ]);
 
+
             $query = TableRegistry::getTableLocator()->get('Users')->find('basicInfo')
                 ->select([
                     'property_name' => 'p.name',
@@ -188,6 +190,9 @@ class ClientsController extends AppController
 
 
             $payments = $query->all();
+
+
+
             $occupants_ids = [];
             foreach ($payments as $payment) {
                 if (empty($payment['date'])) {
@@ -196,7 +201,7 @@ class ClientsController extends AppController
             }
             $maps = [];
             foreach ($occupants_ids as $not_paid) {
-                $object = TableRegistry::getTableLocator()->get('Rents')->find('all')
+                $object = TableRegistry::getTableLocator()->get('Rents')->find()
                     ->select([
                         'occupant_id' => 'occupant_id',
                         'last_paid_date' => 'date',
@@ -207,6 +212,7 @@ class ClientsController extends AppController
                     ->order(['date' => 'DESC'])->limit(1)->first();
                 $maps[$object->get('occupant_id')] = $object;
             }
+
 
             /*  echo '<pre>';
               var_dump($maps);
@@ -272,6 +278,8 @@ class ClientsController extends AppController
                 'groupField' => 'Rents.date'
             ]);
 
+
+
             if (!$rents) {
                 $this->Flash->error(__('No results.'));
 
@@ -289,13 +297,11 @@ class ClientsController extends AppController
                 ]);
 
             $installments = $this->paginate($installments);
+            $client = TableRegistry::getTableLocator()->get('Users')->get($this->getRequest()->getSession()->read('id'));
+
         }
 
-        $users = TableRegistry::get('Users')->find('all', [
-            'conditions' => ['Users.type =' => 'client'],
-            'keyField' => 'id',
-            'valueField' => 'first_name'
-        ]);
+
 
         $this->set(compact('rents', 'branches', 'users', 'deposits', 'financials', 'requisitions', 'cashs',
             'installments', 'tenancy', 'end_date', 'start_date', 'client'));
