@@ -62,11 +62,8 @@
                         <span>Expenses & Requisitions</span>
                     </a>
                     <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List Requisitions'),
-                                ['controller' => 'Requisitions', 'action' => 'index']) ?></li>
-                        <li><?= $this->Html->link(__('Advanced'),
-                                ['controller' => 'Expenses', 'action' => 'expense']) ?></li>
-
+                        <li><?= $this->Html->link(__('Expenses & Requisitions'),
+                                ['controller' => 'Clients', 'action' => 'requisitions']) ?></li>
 
                     </ul>
 
@@ -80,12 +77,10 @@
                     </a>
                     <ul class="ml-menu">
                         <li><?= $this->Html->link(__('Financial Report'),
-                                ['controller' => 'Rents', 'action' => 'original']) ?></li>
+                                ['controller' => 'Clients', 'action' => 'financial']) ?></li>
 
                         <li><?= $this->Html->link(__('Expenses'),
-                                ['controller' => 'Rents', 'action' => 'expense']) ?></li>
-
-
+                                ['controller' => 'Clients', 'action' => 'expense']) ?></li>
                     </ul>
                 </li>
 
@@ -153,7 +148,8 @@
                         <span>Utilities</span>
                     </a>
                     <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List Utilities'),
+                        <li>
+                            <?= $this->Html->link(__('List Utilities'),
                                 ['controller' => 'Utilities', 'action' => 'index']) ?></li>
 
                         <li>

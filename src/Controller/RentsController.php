@@ -341,6 +341,7 @@ class RentsController extends AppController
         $this->set(compact('rents', 'branches', 'users', 'deposits', 'financials', 'requisitions', 'cashs',
             'installments', 'tenancy', 'end_date', 'start_date', 'client'));
     }
+
     public function original()
     {
         $rents = Array();
