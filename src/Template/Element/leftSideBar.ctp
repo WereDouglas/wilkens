@@ -83,50 +83,6 @@
                                 ['controller' => 'Clients', 'action' => 'expense']) ?></li>
                     </ul>
                 </li>
-
-                <li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <div class="icon">
-                            <i class="material-icons col-pink">lock</i>
-                        </div>
-                        <span>Installments</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List'),
-                                ['controller' => 'Installments', 'action' => 'index']) ?></li>
-                    </ul>
-
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <div class="icon">
-                            <i class="material-icons col-purple">wc</i>
-                        </div>
-                        <span>Tenants</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List Tenants'),
-                                ['controller' => 'Tenants', 'action' => 'index']) ?></li>
-                        <li>
-                            <a href="javascript:void(0);" class="menu-toggle">
-                                <span>Rent/tenancy</span>
-                            </a>
-
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="menu-toggle">
-                                <span>Security Deposits</span>
-                            </a>
-                            <ul class="ml-menu">
-                                <li><?= $this->Html->link(__('List Securities'),
-                                        ['controller' => 'Securities', 'action' => 'index']) ?></li>
-
-                            </ul>
-                        </li>
-                    </ul>
-
-                </li>
-
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <div class="icon">
@@ -136,92 +92,25 @@
                     </a>
                     <ul class="ml-menu">
                         <li><?= $this->Html->link(__('List Deposits'),
-                                ['controller' => 'Deposits', 'action' => 'index']) ?></li>
+                                ['controller' => 'Clients', 'action' => 'deposits']) ?></li>
 
                     </ul>
                 </li>
+
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <div class="icon">
-                            <i class="material-icons col-yellow">power</i>
+                            <i class="material-icons col-purple">wc</i>
                         </div>
-                        <span>Utilities</span>
+                        <span>Tenants</span>
                     </a>
                     <ul class="ml-menu">
-                        <li>
-                            <?= $this->Html->link(__('List Utilities'),
-                                ['controller' => 'Utilities', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link(__('List Tenants'),
+                                ['controller' => 'Clients', 'action' => 'tenants']) ?></li>
 
-                        <li>
-                            <a href="javascript:void(0);" class="menu-toggle">
-                                <span>Bills</span>
-                            </a>
-                            <ul class="ml-menu">
-                                <li><?= $this->Html->link(__('List Bills'),
-                                        ['controller' => 'Bills', 'action' => 'index']) ?></li>
-
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="menu-toggle">
-                                <span>Payments</span>
-                            </a>
-                            <ul class="ml-menu">
-                                <li><?= $this->Html->link(__('List Payments'),
-                                        ['controller' => 'Payments', 'action' => 'index']) ?></li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <div class="icon">
-                            <i class="material-icons col-red">lock</i>
-                        </div>
-                        <span>Confiscations</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List Confiscations'),
-                                ['controller' => 'Confiscations', 'action' => 'index']) ?></li>
                     </ul>
 
                 </li>
-                <li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <div class="icon">
-                            <i class="material-icons col-orange">build</i>
-                        </div>
-                        <span>Property Repairs & Damages</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List Damages'),
-                                ['controller' => 'Damages', 'action' => 'index']) ?></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">track_changes</i>
-                        <span>Evictions</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List Evictions'),
-                                ['controller' => 'Evictions', 'action' => 'index']) ?></li>
-                    </ul>
-
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">remove_from_queues</i>
-                        <span>Refunds</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li><?= $this->Html->link(__('List Refunds'),
-                                ['controller' => 'Refunds', 'action' => 'index']) ?></li>
-                    </ul>
-
-                </li>
-
             <?php } else { ?>
 
                 <li>

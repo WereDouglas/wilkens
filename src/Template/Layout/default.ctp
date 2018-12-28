@@ -14,6 +14,10 @@
  */
 
 $active = ['yes','no'];
+$body = 'theme-red';
+if ($this->session->read('user_type') == "Client") {
+    $body = 'theme-purple';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +25,8 @@ $active = ['yes','no'];
 <?=$this->element('head')?>
 <?=$this->Html->css('base.css')?>
 </head>
-<body class="theme-red">
+
+<body class="<?php echo $body;?>">
     <!-- Top Bar -->
     <?=$this->element('topBar')?>
      <section>

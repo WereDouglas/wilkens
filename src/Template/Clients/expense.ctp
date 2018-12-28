@@ -100,22 +100,15 @@ $expenses_sum = 0;
                             'div' => 'form-group',
                             'class' => 'btn btn-success btn-lg m-l-15 waves-effect'
                         )); ?>
-
-
                     </div>
                 </div>
                 <?php echo $this->Form->end(); ?>
-
             </div>
-
-
         </div>
     </div>
 </div>
-
-
 <div class="rents index large-12 medium-12 columns content table-responsive">
-    <?= $this->Element('nav', ['links' => $links_array, 'title' => 'Expense Report']); ?>
+    <h1> Expense Report</h1>
     <button class="btn btn-default" onclick="printDiv('printableArea')">
         <i class="fa fa-print" aria-hidden="true" style="font-size: 17px;"> Print</i>
     </button>
@@ -148,9 +141,6 @@ $expenses_sum = 0;
                         <th scope="col"><?= __('Total') ?></th>
 
                     </tr>
-
-
-
                     <?php
 
                     $expenses_sum = 0;
@@ -180,15 +170,14 @@ $expenses_sum = 0;
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                     <tr>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>--</td>

@@ -9,30 +9,34 @@
         <div class="card">
             <div class="header">
                 <h2>
-                  ADD ROLE
+                    ADD ROLE
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">
+                           aria-haspopup="true" aria-expanded="false">
                             <i class="material-icons">more_vert</i>
                         </a>
-    <ul class="dropdown-menu pull-right">
-    <?php 
-foreach ($link  as list($name,$options)){    
-?>
- <li><?= $this->Html->link(__($name), $options) ?></li>      
-<?php
-}
-?>
+                        <ul class="dropdown-menu pull-right">
+                            <?php
+                            foreach ($link as list($name, $options)) {
+                                ?>
+                                <li><?= $this->Html->link(__($name), $options) ?></li>
+                                <?php
+                            }
+                            ?>
 
 
-         <li><?= $this->Html->link(__('List Permissions'), ['controller' => 'Permissions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Permission'), ['controller' => 'Permissions', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-   
-    </ul>
+                            <li><?= $this->Html->link(__('List Permissions'),
+                                    ['controller' => 'Permissions', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New Permission'),
+                                    ['controller' => 'Permissions', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('List Users'),
+                                    ['controller' => 'Users', 'action' => 'index']) ?></li>
+                            <li><?= $this->Html->link(__('New User'),
+                                    ['controller' => 'Users', 'action' => 'add']) ?></li>
+
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -40,21 +44,21 @@ foreach ($link  as list($name,$options)){
             <div class="body">
                 <div class="row clearfix">
                     <div class="col-sm-12">
-    <?= $this->Form->create($role) ?>      
-        <?php
+                        <?= $this->Form->create($role) ?>
+                        <?php
 
-            $input_array = [
-                ['name', ['class' => 'form-control', 'placeholder' => 'Role name']],
-                ['permissions._ids', ['class' => 'form-control','options' => $permissions]],
-                ['users._ids', ['class' => 'form-control', 'options' => $users]]
-            ];            
-            echo $this->element('inputFields', ['array' => $input_array]);
-        ?> 
-    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary m-t-15 waves-effect']) ?>
-    <?= $this->Form->end() ?>
-    </div>
+                        $input_array = [
+                            ['name', ['class' => 'form-control', 'placeholder' => 'Role name']],
+                            ['permissions._ids', ['class' => 'form-control', 'options' => $permissions]],
+                            ['users._ids', ['class' => 'form-control', 'options' => $users]]
+                        ];
+                        echo $this->element('inputFields', ['array' => $input_array]);
+                        ?>
+                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary m-t-15 waves-effect']) ?>
+                        <?= $this->Form->end() ?>
+                    </div>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 </div>

@@ -115,7 +115,7 @@ $expenses_sum = 0;
 
 
 <div class="rents index large-12 medium-12 columns content table-responsive">
-    <?= $this->Element('nav', ['links' => $links_array, 'title' => 'Rent Report']); ?>
+    <h1> Rent Report</h1>
     <button class="btn btn-default" onclick="printDiv('printableArea')">
         <i class="fa fa-print" aria-hidden="true" style="font-size: 17px;"> Print</i>
     </button>

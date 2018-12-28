@@ -69,9 +69,7 @@ $links_array = [
 
 
 <div class="rents index large-12 medium-12 columns content">
-    <?= $this->Element('nav',['links'=>$links_array,'title'=>'List of  Rent Payments']);   ?>
-
-
+    <h1>Rent Payments</h1>
     <table cellpadding="0" cellspacing="0"  class="table table-bordered table-striped table-hover dataTable js-exportable">
         <thead>
             <tr>
