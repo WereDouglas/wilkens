@@ -39,8 +39,6 @@
     <div class="menu">
         <ul class="list">
             <li class="header">MAIN NAVIGATION</li>
-
-
             <?php if ($this->session->read('user_type') == "Client") { ?>
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle">

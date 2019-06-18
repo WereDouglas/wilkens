@@ -11,10 +11,7 @@ $links_array = [
 
 ];
 ?>
-
 <?= $this->Element('nav', ['links' => $links_array, 'title' => 'View User']); ?>
-
-
 <!-- Example Tab -->
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -44,8 +41,6 @@ $links_array = [
                     <li role="presentation" class="active"><a href="#home" data-toggle="tab">PROFILE</a></li>
                     <li role="presentation"><a href="#profile" data-toggle="tab">DEPOSITS</a></li>
                     <li role="presentation"><a href="#messages" data-toggle="tab">REQUISITIONS</a></li>
-
-
                     <li role="presentation"><a href="#rent" data-toggle="tab">RENT</a></li>
                     <li role="presentation"><a href="#confiscation" data-toggle="tab">CONFISCATIONS</a></li>
                     <li role="presentation"><a href="#damages" data-toggle="tab">DAMAGES</a></li>

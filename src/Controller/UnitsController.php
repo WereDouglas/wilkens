@@ -67,8 +67,8 @@ class UnitsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->usingApi) {
-               // var_dump($unit->getErrors());
-               // exit;
+                var_dump($unit->getErrors());
+                exit;
                 $message = 'failed';
                 $this->set(compact('message'));
                 $this->set('_serialize', 'message');

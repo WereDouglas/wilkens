@@ -303,7 +303,6 @@ class UsersController extends AppController
 
     public function find()
     {
-
         if ($this->request->is(['patch', 'post', 'put'])) {
             $values = $this->request->getData();
             $query = TableRegistry::getTableLocator()->get('Users')->find('basicInfo')
@@ -420,8 +419,6 @@ class UsersController extends AppController
                 // $values = $this->request->getData();
                 if ($this->request->getData('rememberme') == 1) {
                     // remove "remember me checkbox"
-
-
                     unset($this->request->data['User']['remember_me']);
                     // hash the user's password
                     $this->request->data['User']['contact'] = $this->Auth->user('contact');
@@ -454,7 +451,6 @@ class UsersController extends AppController
 
     public function edits($id = null)
     {
-
         if ($this->request->is(['patch', 'post', 'put'])) {
 
             $user = $this->Users->get($id, [

@@ -257,10 +257,8 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-
         $rules->add($rules->existsIn(['company_id'], 'Companies'));
         $rules->add($rules->existsIn(['user_id'], 'Landlords'));
-
         return $rules;
     }
 

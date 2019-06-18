@@ -67,7 +67,7 @@ class UnitsTable extends Table
 
         $validator
             ->scalar('types')
-            ->maxLength('types', 10)
+            ->maxLength('types', 60)
             ->allowEmpty('types');
 
         $validator

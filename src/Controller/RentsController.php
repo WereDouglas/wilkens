@@ -67,7 +67,6 @@ class RentsController extends AppController
                     return;
                 }
                 $this->Flash->success(__('The rent has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             if ($this->usingApi) {
@@ -299,8 +298,6 @@ class RentsController extends AppController
 
                     ]);
             $requisitions = $this->paginate($requisitions);
-
-
             $cashs = $this->Rents->find('all', [
                 'conditions' => [
                     'Rents.date  >=' => $start_date,
@@ -502,8 +499,6 @@ class RentsController extends AppController
 
                     ]);
             $requisitions = $this->paginate($requisitions);
-
-
             $cashs = $this->Rents->find('all', [
                 'conditions' => [
                     'Rents.date  >=' => $start_date,
@@ -564,8 +559,6 @@ class RentsController extends AppController
                 'contain' => ['Branches', 'Users', 'Deposits', 'Landlords', 'Occupants'],
                 'groupField' => 'Rents.date'
             ]);
-
-
             $requisitions = TableRegistry::getTableLocator()->get('Requisitions')->find('all', [
                 'conditions' => [
                     'date  >=' => $start_date,
@@ -597,12 +590,10 @@ class RentsController extends AppController
             $client = TableRegistry::getTableLocator()->get('Users')->get($values['user_id']);
 
         }
-
         if (!$requisitions) {
             $this->Flash->error(__('No results.'));
 
         }
-
 
         $users = TableRegistry::get('Users')->find('all', [
             'conditions' => ['Users.type =' => 'client'],
